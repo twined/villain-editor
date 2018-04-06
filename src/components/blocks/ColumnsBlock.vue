@@ -8,11 +8,30 @@
       <div
         v-for="col in block.data"
         :class="col.class">
-        <BlockContainer
-          :blocks="col.data"
-          @add="addBlockInColumn($event)"
-          @delete="deleteBlockFromColumn"
-        />
+        <div v-if="col.data.length">
+          <div
+            v-for="b in col.data"
+            class="villain-block-container"
+          >
+            <component
+              :is="b.type + 'Block'"
+              :block="b"
+              @delete="$emit('delete', $event)"
+            />
+
+            <VillainPlus
+              :after="b.id"
+              :parent="uid"
+              @add="$emit('add', $event)"
+            />
+          </div>
+        </div>
+        <div v-else>
+          <VillainPlus
+            :parent="block.uid"
+            @add="$emit('add', $event)"
+          />
+        </div>
       </div>
     </div>
 
@@ -31,18 +50,29 @@
 <script>
 import Block from './Block'
 import BlockContainer from './BlockContainer'
+import VillainPlus from '../tools/VillainPlus'
+import ColumnsBlock from './ColumnsBlock'
+import HeaderBlock from './HeaderBlock'
+import MarkdownBlock from './MarkdownBlock'
+import TextBlock from './TextBlock'
 
 export default {
   name: 'columns-block',
 
   components: {
     Block,
-    BlockContainer
+    BlockContainer,
+    VillainPlus,
+    ColumnsBlock,
+    HeaderBlock,
+    MarkdownBlock,
+    TextBlock
   },
 
   data () {
     return {
-      columnCount: 2
+      columnCount: 2,
+      uid: null
     }
   },
 
@@ -55,13 +85,17 @@ export default {
 
   created () {
     console.log('<ColumnsBlock /> created')
+    this.block.uid = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
     console.log(this.block)
   },
 
   methods: {
+    createUID () {
+      return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
+    },
+
     addBlockInColumn ({block: blockType, after}) {
       let block = {
-        uid: (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase(),
         type: blockType.component.toLowerCase(),
         data: blockType.dataTemplate
       }

@@ -7,6 +7,7 @@
       <component
         :is="b.type + 'Block'"
         :block="b"
+        @add="$emit('add', $event)"
         @delete="$emit('delete', $event)"
       />
 
@@ -50,9 +51,16 @@ export default {
     }
   },
 
+  data () {
+    return {
+      uid: null
+    }
+  },
+
   created () {
     // console.log(this.blocks)
     console.log('<BlockContainer /> created')
+    this.uid = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
   },
 
   methods: {

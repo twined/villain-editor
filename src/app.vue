@@ -1,6 +1,10 @@
 <template>
   <div id="app">
     <VillainEditor />
+    FLYTTE UID TIL KOMPONENT LEVEL?
+
+    created () { this.uid = createUID() }
+
   </div>
 </template>
 

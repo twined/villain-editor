@@ -2,6 +2,7 @@
   <div
     v-if="!showConfig"
     class="villain-block">
+    <div class="text-small">{{ block.uid }}</div>
     <slot></slot>
     <div class="villain-block-actions">
       <button

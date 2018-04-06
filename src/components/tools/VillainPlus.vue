@@ -31,6 +31,11 @@
 </template>
 
 <script>
+
+function createUID () {
+  return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
+}
+
 export default {
   name: 'villain-plus',
 
@@ -76,9 +81,11 @@ export default {
             component: 'Columns',
             dataTemplate: [
               {
+                'uid': createUID(),
                 'class': 'col-sm-6',
                 'data': [
                   {
+                    'uid': createUID(),
                     'type': 'text',
                     'data': {
                       'text': 'Kolonnetekst',
@@ -88,9 +95,11 @@ export default {
                 ]
               },
               {
+                'uid': createUID(),
                 'class': 'col-sm-6',
                 'data': [
                   {
+                    'uid': createUID(),
                     'type': 'text',
                     'data': {
                       'text': 'Kolonnetekst',
@@ -128,6 +137,7 @@ export default {
   methods: {
     addBlock (b) {
       this.active = false
+      console.log('adding with parent', this.parent)
       this.$emit('add', {block: b, after: this.after, parent: this.parent})
     }
   }

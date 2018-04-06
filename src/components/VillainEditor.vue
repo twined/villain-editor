@@ -82,8 +82,8 @@ export default {
     },
 
     addBlock ({block: blockType, after, parent}) {
+      console.log('-- adding')
       let block = {
-        uid: (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase(),
         type: blockType.component.toLowerCase(),
         data: blockType.dataTemplate
       }

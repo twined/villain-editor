@@ -1,0 +1,28 @@
+.villain-editor-plus {
+  text-align: center;
+  .villain-editor-plus-available-blocks {
+    .villain-editor-plus-available-block {
+      background-color: #f00;
+      display: inline-block;
+      padding: 1rem;
+      margin: 1rem;
+    }
+  }
+}
+
+.villain-editor-plus-inactive {
+  a {
+    display: block;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: $vmain;
+    background-color: #fff;
+    transition: all 250ms ease;
+
+    &:hover {
+      background-color: $vmain;
+      color: #fff;
+    }
+  }
+}

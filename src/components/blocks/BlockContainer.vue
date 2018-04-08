@@ -1,21 +1,22 @@
 <template>
   <div v-if="blocks.length">
-    <div
-      v-for="b in blocks"
-      class="villain-block-container"
+    <draggable
+      v-model="cBlocks"
+      :options="{ handle: '.villain-move' }"
+      @update="updateOrder"
     >
-      <component
-        :is="b.type + 'Block'"
-        :block="b"
-        @add="$emit('add', $event)"
-        @delete="$emit('delete', $event)"
-      />
-
-      <VillainPlus
-        :after="b.id"
-        @add="$emit('add', $event)"
-      />
-    </div>
+      <div
+        v-for="b in cBlocks"
+        class="villain-block-container"
+      >
+        <component
+          :is="b.type + 'Block'"
+          :block="b"
+          @add="$emit('add', $event)"
+          @delete="$emit('delete', $event)"
+        />
+      </div>
+    </draggable>
   </div>
   <div v-else>
     <VillainPlus
@@ -26,6 +27,7 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable'
 import VillainPlus from '../tools/VillainPlus'
 
 import ColumnsBlock from './ColumnsBlock'
@@ -36,6 +38,7 @@ import TextBlock from './TextBlock'
 export default {
   name: 'block-container',
   components: {
+    draggable,
     VillainPlus,
     // BLOCKS
     ColumnsBlock,
@@ -48,6 +51,17 @@ export default {
     blocks: {
       type: Array,
       default: () => []
+    }
+  },
+
+  computed: {
+    cBlocks: {
+      get: function () {
+        return [...this.blocks]
+      },
+      set: function (blocks) {
+        this.$emit('order', blocks)
+      }
     }
   },
 
@@ -64,7 +78,9 @@ export default {
   },
 
   methods: {
-
+    updateOrder () {
+      console.log('UPDATED, EMIT?')
+    }
   }
 }
 </script>

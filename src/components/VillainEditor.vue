@@ -2,11 +2,11 @@
   <div
     v-if="blocks.length"
     class="villain-editor">
-    {{ blocks.length }}
     <BlockContainer
       :blocks="blocks"
       @add="addBlock($event)"
       @delete="deleteBlock"
+      @order="orderBlocks"
     />
     <code><pre>{{ blocks }}</pre></code>
   </div>
@@ -28,7 +28,6 @@
 
 <script>
 import VillainPlus from './tools/VillainPlus'
-
 import BlockContainer from './blocks/BlockContainer'
 import ColumnsBlock from './blocks/ColumnsBlock'
 import HeaderBlock from './blocks/HeaderBlock'
@@ -96,15 +95,54 @@ export default {
           ...this.blocks,
           block
         ]
+        return
       }
 
       if (parent) {
+        console.log('adding to parent', parent)
         // child of a column
-        let p = this.blocks.find(b => b.uid === parent)
+        let mainBlock = this.blocks.find(b => {
+          if (b.type === 'columns') {
+            console.log('columns', b)
+            for (let i = 0; i < b.data.length; i++) {
+              if (b.data[i].uid === parent) {
+                return b
+              }
+            }
+          }
+        })
+        let parentBlock = null
+        if (mainBlock) {
+          // we have the main block -- add to the correct parent
+          for (let i = 0; i < mainBlock.data.length; i++) {
+            if (mainBlock.data[i].uid === parent) {
+              parentBlock = mainBlock.data[i]
+            }
+          }
+
+          parentBlock.data = [
+            ...parentBlock.data,
+            block
+          ]
+        }
+        return
+      }
+
+      if (after) {
+        let p = this.blocks.find(b => b.uid === after)
         let idx = this.blocks.indexOf(p)
+        if (idx === this.blocks.length) {
+          this.blocks = [
+            ...this.blocks,
+            block
+          ]
+          return
+        }
+
         this.blocks = [
           ...this.blocks.slice(0, idx),
-          {...p, data: [...p.data, block]},
+          p,
+          block,
           ...this.blocks.slice(idx + 1)
         ]
       }
@@ -119,6 +157,10 @@ export default {
           ...this.blocks.slice(idx + 1)
         ]
       }
+    },
+
+    orderBlocks (blocks) {
+      this.blocks = [...blocks]
     }
   }
 

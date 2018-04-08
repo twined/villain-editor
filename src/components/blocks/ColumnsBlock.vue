@@ -1,6 +1,8 @@
 <template>
   <Block
     :block="block"
+    :parent="block.uid"
+    @add="$emit('add', $event)"
     @delete="$emit('delete', $event)">
 
     <!-- parse each block inside columns -->
@@ -13,20 +15,19 @@
             v-for="b in col.data"
             class="villain-block-container"
           >
+            COL-UID: {{ col.uid }}
             <component
               :is="b.type + 'Block'"
               :block="b"
-              @delete="$emit('delete', $event)"
-            />
-
-            <VillainPlus
-              :after="b.id"
-              :parent="uid"
+              :parent="col.uid"
+              :after="b.uid"
               @add="$emit('add', $event)"
+              @delete="$emit('delete', $event)"
             />
           </div>
         </div>
         <div v-else>
+          ELSE IN "COLUMNSBLOCK"
           <VillainPlus
             :parent="block.uid"
             @add="$emit('add', $event)"
@@ -80,6 +81,11 @@ export default {
     block: {
       type: Object,
       default: () => {}
+    },
+
+    parent: {
+      type: String,
+      default: null
     }
   },
 

@@ -1,10 +1,13 @@
 <template>
   <Block
     :block="block"
+    :parent="parent"
+    @add="$emit('add', $event)"
     @delete="$emit('delete', $event)">
-    <textarea
+    <input
+      class="villain-header-input"
+      :style="'font-size: ' + fontSize + 'rem'"
       v-model="block.data.text">
-    </textarea>
     <template slot="config">
       <div class="form-check">
         <input
@@ -99,6 +102,30 @@ export default {
     block: {
       type: Object,
       default: () => {}
+    },
+
+    parent: {
+      type: String,
+      default: null
+    }
+  },
+
+  computed: {
+    fontSize () {
+      switch (this.block.data.level) {
+        case 1:
+          return 5
+        case 2:
+          return 4
+        case 3:
+          return 3
+        case 4:
+          return 2
+        case 5:
+          return 1
+        case 6:
+          return 0.75
+      }
     }
   },
 

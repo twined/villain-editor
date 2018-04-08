@@ -138,6 +138,7 @@ export default {
     addBlock (b) {
       this.active = false
       console.log('adding with parent', this.parent)
+      console.log('adding with after', this.after)
       this.$emit('add', {block: b, after: this.after, parent: this.parent})
     }
   }

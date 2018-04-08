@@ -1,34 +1,64 @@
 <template>
   <div
-    v-if="!showConfig"
-    class="villain-block">
-    <div class="text-small">{{ block.uid }}</div>
-    <slot></slot>
-    <div class="villain-block-actions">
-      <button
-        @click="configBlock">
-        CONFIG
-      </button>
-      <button
-        @click="deleteBlock">
-        DEL
-      </button>
+    class="villain-block-wrapper">
+    <div
+      v-show="!showConfig"
+      class="villain-block">
+      <slot></slot>
+      <div class="villain-block-actions">
+        <div class="villain-block-action villain-move">
+          <i class="fa fa-fw fa-expand-arrows-alt" />
+        </div>
+        <div
+          class="villain-block-action villain-config"
+          @click="configBlock">
+          <i class="fa fa-fw fa-cog" />
+        </div>
+        <div
+          class="villain-block-action villain-delete"
+          @click="deleteBlock">
+          <i class="fa fa-fw fa-trash-alt" />
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div
-    v-else
-    class="villain-block villain-block-config">
-    <slot name="config" />
-    <button
-      @click="showConfig = false">
-      Close
-    </button>
+    <div
+      v-show="showConfig"
+      class="villain-block villain-block-config">
+      <slot name="config" />
+      <div class="villain-block-actions">
+        <div class="villain-block-action villain-move">
+          <i class="fa fa-fw fa-expand-arrows-alt" />
+        </div>
+        <div
+          class="villain-block-action villain-config"
+          @click="showConfig = false">
+          <i class="fa fa-fw fa-cog" />
+        </div>
+        <div
+          class="villain-block-action villain-delete"
+          @click="deleteBlock">
+          <i class="fa fa-fw fa-trash-alt" />
+        </div>
+      </div>
+    </div>
+
+    <VillainPlus
+      :after="block.uid"
+      :parent="parent"
+      @add="$emit('add', $event)"
+    />
   </div>
 </template>
 
 <script>
+import VillainPlus from '@/components/tools/VillainPlus'
+
 export default {
+  components: {
+    VillainPlus
+  },
+
   data () {
     return {
       showConfig: false
@@ -39,6 +69,11 @@ export default {
     block: {
       type: Object,
       default: () => {}
+    },
+
+    parent: {
+      type: String,
+      default: null
     },
 
     config: {

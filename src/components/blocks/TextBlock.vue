@@ -1,6 +1,8 @@
 <template>
   <Block
     :block="block"
+    :parent="parent"
+    @add="$emit('add', $event)"
     @delete="$emit('delete', $event)">
     <textarea
       v-model="block.data.text">
@@ -66,6 +68,11 @@ export default {
     block: {
       type: Object,
       default: () => {}
+    },
+
+    parent: {
+      type: String,
+      default: null
     }
   },
 

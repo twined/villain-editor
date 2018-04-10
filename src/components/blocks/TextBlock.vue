@@ -2,16 +2,19 @@
   <Block
     :block="block"
     :parent="parent"
+    icon="fa-paragraph"
     @add="$emit('add', $event)"
     @delete="$emit('delete', $event)">
-    <textarea
-      v-model="block.data.text">
-    </textarea>
+    <quill-editor
+      v-model="text"
+      :class="block.data.type"
+      :options="quillOptions">
+    </quill-editor>
     <template slot="config">
       <div class="form-check">
         <input
           v-model="block.data.type"
-          class="form-control"
+          class="form-check-input"
           type="radio"
           value="paragraph">
         <label class="form-check-label">
@@ -21,7 +24,7 @@
       <div class="form-check">
         <input
           v-model="block.data.type"
-          class="form-control"
+          class="form-check-input"
           type="radio"
           value="lead">
         <label class="form-check-label">
@@ -31,7 +34,7 @@
       <div class="form-check">
         <input
           v-model="block.data.type"
-          class="form-control"
+          class="form-check-input"
           type="radio"
           :value="customClass">
         <label class="form-check-label">
@@ -48,19 +51,50 @@
 </template>
 
 <script>
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+
+import { quillEditor } from 'vue-quill-editor'
+import MarkdownIt from 'markdown-it'
+const md = new MarkdownIt()
+
 import Block from './Block'
 
 export default {
   name: 'text-block',
 
   components: {
-    Block
+    Block,
+    quillEditor
   },
 
   data () {
     return {
       customClass: '',
-      uid: null
+      uid: null,
+      quillOptions: {
+        placeholder: 'Tekst her',
+        modules: {
+          toolbar: [
+            ['bold', 'italic'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+            ['link']
+          ]
+        }
+      }
+    }
+  },
+
+  computed: {
+    text: {
+      get () {
+        return this.block.data.text
+      },
+
+      set (txt) {
+        this.block.data.text = txt
+        return this.block.data.text
+      }
     }
   },
 
@@ -78,6 +112,7 @@ export default {
 
   created () {
     console.log('<TextBlock /> created')
+    this.text = md.render(this.block.data.text)
     this.block.uid = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
   }
 }

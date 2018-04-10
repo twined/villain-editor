@@ -16,16 +16,22 @@
         v-for="b in availableBlocks"
         class="villain-editor-plus-available-block"
         @click="addBlock(b)">
-        <i
-          :class="b.icon"
-          class="fa fa-fw"
-        />
+        <div>
+          <i
+            :class="b.icon"
+            class="fa fa-fw"
+          />
+        </div>
+        <div class="villain-editor-plus-available-block-text">
           {{ b.name }}
+        </div>
       </div>
-      <button
-        @click="active = false">
-        x
-      </button>
+      <div
+        class="villain-editor-plus-close"
+        @click="active = false"
+        >
+        <i class="fa fa-fw fa-times-circle" />
+      </div>
     </div>
   </div>
 </template>
@@ -59,7 +65,7 @@ export default {
             icon: 'fa-paragraph',
             component: 'Text',
             dataTemplate: {
-              'text': 'Tekst her',
+              'text': '',
               'type': 'paragraph'
             }
           },
@@ -72,6 +78,52 @@ export default {
               'text': 'Overskrift',
               'level': 1,
               'class': ''
+            }
+          },
+
+          {
+            name: 'Skillelinje',
+            icon: 'fa-minus',
+            component: 'Divider',
+            dataTemplate: {
+              'text': '-------------'
+            }
+          },
+
+          {
+            name: 'Bilde',
+            icon: 'fa-image',
+            component: 'Image',
+            dataTemplate: {}
+          },
+
+          {
+            name: 'Video',
+            icon: 'fa-video',
+            component: 'Video',
+            dataTemplate: {
+              source: 'youtube',
+              remote_id: ''
+            }
+          },
+
+          {
+            name: 'Kart',
+            icon: 'fa-map-marker',
+            component: 'Map',
+            dataTemplate: {
+              source: 'gmaps',
+              embed_url: ''
+            }
+          },
+
+          {
+            name: 'Sitat',
+            icon: 'fa-quote-right',
+            component: 'Blockquote',
+            dataTemplate: {
+              'content': 'Sitat',
+              'cite': 'Sitatforfatter'
             }
           },
 

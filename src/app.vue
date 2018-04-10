@@ -1,10 +1,6 @@
 <template>
   <div id="app">
     <VillainEditor />
-    FLYTTE UID TIL KOMPONENT LEVEL?
-
-    created () { this.uid = createUID() }
-
   </div>
 </template>
 
@@ -24,7 +20,6 @@ export default {
   font-family: Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
   margin-top: 60px;
   max-width: 1200px;
   margin: 0 auto;

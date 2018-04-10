@@ -1,4 +1,8 @@
-$vmain: #476694;
+$vmain: #94003e;
+$vsecondary: #94003e0d;
+$availableBlockColor: $vmain;
+$availableBlockHoverColor: lighten($vmain, 50%);
 
+@import './editor';
 @import './block';
 @import './plus';

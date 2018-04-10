@@ -19,9 +19,12 @@
     </draggable>
   </div>
   <div v-else>
-    <VillainPlus
-      @add="$emit('add', $event)"
-    />
+    <div
+      class="villain-block-wrapper">
+      <VillainPlus
+        @add="$emit('add', $event)"
+      />
+    </div>
   </div>
 
 </template>
@@ -30,10 +33,15 @@
 import draggable from 'vuedraggable'
 import VillainPlus from '../tools/VillainPlus'
 
+import BlockquoteBlock from './BlockquoteBlock'
 import ColumnsBlock from './ColumnsBlock'
+import DividerBlock from './DividerBlock'
 import HeaderBlock from './HeaderBlock'
+import ImageBlock from './ImageBlock'
+import MapBlock from './MapBlock'
 import MarkdownBlock from './MarkdownBlock'
 import TextBlock from './TextBlock'
+import VideoBlock from './VideoBlock'
 
 export default {
   name: 'block-container',
@@ -41,10 +49,15 @@ export default {
     draggable,
     VillainPlus,
     // BLOCKS
+    BlockquoteBlock,
     ColumnsBlock,
+    DividerBlock,
     HeaderBlock,
+    ImageBlock,
+    MapBlock,
     MarkdownBlock,
-    TextBlock
+    TextBlock,
+    VideoBlock
   },
 
   props: {

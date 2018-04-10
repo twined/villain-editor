@@ -10,6 +10,7 @@
           <i class="fa fa-fw fa-expand-arrows-alt" />
         </div>
         <div
+          v-if="hasConfigSlot"
           class="villain-block-action villain-config"
           @click="configBlock">
           <i class="fa fa-fw fa-cog" />
@@ -25,20 +26,33 @@
     <div
       v-show="showConfig"
       class="villain-block villain-block-config">
-      <slot name="config" />
-      <div class="villain-block-actions">
-        <div class="villain-block-action villain-move">
-          <i class="fa fa-fw fa-expand-arrows-alt" />
-        </div>
+      <div class="villain-block-config-content">
+        <h5>Blokkoppsett &rarr;</h5>
+
         <div
-          class="villain-block-action villain-config"
-          @click="showConfig = false">
-          <i class="fa fa-fw fa-cog" />
+          v-if="icon"
+          class="display-icon">
+          <i
+            :class="icon"
+            class="fa fa-fw" />
         </div>
-        <div
-          class="villain-block-action villain-delete"
-          @click="deleteBlock">
-          <i class="fa fa-fw fa-trash-alt" />
+
+        <slot name="config" />
+        <div class="villain-block-actions">
+          <div class="villain-block-action villain-move">
+            <i class="fa fa-fw fa-expand-arrows-alt" />
+          </div>
+          <div
+            v-if="hasConfigSlot"
+            class="villain-block-action villain-config"
+            @click="showConfig = false">
+            <i class="fa fa-fw fa-cog" />
+          </div>
+          <div
+            class="villain-block-action villain-delete"
+            @click="deleteBlock">
+            <i class="fa fa-fw fa-trash-alt" />
+          </div>
         </div>
       </div>
     </div>
@@ -79,10 +93,28 @@ export default {
     config: {
       type: Boolean,
       default: false
+    },
+
+    icon: {
+      type: String,
+      default: ''
+    }
+  },
+
+  computed: {
+    hasConfigSlot () {
+      if (this.$slots.hasOwnProperty('config')) {
+        console.log('has it!!')
+        return true
+      } else {
+        console.log('does not have it')
+        return false
+      }
     }
   },
 
   created () {
+    console.log(this.$slots)
     if (this.config) {
       this.showConfig = true
     }

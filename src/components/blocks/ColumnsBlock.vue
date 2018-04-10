@@ -15,7 +15,6 @@
             v-for="b in col.data"
             class="villain-block-container"
           >
-            COL-UID: {{ col.uid }}
             <component
               :is="b.type + 'Block'"
               :block="b"
@@ -52,10 +51,16 @@
 import Block from './Block'
 import BlockContainer from './BlockContainer'
 import VillainPlus from '../tools/VillainPlus'
+
+import BlockquoteBlock from './BlockquoteBlock'
 import ColumnsBlock from './ColumnsBlock'
+import DividerBlock from './DividerBlock'
 import HeaderBlock from './HeaderBlock'
+import ImageBlock from './ImageBlock'
+import MapBlock from './MapBlock'
 import MarkdownBlock from './MarkdownBlock'
 import TextBlock from './TextBlock'
+import VideoBlock from './VideoBlock'
 
 export default {
   name: 'columns-block',
@@ -63,11 +68,16 @@ export default {
   components: {
     Block,
     BlockContainer,
+    BlockquoteBlock,
+    DividerBlock,
     VillainPlus,
     ColumnsBlock,
     HeaderBlock,
+    ImageBlock,
+    MapBlock,
     MarkdownBlock,
-    TextBlock
+    TextBlock,
+    VideoBlock
   },
 
   data () {

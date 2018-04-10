@@ -16,7 +16,6 @@
     v-else>
     <div class="villain-block-container">
       <!-- no blocks -->
-      NO BLOCKS!!!!
       <BlockContainer
         :blocks="blocks"
         @add="addBlock($event)"
@@ -166,10 +165,3 @@ export default {
 
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  .villain-editor {
-    background-color: #efe;
-  }
-</style>

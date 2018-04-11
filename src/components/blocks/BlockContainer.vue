@@ -1,14 +1,21 @@
 <template>
   <div v-if="blocks.length">
+    <div
+      class="villain-block-wrapper">
+      <VillainPlus
+        @add="$emit('add', $event)"
+      />
+    </div>
     <draggable
       v-model="cBlocks"
-      :options="{ handle: '.villain-move' }"
-      @update="updateOrder"
-    >
+      :options="{ handle: '.villain-move' }">
+
       <div
-        v-for="b in cBlocks"
+        v-for="(b, idx) in cBlocks"
+        :key="b.uid"
         class="villain-block-container"
       >
+        {{ b.uid }}
         <component
           :is="b.type + 'Block'"
           :block="b"
@@ -86,14 +93,8 @@ export default {
 
   created () {
     // console.log(this.blocks)
-    console.log('<BlockContainer /> created')
+    console.debug('<BlockContainer /> created')
     this.uid = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
-  },
-
-  methods: {
-    updateOrder () {
-      console.log('UPDATED, EMIT?')
-    }
   }
 }
 </script>

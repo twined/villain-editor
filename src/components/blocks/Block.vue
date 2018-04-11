@@ -56,7 +56,7 @@
         </div>
       </div>
     </div>
-
+    {{ block.uid }}
     <VillainPlus
       :after="block.uid"
       :parent="parent"
@@ -103,18 +103,11 @@ export default {
 
   computed: {
     hasConfigSlot () {
-      if (this.$slots.hasOwnProperty('config')) {
-        console.log('has it!!')
-        return true
-      } else {
-        console.log('does not have it')
-        return false
-      }
+      return this.$slots.hasOwnProperty('config')
     }
   },
 
   created () {
-    console.log(this.$slots)
     if (this.config) {
       this.showConfig = true
     }

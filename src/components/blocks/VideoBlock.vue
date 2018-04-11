@@ -95,10 +95,14 @@ export default {
   },
 
   created () {
-    console.log('<VideoBlock /> created')
-    this.block.uid = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
-    if (!this.block.data.url) {
+    console.debug('<VideoBlock /> created')
+
+    if (!this.block.data.remote_id) {
       this.showConfig = true
+    } else {
+      this.html = this.providers[this.block.data.source].html
+        .replace('{{protocol}}', window.location.protocol)
+        .replace('{{remote_id}}', this.block.data.remote_id)
     }
   },
 

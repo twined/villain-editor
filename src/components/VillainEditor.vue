@@ -22,10 +22,12 @@
         @delete="deleteBlock"
       />
     </div>
+    <code><pre>{{ blocks }}</pre></code>
   </div>
 </template>
 
 <script>
+import cloneDeep from 'lodash/cloneDeep'
 import VillainPlus from './tools/VillainPlus'
 import BlockContainer from './blocks/BlockContainer'
 import ColumnsBlock from './blocks/ColumnsBlock'
@@ -49,6 +51,16 @@ export default {
     json: {
       type: String,
       default: '[]'
+    },
+
+    baseURL: {
+      type: String,
+      default: ''
+    },
+
+    imageSeries: {
+      type: String,
+      default: ''
     }
   },
 
@@ -59,20 +71,45 @@ export default {
     }
   },
 
-  computed: {
-    output () {
-      let blocksCopy = [ ...this.blocks ]
-      return JSON.stringify(blocksCopy.map(b => this.stripUID(b)), null, 2)
+  provide: {
+    baseURL: this.baseURL,
+    imageSeries: this.imageSeries
+  },
+
+  watch: {
+    blocks: {
+      handler: function (val, oldVal) {
+        let bx = cloneDeep(val)
+        if (bx.length) {
+          this.$emit('input', JSON.stringify(bx.map(b => this.stripUID(b)), null, 2))
+        }
+        return val
+      },
+      deep: true
     }
   },
 
   created () {
     // convert data to blocks
     this.blocks = JSON.parse(this.json)
+    this.blocks = this.addUIDs()
   },
 
   methods: {
+    addUIDs () {
+      return [...this.blocks].map(b => {
+        return { ...b, uid: this.createUID() }
+      })
+    },
+
+    createUID () {
+      return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
+    },
+
     stripUID (obj) {
+      if (!obj) {
+        return obj
+      }
       if (obj.hasOwnProperty('uid')) {
         delete obj.uid
       }
@@ -80,25 +117,36 @@ export default {
     },
 
     addBlock ({block: blockType, after, parent}) {
-      console.log('-- adding')
       let block = {
         type: blockType.component.toLowerCase(),
-        data: blockType.dataTemplate
+        data: { ...blockType.dataTemplate },
+        uid: blockType.uid
       }
 
-      console.log('parent: ', parent)
-      console.log('after: ', after)
+      console.log('* adding', block)
+      console.log('-> parent: ', parent)
+      console.log('-> after: ', after)
 
+      // no after, no parent = + at the top OR first one if empty
       if (!after && !parent) {
-        this.blocks = [
-          ...this.blocks,
-          block
-        ]
+        // if we have blocks, it's the top + so we add to top
+        if (this.blocks.length) {
+          console.debug('add to top')
+          this.blocks = [
+            block,
+            ...this.blocks
+          ]
+        } else {
+          console.debug('add to bottom')
+          this.blocks = [
+            ...this.blocks,
+            block
+          ]
+        }
         return
       }
 
       if (parent) {
-        console.log('adding to parent', parent)
         // child of a column
         let mainBlock = this.blocks.find(b => {
           if (b.type === 'columns') {
@@ -129,8 +177,13 @@ export default {
 
       if (after) {
         let p = this.blocks.find(b => b.uid === after)
+        if (!p) {
+          console.error('--- NO UID FOR "AFTER"-BLOCK')
+        }
         let idx = this.blocks.indexOf(p)
-        if (idx === this.blocks.length) {
+
+        if (idx + 1 === this.blocks.length) {
+          // index is last, just add to list
           this.blocks = [
             ...this.blocks,
             block
@@ -138,9 +191,9 @@ export default {
           return
         }
 
+        // we're adding in the midst of things
         this.blocks = [
-          ...this.blocks.slice(0, idx),
-          p,
+          ...this.blocks.slice(0, idx + 1),
           block,
           ...this.blocks.slice(idx + 1)
         ]

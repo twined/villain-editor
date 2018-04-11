@@ -112,15 +112,16 @@ export default {
 
   computed: {
     fontSize () {
-      switch (this.block.data.level) {
+      const level = parseInt(this.block.data.level)
+      switch (level) {
         case 1:
-          return 5
-        case 2:
           return 4
-        case 3:
+        case 2:
           return 3
-        case 4:
+        case 3:
           return 2
+        case 4:
+          return 1.5
         case 5:
           return 1
         case 6:
@@ -130,9 +131,7 @@ export default {
   },
 
   created () {
-    console.log('<HeaderBlock /> created')
-    console.log(this.block)
-    this.block.uid = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
+    console.debug('<HeaderBlock /> created')
   }
 }
 </script>

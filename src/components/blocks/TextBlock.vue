@@ -56,7 +56,7 @@ import 'quill/dist/quill.snow.css'
 
 import { quillEditor } from 'vue-quill-editor'
 import MarkdownIt from 'markdown-it'
-const md = new MarkdownIt()
+const md = new MarkdownIt({ html: true })
 
 import Block from './Block'
 
@@ -71,7 +71,6 @@ export default {
   data () {
     return {
       customClass: '',
-      uid: null,
       quillOptions: {
         placeholder: 'Tekst her',
         modules: {
@@ -111,13 +110,8 @@ export default {
   },
 
   created () {
-    console.log('<TextBlock /> created')
+    console.debug('<TextBlock /> created --', this.block.uid)
     this.text = md.render(this.block.data.text)
-    this.block.uid = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
   }
 }
 </script>
-
-<style lang="scss">
-
-</style>

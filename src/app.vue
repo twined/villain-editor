@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <VillainEditor />
+    <VillainEditor
+      :json="json"
+      @input="inp"
+    />
   </div>
 </template>
 
@@ -11,6 +14,17 @@ export default {
   name: 'app',
   components: {
     VillainEditor
+  },
+  data () {
+    return {
+      json: `[{"type":"text","data":{"type":"paragraph","text":"TEXT1"}},{"type":"text","data":{"type":"paragraph","text":"TEXT2"}}]`
+    }
+  },
+
+  methods: {
+    inp () {
+      console.log('inp called')
+    }
   }
 }
 </script>

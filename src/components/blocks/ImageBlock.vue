@@ -42,7 +42,9 @@
           type="input">
       </div>
       <div class="villain-config-content-buttons">
-        <button class="btn btn-primary">
+        <button
+          @click="getImages"
+          class="btn btn-primary">
           Hent bilde fra bildebibliotek
         </button>
 
@@ -62,6 +64,12 @@ export default {
 
   components: {
     Block
+  },
+
+  computed: {
+    url () {
+      return this.browseURL
+    }
   },
 
   data () {
@@ -85,11 +93,22 @@ export default {
   },
 
   created () {
-    console.log('<ImageBlock /> created')
-    this.block.uid = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
+    console.debug('<ImageBlock /> created')
+
     if (!this.block.data.url) {
-      console.log('nathhinn')
       this.showConfig = true
+    }
+  },
+
+  methods: {
+    async getImages () {
+      try {
+        var response = await fetch(this.url)
+        var data = await response.json()
+        console.log(data)
+      } catch (e) {
+        console.log('Booo')
+      }
     }
   }
 }

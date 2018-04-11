@@ -87,8 +87,8 @@ export default {
   },
 
   created () {
-    console.log('<MapBlock /> created')
-    this.block.uid = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
+    console.debug('<MapBlock /> created')
+
     if (!this.block.data.url) {
       this.showConfig = true
     }

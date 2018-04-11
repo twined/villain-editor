@@ -100,9 +100,7 @@ export default {
   },
 
   created () {
-    console.log('<ColumnsBlock /> created')
-    this.block.uid = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
-    console.log(this.block)
+    console.debug('<ColumnsBlock /> created')
   },
 
   methods: {

@@ -46,11 +46,12 @@
     color: $vmain;
     background-color: #fff;
     transition: all 250ms ease;
-    padding-bottom: .3rem;
+    border: 0;
 
     &:hover {
       background-color: $vmain;
       color: #fff !important;
+      border: 0;
     }
   }
 }

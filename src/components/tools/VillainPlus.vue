@@ -183,15 +183,14 @@ export default {
   },
 
   created () {
-    console.log('<VillainPlus /> created')
+    console.debug('<VillainPlus /> created')
   },
 
   methods: {
     addBlock (b) {
+      let block = {...b, uid: createUID()}
       this.active = false
-      console.log('adding with parent', this.parent)
-      console.log('adding with after', this.after)
-      this.$emit('add', {block: b, after: this.after, parent: this.parent})
+      this.$emit('add', {block: block, after: this.after, parent: this.parent})
     }
   }
 }

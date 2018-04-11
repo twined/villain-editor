@@ -95,10 +95,9 @@ export default {
   },
 
   created () {
-    console.log('<ImageBlock /> created')
+    console.log('<VideoBlock /> created')
     this.block.uid = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
     if (!this.block.data.url) {
-      console.log('nathhinn')
       this.showConfig = true
     }
   },
@@ -107,7 +106,6 @@ export default {
     parseUrl (v) {
       let match
       let url = v.srcElement.value
-      console.log('parsing', url)
 
       for (let key of Object.keys(this.providers)) {
         let provider = this.providers[key]
@@ -120,7 +118,6 @@ export default {
       }
 
       if (!{}.hasOwnProperty.call(this.providers, this.block.data.source)) {
-        console.log('boohoo')
         return false
       }
 

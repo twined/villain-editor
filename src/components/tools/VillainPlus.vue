@@ -109,7 +109,7 @@ export default {
 
           {
             name: 'Kart',
-            icon: 'fa-map-marker',
+            icon: 'fa-compass',
             component: 'Map',
             dataTemplate: {
               source: 'gmaps',

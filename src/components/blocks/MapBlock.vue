@@ -3,7 +3,7 @@
     :block="block"
     :parent="parent"
     :config="showConfig"
-    icon="fa-map-marker"
+    icon="fa-compass"
     @add="$emit('add', $event)"
     @delete="$emit('delete', $event)">
     <div class="villain-block-video">
@@ -45,9 +45,6 @@
 <script>
 import Block from './Block'
 
-const VIMEO_REGEX = /(?:http[s]?:\/\/)?(?:www.)?vimeo.com\/(.+)/
-const YOUTUBE_REGEX = /(?:http[s]?:\/\/)?(?:www.)?(?:(?:youtube.com\/watch\?(?:.*)(?:v=))|(?:youtu.be\/))([^&].+)/
-
 export default {
   name: 'image-block',
 
@@ -62,20 +59,16 @@ export default {
       showConfig: false,
       url: '',
       html: '',
-
       providers: {
-        vimeo: {
-          regex: VIMEO_REGEX,
-          html: [
-            '<iframe src="{{protocol}}//player.vimeo.com/video/{{remote_id}}?title=0&byline=0" ',
-            'width="580" height="320" frameborder="0"></iframe>'
-          ].join('\n')
-        },
-        youtube: {
-          regex: YOUTUBE_REGEX,
-          html: ['<iframe src="{{protocol}}//www.youtube.com/embed/{{remote_id}}" ',
-            'width="580" height="320" frameborder="0" allowfullscreen></iframe>'
-          ].join('\n')
+        gmaps: {
+          regex: /<iframe(?:.*)src="(.*?)"/,
+          html: `
+            <iframe src="{{protocol}}{{embed_url}}"
+                    width="600"
+                    height="450"
+                    frameborder="0"
+                    style="border:0"
+                    allowfullscreen></iframe>`
         }
       }
     }
@@ -94,10 +87,9 @@ export default {
   },
 
   created () {
-    console.log('<ImageBlock /> created')
+    console.log('<MapBlock /> created')
     this.block.uid = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
     if (!this.block.data.url) {
-      console.log('nathhinn')
       this.showConfig = true
     }
   },
@@ -106,7 +98,6 @@ export default {
     parseUrl (v) {
       let match
       let url = v.srcElement.value
-      console.log('parsing', url)
 
       for (let key of Object.keys(this.providers)) {
         let provider = this.providers[key]
@@ -114,18 +105,17 @@ export default {
 
         if (match !== null && match[1] !== undefined) {
           this.block.data.source = key
-          this.block.data.remote_id = match[1]
+          this.block.data.embed_url = match[1].replace('http:', '').replace('https:', '')
         }
       }
 
       if (!{}.hasOwnProperty.call(this.providers, this.block.data.source)) {
-        console.log('boohoo')
         return false
       }
 
       this.html = this.providers[this.block.data.source].html
         .replace('{{protocol}}', window.location.protocol)
-        .replace('{{remote_id}}', this.block.data.remote_id)
+        .replace('{{embed_url}}', this.block.data.embed_url)
     }
   }
 }

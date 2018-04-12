@@ -9,65 +9,68 @@
       :style="'font-size: ' + fontSize + 'rem'"
       v-model="block.data.text">
     <template slot="config">
-      <div class="form-check">
-        <input
-          v-model="block.data.level"
-          class="form-control"
-          type="radio"
-          value="1">
-        <label class="form-check-label">
-          H1
-        </label>
-      </div>
-      <div class="form-check">
-        <input
-          v-model="block.data.level"
-          class="form-control"
-          type="radio"
-          value="2">
-        <label class="form-check-label">
-          H2
-        </label>
-      </div>
-      <div class="form-check">
-        <input
-          v-model="block.data.level"
-          class="form-control"
-          type="radio"
-          value="3">
-        <label class="form-check-label">
-          H3
-        </label>
-      </div>
-      <div class="form-check">
-        <input
-          v-model="block.data.level"
-          class="form-control"
-          type="radio"
-          value="4">
-        <label class="form-check-label">
-          H4
-        </label>
-      </div>
-      <div class="form-check">
-        <input
-          v-model="block.data.level"
-          class="form-control"
-          type="radio"
-          value="5">
-        <label class="form-check-label">
-          H5
-        </label>
-      </div>
-      <div class="form-check">
-        <input
-          v-model="block.data.level"
-          class="form-control"
-          type="radio"
-          value="6">
-        <label class="form-check-label">
-          H6
-        </label>
+      <div class="form-group">
+        <label>Størrelse</label>
+        <div class="form-check">
+          <input
+            v-model="block.data.level"
+            class="form-check-input"
+            type="radio"
+            value="1">
+          <label class="form-check-label">
+            H1
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            v-model="block.data.level"
+            class="form-check-input"
+            type="radio"
+            value="2">
+          <label class="form-check-label">
+            H2
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            v-model="block.data.level"
+            class="form-check-input"
+            type="radio"
+            value="3">
+          <label class="form-check-label">
+            H3
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            v-model="block.data.level"
+            class="form-check-input"
+            type="radio"
+            value="4">
+          <label class="form-check-label">
+            H4
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            v-model="block.data.level"
+            class="form-check-input"
+            type="radio"
+            value="5">
+          <label class="form-check-label">
+            H5
+          </label>
+        </div>
+        <div class="form-check">
+          <input
+            v-model="block.data.level"
+            class="form-check-input"
+            type="radio"
+            value="6">
+          <label class="form-check-label">
+            H6
+          </label>
+        </div>
       </div>
 
       <div class="form-group">

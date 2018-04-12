@@ -1,38 +1,42 @@
 <template>
   <div class="villain-editor-plus">
-    <div
-      v-if="!active"
-      class="villain-editor-plus-inactive">
-      <a
-        @click="active = true">
-        +
-      </a>
-    </div>
-    <div
-      v-else
-      class="villain-editor-plus-available-blocks">
+    <transition name="fade-fast" mode="out-in">
+      <div
+        v-if="!active"
+        key="plus"
+        class="villain-editor-plus-inactive">
+        <a
+          @click="active = true">
+          +
+        </a>
+      </div>
+      <div
+        v-else
+        key="blocks"
+        class="villain-editor-plus-available-blocks">
 
-      <div
-        v-for="b in availableBlocks"
-        class="villain-editor-plus-available-block"
-        @click="addBlock(b)">
-        <div>
-          <i
-            :class="b.icon"
-            class="fa fa-fw"
-          />
+        <div
+          v-for="b in availableBlocks"
+          class="villain-editor-plus-available-block"
+          @click="addBlock(b)">
+          <div>
+            <i
+              :class="b.icon"
+              class="fa fa-fw"
+            />
+          </div>
+          <div class="villain-editor-plus-available-block-text">
+            {{ b.name }}
+          </div>
         </div>
-        <div class="villain-editor-plus-available-block-text">
-          {{ b.name }}
+        <div
+          class="villain-editor-plus-close"
+          @click="active = false"
+          >
+          <i class="fa fa-fw fa-times-circle" />
         </div>
       </div>
-      <div
-        class="villain-editor-plus-close"
-        @click="active = false"
-        >
-        <i class="fa fa-fw fa-times-circle" />
-      </div>
-    </div>
+    </transition>
   </div>
 </template>
 

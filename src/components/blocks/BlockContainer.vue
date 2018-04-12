@@ -15,13 +15,14 @@
         :key="b.uid"
         class="villain-block-container"
       >
-        {{ b.uid }}
-        <component
-          :is="b.type + 'Block'"
-          :block="b"
-          @add="$emit('add', $event)"
-          @delete="$emit('delete', $event)"
-        />
+        <transition name="fade" appear>
+          <component
+            :is="b.type + 'Block'"
+            :block="b"
+            @add="$emit('add', $event)"
+            @delete="$emit('delete', $event)"
+          />
+        </transition>
       </div>
     </draggable>
   </div>

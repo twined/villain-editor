@@ -56,7 +56,7 @@
         </div>
       </div>
     </div>
-    {{ block.uid }}
+
     <VillainPlus
       :after="block.uid"
       :parent="parent"

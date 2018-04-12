@@ -8,7 +8,6 @@
       @delete="deleteBlock"
       @order="orderBlocks"
     />
-    <code><pre>{{ blocks }}</pre></code>
   </div>
 
   <div
@@ -22,7 +21,6 @@
         @delete="deleteBlock"
       />
     </div>
-    <code><pre>{{ blocks }}</pre></code>
   </div>
 </template>
 

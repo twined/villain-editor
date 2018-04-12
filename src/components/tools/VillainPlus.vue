@@ -94,7 +94,13 @@ export default {
             name: 'Bilde',
             icon: 'fa-image',
             component: 'Image',
-            dataTemplate: {}
+            dataTemplate: {
+              url: '',
+              sizes: null,
+              title: '',
+              credits: '',
+              class: 'img-fluid'
+            }
           },
 
           {

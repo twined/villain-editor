@@ -107,6 +107,12 @@ export default {
     }
   },
 
+  watch: {
+    config (v) {
+      this.showConfig = v
+    }
+  },
+
   created () {
     if (this.config) {
       this.showConfig = true

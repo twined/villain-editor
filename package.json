@@ -22,7 +22,10 @@
     "autosize": "^4.0.1",
     "lodash.clonedeep": "^4.5.0",
     "markdown-it": "^8.4.1",
+    "vex-dialog": "^1.1.0",
+    "vex-js": "^4.1.0",
     "vue": "^2.3.3",
+    "vue-drag-drop": "^0.2.4",
     "vue-quill-editor": "^3.0.6",
     "vuedraggable": "^2.16.0"
   },

@@ -55,25 +55,38 @@ export default {
 
     baseURL: {
       type: String,
-      default: ''
+      default: '/admin/api/villain/'
+    },
+
+    browseURL: {
+      type: String,
+      default: '/admin/api/villain/browse/'
     },
 
     imageSeries: {
       type: String,
-      default: ''
+      default: 'post'
+    },
+
+    extraHeaders: {
+      type: Object,
+      default: () => {}
     }
   },
 
   data () {
     return {
-      blocks: [],
-      msg: 'Welcome to Your Vue.js App'
+      blocks: []
     }
   },
 
-  provide: {
-    baseURL: this.baseURL,
-    imageSeries: this.imageSeries
+  provide () {
+    return {
+      vBaseURL: this.baseURL,
+      vBrowseURL: this.browseURL,
+      vImageSeries: this.imageSeries,
+      vExtraHeaders: this.extraHeaders
+    }
   },
 
   watch: {

@@ -1,31 +1,49 @@
 <template>
   <div
-    v-if="blocks.length"
     class="villain-editor">
-    <BlockContainer
-      :blocks="blocks"
-      @add="addBlock($event)"
-      @delete="deleteBlock"
-      @order="orderBlocks"
-    />
-  </div>
-
-  <div
-    class="villain-editor"
-    v-else>
-    <div class="villain-block-container">
-      <!-- no blocks -->
+    <div class="villain-editor-toolbar">
+      <i class="fa mr-2 fa-info-circle" />
+      Trykk på "+" under for å legge til innholdsblokk!
+      <div
+        class="src float-right"
+        @click="toggleSource()">
+        <i class="fa fa-code" />
+      </div>
+    </div>
+    <template
+      v-if="showSource">
+      <div class="villain-editor-source">
+        <textarea ref="tasource" v-model="src" />
+        <button
+          class="btn btn-primary"
+          @click="updateSource">
+          Oppdatér
+        </button>
+      </div>
+    </template>
+    <template
+      v-else>
       <BlockContainer
+        v-if="blocks.length"
+        :blocks="blocks"
+        @add="addBlock($event)"
+        @delete="deleteBlock"
+        @order="orderBlocks"
+      />
+      <BlockContainer
+        v-else
         :blocks="blocks"
         @add="addBlock($event)"
         @delete="deleteBlock"
       />
-    </div>
+    </template>
   </div>
 </template>
 
 <script>
+import autosize from 'autosize'
 import cloneDeep from 'lodash/cloneDeep'
+
 import VillainPlus from './tools/VillainPlus'
 import BlockContainer from './blocks/BlockContainer'
 import ColumnsBlock from './blocks/ColumnsBlock'
@@ -74,7 +92,21 @@ export default {
 
   data () {
     return {
-      blocks: []
+      blocks: [],
+      showSource: false
+    }
+  },
+
+  computed: {
+    src: {
+      get () {
+        let bx = cloneDeep(this.blocks)
+        return JSON.stringify(bx.map(b => this.stripUID(b)), null, 0)
+      },
+
+      set (v) {
+        this.updatedSource = v
+      }
     }
   },
 
@@ -107,6 +139,21 @@ export default {
   },
 
   methods: {
+    updateSource () {
+      this.blocks = JSON.parse(this.updatedSource)
+      this.blocks = this.addUIDs()
+      this.toggleSource()
+    },
+
+    toggleSource () {
+      if (this.showSource) {
+        this.showSource = false
+      } else {
+        this.showSource = true
+        autosize(this.$refs.tasource)
+      }
+    },
+
     addUIDs () {
       return [...this.blocks].map(b => {
         return { ...b, uid: this.createUID() }

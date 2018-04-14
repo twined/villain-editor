@@ -9,9 +9,9 @@
 
     .villain-editor-plus-close {
       position: absolute;
-      right: 0;
+      right: 5px;
       color: #fff;
-      top: 0;
+      top: 5px;
     }
 
     .villain-editor-plus-available-block {
@@ -47,6 +47,7 @@
     background-color: #fff;
     transition: all 250ms ease;
     border: 0;
+    padding: .12rem;
 
     &:hover {
       background-color: $vmain;

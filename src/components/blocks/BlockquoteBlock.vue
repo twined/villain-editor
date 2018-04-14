@@ -4,9 +4,9 @@
     :parent="parent"
     @add="$emit('add', $event)"
     @delete="$emit('delete', $event)">
-    <input
+    <textarea
       class="villain-blockquote-content"
-      v-model="block.data.content">
+      v-model="block.data.text" />
     <input
       class="villain-blockquote-cite"
       v-model="block.data.cite">
@@ -53,6 +53,7 @@ export default {
 
   created () {
     console.debug('<BlockquoteBlock /> created')
+    console.log(this.block)
   }
 }
 </script>

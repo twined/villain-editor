@@ -38,6 +38,15 @@
         </div>
 
         <slot name="config" />
+
+        <div class="villain-config-content-buttons">
+          <button
+            class="btn btn-primary"
+            @click="showConfig = false">
+            OK
+          </button>
+        </div>
+
         <div class="villain-block-actions">
           <div class="villain-block-action villain-move">
             <i class="fa fa-fw fa-expand-arrows-alt" />
@@ -98,6 +107,11 @@ export default {
     icon: {
       type: String,
       default: ''
+    },
+
+    showOk: {
+      type: Boolean,
+      default: false
     }
   },
 

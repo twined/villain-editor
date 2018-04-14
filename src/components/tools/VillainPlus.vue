@@ -132,7 +132,7 @@ export default {
             icon: 'fa-quote-right',
             component: 'Blockquote',
             dataTemplate: {
-              'content': 'Sitat',
+              'text': 'Sitat',
               'cite': 'Sitatforfatter'
             }
           },

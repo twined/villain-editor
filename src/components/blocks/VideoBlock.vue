@@ -3,6 +3,7 @@
     :block="block"
     :parent="parent"
     :config="showConfig"
+    :show-ok="true"
     icon="fa-video"
     @add="$emit('add', $event)"
     @delete="$emit('delete', $event)">

@@ -2,7 +2,6 @@
   <div id="app">
     <VillainEditor
       :json="json"
-      @input="inp"
     />
   </div>
 </template>
@@ -22,9 +21,7 @@ export default {
   },
 
   methods: {
-    inp () {
-      console.log('inp called')
-    }
+
   }
 }
 </script>

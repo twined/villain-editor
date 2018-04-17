@@ -24,7 +24,7 @@
     <template
       v-else>
       <BlockContainer
-        v-if="blocks.length"
+        v-if="blocks && blocks.length"
         :blocks="blocks"
         @add="addBlock($event)"
         @delete="deleteBlock"
@@ -134,6 +134,9 @@ export default {
 
   created () {
     // convert data to blocks
+    if (!this.json) {
+      this.json = '[]'
+    }
     this.blocks = JSON.parse(this.json)
     this.blocks = this.addUIDs()
   },

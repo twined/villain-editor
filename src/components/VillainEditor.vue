@@ -135,10 +135,11 @@ export default {
   created () {
     // convert data to blocks
     if (!this.json) {
-      this.json = '[]'
+      this.blocks = []
+    } else {
+      this.blocks = JSON.parse(this.json)
+      this.blocks = this.addUIDs()
     }
-    this.blocks = JSON.parse(this.json)
-    this.blocks = this.addUIDs()
   },
 
   methods: {

@@ -134,6 +134,7 @@ export default {
 
   created () {
     // convert data to blocks
+    console.log('VE // json =', this.json)
     if (!this.json || this.json === '') {
       this.blocks = []
     } else {

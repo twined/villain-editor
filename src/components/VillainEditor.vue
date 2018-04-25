@@ -134,7 +134,7 @@ export default {
 
   created () {
     // convert data to blocks
-    if (!this.json) {
+    if (!this.json || this.json === '') {
       this.blocks = []
     } else {
       this.blocks = JSON.parse(this.json)

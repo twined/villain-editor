@@ -134,7 +134,6 @@ export default {
 
   created () {
     // convert data to blocks
-    console.log('VE // json =', this.json)
     if (!this.json || this.json === '') {
       this.blocks = []
     } else {
@@ -180,10 +179,19 @@ export default {
     },
 
     addBlock ({block: blockType, after, parent}) {
-      let block = {
-        type: blockType.component.toLowerCase(),
-        data: { ...blockType.dataTemplate },
-        uid: blockType.uid
+      let block
+      if (blockType.component === 'Columns') {
+        block = {
+          type: blockType.component.toLowerCase(),
+          data: [ ...blockType.dataTemplate ],
+          uid: blockType.uid
+        }
+      } else {
+        block = {
+          type: blockType.component.toLowerCase(),
+          data: { ...blockType.dataTemplate },
+          uid: blockType.uid
+        }
       }
 
       console.log('* adding', block)
@@ -214,9 +222,13 @@ export default {
         let mainBlock = this.blocks.find(b => {
           if (b.type === 'columns') {
             console.log('columns', b)
-            for (let i = 0; i < b.data.length; i++) {
-              if (b.data[i].uid === parent) {
-                return b
+            for (let key of Object.keys(b.data)) {
+              let x = b.data[key]
+              console.log('x uid', x.uid)
+              console.log('parent', parent)
+              if (x.uid === parent) {
+                console.log('block is', x)
+                return x
               }
             }
           }
@@ -224,16 +236,41 @@ export default {
         let parentBlock = null
         if (mainBlock) {
           // we have the main block -- add to the correct parent
-          for (let i = 0; i < mainBlock.data.length; i++) {
-            if (mainBlock.data[i].uid === parent) {
-              parentBlock = mainBlock.data[i]
+          for (let key of Object.keys(mainBlock.data)) {
+            let y = mainBlock.data[key]
+            if (y.uid === parent) {
+              parentBlock = y
             }
           }
 
-          parentBlock.data = [
-            ...parentBlock.data,
-            block
-          ]
+          if (after) {
+            let p = parentBlock.data.find(b => b.uid === after)
+            if (!p) {
+              console.error('--- NO UID FOR "AFTER"-BLOCK')
+            }
+            let idx = parentBlock.data.indexOf(p)
+
+            if (idx + 1 === parentBlock.data.length) {
+              // index is last, just add to list
+              parentBlock.data = [
+                ...parentBlock.data,
+                block
+              ]
+              return
+            }
+
+            // we're adding in the midst of things
+            parentBlock.data = [
+              ...parentBlock.data.slice(0, idx + 1),
+              block,
+              ...parentBlock.data.slice(idx + 1)
+            ]
+          } else {
+            parentBlock.data = [
+              block,
+              ...parentBlock.data
+            ]
+          }
         }
         return
       }

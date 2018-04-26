@@ -16,7 +16,7 @@ export default {
   },
   data () {
     return {
-      json: `[{"type":"text","data":{"type":"paragraph","text":"TEXT1"}},{"type":"text","data":{"type":"paragraph","text":"TEXT2"}}]`
+      json: `[{"type":"text","data":{"type":"small","text":"TEXT1"}},{"type":"text","data":{"type":"small","text":"TEXT2"}}]`
     }
   },
 

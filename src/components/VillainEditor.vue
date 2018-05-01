@@ -50,17 +50,20 @@ import ColumnsBlock from './blocks/ColumnsBlock'
 import HeaderBlock from './blocks/HeaderBlock'
 import MarkdownBlock from './blocks/MarkdownBlock'
 import TextBlock from './blocks/TextBlock'
+import TimelineBlock from './blocks/TimelineBlock'
 
 export default {
   name: 'villain-editor',
   components: {
     BlockContainer,
     VillainPlus,
+
     // BLOCKS
     ColumnsBlock,
     HeaderBlock,
     MarkdownBlock,
-    TextBlock
+    TextBlock,
+    TimelineBlock
   },
 
   props: {
@@ -180,7 +183,7 @@ export default {
 
     addBlock ({block: blockType, after, parent}) {
       let block
-      if (blockType.component === 'Columns') {
+      if (blockType.component === 'Columns' || blockType.component === 'Timeline') {
         block = {
           type: blockType.component.toLowerCase(),
           data: [ ...blockType.dataTemplate ],

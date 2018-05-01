@@ -50,6 +50,7 @@ import MapBlock from './MapBlock'
 import MarkdownBlock from './MarkdownBlock'
 import TextBlock from './TextBlock'
 import VideoBlock from './VideoBlock'
+import TimelineBlock from './TimelineBlock'
 
 export default {
   name: 'block-container',
@@ -65,7 +66,8 @@ export default {
     MapBlock,
     MarkdownBlock,
     TextBlock,
-    VideoBlock
+    VideoBlock,
+    TimelineBlock
   },
 
   props: {

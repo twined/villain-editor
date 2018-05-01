@@ -138,6 +138,18 @@ export default {
           },
 
           {
+            name: 'Tidslinje',
+            icon: 'fa-clock',
+            component: 'Timeline',
+            dataTemplate: [
+              {
+                'caption': '2018',
+                'text': 'Tekst om hendelsen'
+              }
+            ]
+          },
+
+          {
             name: 'Kolonner',
             icon: 'fa-columns',
             component: 'Columns',

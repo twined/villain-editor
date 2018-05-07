@@ -304,7 +304,23 @@ export default {
     },
 
     deleteBlock ({ uid }) {
-      let block = this.blocks.find(b => b.uid === uid)
+      console.log('deleting')
+      let block = this.blocks.find(b => {
+        if (b.type === 'columns') {
+          for (let col of b.data) {
+            for (let colBlock of col.data) {
+              if (colBlock.uid === uid) {
+                let colIdx = col.data.indexOf(colBlock)
+                col.data = [
+                  ...col.data.slice(0, colIdx),
+                  ...col.data.slice(colIdx + 1)
+                ]
+              }
+            }
+          }
+        }
+        return b.uid === uid
+      })
       if (block) {
         let idx = this.blocks.indexOf(block)
         this.blocks = [

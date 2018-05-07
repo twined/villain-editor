@@ -34,11 +34,14 @@
           </div>
         </div>
         <div v-else>
-          ELSE IN "COLUMNSBLOCK"
-          <VillainPlus
-            :parent="block.uid"
-            @add="$emit('add', $event)"
-          />
+          <div class="villain-block-container">
+            <div class="villain-block-wrapper">
+              <VillainPlus
+                :parent="col.uid"
+                @add="$emit('add', $event)"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

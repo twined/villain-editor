@@ -153,36 +153,37 @@ export default {
             name: 'Kolonner',
             icon: 'fa-columns',
             component: 'Columns',
-            dataTemplate: [
-              {
-                'uid': createUID(),
-                'class': 'col-sm-6',
-                'data': [
-                  {
-                    'uid': createUID(),
-                    'type': 'text',
-                    'data': {
-                      'text': 'Kolonnetekst',
-                      'type': 'paragraph'
-                    }
-                  }
-                ]
-              },
-              {
-                'uid': createUID(),
-                'class': 'col-sm-6',
-                'data': [
-                  {
-                    'uid': createUID(),
-                    'type': 'text',
-                    'data': {
-                      'text': 'Kolonnetekst',
-                      'type': 'paragraph'
-                    }
-                  }
-                ]
-              }
-            ]
+            dataTemplate: []
+            // dataTemplate: [
+            //   {
+            //     'uid': createUID(),
+            //     'class': 'col-sm-6',
+            //     'data': [
+            //       {
+            //         'uid': createUID(),
+            //         'type': 'text',
+            //         'data': {
+            //           'text': 'Kolonnetekst',
+            //           'type': 'paragraph'
+            //         }
+            //       }
+            //     ]
+            //   },
+            //   {
+            //     'uid': createUID(),
+            //     'class': 'col-sm-6',
+            //     'data': [
+            //       {
+            //         'uid': createUID(),
+            //         'type': 'text',
+            //         'data': {
+            //           'text': 'Kolonnetekst',
+            //           'type': 'paragraph'
+            //         }
+            //       }
+            //     ]
+            //   }
+            // ]
           },
 
           {

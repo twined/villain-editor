@@ -2,6 +2,7 @@
   <Block
     :block="block"
     :parent="block.uid"
+    :config="showConfig"
     @add="$emit('add', $event)"
     @delete="$emit('delete', $event)">
 
@@ -53,6 +54,12 @@
           v-model="columnCount"
           class="form-control"
           type="input">
+        <button
+          class="btn btn-primary"
+          @click="updateColumns"
+        >
+          Sett kolonneantall (overskriver nåværende kolonner!)
+        </button>
       </div>
     </template>
   </Block>
@@ -96,6 +103,7 @@ export default {
   data () {
     return {
       columnCount: 2,
+      showConfig: false,
       uid: null
     }
   },
@@ -114,9 +122,31 @@ export default {
 
   created () {
     console.debug('<ColumnsBlock /> created')
+    if (!this.block.data.length) {
+      this.showConfig = true
+    }
   },
 
   methods: {
+    updateColumns () {
+      let colClass
+
+      switch (this.columnCount) {
+        case 1:
+          colClass = 'col-md-12'
+          break
+        case 2:
+          colClass = 'col-md-6'
+          break
+        case 3:
+          colClass = 'col-md-4'
+          break
+        case 4:
+          colClass = 'col-md-3'
+          break
+      }
+    },
+
     createUID () {
       return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
     }

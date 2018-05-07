@@ -89,8 +89,10 @@ export default {
   created () {
     console.debug('<MapBlock /> created')
 
-    if (!this.block.data.url) {
+    if (!this.block.data.embed_url) {
       this.showConfig = true
+    } else {
+      this.populateMap()
     }
   },
 
@@ -109,6 +111,10 @@ export default {
         }
       }
 
+      this.populateMap()
+    },
+
+    populateMap () {
       if (!{}.hasOwnProperty.call(this.providers, this.block.data.source)) {
         return false
       }

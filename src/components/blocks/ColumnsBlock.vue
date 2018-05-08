@@ -54,12 +54,14 @@
           v-model="columnCount"
           class="form-control"
           type="input">
-        <button
-          class="btn btn-primary"
-          @click="updateColumns"
-        >
-          Sett kolonneantall (overskriver nåværende kolonner!)
-        </button>
+        <div class="text-center mt-3">
+          <button
+            class="btn btn-primary"
+            @click="updateColumns"
+          >
+            Sett kolonneantall (overskriver nåværende kolonner!)
+          </button>
+        </div>
       </div>
     </template>
   </Block>
@@ -130,8 +132,9 @@ export default {
   methods: {
     updateColumns () {
       let colClass
+      this.block.data = []
 
-      switch (this.columnCount) {
+      switch (parseInt(this.columnCount)) {
         case 1:
           colClass = 'col-md-12'
           break
@@ -145,6 +148,20 @@ export default {
           colClass = 'col-md-3'
           break
       }
+
+      for (let i = 0; i < this.columnCount; i++) {
+        this.addColumn(colClass)
+      }
+
+      this.showConfig = false
+    },
+
+    addColumn (colClass) {
+      this.block.data.push({
+        uid: this.createUID(),
+        class: colClass,
+        data: []
+      })
     },
 
     createUID () {

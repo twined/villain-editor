@@ -10,22 +10,22 @@
   "dependencies": {
     "autosize": "^4.0.2",
     "lodash.clonedeep": "^4.5.0",
-    "markdown-it": "^8.4.1",
+    "markdown-it": "^8.4.2",
     "vex-dialog": "^1.1.0",
     "vex-js": "^4.1.0",
-    "vue": "^2.5.16",
-    "vue-drag-drop": "^1.1.1",
+    "vue": "^2.5.17",
+    "vue-drag-drop": "^1.1.4",
     "vue-quill-editor": "^3.0.6",
     "vuedraggable": "^2.16.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.0-beta.15",
-    "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
-    "@vue/cli-service": "^3.0.0-beta.15",
-    "@vue/eslint-config-standard": "^3.0.0-beta.16",
-    "node-sass": "^4.9.0",
-    "sass-loader": "^7.0.1",
-    "vue-template-compiler": "^2.5.16"
+    "@vue/cli-plugin-babel": "^3.0.1",
+    "@vue/cli-plugin-eslint": "^3.0.1",
+    "@vue/cli-service": "^3.0.1",
+    "@vue/eslint-config-standard": "^3.0.1",
+    "node-sass": "^4.9.3",
+    "sass-loader": "^7.1.0",
+    "vue-template-compiler": "^2.5.17"
   },
   "browserslist": [
     "> 1%",

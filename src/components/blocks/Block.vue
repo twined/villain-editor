@@ -65,10 +65,15 @@
         </div>
       </div>
     </div>
-
     <VillainPlus
+      v-if="block.type !== 'columns'"
       :after="block.uid"
       :parent="parent"
+      @add="$emit('add', $event)"
+    />
+    <VillainPlus
+      v-else
+      :after="block.uid"
       @add="$emit('add', $event)"
     />
   </div>

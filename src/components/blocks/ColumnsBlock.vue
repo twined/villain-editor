@@ -10,6 +10,7 @@
     <div class="row">
       <div
         v-for="col in block.data"
+        :key="col.uid"
         :class="col.class">
         <div v-if="col.data.length">
           <div class="villain-block-container">
@@ -22,8 +23,8 @@
           </div>
           <div
             v-for="b in col.data"
-            class="villain-block-container"
-          >
+            :key="b.uid"
+            class="villain-block-container">
             <component
               :is="b.type + 'Block'"
               :block="b"
@@ -57,8 +58,7 @@
         <div class="text-center mt-3">
           <button
             class="btn btn-primary"
-            @click="updateColumns"
-          >
+            @click="updateColumns">
             Sett kolonneantall (overskriver nåværende kolonner!)
           </button>
         </div>

@@ -17,6 +17,7 @@
 
         <div
           v-for="b in availableBlocks"
+          :key="b.name"
           class="villain-editor-plus-available-block"
           @click="addBlock(b)">
           <div>
@@ -31,8 +32,7 @@
         </div>
         <div
           class="villain-editor-plus-close"
-          @click="active = false"
-          >
+          @click="active = false">
           <i class="fa fa-fw fa-times-circle" />
         </div>
       </div>

@@ -1,12 +1,14 @@
 {
   "name": "villain-editor",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0-alpha.0",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
+  "main": "dist/villain-editor.common.js",
+  "web": "dist/villain-editor.umd.js",
+  "style": "dist/villain-editor.css",
   "dependencies": {
     "autosize": "^4.0.2",
     "lodash.clonedeep": "^4.5.0",

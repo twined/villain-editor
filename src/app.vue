@@ -16,7 +16,7 @@ export default {
   },
   data () {
     return {
-      json: `[{"type":"text","data":{"type":"small","text":"TEXT1"}},{"type":"text","data":{"type":"small","text":"TEXT2"}}]`
+      json: `[{"type":"text","data":{"text":"<p>OVER</p>","type":"paragraph"}},{"type":"columns","data":[{"uid":"JLJCB6Q02MSU8","class":"col-md-6","data":[{"type":"text","data":{"text":"<p>KOLONNE A1</p>","type":"paragraph"},"uid":"JLJCBC40MSBDP"},{"type":"text","data":{"text":"<p>KOLONNE A2</p>","type":"paragraph"},"uid":"JLJCBM3ZW49PW"}]},{"uid":"JLJCB6Q0C1GZV","class":"col-md-6","data":[{"type":"text","data":{"text":"<p>KOLONNE B1</p>","type":"paragraph"},"uid":"JLJCBGGGQZ2Y3"},{"type":"text","data":{"text":"<p>KOLONNE B2</p>","type":"paragraph"},"uid":"JLJCBQFTJHXM5"}]}]},{"type":"text","data":{"text":"<p>UNDER</p>","type":"paragraph"}}]`
     }
   },
 

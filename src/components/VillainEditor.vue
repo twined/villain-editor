@@ -27,6 +27,7 @@
         v-if="blocks && blocks.length"
         :blocks="blocks"
         @add="addBlock($event)"
+        @move="moveBlock($event)"
         @delete="deleteBlock"
         @order="orderBlocks"
       />
@@ -34,6 +35,7 @@
         v-else
         :blocks="blocks"
         @add="addBlock($event)"
+        @move="moveBlock($event)"
         @delete="deleteBlock"
       />
     </template>
@@ -43,6 +45,7 @@
 <script>
 import autosize from 'autosize'
 import cloneDeep from 'lodash/cloneDeep'
+import VueSlideUpDown from 'vue-slide-up-down'
 
 import VillainPlus from './tools/VillainPlus'
 import BlockContainer from './blocks/BlockContainer'
@@ -55,6 +58,7 @@ import TimelineBlock from './blocks/TimelineBlock'
 export default {
   name: 'villain-editor',
   components: {
+    VueSlideUpDown,
     BlockContainer,
     VillainPlus,
 
@@ -203,6 +207,7 @@ export default {
 
       // no after, no parent = + at the top OR first one if empty
       if (!after && !parent) {
+        console.log(block)
         // if we have blocks, it's the top + so we add to top
         if (this.blocks.length) {
           console.debug('add to top')
@@ -299,6 +304,118 @@ export default {
           ...this.blocks.slice(0, idx + 1),
           block,
           ...this.blocks.slice(idx + 1)
+        ]
+      }
+    },
+
+    moveBlock ({block, after, parent}) {
+      console.log('==> requesting to move block')
+
+      // remove the block first
+
+      this.deleteBlock(block)
+
+      if (!after && !parent) {
+        let b = this.blocks.find(b => b.uid === block.uid)
+        let bIdx = this.blocks.indexOf(b)
+        console.log(bIdx)
+        // if we have blocks, it's the top + so we add to top
+        if (this.blocks.length) {
+          console.debug('add to top')
+          this.blocks = [
+            block,
+            ...this.blocks
+          ]
+        }
+      }
+
+      /*
+      ** Block is moved into a column
+      */
+      if (parent) {
+        console.log('==> ADDING to column')
+        // child of a column
+        let mainBlock = this.blocks.find(b => {
+          if (b.type === 'columns') {
+            console.log('columns', b)
+            for (let key of Object.keys(b.data)) {
+              let x = b.data[key]
+              console.log('x uid', x.uid)
+              console.log('parent', parent)
+              if (x.uid === parent) {
+                console.log('block is', x)
+                return x
+              }
+            }
+          }
+        })
+
+        let parentBlock = null
+        if (mainBlock) {
+          // we have the main block -- add to the correct parent
+          for (let key of Object.keys(mainBlock.data)) {
+            let y = mainBlock.data[key]
+            if (y.uid === parent) {
+              parentBlock = y
+            }
+          }
+
+          if (after) {
+            let p = parentBlock.data.find(b => b.uid === after)
+            if (!p) {
+              console.error('--- NO UID FOR "AFTER"-BLOCK')
+            }
+            let idx = parentBlock.data.indexOf(p)
+
+            if (idx + 1 === parentBlock.data.length) {
+              // index is last, just add to list
+              parentBlock.data = [
+                ...parentBlock.data,
+                block
+              ]
+              return
+            }
+
+            // we're adding in the midst of things
+            parentBlock.data = [
+              ...parentBlock.data.slice(0, idx + 1),
+              block,
+              ...parentBlock.data.slice(idx + 1)
+            ]
+          } else {
+            parentBlock.data = [
+              block,
+              ...parentBlock.data
+            ]
+          }
+        }
+        return
+      }
+
+      /*
+      ** Block is moved after another block, but not to a columns object
+      */
+      if (after) {
+        let p = this.blocks.find(b => b.uid === after)
+        if (!p) {
+          console.error('--- NO UID FOR "AFTER"-BLOCK')
+        }
+        let parentIdx = this.blocks.indexOf(p)
+
+        if (parentIdx + 1 === this.blocks.length) {
+          // index is last, just add to list
+          this.blocks = [
+            ...this.blocks,
+            block
+          ]
+          return
+        }
+
+        // we're adding in the midst of things
+        this.blocks = [
+          ...this.blocks.slice(0, parentIdx + 1),
+          block,
+          ...this.blocks.slice(parentIdx + 1)
         ]
       }
     },

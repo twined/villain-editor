@@ -1,9 +1,10 @@
 <template>
   <Block
     :block="block"
-    :parent="block.uid"
+    :parent="null"
     :config="showConfig"
     @add="$emit('add', $event)"
+    @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
 
     <!-- parse each block inside columns -->
@@ -18,22 +19,26 @@
               <VillainPlus
                 :parent="col.uid"
                 @add="$emit('add', $event)"
+                @move="$emit('move', $event)"
               />
             </div>
           </div>
-          <div
-            v-for="b in col.data"
-            :key="b.uid"
-            class="villain-block-container">
-            <component
-              :is="b.type + 'Block'"
-              :block="b"
-              :parent="col.uid"
-              :after="b.uid"
-              @add="$emit('add', $event)"
-              @delete="$emit('delete', $event)"
-            />
-          </div>
+          <transition-group name="bounce">
+            <div
+              v-for="b in col.data"
+              :key="b.uid"
+              class="villain-block-container">
+                <component
+                  :is="b.type + 'Block'"
+                  :block="b"
+                  :parent="col.uid"
+                  :after="b.uid"
+                  @add="$emit('add', $event)"
+                  @move="$emit('move', $event)"
+                  @delete="$emit('delete', $event)"
+                />
+            </div>
+          </transition-group>
         </div>
         <div v-else>
           <div class="villain-block-container">
@@ -41,6 +46,7 @@
               <VillainPlus
                 :parent="col.uid"
                 @add="$emit('add', $event)"
+                @move="$emit('move', $event)"
               />
             </div>
           </div>

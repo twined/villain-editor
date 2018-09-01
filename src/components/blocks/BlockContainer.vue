@@ -4,33 +4,31 @@
       class="villain-block-wrapper">
       <VillainPlus
         @add="$emit('add', $event)"
+        @move="$emit('move', $event)"
       />
     </div>
-    <draggable
-      v-model="cBlocks"
-      :options="{ handle: '.villain-move' }">
 
+    <transition-group name="bounce">
       <div
-        v-for="(b, idx) in cBlocks"
+        v-for="b in cBlocks"
         :key="b.uid"
-        class="villain-block-container"
-      >
-        <transition name="fade" appear>
-          <component
-            :is="b.type + 'Block'"
-            :block="b"
-            @add="$emit('add', $event)"
-            @delete="$emit('delete', $event)"
-          />
-        </transition>
+        class="villain-block-container">
+        <component
+          :is="b.type + 'Block'"
+          :block="b"
+          @add="$emit('add', $event)"
+          @delete="$emit('delete', $event)"
+          @move="$emit('move', $event)"
+        />
       </div>
-    </draggable>
+    </transition-group>
   </div>
   <div v-else>
     <div
       class="villain-block-wrapper">
       <VillainPlus
         @add="$emit('add', $event)"
+        @move="$emit('move', $event)"
       />
     </div>
   </div>

@@ -3,6 +3,7 @@
     :block="block"
     :parent="parent"
     @add="$emit('add', $event)"
+    @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
 
     <ul class="villain-timeline">

@@ -5,6 +5,7 @@
     :config="showConfig"
     icon="fa-compass"
     @add="$emit('add', $event)"
+    @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
     <div class="villain-block-video">
       <div

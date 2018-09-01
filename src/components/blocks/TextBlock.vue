@@ -4,6 +4,7 @@
     :parent="parent"
     icon="fa-paragraph"
     @add="$emit('add', $event)"
+    @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
     <quill-editor
       v-model="text"
@@ -54,11 +55,11 @@
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 
+import Block from './Block'
 import { quillEditor } from 'vue-quill-editor'
 import MarkdownIt from 'markdown-it'
-const md = new MarkdownIt({ html: true })
 
-import Block from './Block'
+const md = new MarkdownIt({ html: true })
 
 export default {
   name: 'text-block',

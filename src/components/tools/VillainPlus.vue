@@ -2,52 +2,54 @@
   <div
     ref="plus"
     class="villain-editor-plus">
-    <transition name="fade-fast" mode="out-in">
-      <div
-        v-if="!active"
-        key="plus"
-        class="villain-editor-plus-inactive">
-        <a
-          @click="active = true">
-          <template v-if="draggingOver">
-            Flytt blokken hit
-          </template>
-          <template v-else>
-            +
-          </template>
-        </a>
-      </div>
-      <div
-        v-else
-        key="blocks"
-        class="villain-editor-plus-available-blocks">
 
-        <div
-          v-for="b in availableBlocks"
-          :key="b.name"
-          class="villain-editor-plus-available-block"
-          @click="addBlock(b)">
-          <div>
-            <i
-              :class="b.icon"
-              class="fa fa-fw"
-            />
+    <div
+      key="plus"
+      class="villain-editor-plus-inactive">
+      <a
+        @click="active = true">
+        <template v-if="draggingOver">
+          Flytt blokken hit
+        </template>
+        <template v-else-if="active">
+          <small>Legg til ny blokk</small>
+        </template>
+        <template v-else>
+          +
+        </template>
+      </a>
+
+      <VueSlideUpDown :active="active" :duration="350">
+        <div class="villain-editor-plus-available-blocks">
+          <div
+            v-for="b in availableBlocks"
+            :key="b.name"
+            class="villain-editor-plus-available-block"
+            @click="addBlock(b)">
+            <div>
+              <i
+                :class="b.icon"
+                class="fa fa-fw"
+              />
+            </div>
+            <div class="villain-editor-plus-available-block-text">
+              {{ b.name }}
+            </div>
           </div>
-          <div class="villain-editor-plus-available-block-text">
-            {{ b.name }}
+          <div
+            class="villain-editor-plus-close"
+            @click="active = false">
+            <i class="fa fa-fw fa-times-circle" />
           </div>
         </div>
-        <div
-          class="villain-editor-plus-close"
-          @click="active = false">
-          <i class="fa fa-fw fa-times-circle" />
-        </div>
-      </div>
-    </transition>
+      </VueSlideUpDown>
+    </div>
   </div>
 </template>
 
 <script>
+
+import VueSlideUpDown from 'vue-slide-up-down'
 
 function createUID () {
   return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
@@ -55,6 +57,10 @@ function createUID () {
 
 export default {
   name: 'villain-plus',
+
+  components: {
+    VueSlideUpDown
+  },
 
   props: {
     parent: {

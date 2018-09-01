@@ -3,7 +3,7 @@
     class="villain-editor">
     <div class="villain-editor-toolbar">
       <i class="fa mr-2 fa-info-circle" />
-      Trykk på "+" under for å legge til innholdsblokk!
+      Trykk på "+" under for å legge til en innholdsblokk
       <div
         class="src float-right"
         @click="toggleSource()">
@@ -45,7 +45,6 @@
 <script>
 import autosize from 'autosize'
 import cloneDeep from 'lodash/cloneDeep'
-import VueSlideUpDown from 'vue-slide-up-down'
 
 import VillainPlus from './tools/VillainPlus'
 import BlockContainer from './blocks/BlockContainer'
@@ -58,7 +57,6 @@ import TimelineBlock from './blocks/TimelineBlock'
 export default {
   name: 'villain-editor',
   components: {
-    VueSlideUpDown,
     BlockContainer,
     VillainPlus,
 

@@ -52,9 +52,6 @@
 </template>
 
 <script>
-import 'quill/dist/quill.core.css'
-import 'quill/dist/quill.snow.css'
-
 import Block from './Block'
 import { quillEditor } from 'vue-quill-editor'
 import MarkdownIt from 'markdown-it'

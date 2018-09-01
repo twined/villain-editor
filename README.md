@@ -2,6 +2,21 @@
 
 > Villain Content Editor
 
+## Props
+
+`visibleBlocks (array) - ['Markdown', 'Image']`
+`extraBlocks (array) - [
+  {
+    name: 'Custom block',
+    icon: 'fa-quote-right',
+    component: 'MyComponent',
+    dataTemplate: {
+      'text': 'This is my text',
+      'foo': 'bar'
+    }
+  }
+]`
+
 ## Build Setup
 
 ``` bash

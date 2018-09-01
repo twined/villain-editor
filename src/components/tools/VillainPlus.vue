@@ -22,7 +22,7 @@
       <VueSlideUpDown :active="active" :duration="350">
         <div class="villain-editor-plus-available-blocks">
           <div
-            v-for="b in availableBlocks"
+            v-for="b in vAvailableBlocks"
             :key="b.name"
             class="villain-editor-plus-available-block"
             @click="addBlock(b)">
@@ -71,114 +71,6 @@ export default {
     after: {
       type: String,
       default: null
-    },
-
-    availableBlocks: {
-      type: Array,
-      default: () => {
-        return [
-          {
-            name: 'Tekst',
-            icon: 'fa-paragraph',
-            component: 'Text',
-            dataTemplate: {
-              'text': '',
-              'type': 'paragraph'
-            }
-          },
-
-          {
-            name: 'Overskrift',
-            icon: 'fa-heading',
-            component: 'Header',
-            dataTemplate: {
-              'text': 'Overskrift',
-              'level': 1,
-              'class': ''
-            }
-          },
-
-          {
-            name: 'Skillelinje',
-            icon: 'fa-minus',
-            component: 'Divider',
-            dataTemplate: {
-              'text': '-------------'
-            }
-          },
-
-          {
-            name: 'Bilde',
-            icon: 'fa-image',
-            component: 'Image',
-            dataTemplate: {
-              url: '',
-              sizes: null,
-              title: '',
-              credits: '',
-              class: 'img-fluid'
-            }
-          },
-
-          {
-            name: 'Video',
-            icon: 'fa-video',
-            component: 'Video',
-            dataTemplate: {
-              source: 'youtube',
-              remote_id: ''
-            }
-          },
-
-          {
-            name: 'Kart',
-            icon: 'fa-compass',
-            component: 'Map',
-            dataTemplate: {
-              source: 'gmaps',
-              embed_url: ''
-            }
-          },
-
-          {
-            name: 'Sitat',
-            icon: 'fa-quote-right',
-            component: 'Blockquote',
-            dataTemplate: {
-              'text': 'Sitat',
-              'cite': 'Sitatforfatter'
-            }
-          },
-
-          {
-            name: 'Tidslinje',
-            icon: 'fa-clock',
-            component: 'Timeline',
-            dataTemplate: [
-              {
-                'caption': '2018',
-                'text': 'Tekst om hendelsen'
-              }
-            ]
-          },
-
-          {
-            name: 'Kolonner',
-            icon: 'fa-columns',
-            component: 'Columns',
-            dataTemplate: []
-          },
-
-          {
-            name: 'Markdown',
-            icon: 'fa-code',
-            component: 'Markdown',
-            dataTemplate: {
-              'text': '## Markdown code'
-            }
-          }
-        ]
-      }
     }
   },
 
@@ -188,6 +80,10 @@ export default {
       draggingOver: false
     }
   },
+
+  inject: [
+    'vAvailableBlocks'
+  ],
 
   created () {
     console.debug('<VillainPlus /> created')

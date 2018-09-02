@@ -52,12 +52,22 @@
   transition: transform 1s ease;
   transform: rotateZ(0deg);
   circle {
+    transition: fill 750ms ease;
     fill: rgba($vmain, .3);
+  }
+  path {
+    transition: fill 350ms ease;
+    fill: #fff;
   }
   &.villain-svg-plus-open {
     transform: rotateZ(135deg);
     circle {
-      fill: #000;
+      transition: fill 750ms ease;
+      fill: transparent;
+    }
+    path {
+      transition: fill 350ms ease;
+      fill: $vmain;
     }
   }
 }
@@ -81,6 +91,7 @@
     &:hover {
       .villain-svg-plus {
         circle {
+          transition: fill 350ms ease;
           fill: $vmain;
         }
       }

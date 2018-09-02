@@ -6,7 +6,8 @@
       v-show="!showConfig"
       :class="hovering ? 'villain-hover' : ''"
       ref="content"
-      class="villain-block">
+      class="villain-block"
+      :data-type="block.type">
       <slot></slot>
       <div class="villain-block-actions">
         <div

@@ -46,116 +46,16 @@
 import autosize from 'autosize'
 import cloneDeep from 'lodash/cloneDeep'
 
-import VillainPlus from './tools/VillainPlus'
-import BlockContainer from './blocks/BlockContainer'
-import ColumnsBlock from './blocks/ColumnsBlock'
-import HeaderBlock from './blocks/HeaderBlock'
-import MarkdownBlock from './blocks/MarkdownBlock'
-import TextBlock from './blocks/TextBlock'
-import TimelineBlock from './blocks/TimelineBlock'
+import VillainPlus from '@/components/tools/VillainPlus'
+import BlockContainer from '@/components/blocks/BlockContainer'
+import ColumnsBlock from '@/components/blocks/ColumnsBlock'
+import HeaderBlock from '@/components/blocks/HeaderBlock'
+import MarkdownBlock from '@/components/blocks/MarkdownBlock'
+import TextBlock from '@/components/blocks/TextBlock'
+import TimelineBlock from '@/components/blocks/TimelineBlock'
 
-const STANDARD_BLOCKS = [
-  {
-    name: 'Tekst',
-    icon: 'fa-paragraph',
-    component: 'Text',
-    dataTemplate: {
-      'text': '',
-      'type': 'paragraph'
-    }
-  },
-
-  {
-    name: 'Overskrift',
-    icon: 'fa-heading',
-    component: 'Header',
-    dataTemplate: {
-      'text': 'Overskrift',
-      'level': 1,
-      'class': ''
-    }
-  },
-
-  {
-    name: 'Skillelinje',
-    icon: 'fa-minus',
-    component: 'Divider',
-    dataTemplate: {
-      'text': '-------------'
-    }
-  },
-
-  {
-    name: 'Bilde',
-    icon: 'fa-image',
-    component: 'Image',
-    dataTemplate: {
-      url: '',
-      sizes: null,
-      title: '',
-      credits: '',
-      class: 'img-fluid'
-    }
-  },
-
-  {
-    name: 'Video',
-    icon: 'fa-video',
-    component: 'Video',
-    dataTemplate: {
-      source: 'youtube',
-      remote_id: ''
-    }
-  },
-
-  {
-    name: 'Kart',
-    icon: 'fa-compass',
-    component: 'Map',
-    dataTemplate: {
-      source: 'gmaps',
-      embed_url: ''
-    }
-  },
-
-  {
-    name: 'Sitat',
-    icon: 'fa-quote-right',
-    component: 'Blockquote',
-    dataTemplate: {
-      'text': 'Sitat',
-      'cite': 'Sitatforfatter'
-    }
-  },
-
-  {
-    name: 'Tidslinje',
-    icon: 'fa-clock',
-    component: 'Timeline',
-    dataTemplate: [
-      {
-        'caption': '2018',
-        'text': 'Tekst om hendelsen'
-      }
-    ]
-  },
-
-  {
-    name: 'Kolonner',
-    icon: 'fa-columns',
-    component: 'Columns',
-    dataTemplate: []
-  },
-
-  {
-    name: 'Markdown',
-    icon: 'fa-code',
-    component: 'Markdown',
-    dataTemplate: {
-      'text': '## Markdown code'
-    }
-  }
-]
+import STANDARD_BLOCKS from '@/config/standardBlocks.js'
+import STANDARD_TEMPLATES from '@/config/standardTemplates.js'
 
 export default {
   name: 'villain-editor',
@@ -250,7 +150,8 @@ export default {
       vBrowseURL: this.browseURL,
       vImageSeries: this.imageSeries,
       vExtraHeaders: this.extraHeaders,
-      vAvailableBlocks: this.availableBlocks
+      vAvailableBlocks: this.availableBlocks,
+      vAvailableTemplates: this.availableTemplates
     }
   },
 
@@ -310,6 +211,16 @@ export default {
       if (obj.hasOwnProperty('uid')) {
         delete obj.uid
       }
+      // If we strip UID from columns, they disappear..
+      // if (obj.hasOwnProperty('data')) {
+      //   if (obj.data.length) {
+      //     obj.data.forEach((d, idx, data) => {
+      //       this.stripUID(data[idx])
+      //     })
+      //   } else {
+      //     this.stripUID(obj.data)
+      //   }
+      // }
       return obj
     },
 

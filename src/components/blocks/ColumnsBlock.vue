@@ -61,12 +61,23 @@
           v-model="columnCount"
           class="form-control"
           type="input">
+        <button
+          class="btn btn-primary mt-2"
+          @click="updateColumns">
+          Sett kolonneantall (overskriver nåværende kolonner!)
+        </button>
+        <template v-if="block.data.length">
+          <label class="mt-4">Kolonne CSS-klasser (avansert)</label>
+          <input
+            v-for="(b, idx) in block.data"
+            :key="b.uid"
+            :class="idx > 0 ? 'mt-2' : ''"
+            v-model="b.class"
+            class="form-control"
+            type="input">
+        </template>
         <div class="text-center mt-3">
-          <button
-            class="btn btn-primary"
-            @click="updateColumns">
-            Sett kolonneantall (overskriver nåværende kolonner!)
-          </button>
+
         </div>
       </div>
     </template>

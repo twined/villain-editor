@@ -5,22 +5,36 @@
 
     <div
       key="plus"
-      class="villain-editor-plus-inactive">
+      :class="active ? 'villain-editor-plus-active' : 'villain-editor-plus-inactive'">
       <a
-        @click="active = true">
+        @click="clickPlus">
         <template v-if="draggingOver">
           Flytt blokken hit
         </template>
-        <template v-else-if="active">
-          <small>Legg til ny blokk</small>
-        </template>
-        <template v-else>
-          +
+        <template>
+          <svg
+            :class="active ? 'villain-svg-plus-open' : ''"
+            class="villain-svg-plus"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 300 300">
+            <circle cx="150" cy="150" r="142.7" stroke="#FFF" stroke-miterlimit="10"/>
+            <path fill="#FFF" d="M224.3 133.3v31.3H166v58.3h-31.3v-58.3H76.4v-31.3h58.3V75H166v58.3h58.3z"/>
+          </svg>
         </template>
       </a>
 
       <VueSlideUpDown :active="active" :duration="350">
         <div class="villain-editor-plus-available-blocks">
+          <div
+            class="villain-editor-plus-available-block"
+            @click="showTemplates">
+            <div>
+              <i class="fa fa-fw fa-anchor" />
+            </div>
+            <div class="villain-editor-plus-available-block-text">
+              Moduler
+            </div>
+          </div>
           <div
             v-for="b in vAvailableBlocks"
             :key="b.name"
@@ -35,11 +49,6 @@
             <div class="villain-editor-plus-available-block-text">
               {{ b.name }}
             </div>
-          </div>
-          <div
-            class="villain-editor-plus-close"
-            @click="active = false">
-            <i class="fa fa-fw fa-times-circle" />
           </div>
         </div>
       </VueSlideUpDown>
@@ -98,6 +107,14 @@ export default {
   },
 
   methods: {
+    showTemplates () {
+      console.log('coming.')
+    },
+
+    clickPlus () {
+      this.active = !this.active
+    },
+
     addBlock (b) {
       let block = {...b, uid: createUID()}
       this.active = false

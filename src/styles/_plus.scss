@@ -35,6 +35,7 @@
       &:hover {
         background-color: #fff;
         color: $vmain;
+        border: 0;
       }
 
       .villain-editor-plus-available-block-text {
@@ -46,22 +47,43 @@
   }
 }
 
-.villain-editor-plus-inactive {
+.villain-svg-plus {
+  width: 30px;
+  transition: transform 1s ease;
+  transform: rotateZ(0deg);
+  circle {
+    fill: rgba($vmain, .3);
+  }
+  &.villain-svg-plus-open {
+    transform: rotateZ(135deg);
+    circle {
+      fill: #000;
+    }
+  }
+}
+
+.villain-editor-plus-inactive, .villain-editor-plus-active {
   a {
-    display: block;
+    display: inline-block;
     font-size: 2.5rem;
+    line-height: 2.5rem;
     font-weight: bold;
     cursor: pointer;
     color: $vmain;
-    background-color: #fff;
+    background-color: transparent;
     transition: all 250ms ease;
     border: 0;
-    padding: .12rem;
+  }
+}
 
+.villain-editor-plus-inactive {
+  a {
     &:hover {
-      background-color: $vmain;
-      color: #fff !important;
-      border: 0;
+      .villain-svg-plus {
+        circle {
+          fill: $vmain;
+        }
+      }
     }
   }
 }

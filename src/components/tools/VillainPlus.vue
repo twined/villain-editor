@@ -99,7 +99,6 @@ export default {
   },
 
   mounted () {
-    console.log('addevent drop')
     this.$refs.plus.addEventListener('dragenter', this.dragEnter)
     this.$refs.plus.addEventListener('dragover', this.dragOver)
     this.$refs.plus.addEventListener('dragleave', this.dragLeave)
@@ -130,7 +129,6 @@ export default {
       ev.currentTarget.classList.remove('villain-drag-over')
       this.draggingOver = false
 
-      console.debug('$emit(move) - VillainPlus')
       this.$emit('move', {block, after: this.after, parent: this.parent})
     },
 

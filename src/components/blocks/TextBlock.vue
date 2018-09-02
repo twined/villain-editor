@@ -8,6 +8,7 @@
     @delete="$emit('delete', $event)">
     <quill-editor
       v-model="text"
+      ref="quill"
       :class="block.data.type"
       :options="quillOptions">
     </quill-editor>
@@ -111,6 +112,24 @@ export default {
     console.debug('<TextBlock /> created --', this.block.uid)
     this.text = md.render(this.block.data.text)
     this.customClass = this.block.data.type
+  },
+
+  mounted () {
+    const quill = this.$refs.quill.quill
+
+    quill.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
+      let ops = []
+      delta.ops.forEach(op => {
+        if (op.insert && typeof op.insert === 'string') {
+          ops.push({
+            insert: op.insert
+          })
+        }
+      })
+      delta.ops = ops
+      return delta
+    })
   }
+
 }
 </script>

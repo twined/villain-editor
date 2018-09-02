@@ -135,11 +135,10 @@ export default {
       }
 
       if (this.visibleBlocks.length) {
-        console.log('filter it')
         // filter according to visibleBlocks
         availableBlocks = availableBlocks.filter(b => this.visibleBlocks.includes(b.component))
       }
-      console.log(availableBlocks)
+
       return availableBlocks
     }
   },

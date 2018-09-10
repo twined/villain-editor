@@ -1,6 +1,6 @@
 {
   "name": "villain-editor",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name villain-editor src/lib.js",

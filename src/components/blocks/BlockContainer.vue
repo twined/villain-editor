@@ -1,5 +1,5 @@
 <template>
-  <div v-if="blocks.length">
+  <div>
     <div
       class="villain-block-wrapper">
       <VillainPlus
@@ -23,16 +23,6 @@
       </div>
     </transition-group>
   </div>
-  <div v-else>
-    <div
-      class="villain-block-wrapper">
-      <VillainPlus
-        @add="$emit('add', $event)"
-        @move="$emit('move', $event)"
-      />
-    </div>
-  </div>
-
 </template>
 
 <script>

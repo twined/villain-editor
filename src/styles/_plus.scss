@@ -8,6 +8,13 @@
       a {
         color: #fff;
         background-color: $vmain !important;
+        border: 0;
+        text-decoration: none;
+
+        &:hover {
+          border: 0;
+          text-decoration: none;
+        }
       }
     }
   }
@@ -83,6 +90,12 @@
     background-color: transparent;
     transition: all 250ms ease;
     border: 0;
+    text-decoration: none;
+
+    &:hover {
+      border: 0;
+      text-decoration: none;
+    }
   }
 }
 

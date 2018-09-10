@@ -99,6 +99,16 @@
   }
 }
 
+.villain-editor-plus-block-name {
+  text-transform: uppercase;
+  font-size: .65rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+  display: inline-block;
+  background: #fff;
+  padding: 3px 7px;
+}
+
 .villain-editor-plus-inactive {
   a {
     &:hover {

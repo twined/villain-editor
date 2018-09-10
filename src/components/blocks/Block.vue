@@ -48,9 +48,9 @@
 
         <div class="villain-config-content-buttons">
           <button
-            class="btn btn-primary"
+            class="btn btn-primary mt-3"
             @click="showConfig = false">
-            OK
+            Lukk
           </button>
         </div>
 

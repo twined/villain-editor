@@ -27,6 +27,9 @@
           <i class="fa fa-fw fa-trash-alt" />
         </div>
       </div>
+      <div class="villain-block-info">
+        {{ getBlockDisplayName(block.type) }}
+      </div>
     </div>
 
     <div
@@ -144,6 +147,10 @@ export default {
     }
   },
 
+  inject: [
+    'vAvailableBlocks'
+  ],
+
   created () {
     if (this.config) {
       this.showConfig = true
@@ -159,6 +166,18 @@ export default {
   },
 
   methods: {
+    getBlockDisplayName (blkType) {
+      let foundBlock = this.vAvailableBlocks.find(b => {
+        console.log(b.component)
+        console.log(blkType)
+        return b.component.toLowerCase() === blkType
+      })
+      if (foundBlock) {
+        return foundBlock.name
+      }
+      return ''
+    },
+
     configBlock () {
       this.showConfig = true
     },

@@ -168,8 +168,6 @@ export default {
   methods: {
     getBlockDisplayName (blkType) {
       let foundBlock = this.vAvailableBlocks.find(b => {
-        console.log(b.component)
-        console.log(blkType)
         return b.component.toLowerCase() === blkType
       })
       if (foundBlock) {

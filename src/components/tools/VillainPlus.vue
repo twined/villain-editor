@@ -24,25 +24,31 @@
       </a>
 
       <VueSlideUpDown :active="active" :duration="350">
+        <div class="villain-editor-plus-block-name">
+          {{ hoveredBlock }}
+        </div>
         <div class="villain-editor-plus-available-blocks">
-          <div
-            class="villain-editor-plus-available-block"
-            @click="showTemplates">
-            <div>
-              <i class="fa fa-fw fa-anchor" />
-            </div>
-          </div>
           <div
             v-for="b in vAvailableBlocks"
             :key="b.name"
             class="villain-editor-plus-available-block"
+            @mouseover="setHover(b.name)"
             @click="addBlock(b)">
             <div>
               <i
                 :class="b.icon"
                 class="fa fa-fw"
               />
-            </div>            
+            </div>
+          </div>
+
+          <div
+            class="villain-editor-plus-available-block"
+            @mouseover="setHover('maler')"
+            @click="showTemplates">
+            <div>
+              <i class="fa fa-fw fa-window-restore" />
+            </div>
           </div>
         </div>
       </VueSlideUpDown>
@@ -80,7 +86,8 @@ export default {
   data () {
     return {
       active: false,
-      draggingOver: false
+      draggingOver: false,
+      hoveredBlock: 'Velg blokktype'
     }
   },
 
@@ -100,6 +107,10 @@ export default {
   },
 
   methods: {
+    setHover (name) {
+      this.hoveredBlock = name
+    },
+
     showTemplates () {
       console.log('coming.')
     },

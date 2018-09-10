@@ -31,9 +31,6 @@
             <div>
               <i class="fa fa-fw fa-anchor" />
             </div>
-            <div class="villain-editor-plus-available-block-text">
-              Moduler
-            </div>
           </div>
           <div
             v-for="b in vAvailableBlocks"
@@ -45,10 +42,7 @@
                 :class="b.icon"
                 class="fa fa-fw"
               />
-            </div>
-            <div class="villain-editor-plus-available-block-text">
-              {{ b.name }}
-            </div>
+            </div>            
           </div>
         </div>
       </VueSlideUpDown>

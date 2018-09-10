@@ -13,7 +13,7 @@
   }
 
   .villain-editor-plus-available-blocks {
-    background-color: $vmain;
+    background-color: #fff;
     position: relative;
 
     .villain-editor-plus-close {
@@ -24,7 +24,7 @@
     }
 
     .villain-editor-plus-available-block {
-      color: #fff;
+      color: $vmain;
       background-color: transparent;
       display: inline-block;
       padding: .5rem 1rem;
@@ -33,8 +33,8 @@
       transition: 500ms background-color ease, 500ms color ease;
 
       &:hover {
-        background-color: #fff;
-        color: $vmain;
+        background-color: $vmain;
+        color: #fff;
         border: 0;
       }
 

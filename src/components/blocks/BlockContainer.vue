@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import draggable from 'vuedraggable'
 import VillainPlus from '../tools/VillainPlus'
 
 import BlockquoteBlock from './BlockquoteBlock'
@@ -43,7 +42,6 @@ import TimelineBlock from './TimelineBlock'
 export default {
   name: 'block-container',
   components: {
-    draggable,
     VillainPlus,
     // BLOCKS
     BlockquoteBlock,

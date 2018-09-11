@@ -1,8 +1,12 @@
 .villain-editor {
   background-color: white;
-  background: linear-gradient(white 50%, #ffebf3 50%);
-  background-size: 100% 2px;
-  background-repeat: repeat-y;
+  background: repeating-linear-gradient(
+    -45deg,
+    #fff,
+    #fff $villain-editor-stripe-thickness,
+    $villain-editor-stripe-color $villain-editor-stripe-thickness,
+    $villain-editor-stripe-color $villain-editor-stripe-thickness * 2
+  );
   padding-top: 1rem;
   padding-bottom: 1rem;
 
@@ -10,10 +14,15 @@
     padding: 0 1rem;
     text-align: center;
 
-    .src {
-      svg {
-        background-color: #fff;
-      }
+    .villain-editor-instructions {
+      padding: .1rem .5rem;
+      display: inline-block;
+      background-color: $villain-block-background-color;
+    }
+
+    .villain-editor-src {
+      padding: .1rem .5rem;
+      background-color: #fff;
     }
   }
 

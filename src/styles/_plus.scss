@@ -1,13 +1,13 @@
 .villain-editor-plus {
   text-align: center;
   margin-top: 1rem;
-  color: $vmain;
+  color: $villain-main-color;
 
   &.villain-drag-over {
     .villain-editor-plus-inactive {
       a {
         color: #fff;
-        background-color: $vmain !important;
+        background-color: $villain-main-color !important;
         border: 0;
         text-decoration: none;
 
@@ -20,7 +20,7 @@
   }
 
   .villain-editor-plus-available-blocks {
-    background-color: #fff;
+    background-color: $villain-block-background-color;
     position: relative;
 
     .villain-editor-plus-close {
@@ -31,7 +31,7 @@
     }
 
     .villain-editor-plus-available-block {
-      color: $vmain;
+      color: $villain-main-color;
       background-color: transparent;
       display: inline-block;
       padding: .5rem 1rem;
@@ -40,7 +40,7 @@
       transition: 500ms background-color ease, 500ms color ease;
 
       &:hover {
-        background-color: $vmain;
+        background-color: $villain-main-color;
         color: #fff;
         border: 0;
       }
@@ -60,7 +60,7 @@
   transform: rotateZ(0deg);
   circle {
     transition: fill 750ms ease;
-    fill: rgba($vmain, .3);
+    fill: $villain-main-faded-color;
   }
   path {
     transition: fill 350ms ease;
@@ -74,7 +74,7 @@
     }
     path {
       transition: fill 350ms ease;
-      fill: $vmain;
+      fill: $villain-main-color;
     }
   }
 }
@@ -86,7 +86,7 @@
     line-height: 2.5rem;
     font-weight: bold;
     cursor: pointer;
-    color: $vmain;
+    color: $villain-main-color;
     background-color: transparent;
     transition: all 250ms ease;
     border: 0;
@@ -105,7 +105,7 @@
   margin-bottom: 10px;
   font-weight: bold;
   display: inline-block;
-  background: #fff;
+  background: $villain-block-background-color;
   padding: 3px 7px;
 }
 
@@ -115,7 +115,7 @@
       .villain-svg-plus {
         circle {
           transition: fill 350ms ease;
-          fill: $vmain;
+          fill: $villain-main-color;
         }
       }
     }

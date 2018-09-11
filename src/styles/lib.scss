@@ -1,7 +1,12 @@
-$vmain: #94003e;
-$vsecondary: #94003e0d;
-$availableBlockColor: $vmain;
-$availableBlockHoverColor: lighten($vmain, 50%);
+$villain-main-color: rgb(211, 0, 0) !default; // #94003e;
+$villain-main-faded-color: #333 !default;
+$villain-editor-stripe-color: #f7f7f7 !default;
+$villain-editor-stripe-thickness: 2px;
+$villain-background-color: #000 !default;
+$villain-secondary-color: #94003e0d !default;
+$villain-block-background-color: #fff !default;
+$villain-available-block-color: $villain-main-color !default;
+$villain-available-block-hover-color: lighten($villain-main-color, 50%) !default;
 
 @import 'editor';
 @import 'block';

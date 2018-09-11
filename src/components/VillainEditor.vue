@@ -2,10 +2,12 @@
   <div
     class="villain-editor">
     <div class="villain-editor-toolbar">
-      <i class="fa mr-2 fa-info-circle" />
-      Trykk på "+" under for å legge til en innholdsblokk
+      <div class="villain-editor-instructions">
+        <i class="fa mr-2 fa-info-circle" />
+        Trykk på "+" under for å legge til en innholdsblokk
+      </div>
       <div
-        class="src float-right"
+        class="villain-editor-src float-right"
         @click="toggleSource()">
         <i class="fa fa-code" />
       </div>

@@ -107,6 +107,11 @@ export default {
     visibleBlocks: {
       type: Array,
       default: () => []
+    },
+
+    templates: {
+      type: Array,
+      default: () => []
     }
   },
 
@@ -142,6 +147,16 @@ export default {
       }
 
       return availableBlocks
+    },
+
+    availableTemplates () {
+      let availableTemplates = STANDARD_TEMPLATES
+
+      if (this.templates.length) {
+        availableTemplates = availableTemplates + STANDARD_TEMPLATES
+      }
+
+      return availableTemplates
     }
   },
 

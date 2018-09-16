@@ -28964,12 +28964,12 @@ var setPublicPath = __webpack_require__("1eb2");
 // EXTERNAL MODULE: ./src/styles/lib.scss
 var lib = __webpack_require__("7b11");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0595ba96-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=e2c2e8d0&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0595ba96-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=c76ebbea&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-editor"},[_c('div',{staticClass:"villain-editor-toolbar"},[_vm._m(0),_c('div',{staticClass:"villain-editor-src float-right",on:{"click":function($event){_vm.toggleSource()}}},[_c('i',{staticClass:"fa fa-code"})])]),(_vm.showSource)?[_c('div',{staticClass:"villain-editor-source"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.src),expression:"src"}],ref:"tasource",domProps:{"value":(_vm.src)},on:{"input":function($event){if($event.target.composing){ return; }_vm.src=$event.target.value}}}),_c('button',{staticClass:"btn btn-primary",on:{"click":_vm.updateSource}},[_vm._v("\n        Oppdatér\n      ")])])]:[(_vm.blocks && _vm.blocks.length)?_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){_vm.addBlock($event)},"move":function($event){_vm.moveBlock($event)},"delete":_vm.deleteBlock,"order":_vm.orderBlocks}}):_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){_vm.addBlock($event)},"move":function($event){_vm.moveBlock($event)},"delete":_vm.deleteBlock}})]],2)}
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-editor-instructions"},[_c('i',{staticClass:"fa mr-2 fa-info-circle"}),_vm._v("\n      Trykk på \"+\" under for å legge til en innholdsblokk\n    ")])}]
 
 
-// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=e2c2e8d0&
+// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=c76ebbea&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.symbol.async-iterator.js
 var es7_symbol_async_iterator = __webpack_require__("ac4d");
@@ -31665,6 +31665,12 @@ BlockContainer_component.options.__file = "BlockContainer.vue"
       default: function _default() {
         return [];
       }
+    },
+    templates: {
+      type: Array,
+      default: function _default() {
+        return [];
+      }
     }
   },
   data: function data() {
@@ -31704,6 +31710,15 @@ BlockContainer_component.options.__file = "BlockContainer.vue"
       }
 
       return availableBlocks;
+    },
+    availableTemplates: function availableTemplates() {
+      var availableTemplates = standardTemplates;
+
+      if (this.templates.length) {
+        availableTemplates = availableTemplates + standardTemplates;
+      }
+
+      return availableTemplates;
     }
   },
   provide: function provide() {

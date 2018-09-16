@@ -93,6 +93,7 @@
     text-decoration: none;
 
     &:hover {
+      background-color: transparent;
       border: 0;
       text-decoration: none;
     }
@@ -112,6 +113,7 @@
 .villain-editor-plus-inactive {
   a {
     &:hover {
+      background-color: transparent;
       .villain-svg-plus {
         circle {
           transition: fill 350ms ease;

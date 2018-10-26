@@ -85,38 +85,15 @@
 </template>
 
 <script>
-import Block from './Block'
-import BlockContainer from './BlockContainer'
-import VillainPlus from '../tools/VillainPlus'
-
-import BlockquoteBlock from './BlockquoteBlock'
-import ColumnsBlock from './ColumnsBlock'
-import DividerBlock from './DividerBlock'
-import HeaderBlock from './HeaderBlock'
-import ImageBlock from './ImageBlock'
-import MapBlock from './MapBlock'
-import MarkdownBlock from './MarkdownBlock'
-import TextBlock from './TextBlock'
-import VideoBlock from './VideoBlock'
-import TimelineBlock from './TimelineBlock'
+import systemComponents from '../system'
+import standardComponents from '.'
 
 export default {
   name: 'columns-block',
 
   components: {
-    Block,
-    BlockContainer,
-    BlockquoteBlock,
-    DividerBlock,
-    VillainPlus,
-    ColumnsBlock,
-    HeaderBlock,
-    ImageBlock,
-    MapBlock,
-    MarkdownBlock,
-    TextBlock,
-    VideoBlock,
-    TimelineBlock
+    ...systemComponents,
+    ...standardComponents
   },
 
   data () {

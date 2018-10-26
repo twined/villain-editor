@@ -12,6 +12,12 @@
   border: 2px solid #fff;
   transition: border 500ms ease;
 
+  input:focus, textarea:focus {
+    outline: none !important;
+    border: none;
+    box-shadow: none;
+  }
+
   &.villain-drag-element {
     background: #fff;
     box-shadow: 3px 3px #f00 inset, -3px -3px #f00 inset ;
@@ -115,6 +121,15 @@
     }
   }
 
+  .villain-template-description {
+    background-color: $villain-background-color;
+    color: white;
+    font-size: 12px;
+    padding: 3px 7px;
+    font-weight: bold;
+    display: inline-block;
+  }
+
   .villain-block-info {
     font-size: 8px;
     text-transform: uppercase;
@@ -145,8 +160,10 @@
 }
 
 .villain-block-image {
-  padding: 2rem;
-  padding-right: 0;
+  padding: 0;
+  img {
+    min-width: 100%;
+  }
 }
 
 .villain-image-library {

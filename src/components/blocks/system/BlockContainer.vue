@@ -26,35 +26,9 @@
 </template>
 
 <script>
-import VillainPlus from '../tools/VillainPlus'
-
-import BlockquoteBlock from './BlockquoteBlock'
-import ColumnsBlock from './ColumnsBlock'
-import DividerBlock from './DividerBlock'
-import HeaderBlock from './HeaderBlock'
-import ImageBlock from './ImageBlock'
-import MapBlock from './MapBlock'
-import MarkdownBlock from './MarkdownBlock'
-import TextBlock from './TextBlock'
-import VideoBlock from './VideoBlock'
-import TimelineBlock from './TimelineBlock'
 
 export default {
   name: 'block-container',
-  components: {
-    VillainPlus,
-    // BLOCKS
-    BlockquoteBlock,
-    ColumnsBlock,
-    DividerBlock,
-    HeaderBlock,
-    ImageBlock,
-    MapBlock,
-    MarkdownBlock,
-    TextBlock,
-    VideoBlock,
-    TimelineBlock
-  },
 
   props: {
     blocks: {
@@ -81,7 +55,6 @@ export default {
   },
 
   created () {
-    // console.log(this.blocks)
     console.debug('<BlockContainer /> created')
     this.uid = (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
   }

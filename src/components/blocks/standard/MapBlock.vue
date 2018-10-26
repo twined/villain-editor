@@ -3,8 +3,7 @@
     :block="block"
     :parent="parent"
     :config="showConfig"
-    :show-ok="true"
-    icon="fa-video"
+    icon="fa-compass"
     @add="$emit('add', $event)"
     @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
@@ -16,15 +15,14 @@
       />
       <p
         v-else>
-        Ingen gyldig video
+        Inget gyldig kart
       </p>
     </div>
     <template slot="config">
       <div
         class="form-group">
         <p>
-          Lim inn link til youtube eller vimeo. <br>
-          F.eks <strong>http://www.youtube.com/watch?v=jlbunmCbTBA</strong>
+          Lim inn embed-link fra Google Maps
         </p>
         <input
           v-model="url"
@@ -46,10 +44,7 @@
 </template>
 
 <script>
-import Block from './Block'
-
-const VIMEO_REGEX = /(?:http[s]?:\/\/)?(?:www.)?vimeo.com\/(.+)/
-const YOUTUBE_REGEX = /(?:youtube(?:-nocookie)?\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})\W/
+import Block from '@/components/blocks/system/Block'
 
 export default {
   name: 'image-block',
@@ -65,20 +60,16 @@ export default {
       showConfig: false,
       url: '',
       html: '',
-
       providers: {
-        vimeo: {
-          regex: VIMEO_REGEX,
-          html: [
-            '<iframe src="{{protocol}}//player.vimeo.com/video/{{remote_id}}?title=0&byline=0" ',
-            'width="580" height="320" frameborder="0"></iframe>'
-          ].join('\n')
-        },
-        youtube: {
-          regex: YOUTUBE_REGEX,
-          html: ['<iframe src="{{protocol}}//www.youtube.com/embed/{{remote_id}}" ',
-            'width="580" height="320" frameborder="0" allowfullscreen></iframe>'
-          ].join('\n')
+        gmaps: {
+          regex: /<iframe(?:.*)src="(.*?)"/,
+          html: `
+            <iframe src="{{protocol}}{{embed_url}}"
+                    width="600"
+                    height="450"
+                    frameborder="0"
+                    style="border:0"
+                    allowfullscreen></iframe>`
         }
       }
     }
@@ -97,14 +88,12 @@ export default {
   },
 
   created () {
-    console.debug('<VideoBlock /> created')
+    console.debug('<MapBlock /> created')
 
-    if (!this.block.data.remote_id) {
+    if (!this.block.data.embed_url) {
       this.showConfig = true
     } else {
-      this.html = this.providers[this.block.data.source].html
-        .replace('{{protocol}}', window.location.protocol)
-        .replace('{{remote_id}}', this.block.data.remote_id)
+      this.populateMap()
     }
   },
 
@@ -119,17 +108,21 @@ export default {
 
         if (match !== null && match[1] !== undefined) {
           this.block.data.source = key
-          this.block.data.remote_id = match[1]
+          this.block.data.embed_url = match[1].replace('http:', '').replace('https:', '')
         }
       }
 
+      this.populateMap()
+    },
+
+    populateMap () {
       if (!{}.hasOwnProperty.call(this.providers, this.block.data.source)) {
         return false
       }
 
       this.html = this.providers[this.block.data.source].html
         .replace('{{protocol}}', window.location.protocol)
-        .replace('{{remote_id}}', this.block.data.remote_id)
+        .replace('{{embed_url}}', this.block.data.embed_url)
     }
   }
 }

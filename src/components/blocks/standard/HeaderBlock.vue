@@ -5,10 +5,12 @@
     @add="$emit('add', $event)"
     @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
-    <input
+    <textarea
+      ref="txt"
       class="villain-header-input"
       :style="'font-size: ' + fontSize + 'rem'"
       v-model="block.data.text">
+    </textarea>
     <template slot="config">
       <div class="form-group">
         <label>Størrelse</label>
@@ -86,7 +88,8 @@
 </template>
 
 <script>
-import Block from './Block'
+import autosize from 'autosize'
+import Block from '@/components/blocks/system/Block'
 
 export default {
   name: 'header-block',
@@ -136,10 +139,10 @@ export default {
 
   created () {
     console.debug('<HeaderBlock /> created')
+  },
+
+  mounted () {
+    autosize(this.$refs.txt)
   }
 }
 </script>
-
-<style lang="scss">
-
-</style>

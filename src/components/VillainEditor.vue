@@ -1,15 +1,29 @@
 <template>
   <div
+    :class="fullscreen ? 'villain-fullscreen': ''"
     class="villain-editor">
     <div class="villain-editor-toolbar">
       <div class="villain-editor-instructions">
         <i class="fa mr-2 fa-info-circle" />
         Trykk på "+" under for å legge til en innholdsblokk
       </div>
-      <div
-        class="villain-editor-src float-right"
-        @click="toggleSource()">
-        <i class="fa fa-code" />
+      <div class="villain-editor-controls float-right">
+        <div @click="toggleSource()">
+          <template v-if="showSource">
+            <i class="fa fa-fw fa-times" />
+          </template>
+          <template v-else>
+            <i class="fa fa-fw fa-code" />
+          </template>
+        </div>
+        <div @click="toggleFullscreen()">
+          <template v-if="fullscreen">
+            <i class="fa fa-fw fa-times" />
+          </template>
+          <template v-else>
+            <i class="fa fa-fw fa-expand-arrows-alt" />
+          </template>
+        </div>
       </div>
     </div>
     <template
@@ -45,38 +59,44 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import autosize from 'autosize'
 import cloneDeep from 'lodash/cloneDeep'
-
-import VillainPlus from '@/components/tools/VillainPlus'
-import BlockContainer from '@/components/blocks/BlockContainer'
-import ColumnsBlock from '@/components/blocks/ColumnsBlock'
-import HeaderBlock from '@/components/blocks/HeaderBlock'
-import MarkdownBlock from '@/components/blocks/MarkdownBlock'
-import TextBlock from '@/components/blocks/TextBlock'
-import TimelineBlock from '@/components/blocks/TimelineBlock'
-
+import standardComponents from '@/components/blocks/standard'
+import systemComponents from '@/components/blocks/system'
+import toolsComponents from '@/components/blocks/tools'
 import STANDARD_BLOCKS from '@/config/standardBlocks.js'
-import STANDARD_TEMPLATES from '@/config/standardTemplates.js'
+
+for (let key in standardComponents) {
+  if (standardComponents.hasOwnProperty(key)) {
+    Vue.component(key, standardComponents[key])
+  }
+}
+
+for (let key in systemComponents) {
+  if (systemComponents.hasOwnProperty(key)) {
+    Vue.component(key, systemComponents[key])
+  }
+}
+
+for (let key in toolsComponents) {
+  if (toolsComponents.hasOwnProperty(key)) {
+    Vue.component(key, toolsComponents[key])
+  }
+}
 
 export default {
   name: 'villain-editor',
-  components: {
-    BlockContainer,
-    VillainPlus,
-
-    // BLOCKS
-    ColumnsBlock,
-    HeaderBlock,
-    MarkdownBlock,
-    TextBlock,
-    TimelineBlock
-  },
 
   props: {
     json: {
       type: String,
       default: '[]'
+    },
+
+    templateMode: {
+      type: Boolean,
+      default: false
     },
 
     baseURL: {
@@ -118,7 +138,8 @@ export default {
   data () {
     return {
       blocks: [],
-      showSource: false
+      showSource: false,
+      fullscreen: false
     }
   },
 
@@ -126,7 +147,7 @@ export default {
     src: {
       get () {
         let bx = cloneDeep(this.blocks)
-        return JSON.stringify(bx.map(b => this.stripUID(b)), null, 0)
+        return JSON.stringify(bx.map(b => this.stripMeta(b)), null, 2)
       },
 
       set (v) {
@@ -150,13 +171,7 @@ export default {
     },
 
     availableTemplates () {
-      let availableTemplates = STANDARD_TEMPLATES
-
-      if (this.templates.length) {
-        availableTemplates = availableTemplates + STANDARD_TEMPLATES
-      }
-
-      return availableTemplates
+      return this.templates
     }
   },
 
@@ -167,7 +182,8 @@ export default {
       vImageSeries: this.imageSeries,
       vExtraHeaders: this.extraHeaders,
       vAvailableBlocks: this.availableBlocks,
-      vAvailableTemplates: this.availableTemplates
+      vAvailableTemplates: this.availableTemplates,
+      vTemplateMode: this.templateMode
     }
   },
 
@@ -176,7 +192,7 @@ export default {
       handler: function (val, oldVal) {
         let bx = cloneDeep(val)
         if (bx.length) {
-          this.$emit('input', JSON.stringify(bx.map(b => this.stripUID(b)), null, 2))
+          this.$emit('input', JSON.stringify(bx.map(b => this.stripMeta(b)), null, 2))
         }
         return val
       },
@@ -210,6 +226,10 @@ export default {
       }
     },
 
+    toggleFullscreen () {
+      this.fullscreen = !this.fullscreen
+    },
+
     addUIDs () {
       return [...this.blocks].map(b => {
         return { ...b, uid: this.createUID() }
@@ -220,58 +240,56 @@ export default {
       return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
     },
 
-    stripUID (obj) {
+    /*
+    ** Strip out uid and locked properties
+    **/
+    stripMeta (obj) {
       if (!obj) {
         return obj
       }
+
       if (obj.hasOwnProperty('uid')) {
         delete obj.uid
       }
-      // If we strip UID from columns, they disappear..
-      // if (obj.hasOwnProperty('data')) {
-      //   if (obj.data.length) {
-      //     obj.data.forEach((d, idx, data) => {
-      //       this.stripUID(data[idx])
-      //     })
-      //   } else {
-      //     this.stripUID(obj.data)
-      //   }
-      // }
+
+      if (obj.hasOwnProperty('locked')) {
+        delete obj.locked
+      }
+
       return obj
     },
 
-    addBlock ({block: blockType, after, parent}) {
+    addBlock ({block: blockTpl, after, parent}) {
       let block
-      if (blockType.component === 'Columns' || blockType.component === 'Timeline') {
-        block = {
-          type: blockType.component.toLowerCase(),
-          data: [ ...blockType.dataTemplate ],
-          uid: blockType.uid
+      // a standard component blueprint
+      if (blockTpl.hasOwnProperty('component')) {
+        if (blockTpl.component === 'Columns' || blockTpl.component === 'Timeline') {
+          block = {
+            type: blockTpl.component.toLowerCase(),
+            data: [ ...blockTpl.dataTemplate ],
+            uid: blockTpl.uid
+          }
+        } else {
+          block = {
+            type: blockTpl.component.toLowerCase(),
+            data: { ...blockTpl.dataTemplate },
+            uid: blockTpl.uid
+          }
         }
       } else {
-        block = {
-          type: blockType.component.toLowerCase(),
-          data: { ...blockType.dataTemplate },
-          uid: blockType.uid
-        }
+        // a template block
+        block = cloneDeep(blockTpl)
       }
-
-      console.log('* adding', block)
-      console.log('-> parent: ', parent)
-      console.log('-> after: ', after)
 
       // no after, no parent = + at the top OR first one if empty
       if (!after && !parent) {
-        console.log(block)
         // if we have blocks, it's the top + so we add to top
         if (this.blocks.length) {
-          console.debug('add to top')
           this.blocks = [
             block,
             ...this.blocks
           ]
         } else {
-          console.debug('add to bottom')
           this.blocks = [
             ...this.blocks,
             block
@@ -284,13 +302,9 @@ export default {
         // child of a column
         let mainBlock = this.blocks.find(b => {
           if (b.type === 'columns') {
-            console.log('columns', b)
             for (let key of Object.keys(b.data)) {
               let x = b.data[key]
-              console.log('x uid', x.uid)
-              console.log('parent', parent)
               if (x.uid === parent) {
-                console.log('block is', x)
                 return x
               }
             }
@@ -364,19 +378,11 @@ export default {
     },
 
     moveBlock ({block, after, parent}) {
-      console.log('==> requesting to move block')
-
-      // remove the block first
-
       this.deleteBlock(block)
 
       if (!after && !parent) {
-        let b = this.blocks.find(b => b.uid === block.uid)
-        let bIdx = this.blocks.indexOf(b)
-        console.log(bIdx)
         // if we have blocks, it's the top + so we add to top
         if (this.blocks.length) {
-          console.debug('add to top')
           this.blocks = [
             block,
             ...this.blocks
@@ -392,13 +398,9 @@ export default {
         // child of a column
         let mainBlock = this.blocks.find(b => {
           if (b.type === 'columns') {
-            console.log('columns', b)
             for (let key of Object.keys(b.data)) {
               let x = b.data[key]
-              console.log('x uid', x.uid)
-              console.log('parent', parent)
               if (x.uid === parent) {
-                console.log('block is', x)
                 return x
               }
             }
@@ -476,7 +478,6 @@ export default {
     },
 
     deleteBlock ({ uid }) {
-      console.log('deleting')
       let block = this.blocks.find(b => {
         if (b.type === 'columns') {
           for (let col of b.data) {

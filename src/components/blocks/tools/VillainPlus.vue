@@ -2,7 +2,6 @@
   <div
     ref="plus"
     class="villain-editor-plus">
-
     <div
       key="plus"
       :class="active ? 'villain-editor-plus-active' : 'villain-editor-plus-inactive'">
@@ -27,7 +26,9 @@
         <div class="villain-editor-plus-block-name">
           {{ hoveredBlock }}
         </div>
-        <div class="villain-editor-plus-available-blocks">
+        <div
+          v-if="!vTemplateMode"
+          class="villain-editor-plus-available-blocks">
           <div
             v-for="b in vAvailableBlocks"
             :key="b.name"
@@ -44,12 +45,29 @@
 
           <div
             class="villain-editor-plus-available-block"
-            @mouseover="setHover('maler')"
+            @mouseover="setHover('moduler')"
             @click="showTemplates">
             <div>
               <i class="fa fa-fw fa-window-restore" />
             </div>
           </div>
+        </div>
+      </VueSlideUpDown>
+      <VueSlideUpDown :active="showingTemplates" :duration="350">
+        <div
+          v-if="vAvailableTemplates.length"
+          class="villain-editor-plus-available-templates">
+          <div
+            v-for="(tp, idx) in vAvailableTemplates"
+            :key="idx"
+            class="villain-editor-plus-available-template"
+            @click="addTemplate(tp)">
+            <div class="villain-editor-plus-available-templates-title">{{ tp.data.name }}</div>
+            {{ tp.data.help_text }}
+          </div>
+        </div>
+        <div v-else>
+          Ingen registrerte maler.
         </div>
       </VueSlideUpDown>
     </div>
@@ -87,12 +105,15 @@ export default {
     return {
       active: false,
       draggingOver: false,
+      showingTemplates: false,
       hoveredBlock: 'Velg blokktype'
     }
   },
 
   inject: [
-    'vAvailableBlocks'
+    'vAvailableBlocks',
+    'vAvailableTemplates',
+    'vTemplateMode'
   ],
 
   created () {
@@ -112,16 +133,27 @@ export default {
     },
 
     showTemplates () {
-      console.log('coming.')
+      this.showingTemplates = !this.showingTemplates
     },
 
     clickPlus () {
       this.active = !this.active
+
+      if (this.vTemplateMode) {
+        this.showingTemplates = !this.showingTemplates
+      }
     },
 
     addBlock (b) {
       let block = {...b, uid: createUID()}
       this.active = false
+      this.$emit('add', {block: block, after: this.after, parent: this.parent})
+    },
+
+    addTemplate (tp) {
+      let block = {...tp, uid: createUID()}
+      this.active = false
+      this.showingTemplates = false
       this.$emit('add', {block: block, after: this.after, parent: this.parent})
     },
 

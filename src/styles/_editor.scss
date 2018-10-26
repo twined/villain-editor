@@ -10,6 +10,20 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
 
+  &.villain-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+  }
+
+  .container {
+    /** OVERRIDE THIS TO PREVENT TEMPLATES FROM SCREWING UP **/
+    max-width: 100%;
+  }
+
   .villain-editor-toolbar {
     padding: 0 1rem;
     text-align: center;
@@ -20,9 +34,22 @@
       background-color: $villain-block-background-color;
     }
 
-    .villain-editor-src {
+    .villain-editor-controls {
       padding: .1rem .5rem;
       background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+
+      div {
+        padding: 0 .2rem;
+
+        i {
+          color: lighten($villain-main-faded-color, 55%);
+          &:hover {
+            color: $villain-main-color;
+          }
+        }
+      }
     }
   }
 
@@ -63,11 +90,11 @@
 
 @keyframes bounce-in {
   0% {
-    opacity: 0;
-    transform: scale(0);
+    opacity: .5;
+    transform: scale(0.85);
   }
   50% {
-    opacity: .5;
+    opacity: .75;
     transform: scale(1.02);
   }
   100% {
@@ -82,10 +109,10 @@
     transform: scale(1);
   }
   20% {
-    transform: scale(1.02);
+    transform: scale(1.001);
   }
   100% {
     opacity: 0;
-    transform: scale(0);
+    transform: scale(0.85);
   }
 }

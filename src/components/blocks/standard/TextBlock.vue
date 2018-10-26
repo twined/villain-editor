@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import Block from './Block'
+import Block from '@/components/blocks/system/Block'
 import { quillEditor } from 'vue-quill-editor'
 import MarkdownIt from 'markdown-it'
 

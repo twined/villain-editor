@@ -11,9 +11,16 @@
       <slot></slot>
       <div class="villain-block-actions">
         <div
+          v-if="!locked"
           ref="handle"
           class="villain-block-action villain-move">
-          <i class="fa fa-fw fa-expand-arrows-alt" />
+          <i class="fa fa-fw fa-arrows-alt" />
+        </div>
+        <div
+          v-if="locked"
+          ref="handle"
+          class="villain-block-action villain-locked">
+          <i class="fa fa-fw fa-lock" />
         </div>
         <div
           v-if="hasConfigSlot"
@@ -22,9 +29,15 @@
           <i class="fa fa-fw fa-cog" />
         </div>
         <div
+          v-if="!locked"
           class="villain-block-action villain-delete"
           @click="deleteBlock">
           <i class="fa fa-fw fa-trash-alt" />
+        </div>
+        <div
+          v-if="locked"
+          class="villain-block-action villain-locked">
+          <i class="fa fa-fw fa-lock" />
         </div>
       </div>
       <div class="villain-block-info">
@@ -68,37 +81,39 @@
             <i class="fa fa-fw fa-cog" />
           </div>
           <div
+            v-if="!locked"
             class="villain-block-action villain-delete"
             @click="deleteBlock">
             <i class="fa fa-fw fa-trash-alt" />
           </div>
+          <div
+            v-if="locked"
+            class="villain-block-action villain-locked">
+            <i class="fa fa-fw fa-lock" />
+          </div>
         </div>
       </div>
     </div>
-    <VillainPlus
-      v-if="block.type !== 'columns'"
-      :after="block.uid"
-      :parent="parent"
-      @add="$emit('add', $event)"
-      @move="$emit('move', $event)"
-    />
-    <VillainPlus
-      v-else
-      :after="block.uid"
-      @add="$emit('add', $event)"
-      @move="$emit('move', $event)"
-    />
+    <template v-if="!locked">
+      <VillainPlus
+        v-if="block.type !== 'columns'"
+        :after="block.uid"
+        :parent="parent"
+        @add="$emit('add', $event)"
+        @move="$emit('move', $event)"
+      />
+      <VillainPlus
+        v-else
+        :after="block.uid"
+        @add="$emit('add', $event)"
+        @move="$emit('move', $event)"
+      />
+    </template>
   </div>
 </template>
 
 <script>
-import VillainPlus from '@/components/tools/VillainPlus'
-
 export default {
-  components: {
-    VillainPlus
-  },
-
   data () {
     return {
       showConfig: false,
@@ -138,6 +153,10 @@ export default {
   computed: {
     hasConfigSlot () {
       return this.$slots.hasOwnProperty('config')
+    },
+
+    locked () {
+      return this.block.hasOwnProperty('locked') && this.block.locked
     }
   },
 

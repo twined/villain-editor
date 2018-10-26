@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Block from './Block'
+import Block from '@/components/blocks/system/Block'
 
 export default {
   name: 'divider-block',

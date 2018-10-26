@@ -142,7 +142,7 @@
 </template>
 
 <script>
-import Block from './Block'
+import Block from '@/components/blocks/system/Block'
 import { Drop } from 'vue-drag-drop'
 import { alertError } from '@/utils/alerts'
 
@@ -199,7 +199,6 @@ export default {
 
   created () {
     console.debug('<ImageBlock /> created')
-    console.log(this.browseURL)
 
     if (!this.block.data.url) {
       this.showConfig = true
@@ -265,7 +264,6 @@ export default {
     },
 
     async upload (f) {
-      console.log(f)
       let request
       let headers = new Headers()
       headers.append('accept', 'application/json, text/javascript, */*; q=0.01')
@@ -284,7 +282,6 @@ export default {
       request = new Request(this.uploadURL, { headers, method: 'post', body: formData })
 
       try {
-        console.log('uploading true')
         this.dragOver = false
         this.uploading = true
         let response = await fetch(request)
@@ -292,7 +289,6 @@ export default {
         if (data.status === 200) {
           this.showImages = false
           this.uploading = false
-          console.log('uploading false')
           this.block.data.sizes = data.image.sizes
           this.block.data.credits = ''
           this.block.data.title = ''

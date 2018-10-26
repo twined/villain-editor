@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import Block from './Block'
+import Block from '../system/Block'
 
 export default {
   name: 'blockquote-block',
@@ -54,7 +54,6 @@ export default {
 
   created () {
     console.debug('<BlockquoteBlock /> created')
-    console.log(this.block)
   }
 }
 </script>

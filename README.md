@@ -4,8 +4,8 @@
 
 ## Props
 
-`visibleBlocks (array) - ['Markdown', 'Image']`
-`extraBlocks (array) - [
+* `visibleBlocks` (array) - `['Markdown', 'Image']`
+* `extraBlocks` (array) - `[
   {
     name: 'Custom block',
     icon: 'fa-quote-right',
@@ -16,6 +16,27 @@
     }
   }
 ]`
+* `templates` (array) - `[
+  ...
+]
+
+### Templates
+
+Templates burde være array av vanlige blocks.
+Man burde kunne LÅSE blocks, slik at de ikke kan slettes.
+
+Er da template block som en "container"-block? Altså som en 1 kolonnes blokk?
+
+```
+{
+  type: 'template',
+  data: {
+    name: 'Bilde+Tekst',
+    class: 'p-img-text',
+    blocks:
+  }
+}
+```
 
 ## Build Setup
 

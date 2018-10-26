@@ -19,6 +19,32 @@
     }
   }
 
+.villain-editor-plus-available-templates {
+  background-color: $villain-block-background-color;
+  padding: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 5px;
+  font-size: 14px;
+
+  .villain-editor-plus-available-template {
+    cursor: pointer;
+    padding: 1rem;
+
+    &:hover {
+      color: #fff;
+      background-color: $villain-main-color !important;
+    }
+  }
+
+  .villain-editor-plus-available-templates-title {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+}
+
   .villain-editor-plus-available-blocks {
     background-color: $villain-block-background-color;
     position: relative;

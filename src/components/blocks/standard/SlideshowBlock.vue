@@ -11,7 +11,7 @@
     </div>
     <template slot="config">
       <div
-        v-if="block.data.sizes && series.length"
+        v-if="series.length"
         class="form-group">
         <label>Bildeserie</label>
         <select

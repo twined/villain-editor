@@ -190,7 +190,6 @@ export default {
   watch: {
     blocks: {
       handler: function (val, oldVal) {
-        console.log('update input for VUE')
         let bx = cloneDeep(val)
         if (bx.length) {
           this.$emit('input', JSON.stringify(bx.map(b => this.stripMeta(b)), null, 2))

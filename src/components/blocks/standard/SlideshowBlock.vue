@@ -19,10 +19,10 @@
           class="form-control"
         >
           <option
-            v-for="s in series"
-            :key="s.id"
-            :value="s.slug">
-            {{ s.slug }}
+            v-for="(s, idx) in series"
+            :key="idx"
+            :value="s">
+            {{ s }}
           </option>
         </select>
       </div>

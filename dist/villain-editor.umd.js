@@ -28956,12 +28956,12 @@ var setPublicPath = __webpack_require__("1eb2");
 // EXTERNAL MODULE: ./src/styles/lib.scss
 var lib = __webpack_require__("7b11");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0595ba96-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=067c0aee&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0595ba96-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=64819e6f&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-editor",class:_vm.fullscreen ? 'villain-fullscreen': ''},[_c('div',{staticClass:"villain-editor-toolbar"},[_vm._m(0),_c('div',{staticClass:"villain-editor-controls float-right"},[_c('div',{on:{"click":function($event){_vm.toggleSource()}}},[(_vm.showSource)?[_c('i',{staticClass:"fa fa-fw fa-times"})]:[_c('i',{staticClass:"fa fa-fw fa-code"})]],2),_c('div',{on:{"click":function($event){_vm.toggleFullscreen()}}},[(_vm.fullscreen)?[_c('i',{staticClass:"fa fa-fw fa-times"})]:[_c('i',{staticClass:"fa fa-fw fa-expand-arrows-alt"})]],2)])]),(_vm.showSource)?[_c('div',{staticClass:"villain-editor-source"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.src),expression:"src"}],ref:"tasource",domProps:{"value":(_vm.src)},on:{"input":function($event){if($event.target.composing){ return; }_vm.src=$event.target.value}}}),_c('button',{staticClass:"btn btn-primary",on:{"click":_vm.updateSource}},[_vm._v("\n        Oppdatér\n      ")])])]:[(_vm.blocks && _vm.blocks.length)?_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){_vm.addBlock($event)},"move":function($event){_vm.moveBlock($event)},"delete":_vm.deleteBlock,"order":_vm.orderBlocks}}):_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){_vm.addBlock($event)},"move":function($event){_vm.moveBlock($event)},"delete":_vm.deleteBlock}})]],2)}
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-editor-instructions"},[_c('i',{staticClass:"fa mr-2 fa-info-circle"}),_vm._v("\n      Trykk på \"+\" under for å legge til en innholdsblokk\n    ")])}]
 
 
-// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=067c0aee&
+// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=64819e6f&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.symbol.async-iterator.js
 var es7_symbol_async_iterator = __webpack_require__("ac4d");
@@ -31414,7 +31414,201 @@ var TimelineBlock_component = normalizeComponent(
 
 TimelineBlock_component.options.__file = "TimelineBlock.vue"
 /* harmony default export */ var TimelineBlock = (TimelineBlock_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0595ba96-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/SlideshowBlock.vue?vue&type=template&id=42db6bd4&
+var SlideshowBlockvue_type_template_id_42db6bd4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent,"config":_vm.showConfig},on:{"add":function($event){_vm.$emit('add', $event)},"move":function($event){_vm.$emit('move', $event)},"delete":function($event){_vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-block-slideshow"},[_vm._v("\n    "+_vm._s(_vm.block.data)+"\n  ")]),_c('template',{slot:"config"},[(_vm.block.data.sizes && _vm.series.length)?_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Bildeserie")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.imageseries),expression:"block.data.imageseries"}],staticClass:"form-control",on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.block.data, "imageseries", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},_vm._l((_vm.series),function(s){return _c('option',{key:s.id,domProps:{"value":s.slug}},[_vm._v("\n          "+_vm._s(s.slug)+"\n        ")])}))]):_vm._e(),_c('div',{staticClass:"villain-config-content-buttons"},[_c('button',{staticClass:"btn btn-primary",on:{"click":_vm.getImageSeries}},[_vm._v("\n        Hent tilgjengelige bildekaruseller fra server\n      ")])])])],2)}
+var SlideshowBlockvue_type_template_id_42db6bd4_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/blocks/standard/SlideshowBlock.vue?vue&type=template&id=42db6bd4&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/SlideshowBlock.vue?vue&type=script&lang=js&
+
+
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ var SlideshowBlockvue_type_script_lang_js_ = ({
+  name: 'slideshow-block',
+  components: {
+    Block: Block
+  },
+  computed: {
+    browseURL: function browseURL() {
+      return this.vBrowseURL + 'imageseries';
+    }
+  },
+  data: function data() {
+    return {
+      uid: null,
+      showConfig: false,
+      series: []
+    };
+  },
+  inject: ['vBaseURL', 'vBrowseURL', 'vImageSeries', 'vExtraHeaders'],
+  props: {
+    block: {
+      type: Object,
+      default: function _default() {}
+    },
+    parent: {
+      type: String,
+      default: null
+    }
+  },
+  created: function created() {
+    console.debug('<SlideshowBlock /> created');
+
+    if (!this.block.data.imageseries) {
+      this.showConfig = true;
+    }
+  },
+  methods: {
+    createUID: function createUID() {
+      return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
+    },
+    getImageSeries: function () {
+      var _getImageSeries = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee() {
+        var request, headers, _arr, _i, key, response, data;
+
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                headers = new Headers();
+                headers.append('accept', 'application/json, text/javascript, */*; q=0.01');
+
+                if (this.vExtraHeaders) {
+                  _arr = Object.keys(this.vExtraHeaders);
+
+                  for (_i = 0; _i < _arr.length; _i++) {
+                    key = _arr[_i];
+                    headers.append(key, this.vExtraHeaders[key]);
+                  }
+                }
+
+                request = new Request(this.browseURL, {
+                  headers: headers
+                });
+                _context.prev = 4;
+                _context.next = 7;
+                return fetch(request);
+
+              case 7:
+                response = _context.sent;
+                _context.next = 10;
+                return response.json();
+
+              case 10:
+                data = _context.sent;
+                console.log(data); // data.images
+
+                if (data.series.length) {
+                  this.series = data.series;
+                } else {
+                  alertError('Feil', 'Fant ingen slideshows. Gå til bildeadministrasjonen og last opp!');
+                }
+
+                _context.next = 19;
+                break;
+
+              case 15:
+                _context.prev = 15;
+                _context.t0 = _context["catch"](4);
+                alertError('Feil', 'Kunne ikke koble opp til bildeserver');
+                console.log(_context.t0);
+
+              case 19:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[4, 15]]);
+      }));
+
+      return function getImageSeries() {
+        return _getImageSeries.apply(this, arguments);
+      };
+    }(),
+    selectImage: function selectImage(img) {
+      this.showImages = false;
+      this.$set(this.block.data, 'sizes', img.sizes);
+      this.$set(this.block.data, 'credits', img.credits);
+      this.$set(this.block.data, 'title', img.title);
+      this.$set(this.block.data, 'url', img.src);
+      this.originalUrl = img.src;
+      this.showConfig = false;
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/blocks/standard/SlideshowBlock.vue?vue&type=script&lang=js&
+ /* harmony default export */ var standard_SlideshowBlockvue_type_script_lang_js_ = (SlideshowBlockvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/blocks/standard/SlideshowBlock.vue
+
+
+
+
+
+/* normalize component */
+
+var SlideshowBlock_component = normalizeComponent(
+  standard_SlideshowBlockvue_type_script_lang_js_,
+  SlideshowBlockvue_type_template_id_42db6bd4_render,
+  SlideshowBlockvue_type_template_id_42db6bd4_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+SlideshowBlock_component.options.__file = "SlideshowBlock.vue"
+/* harmony default export */ var SlideshowBlock = (SlideshowBlock_component.exports);
 // CONCATENATED MODULE: ./src/components/blocks/standard/index.js
+
 
 
 
@@ -31435,7 +31629,8 @@ TimelineBlock_component.options.__file = "TimelineBlock.vue"
   MarkdownBlock: MarkdownBlock,
   TextBlock: TextBlock,
   VideoBlock: VideoBlock,
-  TimelineBlock: TimelineBlock
+  TimelineBlock: TimelineBlock,
+  SlideshowBlock: SlideshowBlock
 });
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0595ba96-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/tools/VillainPlus.vue?vue&type=template&id=bd068aa2&
 var VillainPlusvue_type_template_id_bd068aa2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"plus",staticClass:"villain-editor-plus"},[_c('div',{key:"plus",class:_vm.active ? 'villain-editor-plus-active' : 'villain-editor-plus-inactive'},[_c('a',{on:{"click":_vm.clickPlus}},[(_vm.draggingOver)?[_vm._v("\n        Flytt blokken hit\n      ")]:_vm._e(),[_c('svg',{staticClass:"villain-svg-plus",class:_vm.active ? 'villain-svg-plus-open' : '',attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 300 300"}},[_c('circle',{attrs:{"cx":"150","cy":"150","r":"142.7","stroke":"#FFF","stroke-miterlimit":"10"}}),_c('path',{attrs:{"fill":"#FFF","d":"M224.3 133.3v31.3H166v58.3h-31.3v-58.3H76.4v-31.3h58.3V75H166v58.3h58.3z"}})])]],2),_c('VueSlideUpDown',{attrs:{"active":_vm.active,"duration":350}},[_c('div',{staticClass:"villain-editor-plus-block-name"},[_vm._v("\n        "+_vm._s(_vm.hoveredBlock)+"\n      ")]),(!_vm.vTemplateMode)?_c('div',{staticClass:"villain-editor-plus-available-blocks"},[_vm._l((_vm.vAvailableBlocks),function(b){return _c('div',{key:b.name,staticClass:"villain-editor-plus-available-block",on:{"mouseover":function($event){_vm.setHover(b.name)},"click":function($event){_vm.addBlock(b)}}},[_c('div',[_c('i',{staticClass:"fa fa-fw",class:b.icon})])])}),_c('div',{staticClass:"villain-editor-plus-available-block",on:{"mouseover":function($event){_vm.setHover('moduler')},"click":_vm.showTemplates}},[_c('div',[_c('i',{staticClass:"fa fa-fw fa-window-restore"})])])],2):_vm._e()]),_c('VueSlideUpDown',{attrs:{"active":_vm.showingTemplates,"duration":350}},[(_vm.vAvailableTemplates.length)?_c('div',{staticClass:"villain-editor-plus-available-templates"},_vm._l((_vm.vAvailableTemplates),function(tp,idx){return _c('div',{key:idx,staticClass:"villain-editor-plus-available-template",on:{"click":function($event){_vm.addTemplate(tp)}}},[_c('div',{staticClass:"villain-editor-plus-available-templates-title"},[_vm._v(_vm._s(tp.data.name))]),_vm._v("\n          "+_vm._s(tp.data.help_text)+"\n        ")])})):_c('div',[_vm._v("\n        Ingen registrerte maler.\n      ")])])],1)])}
@@ -31701,6 +31896,13 @@ VillainPlus_component.options.__file = "VillainPlus.vue"
     class: 'img-fluid'
   }
 }, {
+  name: 'Bildekarusell',
+  icon: 'fa-images',
+  component: 'Slideshow',
+  dataTemplate: {
+    imageseries: ''
+  }
+}, {
   name: 'Video',
   icon: 'fa-video',
   component: 'Video',
@@ -31948,7 +32150,6 @@ for (var _key2 in tools) {
       handler: function handler(val, oldVal) {
         var _this3 = this;
 
-        console.log('update input for VUE');
         var bx = cloneDeep_default()(val);
 
         if (bx.length) {

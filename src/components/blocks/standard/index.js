@@ -8,6 +8,7 @@ import MarkdownBlock from '@/components/blocks/standard/MarkdownBlock'
 import TextBlock from '@/components/blocks/standard/TextBlock'
 import VideoBlock from '@/components/blocks/standard/VideoBlock'
 import TimelineBlock from '@/components/blocks/standard/TimelineBlock'
+import SlideshowBlock from '@/components/blocks/standard/SlideshowBlock'
 
 export default {
   BlockquoteBlock,
@@ -19,5 +20,6 @@ export default {
   MarkdownBlock,
   TextBlock,
   VideoBlock,
-  TimelineBlock
+  TimelineBlock,
+  SlideshowBlock
 }

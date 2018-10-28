@@ -43,6 +43,15 @@ export default [
   },
 
   {
+    name: 'Bildekarusell',
+    icon: 'fa-images',
+    component: 'Slideshow',
+    dataTemplate: {
+      imageseries: ''
+    }
+  },
+
+  {
     name: 'Video',
     icon: 'fa-video',
     component: 'Video',

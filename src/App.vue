@@ -3,7 +3,7 @@
     <VillainEditor
       :json="json"
       :templates="templates"
-      :templateMode="true"
+      :templateMode="false"
     />
   </div>
 </template>

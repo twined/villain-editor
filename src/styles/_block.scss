@@ -201,6 +201,15 @@
   }
 }
 
+.villain-block-slideshow {
+  .villain-block-slideshow-images {
+    display: flex;
+    .villain-block-slideshow-image {
+      padding: 1rem;
+    }
+  }
+}
+
 .villain-header-input {
   border: 0;
   width: 100%;

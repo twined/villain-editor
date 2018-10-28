@@ -17,6 +17,9 @@
       </div>
     </div>
     <template slot="config">
+      <div class="alert alert-warning">
+        Bildekaruseller hentes fra sidens bildebibliotek. Klikk <a href="/admin/bilder/kategori/2" target="_blank">her</a> og opprett nye bildeserier. Om du oppdaterer bildeserien må du gjennomføre en "tvungen oppdatering" av prosjektet. Dette finner du i prosjektoversikten som et menyvalg for hvert prosjekt.
+      </div>
       <div
         v-if="series.length"
         class="form-group">

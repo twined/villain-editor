@@ -117,7 +117,7 @@ export default {
         let response = await fetch(request)
         let data = await response.json()
         console.log(data)
-        // data.images
+
         if (data.series.length) {
           this.series = data.series
         } else {
@@ -129,7 +129,7 @@ export default {
       }
     },
 
-    async getImageSerie (slug) {
+    async getImageSerie () {
       let request
       let headers = new Headers()
       headers.append('accept', 'application/json, text/javascript, */*; q=0.01')
@@ -140,15 +140,15 @@ export default {
         }
       }
 
-      request = new Request(this.slideshowsURL + slug, { headers })
+      request = new Request(this.slideshowsURL + this.block.data.imageseries, { headers })
 
       try {
         let response = await fetch(request)
         let data = await response.json()
+        // got series
         console.log(data)
-        // data.images
+
         if (data.images.length) {
-          this.data.imageseries = slug
           this.images = data.images
         } else {
           alertError('Feil', 'Ingen bilder i bildekarusellen!')

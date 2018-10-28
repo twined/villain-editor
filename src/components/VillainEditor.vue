@@ -109,6 +109,11 @@ export default {
       default: '/admin/api/villain/browse/'
     },
 
+    slideshowsURL: {
+      type: String,
+      default: '/admin/api/villain/slideshows/'
+    },
+
     imageSeries: {
       type: String,
       default: 'post'
@@ -179,6 +184,7 @@ export default {
     return {
       vBaseURL: this.baseURL,
       vBrowseURL: this.browseURL,
+      vSlideshowsURL: this.slideshowsURL,
       vImageSeries: this.imageSeries,
       vExtraHeaders: this.extraHeaders,
       vAvailableBlocks: this.availableBlocks,

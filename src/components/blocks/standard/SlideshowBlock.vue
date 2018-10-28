@@ -49,8 +49,8 @@ export default {
   },
 
   computed: {
-    browseURL () {
-      return this.vBrowseURL + 'imageseries'
+    slideshowsURL () {
+      return this.vSlideshowsURL
     }
   },
 
@@ -64,7 +64,7 @@ export default {
 
   inject: [
     'vBaseURL',
-    'vBrowseURL',
+    'vSlideshowsURL',
     'vImageSeries',
     'vExtraHeaders'
   ],
@@ -105,7 +105,7 @@ export default {
         }
       }
 
-      request = new Request(this.browseURL, { headers })
+      request = new Request(this.slideshowsURL, { headers })
 
       try {
         let response = await fetch(request)

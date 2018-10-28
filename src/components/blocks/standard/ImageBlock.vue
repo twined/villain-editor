@@ -240,10 +240,10 @@ export default {
 
     selectImage (img) {
       this.showImages = false
-      this.block.data.sizes = img.sizes
-      this.block.data.credits = img.credits
-      this.block.data.title = img.title
-      this.block.data.url = img.src
+      this.$set(this.block.data, 'sizes', img.sizes)
+      this.$set(this.block.data, 'credits', img.credits)
+      this.$set(this.block.data, 'title', img.title)
+      this.$set(this.block.data, 'url', img.src)
       this.originalUrl = img.src
 
       this.showConfig = false

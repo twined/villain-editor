@@ -221,6 +221,8 @@ export default {
       if (this.showSource) {
         this.showSource = false
       } else {
+        let bx = cloneDeep(this.blocks)
+        this.updatedSource = JSON.stringify(bx.map(b => this.stripMeta(b)), null, 2)
         this.showSource = true
         autosize(this.$refs.tasource)
       }
@@ -394,7 +396,6 @@ export default {
       ** Block is moved into a column
       */
       if (parent) {
-        console.log('==> ADDING to column')
         // child of a column
         let mainBlock = this.blocks.find(b => {
           if (b.type === 'columns') {

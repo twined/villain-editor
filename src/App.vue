@@ -2,8 +2,6 @@
   <div id="app">
     <VillainEditor
       :json="json"
-      :templates="templates"
-      :templateMode="true"
     />
   </div>
 </template>

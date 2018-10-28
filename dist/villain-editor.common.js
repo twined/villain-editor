@@ -28947,12 +28947,12 @@ var setPublicPath = __webpack_require__("1eb2");
 // EXTERNAL MODULE: ./src/styles/lib.scss
 var lib = __webpack_require__("7b11");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0595ba96-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=4c8be701&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0595ba96-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=64819e6f&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-editor",class:_vm.fullscreen ? 'villain-fullscreen': ''},[_c('div',{staticClass:"villain-editor-toolbar"},[_vm._m(0),_c('div',{staticClass:"villain-editor-controls float-right"},[_c('div',{on:{"click":function($event){_vm.toggleSource()}}},[(_vm.showSource)?[_c('i',{staticClass:"fa fa-fw fa-times"})]:[_c('i',{staticClass:"fa fa-fw fa-code"})]],2),_c('div',{on:{"click":function($event){_vm.toggleFullscreen()}}},[(_vm.fullscreen)?[_c('i',{staticClass:"fa fa-fw fa-times"})]:[_c('i',{staticClass:"fa fa-fw fa-expand-arrows-alt"})]],2)])]),(_vm.showSource)?[_c('div',{staticClass:"villain-editor-source"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.src),expression:"src"}],ref:"tasource",domProps:{"value":(_vm.src)},on:{"input":function($event){if($event.target.composing){ return; }_vm.src=$event.target.value}}}),_c('button',{staticClass:"btn btn-primary",on:{"click":_vm.updateSource}},[_vm._v("\n        Oppdatér\n      ")])])]:[(_vm.blocks && _vm.blocks.length)?_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){_vm.addBlock($event)},"move":function($event){_vm.moveBlock($event)},"delete":_vm.deleteBlock,"order":_vm.orderBlocks}}):_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){_vm.addBlock($event)},"move":function($event){_vm.moveBlock($event)},"delete":_vm.deleteBlock}})]],2)}
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-editor-instructions"},[_c('i',{staticClass:"fa mr-2 fa-info-circle"}),_vm._v("\n      Trykk på \"+\" under for å legge til en innholdsblokk\n    ")])}]
 
 
-// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=4c8be701&
+// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=64819e6f&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.symbol.async-iterator.js
 var es7_symbol_async_iterator = __webpack_require__("ac4d");
@@ -31968,9 +31968,15 @@ for (var _key2 in tools) {
       this.toggleSource();
     },
     toggleSource: function toggleSource() {
+      var _this4 = this;
+
       if (this.showSource) {
         this.showSource = false;
       } else {
+        var bx = cloneDeep_default()(this.blocks);
+        this.updatedSource = JSON.stringify(bx.map(function (b) {
+          return _this4.stripMeta(b);
+        }), null, 2);
         this.showSource = true;
         autosize_default()(this.$refs.tasource);
       }
@@ -31979,11 +31985,11 @@ for (var _key2 in tools) {
       this.fullscreen = !this.fullscreen;
     },
     addUIDs: function addUIDs() {
-      var _this4 = this;
+      var _this5 = this;
 
       return _toConsumableArray(this.blocks).map(function (b) {
         return _objectSpread({}, b, {
-          uid: _this4.createUID()
+          uid: _this5.createUID()
         });
       });
     },
@@ -32143,8 +32149,7 @@ for (var _key2 in tools) {
 
 
       if (parent) {
-        console.log('==> ADDING to column'); // child of a column
-
+        // child of a column
         var mainBlock = this.blocks.find(function (b) {
           if (b.type === 'columns') {
             var _arr3 = Object.keys(b.data);

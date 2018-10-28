@@ -7,7 +7,7 @@
     @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
     <div class="villain-block-slideshow">
-      {{ block.data }}
+      {{ images }}
     </div>
     <template slot="config">
       <div
@@ -17,7 +17,12 @@
         <select
           v-model="block.data.imageseries"
           class="form-control"
+          @change="getImageSerie"
         >
+          <option
+            :value="null">
+            Velg bildeserie
+          </option>
           <option
             v-for="(s, idx) in series"
             :key="idx"
@@ -58,7 +63,8 @@ export default {
     return {
       uid: null,
       showConfig: false,
-      series: []
+      series: [],
+      images: [] // used for preview
     }
   },
 
@@ -116,6 +122,36 @@ export default {
           this.series = data.series
         } else {
           alertError('Feil', 'Fant ingen slideshows. Gå til bildeadministrasjonen og last opp!')
+        }
+      } catch (e) {
+        alertError('Feil', 'Kunne ikke koble opp til bildeserver')
+        console.log(e)
+      }
+    },
+
+    async getImageSerie (slug) {
+      let request
+      let headers = new Headers()
+      headers.append('accept', 'application/json, text/javascript, */*; q=0.01')
+
+      if (this.vExtraHeaders) {
+        for (let key of Object.keys(this.vExtraHeaders)) {
+          headers.append(key, this.vExtraHeaders[key])
+        }
+      }
+
+      request = new Request(this.slideshowsURL + slug, { headers })
+
+      try {
+        let response = await fetch(request)
+        let data = await response.json()
+        console.log(data)
+        // data.images
+        if (data.images.length) {
+          this.data.imageseries = slug
+          this.images = data.images
+        } else {
+          alertError('Feil', 'Ingen bilder i bildekarusellen!')
         }
       } catch (e) {
         alertError('Feil', 'Kunne ikke koble opp til bildeserver')

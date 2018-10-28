@@ -7,7 +7,14 @@
     @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
     <div class="villain-block-slideshow">
-      {{ images }}
+      <div class="villain-block-slideshow-images">
+        <div
+          v-for="(i, idx) in images"
+          :key="idx"
+          class="villain-block-slideshow-image">
+          <img :src="i" class="img-fluid">
+        </div>
+      </div>
     </div>
     <template slot="config">
       <div
@@ -150,6 +157,7 @@ export default {
 
         if (data.images.length) {
           this.images = data.images
+          this.showConfig = false
         } else {
           alertError('Feil', 'Ingen bilder i bildekarusellen!')
         }

@@ -31426,12 +31426,12 @@ var TimelineBlock_component = normalizeComponent(
 
 TimelineBlock_component.options.__file = "TimelineBlock.vue"
 /* harmony default export */ var TimelineBlock = (TimelineBlock_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0595ba96-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/SlideshowBlock.vue?vue&type=template&id=46f39a50&
-var SlideshowBlockvue_type_template_id_46f39a50_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent,"config":_vm.showConfig},on:{"add":function($event){_vm.$emit('add', $event)},"move":function($event){_vm.$emit('move', $event)},"delete":function($event){_vm.$emit('delete', $event)}}},[_c('div',{ref:"block",staticClass:"villain-block-slideshow"},[_c('div',{staticClass:"villain-block-slideshow-images"},_vm._l((_vm.images),function(i,idx){return _c('div',{key:idx,staticClass:"villain-block-slideshow-image"},[_c('img',{staticClass:"img-fluid",attrs:{"src":i}})])}))]),_c('template',{slot:"config"},[_c('div',{staticClass:"alert alert-warning"},[_vm._v("\n      Bildekaruseller hentes fra sidens bildebibliotek. Klikk "),_c('a',{attrs:{"href":"/admin/bilder/kategori/2","target":"_blank"}},[_vm._v("her")]),_vm._v(" og opprett nye bildeserier. Om du oppdaterer bildeserien må du gjennomføre en \"tvungen oppdatering\" av prosjektet. Dette finner du i prosjektoversikten som et menyvalg for hvert prosjekt.\n    ")]),(_vm.series.length)?_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Bildeserie")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.imageseries),expression:"block.data.imageseries"}],staticClass:"form-control",on:{"change":[function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.block.data, "imageseries", $event.target.multiple ? $$selectedVal : $$selectedVal[0])},_vm.getImageSerie]}},[_c('option',{domProps:{"value":null}},[_vm._v("\n          Velg bildeserie\n        ")]),_vm._l((_vm.series),function(s,idx){return _c('option',{key:idx,domProps:{"value":s}},[_vm._v("\n          "+_vm._s(s)+"\n        ")])})],2)]):_vm._e(),_c('div',{staticClass:"villain-config-content-buttons"},[_c('button',{staticClass:"btn btn-primary",on:{"click":_vm.getImageSeries}},[_vm._v("\n        Hent tilgjengelige bildekaruseller fra server\n      ")])])])],2)}
-var SlideshowBlockvue_type_template_id_46f39a50_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0595ba96-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/SlideshowBlock.vue?vue&type=template&id=6f9903fc&
+var SlideshowBlockvue_type_template_id_6f9903fc_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent,"config":_vm.showConfig},on:{"add":function($event){_vm.$emit('add', $event)},"move":function($event){_vm.$emit('move', $event)},"delete":function($event){_vm.$emit('delete', $event)}}},[_c('div',{ref:"block",staticClass:"villain-block-slideshow"},[_c('div',{staticClass:"villain-block-slideshow-images"},_vm._l((_vm.images),function(i,idx){return _c('div',{key:idx,staticClass:"villain-block-slideshow-image"},[_c('img',{staticClass:"img-fluid",attrs:{"src":i}})])}))]),_c('template',{slot:"config"},[_c('div',{staticClass:"alert alert-warning"},[_vm._v("\n      Bildekaruseller hentes fra sidens bildebibliotek. Klikk "),_c('a',{attrs:{"href":"/admin/bilder/kategori/2","target":"_blank"}},[_vm._v("her")]),_vm._v(" og opprett nye bildeserier. Om du oppdaterer bildeserien må du gjennomføre en \"tvungen oppdatering\" av prosjektet. Dette finner du i prosjektoversikten som et menyvalg for hvert prosjekt.\n    ")]),(_vm.series.length)?_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Bildeserie")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.imageseries),expression:"block.data.imageseries"}],staticClass:"form-control",on:{"change":[function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.block.data, "imageseries", $event.target.multiple ? $$selectedVal : $$selectedVal[0])},_vm.getImageSerie]}},[_c('option',{domProps:{"value":null}},[_vm._v("\n          Velg bildeserie\n        ")]),_vm._l((_vm.series),function(s,idx){return _c('option',{key:idx,domProps:{"value":s}},[_vm._v("\n          "+_vm._s(s)+"\n        ")])})],2)]):_vm._e(),_c('div',{staticClass:"villain-config-content-buttons"},[_c('button',{staticClass:"btn btn-primary",on:{"click":_vm.getImageSeries}},[_vm._v("\n        Hent tilgjengelige bildekaruseller fra server\n      ")])])])],2)}
+var SlideshowBlockvue_type_template_id_6f9903fc_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/blocks/standard/SlideshowBlock.vue?vue&type=template&id=46f39a50&
+// CONCATENATED MODULE: ./src/components/blocks/standard/SlideshowBlock.vue?vue&type=template&id=6f9903fc&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/SlideshowBlock.vue?vue&type=script&lang=js&
 
@@ -31531,6 +31531,9 @@ var SlideshowBlockvue_type_template_id_46f39a50_staticRenderFns = []
 
     if (!this.block.data.imageseries) {
       this.showConfig = true;
+    } else {
+      // grab images
+      this.getImageSerie();
     }
   },
   methods: {
@@ -31573,7 +31576,6 @@ var SlideshowBlockvue_type_template_id_46f39a50_staticRenderFns = []
 
               case 10:
                 data = _context.sent;
-                console.log(data);
 
                 if (data.series.length) {
                   this.series = data.series;
@@ -31581,21 +31583,21 @@ var SlideshowBlockvue_type_template_id_46f39a50_staticRenderFns = []
                   alertError('Feil', 'Fant ingen slideshows. Gå til bildeadministrasjonen og last opp!');
                 }
 
-                _context.next = 19;
+                _context.next = 18;
                 break;
 
-              case 15:
-                _context.prev = 15;
+              case 14:
+                _context.prev = 14;
                 _context.t0 = _context["catch"](4);
                 alertError('Feil', 'Kunne ikke koble opp til bildeserver');
                 console.log(_context.t0);
 
-              case 19:
+              case 18:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[4, 15]]);
+        }, _callee, this, [[4, 14]]);
       }));
 
       return function getImageSeries() {
@@ -31638,8 +31640,6 @@ var SlideshowBlockvue_type_template_id_46f39a50_staticRenderFns = []
 
               case 10:
                 data = _context2.sent;
-                // got series
-                console.log(data);
 
                 if (data.images.length) {
                   this.images = data.images;
@@ -31648,21 +31648,21 @@ var SlideshowBlockvue_type_template_id_46f39a50_staticRenderFns = []
                   alertError('Feil', 'Ingen bilder i bildekarusellen!');
                 }
 
-                _context2.next = 19;
+                _context2.next = 18;
                 break;
 
-              case 15:
-                _context2.prev = 15;
+              case 14:
+                _context2.prev = 14;
                 _context2.t0 = _context2["catch"](4);
                 alertError('Feil', 'Kunne ikke koble opp til bildeserver');
                 console.log(_context2.t0);
 
-              case 19:
+              case 18:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, this, [[4, 15]]);
+        }, _callee2, this, [[4, 14]]);
       }));
 
       return function getImageSerie() {
@@ -31692,8 +31692,8 @@ var SlideshowBlockvue_type_template_id_46f39a50_staticRenderFns = []
 
 var SlideshowBlock_component = normalizeComponent(
   standard_SlideshowBlockvue_type_script_lang_js_,
-  SlideshowBlockvue_type_template_id_46f39a50_render,
-  SlideshowBlockvue_type_template_id_46f39a50_staticRenderFns,
+  SlideshowBlockvue_type_template_id_6f9903fc_render,
+  SlideshowBlockvue_type_template_id_6f9903fc_staticRenderFns,
   false,
   null,
   null,

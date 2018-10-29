@@ -102,6 +102,9 @@ export default {
 
     if (!this.block.data.imageseries) {
       this.showConfig = true
+    } else {
+      // grab images
+      this.getImageSerie()
     }
   },
 
@@ -126,7 +129,6 @@ export default {
       try {
         let response = await fetch(request)
         let data = await response.json()
-        console.log(data)
 
         if (data.series.length) {
           this.series = data.series
@@ -155,8 +157,6 @@ export default {
       try {
         let response = await fetch(request)
         let data = await response.json()
-        // got series
-        console.log(data)
 
         if (data.images.length) {
           this.images = data.images

@@ -60,6 +60,7 @@
         class="villain-image-library row mt-4">
         <div
           v-for="i in images"
+          :key="i.id"
           class="col-4">
           <img
             :src="i.thumb"
@@ -114,6 +115,7 @@
             </option>
             <option
               v-for="(size, key) in block.data.sizes"
+              :key="key"
               :value="size">
               {{ key }}
             </option>

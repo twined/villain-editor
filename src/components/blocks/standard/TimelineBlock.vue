@@ -8,7 +8,8 @@
 
     <ul class="villain-timeline">
       <li
-        v-for="item in block.data"
+        v-for="(item, idx) in block.data"
+        :key="idx"
         class="villain-timeline-item">
         <p class="villain-timeline-item-date">
           {{ item.caption }}
@@ -22,7 +23,8 @@
     </ul>
     <template slot="config">
       <div
-        v-for="item in block.data"
+        v-for="(item, idx) in block.data"
+        :key="idx + 'cfg'"
         class="form-group">
         <label>Punktoverskrift</label>
         <input

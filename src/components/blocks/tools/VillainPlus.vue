@@ -28,6 +28,7 @@
         </div>
         <div
           v-if="!vTemplateMode"
+          ref="blocks"
           class="villain-editor-plus-available-blocks">
           <div
             v-for="b in vAvailableBlocks"
@@ -56,6 +57,7 @@
       <VueSlideUpDown :active="showingTemplates" :duration="350">
         <div
           v-if="vAvailableTemplates.length"
+          ref="templates"
           class="villain-editor-plus-available-templates">
           <div
             v-for="(tp, idx) in vAvailableTemplates"
@@ -134,10 +136,45 @@ export default {
 
     showTemplates () {
       this.showingTemplates = !this.showingTemplates
+      if (this.showingTemplates) {
+        setTimeout(() => {
+          let elTop = this.$refs.templates.getBoundingClientRect().top
+          let docBot = document.body.scrollTop + window.innerHeight
+          let elHeight = this.$refs.templates.clientHeight
+          let elBot = elTop + elHeight
+
+          if (elBot > docBot) {
+            let distance = elBot - docBot
+            window.scrollBy({
+              top: distance,
+              behavior: 'smooth'
+            })
+          }
+        }, 250)
+      }
     },
 
     clickPlus () {
       this.active = !this.active
+
+      if (this.active) {
+        setTimeout(() => {
+          let elTop = this.$refs.blocks.getBoundingClientRect().top
+          let docBot = document.body.scrollTop + window.innerHeight
+          let elHeight = this.$refs.blocks.clientHeight
+          let elBot = elTop + elHeight
+
+          if (elBot > docBot) {
+            let distance = elBot - docBot
+            window.scrollBy({
+              top: distance,
+              behavior: 'smooth'
+            })
+          }
+        }, 250)
+      } else {
+        this.showingTemplates = false
+      }
 
       if (this.vTemplateMode) {
         this.showingTemplates = !this.showingTemplates

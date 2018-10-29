@@ -6,7 +6,7 @@
     @add="$emit('add', $event)"
     @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
-    <div class="villain-block-slideshow">
+    <div class="villain-block-slideshow" ref="block">
       <div class="villain-block-slideshow-images">
         <div
           v-for="(i, idx) in images"

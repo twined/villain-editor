@@ -157,7 +157,7 @@ export default {
     clickPlus () {
       this.active = !this.active
 
-      if (this.active) {
+      if (this.active && this.$refs.blocks) {
         setTimeout(() => {
           let elTop = this.$refs.blocks.getBoundingClientRect().top
           let docBot = document.body.scrollTop + window.innerHeight
@@ -177,7 +177,7 @@ export default {
       }
 
       if (this.vTemplateMode) {
-        this.showingTemplates = !this.showingTemplates
+        this.showTemplates()
       }
     },
 

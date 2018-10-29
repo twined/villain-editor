@@ -31728,12 +31728,12 @@ SlideshowBlock_component.options.__file = "SlideshowBlock.vue"
   TimelineBlock: TimelineBlock,
   SlideshowBlock: SlideshowBlock
 });
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0595ba96-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/tools/VillainPlus.vue?vue&type=template&id=ac1ea912&
-var VillainPlusvue_type_template_id_ac1ea912_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"plus",staticClass:"villain-editor-plus"},[_c('div',{key:"plus",class:_vm.active ? 'villain-editor-plus-active' : 'villain-editor-plus-inactive'},[_c('a',{on:{"click":_vm.clickPlus}},[(_vm.draggingOver)?[_vm._v("\n        Flytt blokken hit\n      ")]:_vm._e(),[_c('svg',{staticClass:"villain-svg-plus",class:_vm.active ? 'villain-svg-plus-open' : '',attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 300 300"}},[_c('circle',{attrs:{"cx":"150","cy":"150","r":"142.7","stroke":"#FFF","stroke-miterlimit":"10"}}),_c('path',{attrs:{"fill":"#FFF","d":"M224.3 133.3v31.3H166v58.3h-31.3v-58.3H76.4v-31.3h58.3V75H166v58.3h58.3z"}})])]],2),_c('VueSlideUpDown',{attrs:{"active":_vm.active,"duration":350}},[_c('div',{staticClass:"villain-editor-plus-block-name"},[_vm._v("\n        "+_vm._s(_vm.hoveredBlock)+"\n      ")]),(!_vm.vTemplateMode)?_c('div',{ref:"blocks",staticClass:"villain-editor-plus-available-blocks"},[_vm._l((_vm.vAvailableBlocks),function(b){return _c('div',{key:b.name,staticClass:"villain-editor-plus-available-block",on:{"mouseover":function($event){_vm.setHover(b.name)},"click":function($event){_vm.addBlock(b)}}},[_c('div',[_c('i',{staticClass:"fa fa-fw",class:b.icon})])])}),_c('div',{staticClass:"villain-editor-plus-available-block",on:{"mouseover":function($event){_vm.setHover('moduler')},"click":_vm.showTemplates}},[_c('div',[_c('i',{staticClass:"fa fa-fw fa-window-restore"})])])],2):_vm._e()]),_c('VueSlideUpDown',{attrs:{"active":_vm.showingTemplates,"duration":350}},[(_vm.vAvailableTemplates.length)?_c('div',{ref:"templates",staticClass:"villain-editor-plus-available-templates"},_vm._l((_vm.vAvailableTemplates),function(tp,idx){return _c('div',{key:idx,staticClass:"villain-editor-plus-available-template",on:{"click":function($event){_vm.addTemplate(tp)}}},[_c('div',{staticClass:"villain-editor-plus-available-templates-title"},[_vm._v(_vm._s(tp.data.name))]),_vm._v("\n          "+_vm._s(tp.data.help_text)+"\n        ")])})):_c('div',[_vm._v("\n        Ingen registrerte maler.\n      ")])])],1)])}
-var VillainPlusvue_type_template_id_ac1ea912_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0595ba96-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/tools/VillainPlus.vue?vue&type=template&id=aeb3eca0&
+var VillainPlusvue_type_template_id_aeb3eca0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"plus",staticClass:"villain-editor-plus"},[_c('div',{key:"plus",class:_vm.active ? 'villain-editor-plus-active' : 'villain-editor-plus-inactive'},[_c('a',{on:{"click":_vm.clickPlus}},[(_vm.draggingOver)?[_vm._v("\n        Flytt blokken hit\n      ")]:_vm._e(),[_c('svg',{staticClass:"villain-svg-plus",class:_vm.active ? 'villain-svg-plus-open' : '',attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 300 300"}},[_c('circle',{attrs:{"cx":"150","cy":"150","r":"142.7","stroke":"#FFF","stroke-miterlimit":"10"}}),_c('path',{attrs:{"fill":"#FFF","d":"M224.3 133.3v31.3H166v58.3h-31.3v-58.3H76.4v-31.3h58.3V75H166v58.3h58.3z"}})])]],2),_c('VueSlideUpDown',{attrs:{"active":_vm.active,"duration":350}},[_c('div',{staticClass:"villain-editor-plus-block-name"},[_vm._v("\n        "+_vm._s(_vm.hoveredBlock)+"\n      ")]),(!_vm.vTemplateMode)?_c('div',{ref:"blocks",staticClass:"villain-editor-plus-available-blocks"},[_vm._l((_vm.vAvailableBlocks),function(b){return _c('div',{key:b.name,staticClass:"villain-editor-plus-available-block",on:{"mouseover":function($event){_vm.setHover(b.name)},"click":function($event){_vm.addBlock(b)}}},[_c('div',[_c('i',{staticClass:"fa fa-fw",class:b.icon})])])}),_c('div',{staticClass:"villain-editor-plus-available-block",on:{"mouseover":function($event){_vm.setHover('moduler')},"click":_vm.showTemplates}},[_c('div',[_c('i',{staticClass:"fa fa-fw fa-window-restore"})])])],2):_vm._e()]),_c('VueSlideUpDown',{attrs:{"active":_vm.showingTemplates,"duration":350}},[(_vm.vAvailableTemplates.length)?_c('div',{ref:"templates",staticClass:"villain-editor-plus-available-templates"},_vm._l((_vm.vAvailableTemplates),function(tp,idx){return _c('div',{key:idx,staticClass:"villain-editor-plus-available-template",on:{"click":function($event){_vm.addTemplate(tp)}}},[_c('div',{staticClass:"villain-editor-plus-available-templates-title"},[_vm._v(_vm._s(tp.data.name))]),_vm._v("\n          "+_vm._s(tp.data.help_text)+"\n        ")])})):_c('div',[_vm._v("\n        Ingen registrerte maler.\n      ")])])],1)])}
+var VillainPlusvue_type_template_id_aeb3eca0_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/blocks/tools/VillainPlus.vue?vue&type=template&id=ac1ea912&
+// CONCATENATED MODULE: ./src/components/blocks/tools/VillainPlus.vue?vue&type=template&id=aeb3eca0&
 
 // CONCATENATED MODULE: ./node_modules/vue-slide-up-down/dist/vue-slide-up-down.m.js
 /* harmony default export */ var vue_slide_up_down_m = ({name:"SlideUpDown",props:{active:Boolean,duration:{type:Number,default:500},tag:{type:String,default:"div"}},data:function(){return{scrollHeight:0,isMounted:!1}},watch:{active:function(){this.layout()}},render:function(t){return t(this.tag,{style:this.style,ref:"container"},this.$slots.default)},mounted:function(){var t=this;window.addEventListener("resize",this.layout),this.layout(),this.$nextTick(function(){t.isMounted=!0})},destroyed:function(){window.removeEventListener("resize",this.layout)},computed:{style:function(){return{overflow:"hidden","transition-property":"height",height:this.isMounted?(this.active?this.scrollHeight:0)+"px":"auto","transition-duration":this.duration+"ms"}}},methods:{layout:function(){this.scrollHeight=this.$refs.container.scrollHeight}}});
@@ -31891,7 +31891,7 @@ function createUID() {
 
       this.active = !this.active;
 
-      if (this.active) {
+      if (this.active && this.$refs.blocks) {
         setTimeout(function () {
           var elTop = _this2.$refs.blocks.getBoundingClientRect().top;
 
@@ -31912,7 +31912,7 @@ function createUID() {
       }
 
       if (this.vTemplateMode) {
-        this.showingTemplates = !this.showingTemplates;
+        this.showTemplates();
       }
     },
     addBlock: function addBlock(b) {
@@ -31983,8 +31983,8 @@ function createUID() {
 
 var VillainPlus_component = normalizeComponent(
   tools_VillainPlusvue_type_script_lang_js_,
-  VillainPlusvue_type_template_id_ac1ea912_render,
-  VillainPlusvue_type_template_id_ac1ea912_staticRenderFns,
+  VillainPlusvue_type_template_id_aeb3eca0_render,
+  VillainPlusvue_type_template_id_aeb3eca0_staticRenderFns,
   false,
   null,
   null,

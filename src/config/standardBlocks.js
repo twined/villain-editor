@@ -107,5 +107,14 @@ export default [
     dataTemplate: {
       'text': '## Markdown code'
     }
+  },
+
+  {
+    name: 'Html',
+    icon: 'fa-file-code',
+    component: 'Html',
+    dataTemplate: {
+      'text': 'html'
+    }
   }
 ]

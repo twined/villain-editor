@@ -30209,6 +30209,82 @@ var HeaderBlock_component = normalizeComponent(
 
 HeaderBlock_component.options.__file = "HeaderBlock.vue"
 /* harmony default export */ var HeaderBlock = (HeaderBlock_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0595ba96-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/HtmlBlock.vue?vue&type=template&id=8edffa8a&
+var HtmlBlockvue_type_template_id_8edffa8a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){_vm.$emit('add', $event)},"move":function($event){_vm.$emit('move', $event)},"delete":function($event){_vm.$emit('delete', $event)}}},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.text),expression:"block.data.text"}],ref:"txt",staticClass:"villain-html-input",domProps:{"value":(_vm.block.data.text)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "text", $event.target.value)}}}),_c('template',{slot:"config"},[_vm._v("\n    This is the config contents!\n  ")])],2)}
+var HtmlBlockvue_type_template_id_8edffa8a_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/blocks/standard/HtmlBlock.vue?vue&type=template&id=8edffa8a&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/HtmlBlock.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ var HtmlBlockvue_type_script_lang_js_ = ({
+  name: 'html-block',
+  components: {
+    Block: Block
+  },
+  props: {
+    block: {
+      type: Object,
+      default: function _default() {}
+    },
+    parent: {
+      type: String,
+      default: null
+    }
+  },
+  data: function data() {
+    return {};
+  },
+  created: function created() {
+    console.debug('<HtmlBlock /> created');
+  },
+  mounted: function mounted() {
+    autosize_default()(this.$refs.txt);
+  }
+});
+// CONCATENATED MODULE: ./src/components/blocks/standard/HtmlBlock.vue?vue&type=script&lang=js&
+ /* harmony default export */ var standard_HtmlBlockvue_type_script_lang_js_ = (HtmlBlockvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/blocks/standard/HtmlBlock.vue
+
+
+
+
+
+/* normalize component */
+
+var HtmlBlock_component = normalizeComponent(
+  standard_HtmlBlockvue_type_script_lang_js_,
+  HtmlBlockvue_type_template_id_8edffa8a_render,
+  HtmlBlockvue_type_template_id_8edffa8a_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+HtmlBlock_component.options.__file = "HtmlBlock.vue"
+/* harmony default export */ var HtmlBlock = (HtmlBlock_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"0595ba96-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/ImageBlock.vue?vue&type=template&id=950ad1b2&
 var ImageBlockvue_type_template_id_950ad1b2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent,"config":_vm.showConfig},on:{"add":function($event){_vm.$emit('add', $event)},"move":function($event){_vm.$emit('move', $event)},"delete":function($event){_vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-block-image"},[(_vm.block.data.url)?_c('img',{staticClass:"img-fluid",attrs:{"src":_vm.block.data.url}}):_c('p',[_vm._v("\n      Inget gyldig bilde\n    ")])]),_c('template',{slot:"config"},[(!_vm.showImages && !_vm.block.data.url)?_c('div',[_c('div',{staticClass:"display-icon"},[_c('drop',{staticClass:"drop",on:{"dragover":function($event){_vm.dragOver = true},"dragleave":function($event){_vm.dragOver = false},"drop":_vm.handleDrop}},[(_vm.dragOver)?_c('i',{staticClass:"fa fa-fw fa-cloud-upload-alt"}):[(_vm.uploading)?_c('i',{staticClass:"fa fa-fw fa-circle-notch fa-spin"}):_c('i',{staticClass:"fa fa-fw fa-image"})]],2)],1),_c('p',{staticClass:"text-center"},[(_vm.dragOver)?[_vm._v("\n          Slipp for å laste opp!\n        ")]:[(_vm.uploading)?[_vm._v("\n            Laster opp ...\n          ")]:[_vm._v("\n            Dra bildet du vil laste opp hit ↑\n          ")]]],2)]):_vm._e(),(_vm.showImages)?_c('div',{staticClass:"villain-image-library row mt-4"},_vm._l((_vm.images),function(i){return _c('div',{key:i.id,staticClass:"col-4"},[_c('img',{staticClass:"img-fluid",attrs:{"src":i.thumb},on:{"click":function($event){_vm.selectImage(i)}}})])})):_c('div',[(_vm.block.data.url)?_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Kilde")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.url),expression:"block.data.url"}],staticClass:"form-control",attrs:{"type":"input"},domProps:{"value":(_vm.block.data.url)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "url", $event.target.value)}}})]):_vm._e(),(_vm.block.data.url)?_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Tittel")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.title),expression:"block.data.title"}],staticClass:"form-control",attrs:{"type":"input"},domProps:{"value":(_vm.block.data.title)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "title", $event.target.value)}}})]):_vm._e(),(_vm.block.data.url)?_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Krediteringer")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.credits),expression:"block.data.credits"}],staticClass:"form-control",attrs:{"type":"input"},domProps:{"value":(_vm.block.data.credits)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "credits", $event.target.value)}}})]):_vm._e(),(_vm.block.data.sizes)?_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Størrelse")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.url),expression:"block.data.url"}],staticClass:"form-control",on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.block.data, "url", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},[_c('option',{domProps:{"value":_vm.originalUrl}},[_vm._v("\n            orginal\n          ")]),_vm._l((_vm.block.data.sizes),function(size,key){return _c('option',{key:key,domProps:{"value":size}},[_vm._v("\n            "+_vm._s(key)+"\n          ")])})],2)]):_vm._e(),(_vm.block.data.url)?_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("CSS klasser")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.class),expression:"block.data.class"}],staticClass:"form-control",attrs:{"type":"input"},domProps:{"value":(_vm.block.data.class)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "class", $event.target.value)}}})]):_vm._e(),_c('div',{staticClass:"villain-config-content-buttons"},[_c('button',{staticClass:"btn btn-primary",on:{"click":_vm.getImages}},[_vm._v("\n          Velg bilde fra bildebibliotek\n        ")])])])])],2)}
 var ImageBlockvue_type_template_id_950ad1b2_staticRenderFns = []
@@ -31715,11 +31791,13 @@ SlideshowBlock_component.options.__file = "SlideshowBlock.vue"
 
 
 
+
 /* harmony default export */ var standard = ({
   BlockquoteBlock: BlockquoteBlock,
   ColumnsBlock: ColumnsBlock,
   DividerBlock: DividerBlock,
   HeaderBlock: HeaderBlock,
+  HtmlBlock: HtmlBlock,
   ImageBlock: ImageBlock,
   MapBlock: MapBlock,
   MarkdownBlock: MarkdownBlock,
@@ -32085,6 +32163,13 @@ VillainPlus_component.options.__file = "VillainPlus.vue"
   component: 'Markdown',
   dataTemplate: {
     'text': '## Markdown code'
+  }
+}, {
+  name: 'Html',
+  icon: 'fa-file-code',
+  component: 'Html',
+  dataTemplate: {
+    'text': 'html'
   }
 }]);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=script&lang=js&

@@ -216,10 +216,11 @@
   padding: 1rem;
 }
 
-.villain-markdown-input {
+.villain-markdown-input,
+.villain-html-input {
   border: 0;
   width: 100%;
-  font-family: Fira Code;
+  font-family: Fira Code, Monaco, monospace;
   padding: 1rem;
 }
 

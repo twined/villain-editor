@@ -23,6 +23,12 @@
           <i class="fa fa-fw fa-lock" />
         </div>
         <div
+          v-if="hasHelpSlot"
+          class="villain-block-action villain-help"
+          @click="helpBlock">
+          <i class="fa fa-fw fa-question-circle" />
+        </div>
+        <div
           v-if="hasConfigSlot"
           class="villain-block-action villain-config"
           @click="configBlock">
@@ -42,6 +48,33 @@
       </div>
       <div class="villain-block-info">
         {{ getBlockDisplayName(block.type) }}
+      </div>
+    </div>
+
+    <div
+      v-show="showHelp"
+      ref="help"
+      class="villain-block villain-block-help">
+      <div class="villain-block-help-content">
+        <h5>Hjelpetekst &rarr;</h5>
+
+        <div
+          v-if="icon"
+          class="display-icon">
+          <i
+            :class="icon"
+            class="fa fa-fw" />
+        </div>
+
+        <slot name="help" />
+
+        <div class="villain-help-content-buttons">
+          <button
+            class="btn btn-primary mt-3"
+            @click="showHelp = false">
+            Lukk
+          </button>
+        </div>
       </div>
     </div>
 
@@ -117,6 +150,7 @@ export default {
   data () {
     return {
       showConfig: false,
+      showHelp: false,
       dragEl: null,
       hovering: false,
       moving: false
@@ -155,6 +189,10 @@ export default {
       return this.$slots.hasOwnProperty('config')
     },
 
+    hasHelpSlot () {
+      return this.$slots.hasOwnProperty('help')
+    },
+
     locked () {
       return this.block.hasOwnProperty('locked') && this.block.locked
     }
@@ -163,6 +201,10 @@ export default {
   watch: {
     config (v) {
       this.showConfig = v
+    },
+
+    help (v) {
+      this.showHelp = v
     }
   },
 
@@ -208,6 +250,10 @@ export default {
         return foundBlock.name
       }
       return ''
+    },
+
+    helpBlock () {
+      this.showHelp = true
     },
 
     configBlock () {

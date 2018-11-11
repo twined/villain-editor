@@ -54,6 +54,23 @@
     }
   }
 
+  &.villain-block-help {
+    padding: 2rem;
+
+    .villain-block-help-content {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 2rem;
+
+      background-color: $villain-secondary-color;
+
+      .villain-help-content-buttons {
+        margin: 0 auto;
+        text-align: center;
+      }
+    }
+  }
+
   &.villain-block-config {
     padding: 2rem;
 

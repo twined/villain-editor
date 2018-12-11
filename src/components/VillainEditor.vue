@@ -213,7 +213,7 @@ export default {
     } else {
       // check if it needs to be parsed!
       if (typeof (this.json) === 'object') {
-        this.blocks = this.json
+        this.blocks = cloneDeep(this.json)
       } else {
         this.blocks = JSON.parse(this.json)
       }

@@ -90,7 +90,7 @@ export default {
 
   props: {
     json: {
-      type: String,
+      type: [String, Array],
       default: '[]'
     },
 
@@ -211,7 +211,13 @@ export default {
     if (!this.json || this.json === '') {
       this.blocks = []
     } else {
-      this.blocks = JSON.parse(this.json)
+      // check if it needs to be parsed!
+      if (typeof (this.json) === 'object') {
+        this.blocks = this.json
+      } else {
+        this.blocks = JSON.parse(this.json)
+      }
+
       this.blocks = this.addUIDs()
     }
   },

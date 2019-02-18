@@ -11,8 +11,8 @@
 <script>
 import VillainEditor from './components/VillainEditor'
 
-// import templates from './templates/'
-const templates = {}
+import templates from './templates/'
+// const templates = []
 
 export default {
   name: 'App',

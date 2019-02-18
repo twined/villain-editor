@@ -209,6 +209,7 @@ export default {
   },
 
   created () {
+    console.debug('==> VILLAIN EDITOR INITIALIZING')
     // convert data to blocks
     if (!this.json || this.json === '') {
       this.blocks = []

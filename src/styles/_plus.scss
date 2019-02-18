@@ -105,6 +105,19 @@
   }
 }
 
+.villain-editor-plus-inactive {
+  * {
+    pointer-events: none;
+  }
+
+  a {
+    pointer-events: auto;
+    * {
+      pointer-events: none;
+    }
+  }
+}
+
 .villain-editor-plus-inactive, .villain-editor-plus-active {
   a {
     display: inline-block;

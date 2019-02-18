@@ -6,11 +6,12 @@
       key="plus"
       :class="active ? 'villain-editor-plus-active' : 'villain-editor-plus-inactive'">
       <a
+        ref="plusLink"
         @click="clickPlus">
         <template v-if="draggingOver">
           Flytt blokken hit
         </template>
-        <template>
+        <template v-if="!draggingOver">
           <svg
             :class="active ? 'villain-svg-plus-open' : ''"
             class="villain-svg-plus"
@@ -79,7 +80,7 @@
             {{ tp.data.help_text }}
           </div>
         </div>
-        <div v-else>
+        <div class="mt-4" v-else>
           Ingen registrerte maler.
         </div>
       </VueSlideUpDown>
@@ -134,10 +135,10 @@ export default {
   },
 
   mounted () {
-    this.$refs.plus.addEventListener('dragenter', this.dragEnter)
-    this.$refs.plus.addEventListener('dragover', this.dragOver)
-    this.$refs.plus.addEventListener('dragleave', this.dragLeave)
-    this.$refs.plus.addEventListener('drop', this.onDrop)
+    this.$refs.plusLink.addEventListener('dragenter', this.dragEnter)
+    this.$refs.plusLink.addEventListener('dragover', this.dragOver)
+    this.$refs.plusLink.addEventListener('dragleave', this.dragLeave)
+    this.$refs.plusLink.addEventListener('drop', this.onDrop)
   },
 
   methods: {
@@ -149,17 +150,19 @@ export default {
       this.showingTemplates = !this.showingTemplates
       if (this.showingTemplates) {
         setTimeout(() => {
-          let elTop = this.$refs.templates.getBoundingClientRect().top
-          let docBot = document.body.scrollTop + window.innerHeight
-          let elHeight = this.$refs.templates.clientHeight
-          let elBot = elTop + elHeight
+          if (this.$refs.templates) {
+            let elTop = this.$refs.templates.getBoundingClientRect().top
+            let docBot = document.body.scrollTop + window.innerHeight
+            let elHeight = this.$refs.templates.clientHeight
+            let elBot = elTop + elHeight
 
-          if (elBot > docBot) {
-            let distance = elBot - docBot
-            window.scrollBy({
-              top: distance,
-              behavior: 'smooth'
-            })
+            if (elBot > docBot) {
+              let distance = elBot - docBot
+              window.scrollBy({
+                top: distance,
+                behavior: 'smooth'
+              })
+            }
           }
         }, 250)
       }

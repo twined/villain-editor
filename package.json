@@ -4,7 +4,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name villain-editor src/lib.js",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "watch": "vue-cli-service build --watch --no-clean --target lib --name villain-editor src/lib.js"
   },
   "main": "dist/villain-editor.common.js",
   "web": "dist/villain-editor.umd.js",

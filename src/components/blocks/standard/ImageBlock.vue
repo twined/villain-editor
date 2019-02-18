@@ -236,7 +236,8 @@ export default {
           alertError('Feil', 'Fant ingen bilder i biblioteket. Last opp et i stedet!')
         }
       } catch (e) {
-        console.log(e)
+        alertError('Feil', 'Klarte ikke koble til bildebiblioteket!')
+        console.error(e)
       }
     },
 

@@ -149,20 +149,22 @@ import { Drop } from 'vue-drag-drop'
 import { alertError } from '@/utils/alerts'
 
 export default {
-  name: 'image-block',
+  name: 'ImageBlock',
 
   components: {
     Block,
     Drop
   },
 
-  computed: {
-    browseURL () {
-      return this.vBrowseURL + this.vImageSeries
+  props: {
+    block: {
+      type: Object,
+      default: () => {}
     },
 
-    uploadURL () {
-      return `${this.vBaseURL}upload/${this.vImageSeries}`
+    parent: {
+      type: String,
+      default: null
     }
   },
 
@@ -180,24 +182,22 @@ export default {
     }
   },
 
+  computed: {
+    browseURL () {
+      return this.vBrowseURL + this.vImageSeries
+    },
+
+    uploadURL () {
+      return `${this.vBaseURL}upload/${this.vImageSeries}`
+    }
+  },
+
   inject: [
     'vBaseURL',
     'vBrowseURL',
     'vImageSeries',
     'vExtraHeaders'
   ],
-
-  props: {
-    block: {
-      type: Object,
-      default: () => {}
-    },
-
-    parent: {
-      type: String,
-      default: null
-    }
-  },
 
   created () {
     console.debug('<ImageBlock /> created')

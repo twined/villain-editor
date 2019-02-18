@@ -16,13 +16,22 @@
             class="villain-svg-plus"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 300 300">
-            <circle cx="150" cy="150" r="142.7" stroke="#FFF" stroke-miterlimit="10"/>
-            <path fill="#FFF" d="M224.3 133.3v31.3H166v58.3h-31.3v-58.3H76.4v-31.3h58.3V75H166v58.3h58.3z"/>
+            <circle
+              cx="150"
+              cy="150"
+              r="142.7"
+              stroke="#FFF"
+              stroke-miterlimit="10"/>
+            <path
+              fill="#FFF"
+              d="M224.3 133.3v31.3H166v58.3h-31.3v-58.3H76.4v-31.3h58.3V75H166v58.3h58.3z"/>
           </svg>
         </template>
       </a>
 
-      <VueSlideUpDown :active="active" :duration="350">
+      <VueSlideUpDown
+        :active="active"
+        :duration="350">
         <div class="villain-editor-plus-block-name">
           {{ hoveredBlock }}
         </div>
@@ -54,7 +63,9 @@
           </div>
         </div>
       </VueSlideUpDown>
-      <VueSlideUpDown :active="showingTemplates" :duration="350">
+      <VueSlideUpDown
+        :active="showingTemplates"
+        :duration="350">
         <div
           v-if="vAvailableTemplates.length"
           ref="templates"
@@ -85,7 +96,7 @@ function createUID () {
 }
 
 export default {
-  name: 'villain-plus',
+  name: 'VillainPlus',
 
   components: {
     VueSlideUpDown

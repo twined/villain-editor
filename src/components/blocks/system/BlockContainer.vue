@@ -28,12 +28,18 @@
 <script>
 
 export default {
-  name: 'block-container',
+  name: 'BlockContainer',
 
   props: {
     blocks: {
       type: Array,
       default: () => []
+    }
+  },
+
+  data () {
+    return {
+      uid: null
     }
   },
 
@@ -45,12 +51,6 @@ export default {
       set: function (blocks) {
         this.$emit('order', blocks)
       }
-    }
-  },
-
-  data () {
-    return {
-      uid: null
     }
   },
 

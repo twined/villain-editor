@@ -7,8 +7,8 @@
     @delete="$emit('delete', $event)">
     <textarea
       ref="txt"
-      class="villain-html-input"
-      v-model="block.data.text">
+      v-model="block.data.text"
+      class="villain-html-input">
     </textarea>
     <template slot="config">
       This is the config contents!
@@ -21,7 +21,7 @@ import autosize from 'autosize'
 import Block from '@/components/blocks/system/Block'
 
 export default {
-  name: 'html-block',
+  name: 'HtmlBlock',
 
   components: {
     Block

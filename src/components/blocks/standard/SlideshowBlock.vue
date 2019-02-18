@@ -6,19 +6,25 @@
     @add="$emit('add', $event)"
     @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
-    <div class="villain-block-slideshow" ref="block">
+    <div
+      ref="block"
+      class="villain-block-slideshow">
       <div class="villain-block-slideshow-images">
         <div
           v-for="(i, idx) in images"
           :key="idx"
           class="villain-block-slideshow-image">
-          <img :src="i" class="img-fluid">
+          <img
+            :src="i"
+            class="img-fluid">
         </div>
       </div>
     </div>
     <template slot="config">
       <div class="alert alert-warning">
-        Bildekaruseller hentes fra sidens bildebibliotek. Klikk <a href="/admin/bilder/kategori/2" target="_blank">her</a> og opprett nye bildeserier. Om du oppdaterer bildeserien må du gjennomføre en "tvungen oppdatering" av prosjektet. Dette finner du i prosjektoversikten som et menyvalg for hvert prosjekt.
+        Bildekaruseller hentes fra sidens bildebibliotek. Klikk <a
+          href="/admin/bilder/kategori/2"
+          target="_blank">her</a> og opprett nye bildeserier. Om du oppdaterer bildeserien må du gjennomføre en "tvungen oppdatering" av prosjektet. Dette finner du i prosjektoversikten som et menyvalg for hvert prosjekt.
       </div>
       <div
         v-if="series.length"
@@ -57,33 +63,11 @@ import Block from '@/components/blocks/system/Block'
 import { alertError } from '@/utils/alerts'
 
 export default {
-  name: 'slideshow-block',
+  name: 'SlideshowBlock',
 
   components: {
     Block
   },
-
-  computed: {
-    slideshowsURL () {
-      return this.vSlideshowsURL
-    }
-  },
-
-  data () {
-    return {
-      uid: null,
-      showConfig: false,
-      series: [],
-      images: [] // used for preview
-    }
-  },
-
-  inject: [
-    'vBaseURL',
-    'vSlideshowsURL',
-    'vImageSeries',
-    'vExtraHeaders'
-  ],
 
   props: {
     block: {
@@ -96,6 +80,28 @@ export default {
       default: null
     }
   },
+
+  data () {
+    return {
+      uid: null,
+      showConfig: false,
+      series: [],
+      images: [] // used for preview
+    }
+  },
+
+  computed: {
+    slideshowsURL () {
+      return this.vSlideshowsURL
+    }
+  },
+
+  inject: [
+    'vBaseURL',
+    'vSlideshowsURL',
+    'vImageSeries',
+    'vExtraHeaders'
+  ],
 
   created () {
     console.debug('<SlideshowBlock /> created')

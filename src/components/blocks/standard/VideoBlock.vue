@@ -11,8 +11,8 @@
     <div class="villain-block-video">
       <div
         v-if="html"
-        v-html="html"
         class="villain-block-video-content"
+        v-html="html"
       />
       <p
         v-else>
@@ -52,10 +52,22 @@ const VIMEO_REGEX = /(?:http[s]?:\/\/)?(?:www.)?vimeo.com\/(.+)/
 const YOUTUBE_REGEX = /(?:youtube(?:-nocookie)?\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})\W/
 
 export default {
-  name: 'image-block',
+  name: 'ImageBlock',
 
   components: {
     Block
+  },
+
+  props: {
+    block: {
+      type: Object,
+      default: () => {}
+    },
+
+    parent: {
+      type: String,
+      default: null
+    }
   },
 
   data () {
@@ -81,18 +93,6 @@ export default {
           ].join('\n')
         }
       }
-    }
-  },
-
-  props: {
-    block: {
-      type: Object,
-      default: () => {}
-    },
-
-    parent: {
-      type: String,
-      default: null
     }
   },
 

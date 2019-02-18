@@ -7,8 +7,8 @@
     @delete="$emit('delete', $event)">
     <textarea
       ref="txt"
-      class="villain-markdown-input"
-      v-model="block.data.text">
+      v-model="block.data.text"
+      class="villain-markdown-input">
     </textarea>
     <template slot="help">
       <p>
@@ -27,7 +27,7 @@ import autosize from 'autosize'
 import Block from '@/components/blocks/system/Block'
 
 export default {
-  name: 'markdown-block',
+  name: 'MarkdownBlock',
 
   components: {
     Block

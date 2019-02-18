@@ -42,7 +42,19 @@ Vue.component('component-proxy', {
 })
 
 export default {
-  name: 'template-block',
+  name: 'TemplateBlock',
+
+  props: {
+    block: {
+      type: Object,
+      default: () => {}
+    },
+
+    parent: {
+      type: String,
+      default: null
+    }
+  },
 
   data () {
     return {
@@ -57,18 +69,6 @@ export default {
       return `
         <div class="${this.block.data.class}">${str}</div>
       `
-    }
-  },
-
-  props: {
-    block: {
-      type: Object,
-      default: () => {}
-    },
-
-    parent: {
-      type: String,
-      default: null
     }
   },
 

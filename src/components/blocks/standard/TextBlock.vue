@@ -7,8 +7,8 @@
     @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
     <quill-editor
-      v-model="text"
       ref="quill"
+      v-model="text"
       :class="block.data.type"
       :options="quillOptions">
     </quill-editor>
@@ -36,9 +36,9 @@
       <div class="form-check">
         <input
           v-model="block.data.type"
+          :value="customClass"
           class="form-check-input"
-          type="radio"
-          :value="customClass">
+          type="radio">
         <label class="form-check-label">
           <div class="form-group">
             <input
@@ -60,11 +60,23 @@ import MarkdownIt from 'markdown-it'
 const md = new MarkdownIt({ html: true })
 
 export default {
-  name: 'text-block',
+  name: 'TextBlock',
 
   components: {
     Block,
     quillEditor
+  },
+
+  props: {
+    block: {
+      type: Object,
+      default: () => {}
+    },
+
+    parent: {
+      type: String,
+      default: null
+    }
   },
 
   data () {
@@ -93,18 +105,6 @@ export default {
         this.block.data.text = txt
         return this.block.data.text
       }
-    }
-  },
-
-  props: {
-    block: {
-      type: Object,
-      default: () => {}
-    },
-
-    parent: {
-      type: String,
-      default: null
     }
   },
 

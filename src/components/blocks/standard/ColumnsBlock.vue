@@ -28,15 +28,15 @@
               v-for="b in col.data"
               :key="b.uid"
               class="villain-block-container">
-                <component
-                  :is="b.type + 'Block'"
-                  :block="b"
-                  :parent="col.uid"
-                  :after="b.uid"
-                  @add="$emit('add', $event)"
-                  @move="$emit('move', $event)"
-                  @delete="$emit('delete', $event)"
-                />
+              <component
+                :is="b.type + 'Block'"
+                :block="b"
+                :parent="col.uid"
+                :after="b.uid"
+                @add="$emit('add', $event)"
+                @move="$emit('move', $event)"
+                @delete="$emit('delete', $event)"
+              />
             </div>
           </transition-group>
         </div>
@@ -89,19 +89,11 @@ import systemComponents from '../system'
 import standardComponents from '.'
 
 export default {
-  name: 'columns-block',
+  name: 'ColumnsBlock',
 
   components: {
     ...systemComponents,
     ...standardComponents
-  },
-
-  data () {
-    return {
-      columnCount: 2,
-      showConfig: false,
-      uid: null
-    }
   },
 
   props: {
@@ -113,6 +105,14 @@ export default {
     parent: {
       type: String,
       default: null
+    }
+  },
+
+  data () {
+    return {
+      columnCount: 2,
+      showConfig: false,
+      uid: null
     }
   },
 

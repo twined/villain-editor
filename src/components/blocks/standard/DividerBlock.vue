@@ -15,16 +15,10 @@
 import Block from '@/components/blocks/system/Block'
 
 export default {
-  name: 'divider-block',
+  name: 'DividerBlock',
 
   components: {
     Block
-  },
-
-  data () {
-    return {
-      uid: null
-    }
   },
 
   props: {
@@ -36,6 +30,12 @@ export default {
     parent: {
       type: String,
       default: null
+    }
+  },
+
+  data () {
+    return {
+      uid: null
     }
   },
 

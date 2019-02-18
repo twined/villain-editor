@@ -4,10 +4,10 @@
     class="villain-block-wrapper">
     <div
       v-show="!showConfig"
-      :class="hovering ? 'villain-hover' : ''"
       ref="content"
-      class="villain-block"
-      :data-type="block.type">
+      :class="hovering ? 'villain-hover' : ''"
+      :data-type="block.type"
+      class="villain-block">
       <slot></slot>
       <div class="villain-block-actions">
         <div
@@ -147,15 +147,6 @@
 
 <script>
 export default {
-  data () {
-    return {
-      showConfig: false,
-      showHelp: false,
-      dragEl: null,
-      hovering: false,
-      moving: false
-    }
-  },
 
   props: {
     block: {
@@ -181,6 +172,15 @@ export default {
     showOk: {
       type: Boolean,
       default: false
+    }
+  },
+  data () {
+    return {
+      showConfig: false,
+      showHelp: false,
+      dragEl: null,
+      hovering: false,
+      moving: false
     }
   },
 

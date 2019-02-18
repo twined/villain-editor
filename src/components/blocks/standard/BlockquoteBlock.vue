@@ -6,11 +6,11 @@
     @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
     <textarea
-      class="villain-blockquote-content"
-      v-model="block.data.text" />
+      v-model="block.data.text"
+      class="villain-blockquote-content" />
     <input
-      class="villain-blockquote-cite"
-      v-model="block.data.cite">
+      v-model="block.data.cite"
+      class="villain-blockquote-cite">
     <template slot="config">
       <div class="form-group">
         <label>CSS klasser</label>
@@ -27,17 +27,10 @@
 import Block from '../system/Block'
 
 export default {
-  name: 'blockquote-block',
+  name: 'BlockquoteBlock',
 
   components: {
     Block
-  },
-
-  data () {
-    return {
-      customClass: '',
-      uid: null
-    }
   },
 
   props: {
@@ -49,6 +42,13 @@ export default {
     parent: {
       type: String,
       default: null
+    }
+  },
+
+  data () {
+    return {
+      customClass: '',
+      uid: null
     }
   },
 

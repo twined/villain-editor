@@ -29,7 +29,9 @@
     <template
       v-if="showSource">
       <div class="villain-editor-source">
-        <textarea ref="tasource" v-model="src" />
+        <textarea
+          ref="tasource"
+          v-model="src" />
         <button
           class="btn btn-primary"
           @click="updateSource">
@@ -86,7 +88,7 @@ for (let key in toolsComponents) {
 }
 
 export default {
-  name: 'villain-editor',
+  name: 'VillainEditor',
 
   props: {
     json: {

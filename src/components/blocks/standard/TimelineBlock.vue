@@ -58,17 +58,10 @@
 import Block from '@/components/blocks/system/Block'
 
 export default {
-  name: 'header-block',
+  name: 'HeaderBlock',
 
   components: {
     Block
-  },
-
-  data () {
-    return {
-      customClass: '',
-      uid: null
-    }
   },
 
   props: {
@@ -80,6 +73,13 @@ export default {
     parent: {
       type: String,
       default: null
+    }
+  },
+
+  data () {
+    return {
+      customClass: '',
+      uid: null
     }
   },
 

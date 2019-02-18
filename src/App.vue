@@ -3,7 +3,7 @@
     <VillainEditor
       :json="json"
       :templates="templates"
-      :templateMode="false"
+      :template-mode="false"
     />
   </div>
 </template>
@@ -15,7 +15,7 @@ import VillainEditor from './components/VillainEditor'
 const templates = {}
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     VillainEditor
   },

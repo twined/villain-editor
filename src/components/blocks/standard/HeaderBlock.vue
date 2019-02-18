@@ -7,9 +7,9 @@
     @delete="$emit('delete', $event)">
     <textarea
       ref="txt"
-      class="villain-header-input"
       :style="'font-size: ' + fontSize + 'rem'"
-      v-model="block.data.text">
+      v-model="block.data.text"
+      class="villain-header-input">
     </textarea>
     <template slot="config">
       <div class="form-group">
@@ -92,17 +92,10 @@ import autosize from 'autosize'
 import Block from '@/components/blocks/system/Block'
 
 export default {
-  name: 'header-block',
+  name: 'HeaderBlock',
 
   components: {
     Block
-  },
-
-  data () {
-    return {
-      customClass: '',
-      uid: null
-    }
   },
 
   props: {
@@ -114,6 +107,13 @@ export default {
     parent: {
       type: String,
       default: null
+    }
+  },
+
+  data () {
+    return {
+      customClass: '',
+      uid: null
     }
   },
 

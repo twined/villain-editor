@@ -10,8 +10,8 @@
     <div class="villain-block-video">
       <div
         v-if="html"
-        v-html="html"
         class="villain-block-video-content"
+        v-html="html"
       />
       <p
         v-else>
@@ -47,10 +47,22 @@
 import Block from '@/components/blocks/system/Block'
 
 export default {
-  name: 'image-block',
+  name: 'ImageBlock',
 
   components: {
     Block
+  },
+
+  props: {
+    block: {
+      type: Object,
+      default: () => {}
+    },
+
+    parent: {
+      type: String,
+      default: null
+    }
   },
 
   data () {
@@ -72,18 +84,6 @@ export default {
                     allowfullscreen></iframe>`
         }
       }
-    }
-  },
-
-  props: {
-    block: {
-      type: Object,
-      default: () => {}
-    },
-
-    parent: {
-      type: String,
-      default: null
     }
   },
 

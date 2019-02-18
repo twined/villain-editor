@@ -28,7 +28,7 @@
 <script>
 
 export default {
-  name: 'block-container',
+  name: 'BlockContainer',
 
   props: {
     blocks: {

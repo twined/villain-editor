@@ -20,6 +20,10 @@
     z-index: 999999;
   }
 
+  .text-mono {
+    font-family: "SF Mono", "Menlo", "Monaco", "Inconsolata", "Fira Mono", "Droid Sans Mono", "Source Code Pro", monospace;
+  }
+
   .container {
     /** OVERRIDE THIS TO PREVENT TEMPLATES FROM SCREWING UP **/
     max-width: 100%;

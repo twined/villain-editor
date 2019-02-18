@@ -56,12 +56,57 @@
         </p>
       </div>
       <div
-        v-if="showImages"
+        v-if="showImages && listStyle"
+        class="villain-image-library mt-4">
+        <div
+          style="text-align: center;padding-bottom: 20px;"
+          @click="listStyle = false">
+          <i class="fa fa-fw fa-th" />
+        </div>
+        <table
+          class="table villain-image-table">
+          <tr
+            v-for="i in images"
+            :key="i.id"
+          >
+            <td class="fit">
+              <img
+                :src="i.thumb"
+                class="img-fluid"
+                @click="selectImage(i)"
+              />
+            </td>
+            <td>
+              <table class="table table-bordered">
+                <tr>
+                  <td>
+                    <span class="text-mono">{{ i.src.substring(i.src.lastIndexOf('/')+1) }}</span>
+                  </td>
+                  <td>
+                    <span class="text-mono text-align-right">
+                      {{ i.width }}x{{ i.height }}
+                    </span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div
+        v-else-if="showImages && !listStyle"
         class="villain-image-library row mt-4">
+        <div
+          class="col-12"
+          style="text-align: center;padding-bottom: 20px;"
+          @click="listStyle = true">
+          <i class="fa fa-fw fa-list" />
+        </div>
         <div
           v-for="i in images"
           :key="i.id"
-          class="col-4">
+          class="col-3 mb-3">
           <img
             :src="i.thumb"
             class="img-fluid"
@@ -69,9 +114,8 @@
           />
         </div>
       </div>
-      <div
-        v-else>
 
+      <div v-else>
         <div
           v-if="block.data.url"
           class="form-group">
@@ -133,9 +177,16 @@
         </div>
         <div class="villain-config-content-buttons">
           <button
+            v-if="!showImages"
             class="btn btn-primary"
             @click="getImages">
             Velg bilde fra bildebibliotek
+          </button>
+          <button
+            v-if="block.data.url !== ''"
+            class="btn btn-primary ml-3"
+            @click="resetImage">
+            Nullstill bildeblokk
           </button>
         </div>
       </div>
@@ -178,7 +229,8 @@ export default {
       images: [],
       originalUrl: '',
       dragOver: false,
-      uploading: false
+      uploading: false,
+      listStyle: false
     }
   },
 
@@ -208,6 +260,11 @@ export default {
   },
 
   methods: {
+    resetImage () {
+      console.log(this.block.data)
+      this.block.data = {}
+    },
+
     createUID () {
       return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
     },

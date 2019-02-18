@@ -276,7 +276,7 @@ export default {
       return obj
     },
 
-    addBlock ({block: blockTpl, after, parent}) {
+    addBlock ({ block: blockTpl, after, parent }) {
       let block
       // a standard component blueprint
       if (blockTpl.hasOwnProperty('component')) {
@@ -394,7 +394,7 @@ export default {
       }
     },
 
-    moveBlock ({block, after, parent}) {
+    moveBlock ({ block, after, parent }) {
       this.deleteBlock(block)
 
       if (!after && !parent) {

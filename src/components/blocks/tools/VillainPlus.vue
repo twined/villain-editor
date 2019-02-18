@@ -80,7 +80,10 @@
             {{ tp.data.help_text }}
           </div>
         </div>
-        <div class="mt-4" v-else>
+        <div
+          v-else
+          class="mt-4"
+        >
           Ingen registrerte maler.
         </div>
       </VueSlideUpDown>
@@ -196,16 +199,16 @@ export default {
     },
 
     addBlock (b) {
-      let block = {...b, uid: createUID()}
+      let block = { ...b, uid: createUID() }
       this.active = false
-      this.$emit('add', {block: block, after: this.after, parent: this.parent})
+      this.$emit('add', { block: block, after: this.after, parent: this.parent })
     },
 
     addTemplate (tp) {
-      let block = {...tp, uid: createUID()}
+      let block = { ...tp, uid: createUID() }
       this.active = false
       this.showingTemplates = false
-      this.$emit('add', {block: block, after: this.after, parent: this.parent})
+      this.$emit('add', { block: block, after: this.after, parent: this.parent })
     },
 
     onDrop (ev) {
@@ -217,7 +220,7 @@ export default {
       ev.currentTarget.classList.remove('villain-drag-over')
       this.draggingOver = false
 
-      this.$emit('move', {block, after: this.after, parent: this.parent})
+      this.$emit('move', { block, after: this.after, parent: this.parent })
     },
 
     dragEnter (ev) {

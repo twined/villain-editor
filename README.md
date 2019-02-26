@@ -25,7 +25,53 @@
 
 ## Blocks
 
+#### Datatable
+
+```
+{
+  "type": "datatable",
+  "data": [
+    {
+      "key": "Key 1",
+      "value": "Content 1"
+    },
+    {
+      "key": "Key 2",
+      "value": "Content 2"
+    },
+    {
+      "key": "Key 3",
+      "value": "Content 3"
+    }
+  ]
+}
+```
+
 #### Slideshow
+
+```
+
+{
+  "type": "slideshow",
+  "data": {
+    "images": [
+      {
+        "sizes": {
+          "large": "/media/images/site/posts/large/10aj2gtv8m6.jpg",
+          "medium": "/media/images/site/posts/medium/10aj2gtv8m6.jpg",
+          "micro": "/media/images/site/posts/micro/10aj2gtv8m6.jpg",
+          "small": "/media/images/site/posts/small/10aj2gtv8m6.jpg",
+          "thumb": "/media/images/site/posts/thumb/10aj2gtv8m6.jpg",
+          "xlarge": "/media/images/site/posts/xlarge/10aj2gtv8m6.jpg"
+        },
+        "credits": null,
+        "title": "Title of the image",
+        "url": "/media/images/site/posts/10aj2gtv8m6.jpg"
+      }
+    ]
+  }
+}
+```
 
 ## Build Setup
 

@@ -32,11 +32,13 @@
         <textarea
           ref="tasource"
           v-model="src" />
-        <button
-          class="btn btn-primary"
-          @click="updateSource">
-          Oppdatér
-        </button>
+        <div class="d-flex justify-content-center">
+          <button
+            class="btn btn-primary mt-4"
+            @click="updateSource">
+            Oppdatér
+          </button>
+        </div>
       </div>
     </template>
     <template
@@ -280,7 +282,7 @@ export default {
       let block
       // a standard component blueprint
       if (blockTpl.hasOwnProperty('component')) {
-        if (blockTpl.component === 'Columns' || blockTpl.component === 'Timeline') {
+        if (blockTpl.component === 'Columns' || blockTpl.component === 'Timeline' || blockTpl.component === 'Datatable') {
           block = {
             type: blockTpl.component.toLowerCase(),
             data: [ ...blockTpl.dataTemplate ],
@@ -404,6 +406,10 @@ export default {
             block,
             ...this.blocks
           ]
+        } else {
+          this.blocks = [
+            block
+          ]
         }
       }
 
@@ -471,7 +477,19 @@ export default {
       if (after) {
         let p = this.blocks.find(b => b.uid === after)
         if (!p) {
-          console.error('--- NO UID FOR "AFTER"-BLOCK')
+          if (this.blocks.length) {
+            console.error('--- NO UID FOR "AFTER"-BLOCK')
+            this.blocks = [
+              ...this.blocks,
+              block
+            ]
+            return
+          } else {
+            this.blocks = [
+              block
+            ]
+            return
+          }
         }
         let parentIdx = this.blocks.indexOf(p)
 

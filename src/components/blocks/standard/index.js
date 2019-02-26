@@ -1,5 +1,6 @@
 import BlockquoteBlock from '@/components/blocks/standard/BlockquoteBlock'
 import ColumnsBlock from '@/components/blocks/standard/ColumnsBlock'
+import DatatableBlock from '@/components/blocks/standard/DatatableBlock'
 import DividerBlock from '@/components/blocks/standard/DividerBlock'
 import HeaderBlock from '@/components/blocks/standard/HeaderBlock'
 import HtmlBlock from '@/components/blocks/standard/HtmlBlock'
@@ -14,14 +15,15 @@ import SlideshowBlock from '@/components/blocks/standard/SlideshowBlock'
 export default {
   BlockquoteBlock,
   ColumnsBlock,
+  DatatableBlock,
   DividerBlock,
   HeaderBlock,
   HtmlBlock,
   ImageBlock,
   MapBlock,
   MarkdownBlock,
+  SlideshowBlock,
   TextBlock,
-  VideoBlock,
   TimelineBlock,
-  SlideshowBlock
+  VideoBlock
 }

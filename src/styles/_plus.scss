@@ -84,20 +84,25 @@
   width: 30px;
   transition: transform 1s ease;
   transform: rotateZ(0deg);
+
   circle {
     transition: fill 750ms ease;
     fill: $villain-main-faded-color;
   }
+
   path {
     transition: fill 350ms ease;
     fill: #fff;
   }
+
   &.villain-svg-plus-open {
     transform: rotateZ(135deg);
+
     circle {
       transition: fill 750ms ease;
       fill: transparent;
     }
+
     path {
       transition: fill 350ms ease;
       fill: $villain-main-color;

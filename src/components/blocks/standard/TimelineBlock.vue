@@ -58,7 +58,7 @@
 import Block from '@/components/blocks/system/Block'
 
 export default {
-  name: 'HeaderBlock',
+  name: 'TimelineBlock',
 
   components: {
     Block

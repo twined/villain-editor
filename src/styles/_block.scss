@@ -33,9 +33,11 @@
 
   &.villain-dragging-block {
     background:#f6f7f9;
+
     & > * {
       opacity:0;
     }
+
     &.st-block-addition {
       opacity:1;
     }
@@ -61,6 +63,7 @@
       max-width: 600px;
       margin: 0 auto;
       padding: 2rem;
+      font-size: 95%;
 
       background-color: $villain-secondary-color;
 
@@ -78,12 +81,26 @@
       max-width: 600px;
       margin: 0 auto;
       padding: 2rem;
-
+      position: relative;
       background-color: $villain-secondary-color;
+
+      .villain-config-close-button {
+        position: absolute;
+        top: 21px;
+        right: 31px;
+        font-size: 25px;
+        opacity: 0.5;
+
+        &:hover {
+          opacity: 1;
+          cursor: pointer;
+        }
+      }
 
       .villain-config-content-buttons {
         margin: 0 auto;
         text-align: center;
+
       }
 
       label {
@@ -138,6 +155,12 @@
     }
   }
 
+  &[data-type=datatable], &[data-type=slideshow], &[data-type=image] {
+    display: flex;
+    align-items: center;
+    min-height: 150px;
+  }
+
   .villain-template-description {
     background-color: $villain-background-color;
     color: white;
@@ -178,12 +201,19 @@
 
 .villain-block-image {
   padding: 0;
+  width: 100%;
+
   img {
     min-width: 100%;
   }
 }
 
 .villain-image-library {
+  .villain-image-table-selected {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   table.villain-image-table {
     td {
       border: 0;
@@ -246,11 +276,123 @@
   }
 }
 
+.fade-move-enter-active,
+.fade-move-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-move-enter,
+.fade-move-leave-to {
+  opacity: 0;
+}
+
+.fade-move-move {
+  transition: transform 1s;
+}
+
 .villain-block-slideshow {
+  width: 100%;
+
+  .villain-block-slideshow-images-meta {
+    margin: 0 auto;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    max-width: 275px;
+
+    label {
+      text-align: center;
+      width: 100%;
+    }
+
+    input:focus {
+      border: 1px solid #ced4da;
+    }
+  }
+
   .villain-block-slideshow-images {
     display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+
     .villain-block-slideshow-image {
-      padding: 1rem;
+      position: relative;
+      padding: .5rem;
+      user-select: none;
+
+      .villain-block-slideshow-image-delete-overlay {
+        user-select: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: rgba(0,0,0,0.3);
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        cursor: no-drop;
+        display: none;
+      }
+
+      .villain-block-slideshow-image-overlay {
+        user-select: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        background-color: #000fe0cf;
+        position: absolute;
+        opacity: 1;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        i {
+          padding: 0 15px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.villain-block-datatable-table {
+  tr {
+    td {
+      border: 0;
+      padding: 5px;
+
+      &:first-of-type {
+        width: 35%;
+      }
+
+      input[type=input] {
+        font-size: 90%;
+      }
+    }
+  }
+}
+
+.villain-block-datatable {
+  margin: 0 auto;
+
+  .villain-block-datatable-item {
+    padding: 0 2rem;
+
+    &:hover {
+      cursor: move;
+    }
+
+    .villain-block-datatable-item-key {
+      font-weight: bold;
+      padding-right: 2rem;
+      text-align: right;
+    }
+    .villain-block-datatable-item-value {
+      padding-left: 2rem;
     }
   }
 }

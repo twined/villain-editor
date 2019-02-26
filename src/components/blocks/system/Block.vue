@@ -83,7 +83,13 @@
       ref="config"
       class="villain-block villain-block-config">
       <div class="villain-block-config-content">
-        <h5>Blokkoppsett &rarr;</h5>
+        <div class="villain-config-close-button">
+          <i
+            class="fa fa-times"
+            @click="showConfig = false" />
+        </div>
+
+        <h5>Konfigurasjon &mdash; {{ getBlockDisplayName(block.type) }}</h5>
 
         <div
           v-if="icon"
@@ -94,14 +100,6 @@
         </div>
 
         <slot name="config" />
-
-        <div class="villain-config-content-buttons">
-          <button
-            class="btn btn-primary mt-3"
-            @click="showConfig = false">
-            Lukk
-          </button>
-        </div>
 
         <div class="villain-block-actions">
           <div class="villain-block-action villain-move">
@@ -221,8 +219,8 @@ export default {
   mounted () {
     this.$refs.content.addEventListener('mouseover', this.onMouseOver)
     this.$refs.content.addEventListener('mouseleave', this.onMouseLeave)
-    this.$refs.content.addEventListener('dragstart', this.onDragStart)
-    this.$refs.content.addEventListener('dragend', this.onDragEnd)
+    this.$refs.handle.addEventListener('dragstart', this.onDragStart)
+    this.$refs.handle.addEventListener('dragend', this.onDragEnd)
     this.$refs.handle.addEventListener('mousedown', this.onMouseDown)
 
     setTimeout(() => {
@@ -268,6 +266,7 @@ export default {
       ev.stopPropagation()
 
       let data = this.block
+      console.log('data', data)
       let block = this.$refs.content
       let handle = this.$refs.handle
       let hCR = handle.getBoundingClientRect()
@@ -293,14 +292,14 @@ export default {
       if (this.$refs.content) {
         // might be removed when recreated in another column
         this.$refs.content.classList.remove('villain-dragging-block')
-        this.$refs.content.setAttribute('draggable', 'false')
+        this.$refs.handle.setAttribute('draggable', 'false')
       }
 
       this.dragEl.parentNode.removeChild(this.dragEl)
     },
 
     onMouseDown (ev) {
-      this.$refs.content.setAttribute('draggable', 'true')
+      this.$refs.handle.setAttribute('draggable', 'true')
     },
 
     onMouseOver (ev) {

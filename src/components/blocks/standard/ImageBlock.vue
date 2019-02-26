@@ -11,10 +11,13 @@
         v-if="block.data.url"
         :src="block.data.url"
         class="img-fluid">
-      <p
-        v-else>
-        Inget gyldig bilde
-      </p>
+      <div
+        v-else
+        class="d-flex justify-content-center">
+        <div class="d-inline-block">
+          Inget bilde
+        </div>
+      </div>
     </div>
     <template slot="config">
       <div
@@ -261,7 +264,6 @@ export default {
 
   methods: {
     resetImage () {
-      console.log(this.block.data)
       this.block.data = {}
     },
 
@@ -285,7 +287,7 @@ export default {
       try {
         let response = await fetch(request)
         let data = await response.json()
-        // data.images
+
         if (data.images.length) {
           this.images = data.images
           this.showImages = true

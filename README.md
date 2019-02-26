@@ -22,21 +22,10 @@
 
 ### Templates
 
-Templates burde være array av vanlige blocks.
-Man burde kunne LÅSE blocks, slik at de ikke kan slettes.
 
-Er da template block som en "container"-block? Altså som en 1 kolonnes blokk?
+## Blocks
 
-```
-{
-  type: 'template',
-  data: {
-    name: 'Bilde+Tekst',
-    class: 'p-img-text',
-    blocks:
-  }
-}
-```
+#### Slideshow
 
 ## Build Setup
 

@@ -47,8 +47,15 @@ export default [
     icon: 'fa-images',
     component: 'Slideshow',
     dataTemplate: {
-      imageseries: null
+      images: []
     }
+  },
+
+  {
+    name: 'Datatabell',
+    icon: 'fa-table',
+    component: 'Datatable',
+    dataTemplate: []
   },
 
   {

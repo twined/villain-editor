@@ -45,11 +45,6 @@ export default {
     }
   },
 
-  data () {
-    return {
-    }
-  },
-
   created () {
     console.debug('<MarkdownBlock /> created')
   },
@@ -59,7 +54,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-
-</style>

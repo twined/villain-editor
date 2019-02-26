@@ -9,64 +9,201 @@
     <div
       ref="block"
       class="villain-block-slideshow">
-      <div class="villain-block-slideshow-images">
+      <transition-group
+        v-sortable="{handle: '.villain-block-slideshow-image', animation: 500, store: {get: getOrder, set: storeOrder}}"
+        v-if="block.data.images.length"
+        name="fade-move"
+        tag="div"
+        class="villain-block-slideshow-images">
         <div
-          v-for="(i, idx) in images"
-          :key="idx"
-          class="villain-block-slideshow-image">
+          v-for="i in block.data.images"
+          :key="i.url"
+          :data-id="i.url"
+          class="villain-block-slideshow-image"
+          @mouseover="imgHover"
+          @mouseout="imgLeave"
+          @click="toggleImage(i)">
+          <div
+            v-if="toggledImageUrl === i.url"
+            class="villain-block-slideshow-image-overlay">
+            <i
+              class="fa fa-info-circle"
+              @click.prevent.stop="edit(i)"
+            />
+            <i
+              class="fa fa-trash"
+              @click="del(i)"
+            />
+          </div>
           <img
-            :src="i"
+            :src="i.sizes.thumb"
             class="img-fluid">
         </div>
-      </div>
-    </div>
-    <template slot="config">
-      <div class="alert alert-warning">
-        Bildekaruseller hentes fra sidens bildebibliotek. Klikk <a
-          href="/admin/bilder/kategori/2"
-          target="_blank">her</a> og opprett nye bildeserier. Om du oppdaterer bildeserien må du gjennomføre en "tvungen oppdatering" av prosjektet. Dette finner du i prosjektoversikten som et menyvalg for hvert prosjekt.
+      </transition-group>
+      <div
+        v-else
+        class="d-flex justify-content-center">
+        <div class="d-inline-block">
+          Ingen bilder i karusellen
+        </div>
       </div>
       <div
-        v-if="series.length"
-        class="form-group">
-        <label>Bildeserie</label>
-        <select
-          v-model="block.data.imageseries"
+        v-if="editImage"
+        key="editImageKey"
+        class="villain-block-slideshow-images-meta">
+        <label>Tittel/bildetekst</label>
+        <input
+          v-model="editImage.title"
           class="form-control"
-          @change="getImageSerie"
-        >
-          <option
-            :value="null">
-            Velg bildeserie
-          </option>
-          <option
-            v-for="(s, idx) in series"
-            :key="idx"
-            :value="s">
-            {{ s }}
-          </option>
-        </select>
+          type="input">
+        <div class="d-flex justify-content-center mt-3">
+          <button
+            class="btn btn-primary"
+            @click="editImage = null; toggledImageUrl = null">
+            Lukk
+          </button>
+        </div>
+
       </div>
+    </div>
+
+    <template slot="config">
+      <div
+        v-if="showUpload">
+        <div
+          class="display-icon">
+          <drop
+            class="drop"
+            @dragover="dragOver = true"
+            @dragleave="dragOver = false"
+            @drop="handleDrop">
+            <i
+              v-if="dragOver"
+              class="fa fa-fw fa-cloud-upload-alt"></i>
+            <template
+              v-else>
+              <i
+                v-if="uploading"
+                class="fa fa-fw fa-circle-notch fa-spin"></i>
+              <i
+                v-else
+                class="fa fa-fw fa-image"></i>
+            </template>
+          </drop>
+        </div>
+        <p class="text-center">
+          <template
+            v-if="dragOver">
+            Slipp for å laste opp!
+          </template>
+          <template v-else>
+            <template v-if="uploading">
+              Laster opp ...
+            </template>
+            <template v-else>
+              Dra bildene du vil laste opp hit &uarr;
+            </template>
+          </template>
+        </p>
+      </div>
+      <div
+        v-if="showImages && listStyle"
+        class="villain-image-library mt-4">
+        <div
+          style="text-align: center;padding-bottom: 20px;"
+          @click="listStyle = false">
+          <i class="fa fa-fw fa-th" />
+        </div>
+        <table
+          class="table villain-image-table">
+          <tr
+            v-for="i in images"
+            :key="i.id">
+            <td class="fit">
+              <img
+                :src="i.thumb"
+                :class="alreadySelected(i) ? 'villain-image-table-selected' : ''"
+                class="img-fluid"
+                @click="selectImage(i)"
+              />
+            </td>
+            <td>
+              <table class="table table-bordered">
+                <tr>
+                  <td>
+                    <span class="text-mono">{{ i.src.substring(i.src.lastIndexOf('/')+1) }}</span>
+                  </td>
+                  <td>
+                    <span class="text-mono text-align-right">
+                      {{ i.width }}x{{ i.height }}
+                    </span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div
+        v-else-if="showImages && !listStyle"
+        class="villain-image-library row mt-4 justify-content-center">
+        <div
+          class="col-12"
+          style="text-align: center;padding-bottom: 20px;"
+          @click="listStyle = true">
+          <i class="fa fa-fw fa-list" />
+        </div>
+        <div class="col-12 d-flex justify-content-center mb-4">
+          <button
+            class="btn btn-primary mx-auto"
+            @click="showUpload = true; showImages = false">
+            Last opp bilder
+          </button>
+        </div>
+        <div
+          v-for="i in images"
+          :key="i.id"
+          class="col-3 mb-3">
+          <img
+            :src="i.thumb"
+            :class="alreadySelected(i) ? 'villain-image-table-selected' : ''"
+            class="img-fluid"
+            @click="selectImage(i)"
+          />
+        </div>
+      </div>
+
       <div class="villain-config-content-buttons">
         <button
+          v-if="!showImages"
           class="btn btn-primary"
-          @click="getImageSeries">
-          Hent tilgjengelige bildekaruseller fra server
+          @click="showImages = true; showUpload = false">
+          Velg bilder fra bildebibliotek
         </button>
       </div>
+    </template>
+    <template slot="help">
+      <p>
+        For å slette et bilde i bildekarusellen, klikker du på bildet, deretter klikker du på søplekasse-ikonet (<i class="fa fa-trash" />)<br><br>
+        For å gi bildene bildetekst, klikker du på bildet og deretter på info-ikonet (<i class="fa fa-info-circle" />)<br><br>
+        For å sortere bildene kan du dra og slippe de i ønsket rekkefølge
+      </p>
     </template>
   </Block>
 </template>
 
 <script>
 import Block from '@/components/blocks/system/Block'
+import { Drop } from 'vue-drag-drop'
 import { alertError } from '@/utils/alerts'
 
 export default {
   name: 'SlideshowBlock',
 
   components: {
-    Block
+    Block,
+    Drop
   },
 
   props: {
@@ -85,20 +222,30 @@ export default {
     return {
       uid: null,
       showConfig: false,
-      series: [],
-      images: [] // used for preview
+      showImages: true,
+      showUpload: false,
+      dragOver: false,
+      uploading: false,
+      images: [],
+      listStyle: false,
+      toggledImageUrl: null,
+      editImage: null
     }
   },
 
   computed: {
-    slideshowsURL () {
-      return this.vSlideshowsURL
+    browseURL () {
+      return this.vBrowseURL + this.vImageSeries
+    },
+
+    uploadURL () {
+      return `${this.vBaseURL}upload/${this.vImageSeries}`
     }
   },
 
   inject: [
     'vBaseURL',
-    'vSlideshowsURL',
+    'vBrowseURL',
     'vImageSeries',
     'vExtraHeaders'
   ],
@@ -106,48 +253,78 @@ export default {
   created () {
     console.debug('<SlideshowBlock /> created')
 
-    if (!this.block.data.imageseries) {
+    this.getImages()
+
+    if (!this.block.data.images.length) {
       this.showConfig = true
+      this.showImages = false
+      this.showUpload = true
     } else {
-      // grab images
-      this.getImageSerie()
+
     }
   },
 
   methods: {
+    edit (img) {
+      this.editImage = img
+    },
+
+    toggleImage (img) {
+      if (this.toggledImageUrl === img.url) {
+        this.toggledImageUrl = null
+        return
+      }
+      this.toggledImageUrl = img.url
+    },
+
+    del (img) {
+      let i = this.block.data.images.find(i => i.url === img.url)
+      if (i) {
+        let idx = this.block.data.images.indexOf(i)
+        this.block.data.images = [
+          ...this.block.data.images.slice(0, idx),
+          ...this.block.data.images.slice(idx + 1)
+        ]
+      }
+    },
+
+    alreadySelected (img) {
+      if (this.block.data.images.find(i => i.url === img.src)) {
+        return true
+      }
+      return false
+    },
+
     createUID () {
       return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
     },
 
-    async getImageSeries () {
-      let request
-      let headers = new Headers()
-      headers.append('accept', 'application/json, text/javascript, */*; q=0.01')
-
-      if (this.vExtraHeaders) {
-        for (let key of Object.keys(this.vExtraHeaders)) {
-          headers.append(key, this.vExtraHeaders[key])
-        }
-      }
-
-      request = new Request(this.slideshowsURL, { headers })
-
-      try {
-        let response = await fetch(request)
-        let data = await response.json()
-
-        if (data.series.length) {
-          this.series = data.series
-        } else {
-          alertError('Feil', 'Fant ingen slideshows. Gå til bildeadministrasjonen og last opp!')
-        }
-      } catch (e) {
-        alertError('Feil', 'Kunne ikke koble opp til bildeserver')
-        console.log(e)
-      }
+    getOrder (sortable) {
+      return this.block.data.images
     },
 
-    async getImageSerie () {
+    storeOrder (sortable) {
+      this.sortedArray = sortable.toArray()
+      let newImages = []
+      this.sortedArray.forEach(x => {
+        let i = this.block.data.images.find(i => i.url === x)
+        newImages = [
+          ...newImages,
+          i
+        ]
+      })
+      this.block.data.images = newImages
+    },
+
+    imgHover (e) {
+      e.currentTarget.classList.add('hover')
+    },
+
+    imgLeave (e) {
+      e.currentTarget.classList.remove('hover')
+    },
+
+    async getImages () {
       let request
       let headers = new Headers()
       headers.append('accept', 'application/json, text/javascript, */*; q=0.01')
@@ -158,7 +335,7 @@ export default {
         }
       }
 
-      request = new Request(this.slideshowsURL + this.block.data.imageseries, { headers })
+      request = new Request(this.browseURL, { headers })
 
       try {
         let response = await fetch(request)
@@ -166,25 +343,93 @@ export default {
 
         if (data.images.length) {
           this.images = data.images
-          this.showConfig = false
         } else {
-          alertError('Feil', 'Ingen bilder i bildekarusellen!')
+          this.images = []
         }
       } catch (e) {
-        alertError('Feil', 'Kunne ikke koble opp til bildeserver')
-        console.log(e)
+        alertError('Feil', 'Klarte ikke koble til bildebiblioteket!')
+        console.error(e)
+      }
+    },
+
+    async handleDrop (data, event) {
+      event.preventDefault()
+      const files = event.dataTransfer.files
+
+      if (files) {
+        for (let i = 0; i < files.length; i++) {
+          try {
+            await this.upload(files.item(i))
+          } catch (e) {
+            alertError('Feil', 'Feil ved opplasting :(')
+            break
+          }
+        }
+      }
+
+      this.showImages = false
+      this.uploading = false
+      this.showConfig = false
+    },
+
+    async upload (f) {
+      let request
+      let headers = new Headers()
+      headers.append('accept', 'application/json, text/javascript, */*; q=0.01')
+
+      if (this.vExtraHeaders) {
+        for (let key of Object.keys(this.vExtraHeaders)) {
+          headers.append(key, this.vExtraHeaders[key])
+        }
+      }
+
+      const formData = new FormData()
+      formData.append('image', f)
+      formData.append('name', f.name)
+      formData.append('uid', this.createUID())
+
+      request = new Request(this.uploadURL, { headers, method: 'post', body: formData })
+
+      try {
+        this.dragOver = false
+        this.uploading = true
+        let response = await fetch(request)
+        let data = await response.json()
+
+        if (data.status === 200) {
+          this.block.data.images = [
+            ...this.block.data.images,
+            {
+              sizes: data.image.sizes,
+              credits: '',
+              title: '',
+              url: data.image.src
+            }
+          ]
+        } else {
+          this.uploading = false
+          throw new Error('Feil ved opplasting')
+        }
+      } catch (e) {
+        this.uploading = false
+        throw (e)
       }
     },
 
     selectImage (img) {
-      this.showImages = false
-      this.$set(this.block.data, 'sizes', img.sizes)
-      this.$set(this.block.data, 'credits', img.credits)
-      this.$set(this.block.data, 'title', img.title)
-      this.$set(this.block.data, 'url', img.src)
-      this.originalUrl = img.src
+      if (this.alreadySelected(img)) {
+        return
+      }
 
-      this.showConfig = false
+      this.$set(this.block.data, 'images', [
+        ...this.block.data.images,
+        {
+          sizes: img.sizes,
+          credits: img.credits,
+          title: img.title,
+          url: img.src
+        }
+      ])
     }
   }
 }

@@ -351,11 +351,11 @@ export default {
         if (data.status === 200) {
           this.showImages = false
           this.uploading = false
-          this.$set(this.block.data, 'sizes', data.img.sizes)
-          this.$set(this.block.data, 'credits', data.img.credits)
-          this.$set(this.block.data, 'title', data.img.title)
-          this.$set(this.block.data, 'url', data.img.src)
-          this.originalUrl = data.img.src
+          this.$set(this.block.data, 'sizes', data.image.sizes)
+          this.$set(this.block.data, 'credits', data.image.credits)
+          this.$set(this.block.data, 'title', data.image.title)
+          this.$set(this.block.data, 'url', data.image.src)
+          this.originalUrl = data.image.src
 
           this.showConfig = false
         } else {

@@ -130,6 +130,6 @@ export default {
       return delta
     })
   }
-
 }
+
 </script>

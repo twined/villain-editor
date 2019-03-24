@@ -360,12 +360,12 @@ export default {
           this.showConfig = false
         } else {
           this.uploading = false
-          alertError('Feil', 'Feil ved opplasting :(', data.status)
+          alertError('Feil', `Feil ved opplasting :(\n\n${data.status}'`)
         }
       } catch (e) {
         this.uploading = false
         console.log(' ==> caught error', e)
-        alertError('Feil', 'Feil ved opplasting :(', e)
+        alertError('Feil', `Feil ved opplasting :(\n\n${e}`)
       }
     }
   }

@@ -109,7 +109,7 @@ export default {
   },
 
   created () {
-    console.debug('<TextBlock /> created --', this.block.uid)
+    console.debug('<TextBlock /> created')
     this.text = md.render(this.block.data.text)
     this.customClass = this.block.data.type
   },

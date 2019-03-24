@@ -408,7 +408,7 @@ export default {
           ]
         } else {
           this.uploading = false
-          throw new Error('Feil ved opplasting')
+          alertError('Feil', `Feil ved opplasting :(\n\n${data.error}'`)
         }
       } catch (e) {
         this.uploading = false

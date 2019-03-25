@@ -306,6 +306,8 @@ export default {
       this.$set(this.block.data, 'credits', img.credits)
       this.$set(this.block.data, 'title', img.title)
       this.$set(this.block.data, 'url', img.src)
+      this.$set(this.block.data, 'width', img.width || 0)
+      this.$set(this.block.data, 'height', img.height || 0)
       this.originalUrl = img.src
 
       this.showConfig = false
@@ -351,10 +353,14 @@ export default {
         if (data.status === 200) {
           this.showImages = false
           this.uploading = false
+
           this.$set(this.block.data, 'sizes', data.image.sizes)
           this.$set(this.block.data, 'credits', data.image.credits)
           this.$set(this.block.data, 'title', data.image.title)
           this.$set(this.block.data, 'url', data.image.src)
+          this.$set(this.block.data, 'width', data.image.width || 0)
+          this.$set(this.block.data, 'height', data.image.height || 0)
+
           this.originalUrl = data.image.src
 
           this.showConfig = false

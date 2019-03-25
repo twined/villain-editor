@@ -403,7 +403,9 @@ export default {
               sizes: data.image.sizes,
               credits: '',
               title: '',
-              url: data.image.src
+              url: data.image.src,
+              width: data.image.width,
+              height: data.image.height
             }
           ]
         } else {
@@ -427,7 +429,9 @@ export default {
           sizes: img.sizes,
           credits: img.credits,
           title: img.title,
-          url: img.src
+          url: img.src,
+          width: img.width,
+          height: img.height
         }
       ])
     }

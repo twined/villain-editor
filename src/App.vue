@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <VillainEditor
-      :json="json"
-      :templates="templates"
-      :template-mode="false"
+      :builder-mode="true"
     />
   </div>
 </template>
@@ -11,7 +9,6 @@
 <script>
 import VillainEditor from './components/VillainEditor'
 
-// import templates from './templates/'
 const templates = []
 
 export default {

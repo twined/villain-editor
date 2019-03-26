@@ -1,5 +1,11 @@
 <template>
   <div
+    v-if="builderMode"
+    class="villain-builder">
+    <VillainBuilder />
+  </div>
+  <div
+    v-else
     :class="fullscreen ? 'villain-fullscreen': ''"
     class="villain-editor">
     <div class="villain-editor-toolbar">
@@ -66,6 +72,7 @@
 import Vue from 'vue'
 import autosize from 'autosize'
 import cloneDeep from 'lodash/cloneDeep'
+import VillainBuilder from '@/components/VillainBuilder'
 import standardComponents from '@/components/blocks/standard'
 import systemComponents from '@/components/blocks/system'
 import toolsComponents from '@/components/blocks/tools'
@@ -92,7 +99,16 @@ for (let key in toolsComponents) {
 export default {
   name: 'VillainEditor',
 
+  components: {
+    VillainBuilder
+  },
+
   props: {
+    builderMode: {
+      type: Boolean,
+      default: false
+    },
+
     json: {
       type: [String, Array],
       default: '[]'

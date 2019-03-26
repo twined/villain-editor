@@ -12,24 +12,25 @@
   "style": "dist/villain-editor.css",
   "dependencies": {
     "autosize": "^4.0.2",
+    "codeflask": "^1.4.0",
     "lodash.clonedeep": "^4.5.0",
     "markdown-it": "^8.4.2",
-    "sortablejs": "^1.8.3",
+    "sortablejs": "^1.8.4",
     "vex-dialog": "^1.1.0",
     "vex-js": "^4.1.0",
-    "vue": "^2.6.6",
+    "vue": "^2.6.10",
     "vue-drag-drop": "^1.1.4",
     "vue-quill-editor": "^3.0.6",
-    "vue-slide-up-down": "^1.6.0"
+    "vue-slide-up-down": "^1.7.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.4.0",
-    "@vue/cli-plugin-eslint": "^3.4.0",
-    "@vue/cli-service": "^3.4.0",
+    "@vue/cli-plugin-babel": "^3.5.1",
+    "@vue/cli-plugin-eslint": "^3.5.1",
+    "@vue/cli-service": "^3.5.1",
     "@vue/eslint-config-standard": "^4.0.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.6.6"
+    "vue-template-compiler": "^2.6.10"
   },
   "browserslist": [
     "> 1%",

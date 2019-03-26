@@ -11,6 +11,7 @@ $villain-available-block-hover-color: lighten($villain-main-color, 50%) !default
 @import 'editor';
 @import 'block';
 @import 'plus';
+@import 'builder';
 
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.snow.css';

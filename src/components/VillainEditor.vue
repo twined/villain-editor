@@ -169,7 +169,8 @@ export default {
     return {
       blocks: [],
       showSource: false,
-      fullscreen: false
+      fullscreen: false,
+      availableTemplates: []
     }
   },
 
@@ -198,15 +199,6 @@ export default {
       }
 
       return availableBlocks
-    },
-
-    async availableTemplates () {
-      if (this.templateMode) {
-        let templates = await this.fetchTemplates(this.templates)
-        return templates
-      } else {
-        return this.templates
-      }
     }
   },
 
@@ -237,8 +229,11 @@ export default {
     }
   },
 
-  created () {
+  async created () {
     console.debug('==> VILLAIN EDITOR INITIALIZING')
+    if (this.templateMode) {
+      this.availableTemplates = await this.fetchTemplates(this.templates)
+    }
     // convert data to blocks
     if (!this.json || this.json === '') {
       this.blocks = []

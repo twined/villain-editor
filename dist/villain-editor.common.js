@@ -31453,12 +31453,12 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./src/styles/lib.scss
 var lib = __webpack_require__("7b11");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=08caeb3a&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=39fc8540&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.builderMode)?_c('div',{staticClass:"villain-builder"},[_c('VillainBuilder')],1):_c('div',{staticClass:"villain-editor",class:_vm.fullscreen ? 'villain-fullscreen': ''},[_c('div',{staticClass:"villain-editor-toolbar"},[_vm._m(0),_c('div',{staticClass:"villain-editor-controls float-right"},[_c('div',{on:{"click":function($event){return _vm.toggleSource()}}},[(_vm.showSource)?[_c('i',{staticClass:"fa fa-fw fa-times"})]:[_c('i',{staticClass:"fa fa-fw fa-code"})]],2),_c('div',{on:{"click":function($event){return _vm.toggleFullscreen()}}},[(_vm.fullscreen)?[_c('i',{staticClass:"fa fa-fw fa-times"})]:[_c('i',{staticClass:"fa fa-fw fa-expand-arrows-alt"})]],2)])]),(_vm.showSource)?[_c('div',{staticClass:"villain-editor-source"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.src),expression:"src"}],ref:"tasource",domProps:{"value":(_vm.src)},on:{"input":function($event){if($event.target.composing){ return; }_vm.src=$event.target.value}}}),_c('div',{staticClass:"d-flex justify-content-center"},[_c('button',{staticClass:"btn btn-primary mt-4",on:{"click":_vm.updateSource}},[_vm._v("\n          Oppdatér\n        ")])])])]:[(_vm.blocks && _vm.blocks.length)?_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){return _vm.addBlock($event)},"move":function($event){return _vm.moveBlock($event)},"delete":_vm.deleteBlock,"order":_vm.orderBlocks}}):_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){return _vm.addBlock($event)},"move":function($event){return _vm.moveBlock($event)},"delete":_vm.deleteBlock}})]],2)}
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-editor-instructions"},[_c('i',{staticClass:"fa mr-2 fa-info-circle"}),_vm._v("\n      Trykk på \"+\" under for å legge til en innholdsblokk\n    ")])}]
 
 
-// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=08caeb3a&
+// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=39fc8540&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/get-iterator.js
 var get_iterator = __webpack_require__("5d73");
@@ -35558,7 +35558,8 @@ for (var _key2 in tools) {
     return {
       blocks: [],
       showSource: false,
-      fullscreen: false
+      fullscreen: false,
+      availableTemplates: []
     };
   },
   computed: {
@@ -35592,45 +35593,7 @@ for (var _key2 in tools) {
       }
 
       return availableBlocks;
-    },
-    availableTemplates: function () {
-      var _availableTemplates = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee() {
-        var templates;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!this.templateMode) {
-                  _context.next = 7;
-                  break;
-                }
-
-                _context.next = 3;
-                return this.fetchTemplates(this.templates);
-
-              case 3:
-                templates = _context.sent;
-                return _context.abrupt("return", templates);
-
-              case 7:
-                return _context.abrupt("return", this.templates);
-
-              case 8:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function availableTemplates() {
-        return _availableTemplates.apply(this, arguments);
-      }
-
-      return availableTemplates;
-    }()
+    }
   },
   provide: function provide() {
     return {
@@ -35663,22 +35626,56 @@ for (var _key2 in tools) {
       deep: true
     }
   },
-  created: function created() {
-    console.debug('==> VILLAIN EDITOR INITIALIZING'); // convert data to blocks
+  created: function () {
+    var _created = _asyncToGenerator(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee() {
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              console.debug('==> VILLAIN EDITOR INITIALIZING');
 
-    if (!this.json || this.json === '') {
-      this.blocks = [];
-    } else {
-      // check if it needs to be parsed!
-      if (typeof_typeof(this.json) === 'object') {
-        this.blocks = cloneDeep_default()(this.json);
-      } else {
-        this.blocks = JSON.parse(this.json);
-      }
+              if (!this.templateMode) {
+                _context.next = 5;
+                break;
+              }
 
-      this.blocks = this.addUIDs();
+              _context.next = 4;
+              return this.fetchTemplates(this.templates);
+
+            case 4:
+              this.availableTemplates = _context.sent;
+
+            case 5:
+              // convert data to blocks
+              if (!this.json || this.json === '') {
+                this.blocks = [];
+              } else {
+                // check if it needs to be parsed!
+                if (typeof_typeof(this.json) === 'object') {
+                  this.blocks = cloneDeep_default()(this.json);
+                } else {
+                  this.blocks = JSON.parse(this.json);
+                }
+
+                this.blocks = this.addUIDs();
+              }
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, this);
+    }));
+
+    function created() {
+      return _created.apply(this, arguments);
     }
-  },
+
+    return created;
+  }(),
   methods: {
     fetchTemplates: function () {
       var _fetchTemplates = _asyncToGenerator(

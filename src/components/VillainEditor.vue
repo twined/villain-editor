@@ -119,12 +119,6 @@ export default {
       default: false
     },
 
-    // if this is filled, we get templates from the DB
-    templateNamespace: {
-      type: String,
-      default: null
-    },
-
     baseURL: {
       type: String,
       default: '/admin/api/villain/'
@@ -166,8 +160,8 @@ export default {
     },
 
     templates: {
-      type: Array,
-      default: () => []
+      type: String,
+      default: 'all'
     }
   },
 
@@ -207,8 +201,8 @@ export default {
     },
 
     async availableTemplates () {
-      if (this.templateNamespace) {
-        let templates = await this.fetchTemplates(this.templateNamespace)
+      if (this.templateMode) {
+        let templates = await this.fetchTemplates(this.templates)
         return templates
       } else {
         return this.templates

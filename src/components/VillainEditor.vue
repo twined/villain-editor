@@ -255,9 +255,9 @@ export default {
       let headers = new Headers()
       headers.append('accept', 'application/json, text/javascript, */*; q=0.01')
 
-      if (this.vExtraHeaders) {
-        for (let key of Object.keys(this.vExtraHeaders)) {
-          headers.append(key, this.vExtraHeaders[key])
+      if (this.extraHeaders) {
+        for (let key of Object.keys(this.extraHeaders)) {
+          headers.append(key, this.extraHeaders[key])
         }
       }
 

@@ -31453,12 +31453,12 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./src/styles/lib.scss
 var lib = __webpack_require__("7b11");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=38936fa6&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=24622c2d&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.builderMode)?_c('div',{staticClass:"villain-builder"},[_c('VillainBuilder')],1):_c('div',{staticClass:"villain-editor",class:_vm.fullscreen ? 'villain-fullscreen': ''},[_c('div',{staticClass:"villain-editor-toolbar"},[_vm._m(0),_c('div',{staticClass:"villain-editor-controls float-right"},[_c('div',{on:{"click":function($event){return _vm.toggleSource()}}},[(_vm.showSource)?[_c('i',{staticClass:"fa fa-fw fa-times"})]:[_c('i',{staticClass:"fa fa-fw fa-code"})]],2),_c('div',{on:{"click":function($event){return _vm.toggleFullscreen()}}},[(_vm.fullscreen)?[_c('i',{staticClass:"fa fa-fw fa-times"})]:[_c('i',{staticClass:"fa fa-fw fa-expand-arrows-alt"})]],2)])]),(_vm.showSource)?[_c('div',{staticClass:"villain-editor-source"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.src),expression:"src"}],ref:"tasource",domProps:{"value":(_vm.src)},on:{"input":function($event){if($event.target.composing){ return; }_vm.src=$event.target.value}}}),_c('div',{staticClass:"d-flex justify-content-center"},[_c('button',{staticClass:"btn btn-primary mt-4",on:{"click":_vm.updateSource}},[_vm._v("\n          Oppdatér\n        ")])])])]:[(_vm.blocks && _vm.blocks.length)?_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){return _vm.addBlock($event)},"move":function($event){return _vm.moveBlock($event)},"delete":_vm.deleteBlock,"order":_vm.orderBlocks}}):_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){return _vm.addBlock($event)},"move":function($event){return _vm.moveBlock($event)},"delete":_vm.deleteBlock}})]],2)}
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-editor-instructions"},[_c('i',{staticClass:"fa mr-2 fa-info-circle"}),_vm._v("\n      Trykk på \"+\" under for å legge til en innholdsblokk\n    ")])}]
 
 
-// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=38936fa6&
+// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=24622c2d&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/get-iterator.js
 var get_iterator = __webpack_require__("5d73");
@@ -31664,12 +31664,12 @@ var autosize_default = /*#__PURE__*/__webpack_require__.n(autosize);
 var cloneDeep = __webpack_require__("0644");
 var cloneDeep_default = /*#__PURE__*/__webpack_require__.n(cloneDeep);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainBuilder.vue?vue&type=template&id=e07d8258&
-var VillainBuildervue_type_template_id_e07d8258_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-wrapper"},[_c('button',{staticClass:"save",on:{"click":function($event){return _vm.saveTemplate()}}},[_vm._v("\n    Lagre\n  ")]),_vm._m(0),_c('aside',[_c('ul',_vm._l((_vm.templates),function(t){return _c('li',{key:t.data.id,on:{"click":function($event){return _vm.selectTemplate(t)}}},[_vm._v("\n        "+_vm._s(t.data.class)+"\n      ")])}),0)])])}
-var VillainBuildervue_type_template_id_e07d8258_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-editor-wrapper"},[_c('div',{staticClass:"villain-builder-editor",attrs:{"id":"builder-template"}})])}]
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainBuilder.vue?vue&type=template&id=96eb75d6&
+var VillainBuildervue_type_template_id_96eb75d6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-wrapper"},[_c('button',{staticClass:"save",on:{"click":function($event){return _vm.saveTemplate()}}},[_vm._v("\n    Lagre\n  ")]),_vm._m(0),_c('aside',[_c('ul',_vm._l((_vm.templates),function(t){return _c('li',{key:t.data.id,on:{"click":function($event){return _vm.selectTemplate(t)}}},[_vm._v("\n        "+_vm._s(t.data.class)+"\n      ")])}),0)])])}
+var VillainBuildervue_type_template_id_96eb75d6_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-editor-wrapper"},[_c('div',{staticClass:"villain-builder-editor",attrs:{"id":"builder-template"}})])}]
 
 
-// CONCATENATED MODULE: ./src/components/VillainBuilder.vue?vue&type=template&id=e07d8258&
+// CONCATENATED MODULE: ./src/components/VillainBuilder.vue?vue&type=template&id=96eb75d6&
 
 // EXTERNAL MODULE: ./node_modules/codeflask/build/codeflask.module.js
 var codeflask_module = __webpack_require__("84a6");
@@ -31771,14 +31771,14 @@ function alertConfirm(title, text, callback) {
 
 
 
-function fetchTemplates(_x) {
+function fetchTemplates(_x, _x2, _x3) {
   return _fetchTemplates.apply(this, arguments);
 }
 
 function _fetchTemplates() {
   _fetchTemplates = _asyncToGenerator(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(namespace) {
+  regeneratorRuntime.mark(function _callee(namespace, extraHeaders, url) {
     var request, headers, _arr, _i, key, response, data;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -31811,16 +31811,16 @@ function _fetchTemplates() {
             headers = new Headers();
             headers.append('accept', 'application/json, text/javascript, */*; q=0.01');
 
-            if (this.extraHeaders) {
-              _arr = keys_default()(this.extraHeaders);
+            if (extraHeaders) {
+              _arr = keys_default()(extraHeaders);
 
               for (_i = 0; _i < _arr.length; _i++) {
                 key = _arr[_i];
-                headers.append(key, this.extraHeaders[key]);
+                headers.append(key, extraHeaders[key]);
               }
             }
 
-            request = new Request("".concat(this.templatesURL).concat(namespace || 'all'), {
+            request = new Request("".concat(url).concat(namespace || 'all'), {
               headers: headers
             });
             _context.prev = 4;
@@ -31907,7 +31907,7 @@ function _storeTemplate() {
               break;
             }
 
-            fetchTemplates('all');
+            fetchTemplates('all', this.extraHeaders, url);
             return _context.abrupt("return", data);
 
           case 16:
@@ -31979,7 +31979,7 @@ function _storeTemplate() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return fetchTemplates('all');
+              return fetchTemplates('all', this.headers.extra, this.urls.templates);
 
             case 2:
               this.templates = _context.sent;
@@ -32152,8 +32152,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_VillainBuildervue_type_script_lang_js_,
-  VillainBuildervue_type_template_id_e07d8258_render,
-  VillainBuildervue_type_template_id_e07d8258_staticRenderFns,
+  VillainBuildervue_type_template_id_96eb75d6_render,
+  VillainBuildervue_type_template_id_96eb75d6_staticRenderFns,
   false,
   null,
   null,
@@ -35943,7 +35943,7 @@ for (var _key2 in tools) {
               }
 
               _context.next = 4;
-              return fetchTemplates(this.templates);
+              return fetchTemplates(this.templates, this.extraHeaders, this.templatesURL);
 
             case 4:
               this.availableTemplates = _context.sent;
@@ -35987,7 +35987,7 @@ for (var _key2 in tools) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return fetchTemplates(this.templates);
+                return fetchTemplates(this.templates, this.extraHeaders, this.templatesURL);
 
               case 2:
                 this.availableTemplates = _context2.sent;

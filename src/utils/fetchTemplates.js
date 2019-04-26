@@ -1,6 +1,6 @@
 import { alertError } from './alerts'
 
-export default async function fetchTemplates (namespace) {
+export default async function fetchTemplates (namespace, extraHeaders, url) {
   // return [
   //   {
   //     type: 'template',
@@ -29,13 +29,13 @@ export default async function fetchTemplates (namespace) {
   let headers = new Headers()
   headers.append('accept', 'application/json, text/javascript, */*; q=0.01')
 
-  if (this.extraHeaders) {
-    for (let key of Object.keys(this.extraHeaders)) {
-      headers.append(key, this.extraHeaders[key])
+  if (extraHeaders) {
+    for (let key of Object.keys(extraHeaders)) {
+      headers.append(key, extraHeaders[key])
     }
   }
 
-  request = new Request(`${this.templatesURL}${namespace || 'all'}`, { headers })
+  request = new Request(`${url}${namespace || 'all'}`, { headers })
 
   try {
     let response = await fetch(request)

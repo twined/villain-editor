@@ -43,7 +43,7 @@ export default {
   ],
 
   async mounted () {
-    this.templates = await fetchTemplates('all')
+    this.templates = await fetchTemplates('all', this.headers.extra, this.urls.templates)
     this.flask = new CodeFlask('#builder-template', { language: 'html', lineNumbers: true })
   },
 

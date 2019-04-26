@@ -264,7 +264,7 @@ export default {
   async created () {
     console.debug('==> VILLAIN EDITOR INITIALIZING')
     if (this.templateMode) {
-      this.availableTemplates = await fetchTemplates(this.templates)
+      this.availableTemplates = await fetchTemplates(this.templates, this.extraHeaders, this.templatesURL)
     }
 
     // convert data to blocks
@@ -284,7 +284,7 @@ export default {
 
   methods: {
     async updateTemplates () {
-      this.availableTemplates = await fetchTemplates(this.templates)
+      this.availableTemplates = await fetchTemplates(this.templates, this.extraHeaders, this.templatesURL)
     },
 
     updateSource () {

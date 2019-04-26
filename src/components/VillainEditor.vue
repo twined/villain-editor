@@ -140,6 +140,11 @@ export default {
       default: '/admin/api/villain/slideshows/'
     },
 
+    templatesURL: {
+      type: String,
+      default: '/admin/api/villain/templates/'
+    },
+
     imageSeries: {
       type: String,
       default: 'post'

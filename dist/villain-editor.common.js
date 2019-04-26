@@ -31674,68 +31674,6 @@ var VillainBuildervue_type_template_id_e07d8258_staticRenderFns = [function () {
 // EXTERNAL MODULE: ./node_modules/codeflask/build/codeflask.module.js
 var codeflask_module = __webpack_require__("84a6");
 
-// CONCATENATED MODULE: ./src/utils/fetchTemplates.js
-
-
-
-function fetchTemplates(_x) {
-  return _fetchTemplates.apply(this, arguments);
-}
-
-function _fetchTemplates() {
-  _fetchTemplates = _asyncToGenerator(
-  /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(namespace) {
-    var request, headers, _arr, _i, key, response, data;
-
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            return _context.abrupt("return", [{
-              type: 'template',
-              data: {
-                id: 2,
-                name: 'Produktteaser - 2 bilder',
-                help_text: 'Produktteaser, med to sidestilte bilder (høydeformat)',
-                class: 'v-unique-id',
-                code: '<div>%{MARKDOWN}</div>',
-                refs: [{
-                  'name': 'MARKDOWN',
-                  'data': {
-                    'type': 'markdown',
-                    'data': {
-                      'text': 'MD text!'
-                    }
-                  }
-                }]
-              }
-            }]);
-
-          case 8:
-            response = _context.sent;
-            _context.next = 11;
-            return response.json();
-
-          case 11:
-            data = _context.sent;
-            return _context.abrupt("return", data);
-
-          case 15:
-            _context.prev = 15;
-            _context.t0 = _context["catch"](5);
-            alertError('Feil', 'Klarte ikke hente maler fra databasen!');
-            console.error(_context.t0);
-
-          case 19:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, this, [[5, 15]]);
-  }));
-  return _fetchTemplates.apply(this, arguments);
-}
 // EXTERNAL MODULE: ./node_modules/vex-js/dist/js/vex.js
 var vex = __webpack_require__("308d");
 var vex_default = /*#__PURE__*/__webpack_require__.n(vex);
@@ -31751,7 +31689,7 @@ var vex_dialog_default = /*#__PURE__*/__webpack_require__.n(vex_dialog);
 vex_default.a.registerPlugin(vex_dialog_default.a);
 vex_default.a.defaultOptions.className = 'vex-theme-kurtz';
 
-function alerts_alertError(title, text, callback) {
+function alertError(title, text, callback) {
   if (!callback) {
     callback = function callback() {};
   }
@@ -31828,6 +31766,91 @@ function alertConfirm(title, text, callback) {
 }
 
 
+// CONCATENATED MODULE: ./src/utils/fetchTemplates.js
+
+
+
+
+function fetchTemplates(_x) {
+  return _fetchTemplates.apply(this, arguments);
+}
+
+function _fetchTemplates() {
+  _fetchTemplates = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(namespace) {
+    var request, headers, _arr, _i, key, response, data;
+
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            // return [
+            //   {
+            //     type: 'template',
+            //     data: {
+            //       id: 2,
+            //       name: 'Produktteaser - 2 bilder',
+            //       help_text: 'Produktteaser, med to sidestilte bilder (høydeformat)',
+            //       class: 'v-unique-id',
+            //       code: '<div>%{MARKDOWN}</div>',
+            //       refs: [
+            //         {
+            //           'name': 'MARKDOWN',
+            //           'data': {
+            //             'type': 'markdown',
+            //             'data': {
+            //               'text': 'MD text!'
+            //             }
+            //           }
+            //         }
+            //       ]
+            //     }
+            //   }
+            // ]
+            headers = new Headers();
+            headers.append('accept', 'application/json, text/javascript, */*; q=0.01');
+
+            if (this.extraHeaders) {
+              _arr = keys_default()(this.extraHeaders);
+
+              for (_i = 0; _i < _arr.length; _i++) {
+                key = _arr[_i];
+                headers.append(key, this.extraHeaders[key]);
+              }
+            }
+
+            request = new Request("".concat(this.templatesURL).concat(namespace || 'all'), {
+              headers: headers
+            });
+            _context.prev = 4;
+            _context.next = 7;
+            return fetch(request);
+
+          case 7:
+            response = _context.sent;
+            _context.next = 10;
+            return response.json();
+
+          case 10:
+            data = _context.sent;
+            return _context.abrupt("return", data);
+
+          case 14:
+            _context.prev = 14;
+            _context.t0 = _context["catch"](4);
+            alertError('Feil', 'Klarte ikke hente maler fra databasen!');
+            console.error(_context.t0);
+
+          case 18:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, this, [[4, 14]]);
+  }));
+  return _fetchTemplates.apply(this, arguments);
+}
 // CONCATENATED MODULE: ./src/utils/storeTemplate.js
 
 
@@ -31894,7 +31917,7 @@ function _storeTemplate() {
           case 18:
             _context.prev = 18;
             _context.t0 = _context["catch"](6);
-            alerts_alertError('Feil', 'Feil ved lagring av mal i database.');
+            alertError('Feil', 'Feil ved lagring av mal i database.');
             console.error(_context.t0);
 
           case 22:
@@ -33807,7 +33830,7 @@ var vue_drag_drop_common = __webpack_require__("df76");
                   this.images = data.images;
                   this.showImages = true;
                 } else {
-                  alerts_alertError('Feil', 'Fant ingen bilder i biblioteket. Last opp et i stedet!');
+                  alertError('Feil', 'Fant ingen bilder i biblioteket. Last opp et i stedet!');
                 }
 
                 _context.next = 18;
@@ -33816,7 +33839,7 @@ var vue_drag_drop_common = __webpack_require__("df76");
               case 14:
                 _context.prev = 14;
                 _context.t0 = _context["catch"](4);
-                alerts_alertError('Feil', 'Klarte ikke koble til bildebiblioteket!');
+                alertError('Feil', 'Klarte ikke koble til bildebiblioteket!');
                 console.error(_context.t0);
 
               case 18:
@@ -33849,7 +33872,7 @@ var vue_drag_drop_common = __webpack_require__("df76");
       var files = event.dataTransfer.files;
 
       if (files.length > 1) {
-        alerts_alertError('OBS', 'Du kan kun laste opp et bilde av gangen her. For å laste opp mange i en sleng, bruk "Bilder"-modulen i admin!');
+        alertError('OBS', 'Du kan kun laste opp et bilde av gangen her. For å laste opp mange i en sleng, bruk "Bilder"-modulen i admin!');
         this.dragOver = false;
         return false;
       }
@@ -33915,7 +33938,7 @@ var vue_drag_drop_common = __webpack_require__("df76");
                   this.showConfig = false;
                 } else {
                   this.uploading = false;
-                  alerts_alertError('Feil', "Feil ved opplasting :(\n\n".concat(data.error, "'"));
+                  alertError('Feil', "Feil ved opplasting :(\n\n".concat(data.error, "'"));
                 }
 
                 _context2.next = 25;
@@ -33926,7 +33949,7 @@ var vue_drag_drop_common = __webpack_require__("df76");
                 _context2.t0 = _context2["catch"](8);
                 this.uploading = false;
                 console.log(' ==> caught error', _context2.t0);
-                alerts_alertError('Feil', "Feil ved opplasting :(\n\n".concat(_context2.t0));
+                alertError('Feil', "Feil ved opplasting :(\n\n".concat(_context2.t0));
 
               case 25:
               case "end":
@@ -35001,7 +35024,7 @@ var SlideshowBlockvue_type_template_id_7858eb25_staticRenderFns = []
               case 14:
                 _context.prev = 14;
                 _context.t0 = _context["catch"](4);
-                alerts_alertError('Feil', 'Klarte ikke koble til bildebiblioteket!');
+                alertError('Feil', 'Klarte ikke koble til bildebiblioteket!');
                 console.error(_context.t0);
 
               case 18:
@@ -35054,7 +35077,7 @@ var SlideshowBlockvue_type_template_id_7858eb25_staticRenderFns = []
               case 10:
                 _context2.prev = 10;
                 _context2.t0 = _context2["catch"](5);
-                alerts_alertError('Feil', 'Feil ved opplasting :(');
+                alertError('Feil', 'Feil ved opplasting :(');
                 return _context2.abrupt("break", 17);
 
               case 14:
@@ -35137,7 +35160,7 @@ var SlideshowBlockvue_type_template_id_7858eb25_staticRenderFns = []
                   }]);
                 } else {
                   this.uploading = false;
-                  alerts_alertError('Feil', "Feil ved opplasting :(\n\n".concat(data.error, "'"));
+                  alertError('Feil', "Feil ved opplasting :(\n\n".concat(data.error, "'"));
                 }
 
                 _context3.next = 24;

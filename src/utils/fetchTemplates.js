@@ -1,27 +1,29 @@
+import { alertError } from './alerts'
+
 export default async function fetchTemplates (namespace) {
-  return [
-    {
-      type: 'template',
-      data: {
-        id: 2,
-        name: 'Produktteaser - 2 bilder',
-        help_text: 'Produktteaser, med to sidestilte bilder (høydeformat)',
-        class: 'v-unique-id',
-        code: '<div>%{MARKDOWN}</div>',
-        refs: [
-          {
-            'name': 'MARKDOWN',
-            'data': {
-              'type': 'markdown',
-              'data': {
-                'text': 'MD text!'
-              }
-            }
-          }
-        ]
-      }
-    }
-  ]
+  // return [
+  //   {
+  //     type: 'template',
+  //     data: {
+  //       id: 2,
+  //       name: 'Produktteaser - 2 bilder',
+  //       help_text: 'Produktteaser, med to sidestilte bilder (høydeformat)',
+  //       class: 'v-unique-id',
+  //       code: '<div>%{MARKDOWN}</div>',
+  //       refs: [
+  //         {
+  //           'name': 'MARKDOWN',
+  //           'data': {
+  //             'type': 'markdown',
+  //             'data': {
+  //               'text': 'MD text!'
+  //             }
+  //           }
+  //         }
+  //       ]
+  //     }
+  //   }
+  // ]
 
   let request
   let headers = new Headers()

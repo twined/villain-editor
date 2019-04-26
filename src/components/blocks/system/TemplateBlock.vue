@@ -63,6 +63,10 @@ export default {
     }
   },
 
+  inject: [
+    'available'
+  ],
+
   computed: {
     templateString () {
       let str = this.buildComponents()
@@ -78,8 +82,15 @@ export default {
   },
 
   methods: {
+    getSourceCode () {
+      const id = this.block.data.id
+      let foundTemplate = this.available.templates.find(t => t.data.id === id)
+      return foundTemplate.data.code
+    },
+
     replaceRefs () {
-      return this.block.data.code.replace(/%{(\w+)}/g, this.replaceRef)
+      let srcCode = this.getSourceCode()
+      return srcCode.replace(/%{(\w+)}/g, this.replaceRef)
     },
 
     replaceRef (exp, refName) {

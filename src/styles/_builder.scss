@@ -1,9 +1,35 @@
-.villain-builder-editor-wrapper {
+.villain-builder-wrapper {
   max-width: 100%;
+  display: flex;
+
+  aside {
+    width: 250px;
+    height: 100vh;
+    background-color: palegoldenrod;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        list-style-type: none;
+        text-align: center;
+        padding: 12px 4px;
+        margin-bottom: 5px;
+        z-index: 9999;
+      }
+    }
+  }
+}
+
+.villain-builder-editor-wrapper {
+  width: calc(100% - 250px);
+  background-color: pink;
 
   .villain-builder-editor {
     .codeflask {
-      position: static;
+      width: calc(100% - 250px);
+      // /* height: 100%; */
+      // overflow: hidden;
     }
   }
 }

@@ -235,19 +235,18 @@ export default {
 
   computed: {
     browseURL () {
-      return this.vBrowseURL + this.vImageSeries
+      return this.urls.browse + this.vImageSeries
     },
 
     uploadURL () {
-      return `${this.vBaseURL}upload/${this.vImageSeries}`
+      return `${this.urls.base}upload/${this.vImageSeries}`
     }
   },
 
   inject: [
-    'vBaseURL',
-    'vBrowseURL',
+    'urls',
     'vImageSeries',
-    'vExtraHeaders'
+    'headers'
   ],
 
   created () {
@@ -329,9 +328,9 @@ export default {
       let headers = new Headers()
       headers.append('accept', 'application/json, text/javascript, */*; q=0.01')
 
-      if (this.vExtraHeaders) {
-        for (let key of Object.keys(this.vExtraHeaders)) {
-          headers.append(key, this.vExtraHeaders[key])
+      if (this.headers.extra) {
+        for (let key of Object.keys(this.headers.extra)) {
+          headers.append(key, this.headers.extra[key])
         }
       }
 
@@ -377,9 +376,9 @@ export default {
       let headers = new Headers()
       headers.append('accept', 'application/json, text/javascript, */*; q=0.01')
 
-      if (this.vExtraHeaders) {
-        for (let key of Object.keys(this.vExtraHeaders)) {
-          headers.append(key, this.vExtraHeaders[key])
+      if (this.headers.extra) {
+        for (let key of Object.keys(this.headers.extra)) {
+          headers.append(key, this.headers.extra[key])
         }
       }
 

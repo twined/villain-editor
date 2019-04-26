@@ -207,7 +207,7 @@ export default {
   },
 
   inject: [
-    'vAvailableBlocks'
+    'available'
   ],
 
   created () {
@@ -241,7 +241,7 @@ export default {
 
   methods: {
     getBlockDisplayName (blkType) {
-      let foundBlock = this.vAvailableBlocks.find(b => {
+      let foundBlock = this.available.blocks.find(b => {
         return b.component.toLowerCase() === blkType
       })
       if (foundBlock) {

@@ -41,7 +41,7 @@
           ref="blocks"
           class="villain-editor-plus-available-blocks">
           <div
-            v-for="b in vAvailableBlocks"
+            v-for="b in available.blocks"
             :key="b.name"
             class="villain-editor-plus-available-block"
             @mouseover="setHover(b.name)"
@@ -68,11 +68,11 @@
         :active="showingTemplates"
         :duration="350">
         <div
-          v-if="vAvailableTemplates.length"
+          v-if="available.templates.length"
           ref="templates"
           class="villain-editor-plus-available-templates">
           <div
-            v-for="(tp, idx) in vAvailableTemplates"
+            v-for="(tp, idx) in available.templates"
             :key="idx"
             class="villain-editor-plus-available-template"
             @click="addTemplate(tp)">
@@ -128,8 +128,7 @@ export default {
   },
 
   inject: [
-    'vAvailableBlocks',
-    'vAvailableTemplates',
+    'available',
     'vTemplateMode'
   ],
 

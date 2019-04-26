@@ -77,6 +77,7 @@ import standardComponents from '@/components/blocks/standard'
 import systemComponents from '@/components/blocks/system'
 import toolsComponents from '@/components/blocks/tools'
 import STANDARD_BLOCKS from '@/config/standardBlocks.js'
+import fetchTemplates from '@/utils/fetchTemplates.js'
 
 for (let key in standardComponents) {
   if (standardComponents.hasOwnProperty(key)) {
@@ -203,16 +204,47 @@ export default {
   },
 
   provide () {
+    const available = {}
+    const headers = {}
+    const urls = {}
+
+    Object.defineProperty(available, 'blocks', {
+       enumerable: true,
+       get: () => this.availableBlocks,
+    })
+    Object.defineProperty(available, 'templates', {
+       enumerable: true,
+       get: () => this.availableTemplates,
+    })
+
+    Object.defineProperty(headers, 'extra', {
+       enumerable: true,
+       get: () => this.extraHeaders,
+    })
+
+    Object.defineProperty(urls, 'base', {
+       enumerable: true,
+       get: () => this.baseURL,
+    })
+    Object.defineProperty(urls, 'browse', {
+       enumerable: true,
+       get: () => this.browseURL,
+    })
+    Object.defineProperty(urls, 'slideshows', {
+       enumerable: true,
+       get: () => this.slideshowsURL,
+    })
+    Object.defineProperty(urls, 'templates', {
+       enumerable: true,
+       get: () => this.templatesURL,
+    })
+
     return {
-      vBaseURL: this.baseURL,
-      vBrowseURL: this.browseURL,
-      vSlideshowsURL: this.slideshowsURL,
-      vTemplatesURL: this.templatesURL,
       vImageSeries: this.imageSeries,
-      vExtraHeaders: this.extraHeaders,
-      vAvailableBlocks: this.availableBlocks,
-      vAvailableTemplates: this.availableTemplates,
-      vTemplateMode: this.templateMode
+      vTemplateMode: this.templateMode,
+      available,
+      headers,
+      urls
     }
   },
 
@@ -232,8 +264,9 @@ export default {
   async created () {
     console.debug('==> VILLAIN EDITOR INITIALIZING')
     if (this.templateMode) {
-      this.availableTemplates = await this.fetchTemplates(this.templates)
+      this.availableTemplates = await fetchTemplates(this.templates)
     }
+
     // convert data to blocks
     if (!this.json || this.json === '') {
       this.blocks = []
@@ -250,30 +283,8 @@ export default {
   },
 
   methods: {
-    async fetchTemplates (namespace) {
-      let request
-      let headers = new Headers()
-      headers.append('accept', 'application/json, text/javascript, */*; q=0.01')
-
-      if (this.extraHeaders) {
-        for (let key of Object.keys(this.extraHeaders)) {
-          headers.append(key, this.extraHeaders[key])
-        }
-      }
-
-      request = new Request(`${this.templatesURL}${namespace || 'all'}`, { headers })
-
-      try {
-        let response = await fetch(request)
-        let data = await response.json()
-
-        console.log('==> fetchTemplates')
-        console.log(data)
-        return data
-      } catch (e) {
-        alertError('Feil', 'Klarte ikke hente maler fra databasen!')
-        console.error(e)
-      }
+    async updateTemplates () {
+      this.availableTemplates = await fetchTemplates(this.templates)
     },
 
     updateSource () {

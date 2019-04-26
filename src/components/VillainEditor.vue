@@ -119,6 +119,12 @@ export default {
       default: false
     },
 
+    // if this is filled, we get templates from the DB
+    templateNamespace: {
+      type: String,
+      default: null
+    },
+
     baseURL: {
       type: String,
       default: '/admin/api/villain/'
@@ -195,8 +201,13 @@ export default {
       return availableBlocks
     },
 
-    availableTemplates () {
-      return this.templates
+    async availableTemplates () {
+      if (this.templateNamespace) {
+        let templates = await this.fetchTemplates(this.templateNamespace)
+        return templates
+      } else {
+        return this.templates
+      }
     }
   },
 
@@ -205,6 +216,7 @@ export default {
       vBaseURL: this.baseURL,
       vBrowseURL: this.browseURL,
       vSlideshowsURL: this.slideshowsURL,
+      vTemplatesURL: this.templatesURL,
       vImageSeries: this.imageSeries,
       vExtraHeaders: this.extraHeaders,
       vAvailableBlocks: this.availableBlocks,
@@ -244,6 +256,32 @@ export default {
   },
 
   methods: {
+    async fetchTemplates (namespace) {
+      let request
+      let headers = new Headers()
+      headers.append('accept', 'application/json, text/javascript, */*; q=0.01')
+
+      if (this.vExtraHeaders) {
+        for (let key of Object.keys(this.vExtraHeaders)) {
+          headers.append(key, this.vExtraHeaders[key])
+        }
+      }
+
+      request = new Request(`${this.templatesURL}/${namespace || 'all'}`, { headers })
+
+      try {
+        let response = await fetch(request)
+        let data = await response.json()
+
+        console.log('==> fetchTemplates')
+        console.log(data)
+        return data
+      } catch (e) {
+        alertError('Feil', 'Klarte ikke hente maler fra databasen!')
+        console.error(e)
+      }
+    },
+
     updateSource () {
       this.blocks = JSON.parse(this.updatedSource)
       this.blocks = this.addUIDs()

@@ -13,3 +13,4 @@ test/unit/coverage
 *.sln
 /src/templates
 /public/media
+/.vscode

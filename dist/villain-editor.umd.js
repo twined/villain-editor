@@ -31462,20 +31462,16 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./src/styles/lib.scss
 var lib = __webpack_require__("7b11");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=dcae894a&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=a1ca373a&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.builderMode)?_c('div',{staticClass:"villain-builder"},[_c('VillainBuilder')],1):_c('div',{staticClass:"villain-editor",class:_vm.fullscreen ? 'villain-fullscreen': ''},[_c('div',{staticClass:"villain-editor-toolbar"},[_vm._m(0),_c('div',{staticClass:"villain-editor-controls float-right"},[_c('div',{on:{"click":function($event){return _vm.toggleSource()}}},[(_vm.showSource)?[_c('i',{staticClass:"fa fa-fw fa-times"})]:[_c('i',{staticClass:"fa fa-fw fa-code"})]],2),_c('div',{on:{"click":function($event){return _vm.toggleFullscreen()}}},[(_vm.fullscreen)?[_c('i',{staticClass:"fa fa-fw fa-times"})]:[_c('i',{staticClass:"fa fa-fw fa-expand-arrows-alt"})]],2)])]),(_vm.showSource)?[_c('div',{staticClass:"villain-editor-source"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.src),expression:"src"}],ref:"tasource",domProps:{"value":(_vm.src)},on:{"input":function($event){if($event.target.composing){ return; }_vm.src=$event.target.value}}}),_c('div',{staticClass:"d-flex justify-content-center"},[_c('button',{staticClass:"btn btn-primary mt-4",on:{"click":_vm.updateSource}},[_vm._v("\n          Oppdatér\n        ")])])])]:[(_vm.blocks && _vm.blocks.length)?_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){return _vm.addBlock($event)},"move":function($event){return _vm.moveBlock($event)},"delete":_vm.deleteBlock,"order":_vm.orderBlocks}}):_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){return _vm.addBlock($event)},"move":function($event){return _vm.moveBlock($event)},"delete":_vm.deleteBlock}})]],2)}
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-editor-instructions"},[_c('i',{staticClass:"fa mr-2 fa-info-circle"}),_vm._v("\n      Trykk på \"+\" under for å legge til en innholdsblokk\n    ")])}]
 
 
-// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=dcae894a&
+// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=a1ca373a&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/get-iterator.js
 var get_iterator = __webpack_require__("5d73");
 var get_iterator_default = /*#__PURE__*/__webpack_require__.n(get_iterator);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/keys.js
-var keys = __webpack_require__("a4bb");
-var keys_default = /*#__PURE__*/__webpack_require__.n(keys);
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.find.js
 var es6_array_find = __webpack_require__("7514");
@@ -31494,6 +31490,10 @@ var get_own_property_descriptor_default = /*#__PURE__*/__webpack_require__.n(get
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js
 var get_own_property_symbols = __webpack_require__("e265");
 var get_own_property_symbols_default = /*#__PURE__*/__webpack_require__.n(get_own_property_symbols);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/keys.js
+var keys = __webpack_require__("a4bb");
+var keys_default = /*#__PURE__*/__webpack_require__.n(keys);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js
 var define_property = __webpack_require__("85f2");
@@ -31605,6 +31605,51 @@ function typeof_typeof(obj) {
   }
 
   return typeof_typeof(obj);
+}
+// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
+var runtime = __webpack_require__("96cf");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/promise.js
+var promise = __webpack_require__("795b");
+var promise_default = /*#__PURE__*/__webpack_require__.n(promise);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    promise_default.a.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new promise_default.a(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
 }
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.array.includes.js
 var es7_array_includes = __webpack_require__("6762");
@@ -33139,51 +33184,6 @@ var ImageBlockvue_type_template_id_db5272ea_staticRenderFns = []
 
 // CONCATENATED MODULE: ./src/components/blocks/standard/ImageBlock.vue?vue&type=template&id=db5272ea&
 
-// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
-var runtime = __webpack_require__("96cf");
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/promise.js
-var promise = __webpack_require__("795b");
-var promise_default = /*#__PURE__*/__webpack_require__.n(promise);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    promise_default.a.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new promise_default.a(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
 // EXTERNAL MODULE: ./node_modules/vue-drag-drop/dist/vue-drag-drop.common.js
 var vue_drag_drop_common = __webpack_require__("df76");
 
@@ -33202,7 +33202,7 @@ var vex_dialog_default = /*#__PURE__*/__webpack_require__.n(vex_dialog);
 vex_default.a.registerPlugin(vex_dialog_default.a);
 vex_default.a.defaultOptions.className = 'vex-theme-kurtz';
 
-function alertError(title, text, callback) {
+function alerts_alertError(title, text, callback) {
   if (!callback) {
     callback = function callback() {};
   }
@@ -33582,7 +33582,7 @@ function alertConfirm(title, text, callback) {
                   this.images = data.images;
                   this.showImages = true;
                 } else {
-                  alertError('Feil', 'Fant ingen bilder i biblioteket. Last opp et i stedet!');
+                  alerts_alertError('Feil', 'Fant ingen bilder i biblioteket. Last opp et i stedet!');
                 }
 
                 _context.next = 18;
@@ -33591,7 +33591,7 @@ function alertConfirm(title, text, callback) {
               case 14:
                 _context.prev = 14;
                 _context.t0 = _context["catch"](4);
-                alertError('Feil', 'Klarte ikke koble til bildebiblioteket!');
+                alerts_alertError('Feil', 'Klarte ikke koble til bildebiblioteket!');
                 console.error(_context.t0);
 
               case 18:
@@ -33624,7 +33624,7 @@ function alertConfirm(title, text, callback) {
       var files = event.dataTransfer.files;
 
       if (files.length > 1) {
-        alertError('OBS', 'Du kan kun laste opp et bilde av gangen her. For å laste opp mange i en sleng, bruk "Bilder"-modulen i admin!');
+        alerts_alertError('OBS', 'Du kan kun laste opp et bilde av gangen her. For å laste opp mange i en sleng, bruk "Bilder"-modulen i admin!');
         this.dragOver = false;
         return false;
       }
@@ -33690,7 +33690,7 @@ function alertConfirm(title, text, callback) {
                   this.showConfig = false;
                 } else {
                   this.uploading = false;
-                  alertError('Feil', "Feil ved opplasting :(\n\n".concat(data.error, "'"));
+                  alerts_alertError('Feil', "Feil ved opplasting :(\n\n".concat(data.error, "'"));
                 }
 
                 _context2.next = 25;
@@ -33701,7 +33701,7 @@ function alertConfirm(title, text, callback) {
                 _context2.t0 = _context2["catch"](8);
                 this.uploading = false;
                 console.log(' ==> caught error', _context2.t0);
-                alertError('Feil', "Feil ved opplasting :(\n\n".concat(_context2.t0));
+                alerts_alertError('Feil', "Feil ved opplasting :(\n\n".concat(_context2.t0));
 
               case 25:
               case "end":
@@ -34776,7 +34776,7 @@ var SlideshowBlockvue_type_template_id_2b1ae94c_staticRenderFns = []
               case 14:
                 _context.prev = 14;
                 _context.t0 = _context["catch"](4);
-                alertError('Feil', 'Klarte ikke koble til bildebiblioteket!');
+                alerts_alertError('Feil', 'Klarte ikke koble til bildebiblioteket!');
                 console.error(_context.t0);
 
               case 18:
@@ -34829,7 +34829,7 @@ var SlideshowBlockvue_type_template_id_2b1ae94c_staticRenderFns = []
               case 10:
                 _context2.prev = 10;
                 _context2.t0 = _context2["catch"](5);
-                alertError('Feil', 'Feil ved opplasting :(');
+                alerts_alertError('Feil', 'Feil ved opplasting :(');
                 return _context2.abrupt("break", 17);
 
               case 14:
@@ -34912,7 +34912,7 @@ var SlideshowBlockvue_type_template_id_2b1ae94c_staticRenderFns = []
                   }]);
                 } else {
                   this.uploading = false;
-                  alertError('Feil', "Feil ved opplasting :(\n\n".concat(data.error, "'"));
+                  alerts_alertError('Feil', "Feil ved opplasting :(\n\n".concat(data.error, "'"));
                 }
 
                 _context3.next = 24;
@@ -35405,6 +35405,8 @@ var VillainPlus_component = normalizeComponent(
 
 
 
+
+
 //
 //
 //
@@ -35520,6 +35522,11 @@ for (var _key2 in tools) {
       type: Boolean,
       default: false
     },
+    // if this is filled, we get templates from the DB
+    templateNamespace: {
+      type: String,
+      default: null
+    },
     baseURL: {
       type: String,
       default: '/admin/api/villain/'
@@ -35598,15 +35605,51 @@ for (var _key2 in tools) {
 
       return availableBlocks;
     },
-    availableTemplates: function availableTemplates() {
-      return this.templates;
-    }
+    availableTemplates: function () {
+      var _availableTemplates = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee() {
+        var templates;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!this.templateNamespace) {
+                  _context.next = 7;
+                  break;
+                }
+
+                _context.next = 3;
+                return this.fetchTemplates(this.templateNamespace);
+
+              case 3:
+                templates = _context.sent;
+                return _context.abrupt("return", templates);
+
+              case 7:
+                return _context.abrupt("return", this.templates);
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function availableTemplates() {
+        return _availableTemplates.apply(this, arguments);
+      }
+
+      return availableTemplates;
+    }()
   },
   provide: function provide() {
     return {
       vBaseURL: this.baseURL,
       vBrowseURL: this.browseURL,
       vSlideshowsURL: this.slideshowsURL,
+      vTemplatesURL: this.templatesURL,
       vImageSeries: this.imageSeries,
       vExtraHeaders: this.extraHeaders,
       vAvailableBlocks: this.availableBlocks,
@@ -35649,6 +35692,66 @@ for (var _key2 in tools) {
     }
   },
   methods: {
+    fetchTemplates: function () {
+      var _fetchTemplates = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(namespace) {
+        var request, headers, _arr, _i, _key3, response, data;
+
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                headers = new Headers();
+                headers.append('accept', 'application/json, text/javascript, */*; q=0.01');
+
+                if (this.vExtraHeaders) {
+                  _arr = keys_default()(this.vExtraHeaders);
+
+                  for (_i = 0; _i < _arr.length; _i++) {
+                    _key3 = _arr[_i];
+                    headers.append(_key3, this.vExtraHeaders[_key3]);
+                  }
+                }
+
+                request = new Request("".concat(this.templatesURL, "/").concat(namespace || 'all'), {
+                  headers: headers
+                });
+                _context2.prev = 4;
+                _context2.next = 7;
+                return fetch(request);
+
+              case 7:
+                response = _context2.sent;
+                _context2.next = 10;
+                return response.json();
+
+              case 10:
+                data = _context2.sent;
+                console.log('==> fetchTemplates');
+                console.log(data);
+                return _context2.abrupt("return", data);
+
+              case 16:
+                _context2.prev = 16;
+                _context2.t0 = _context2["catch"](4);
+                alertError('Feil', 'Klarte ikke hente maler fra databasen!');
+                console.error(_context2.t0);
+
+              case 20:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[4, 16]]);
+      }));
+
+      function fetchTemplates(_x) {
+        return _fetchTemplates.apply(this, arguments);
+      }
+
+      return fetchTemplates;
+    }(),
     updateSource: function updateSource() {
       this.blocks = JSON.parse(this.updatedSource);
       this.blocks = this.addUIDs();
@@ -35743,11 +35846,11 @@ for (var _key2 in tools) {
         // child of a column
         var mainBlock = this.blocks.find(function (b) {
           if (b.type === 'columns') {
-            var _arr = keys_default()(b.data);
+            var _arr2 = keys_default()(b.data);
 
-            for (var _i = 0; _i < _arr.length; _i++) {
-              var _key3 = _arr[_i];
-              var x = b.data[_key3];
+            for (var _i2 = 0; _i2 < _arr2.length; _i2++) {
+              var _key4 = _arr2[_i2];
+              var x = b.data[_key4];
 
               if (x.uid === parent) {
                 return x;
@@ -35759,11 +35862,11 @@ for (var _key2 in tools) {
 
         if (mainBlock) {
           // we have the main block -- add to the correct parent
-          var _arr2 = keys_default()(mainBlock.data);
+          var _arr3 = keys_default()(mainBlock.data);
 
-          for (var _i2 = 0; _i2 < _arr2.length; _i2++) {
-            var _key4 = _arr2[_i2];
-            var y = mainBlock.data[_key4];
+          for (var _i3 = 0; _i3 < _arr3.length; _i3++) {
+            var _key5 = _arr3[_i3];
+            var y = mainBlock.data[_key5];
 
             if (y.uid === parent) {
               parentBlock = y;
@@ -35841,11 +35944,11 @@ for (var _key2 in tools) {
         // child of a column
         var mainBlock = this.blocks.find(function (b) {
           if (b.type === 'columns') {
-            var _arr3 = keys_default()(b.data);
+            var _arr4 = keys_default()(b.data);
 
-            for (var _i3 = 0; _i3 < _arr3.length; _i3++) {
-              var _key5 = _arr3[_i3];
-              var x = b.data[_key5];
+            for (var _i4 = 0; _i4 < _arr4.length; _i4++) {
+              var _key6 = _arr4[_i4];
+              var x = b.data[_key6];
 
               if (x.uid === parent) {
                 return x;
@@ -35857,11 +35960,11 @@ for (var _key2 in tools) {
 
         if (mainBlock) {
           // we have the main block -- add to the correct parent
-          var _arr4 = keys_default()(mainBlock.data);
+          var _arr5 = keys_default()(mainBlock.data);
 
-          for (var _i4 = 0; _i4 < _arr4.length; _i4++) {
-            var _key6 = _arr4[_i4];
-            var y = mainBlock.data[_key6];
+          for (var _i5 = 0; _i5 < _arr5.length; _i5++) {
+            var _key7 = _arr5[_i5];
+            var y = mainBlock.data[_key7];
 
             if (y.uid === parent) {
               parentBlock = y;

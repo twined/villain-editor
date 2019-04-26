@@ -22,6 +22,26 @@
 
 ### Templates
 
+```
+{
+  "type": "template",
+  "data": {
+    "id": 1,
+    "refs": [
+      {
+        "name": "MARKDOWN",
+        "data": {
+          "type": "markdown",
+          "data": {
+            "text": "MD text"
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
 
 ## Blocks
 

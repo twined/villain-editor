@@ -266,7 +266,7 @@ export default {
         }
       }
 
-      request = new Request(`${this.templatesURL}/${namespace || 'all'}`, { headers })
+      request = new Request(`${this.templatesURL}${namespace || 'all'}`, { headers })
 
       try {
         let response = await fetch(request)

@@ -128,22 +128,22 @@ export default {
 
     baseURL: {
       type: String,
-      default: '/admin/api/villain/'
+      default: '/api/villain/'
     },
 
     browseURL: {
       type: String,
-      default: '/admin/api/villain/browse/'
+      default: '/api/villain/browse/'
     },
 
     slideshowsURL: {
       type: String,
-      default: '/admin/api/villain/slideshows/'
+      default: '/api/villain/slideshows/'
     },
 
     templatesURL: {
       type: String,
-      default: '/admin/api/villain/templates/'
+      default: '/api/villain/templates/'
     },
 
     imageSeries: {

@@ -1,4 +1,4 @@
 {
-  "/admin/api/villain/templates/all": "/templates/",
-  "/admin/api/villain/templates": "/templates/1"
+  "/api/villain/templates/all": "/templates/",
+  "/api/villain/templates": "/templates/1"
 }

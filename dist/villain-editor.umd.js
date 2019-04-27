@@ -31462,12 +31462,12 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./src/styles/lib.scss
 var lib = __webpack_require__("7b11");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=b9042642&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=b230fc8c&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.builderMode)?_c('div',{staticClass:"villain-builder"},[_c('VillainBuilder')],1):_c('div',{staticClass:"villain-editor",class:_vm.fullscreen ? 'villain-fullscreen': ''},[_c('div',{staticClass:"villain-editor-toolbar"},[_vm._m(0),_c('div',{staticClass:"villain-editor-controls float-right"},[_c('div',{on:{"click":function($event){return _vm.toggleSource()}}},[(_vm.showSource)?[_c('i',{staticClass:"fa fa-fw fa-times"})]:[_c('i',{staticClass:"fa fa-fw fa-code"})]],2),_c('div',{on:{"click":function($event){return _vm.toggleFullscreen()}}},[(_vm.fullscreen)?[_c('i',{staticClass:"fa fa-fw fa-times"})]:[_c('i',{staticClass:"fa fa-fw fa-expand-arrows-alt"})]],2)])]),(_vm.showSource)?[_c('div',{staticClass:"villain-editor-source"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.src),expression:"src"}],ref:"tasource",domProps:{"value":(_vm.src)},on:{"input":function($event){if($event.target.composing){ return; }_vm.src=$event.target.value}}}),_c('div',{staticClass:"d-flex justify-content-center"},[_c('button',{staticClass:"btn btn-primary mt-4",on:{"click":_vm.updateSource}},[_vm._v("\n          Oppdatér\n        ")])])])]:[(_vm.blocks && _vm.blocks.length)?_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){return _vm.addBlock($event)},"move":function($event){return _vm.moveBlock($event)},"delete":_vm.deleteBlock,"order":_vm.orderBlocks}}):_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){return _vm.addBlock($event)},"move":function($event){return _vm.moveBlock($event)},"delete":_vm.deleteBlock}})]],2)}
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-editor-instructions"},[_c('i',{staticClass:"fa mr-2 fa-info-circle"}),_vm._v("\n      Trykk på \"+\" under for å legge til en innholdsblokk\n    ")])}]
 
 
-// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=b9042642&
+// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=b230fc8c&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/get-iterator.js
 var get_iterator = __webpack_require__("5d73");
@@ -31785,7 +31785,7 @@ function pathJoin() {
     args[_key] = arguments[_key];
   }
 
-  return args.map(function (part, i) {
+  var str = args.map(function (part, i) {
     if (i === 0) {
       return part.trim().replace(/[/]*$/g, '');
     } else {
@@ -31794,6 +31794,12 @@ function pathJoin() {
   }).filter(function (x) {
     return x.length;
   }).join('/');
+
+  if (str[0] !== '/') {
+    return '/' + str;
+  }
+
+  return str;
 }
 // CONCATENATED MODULE: ./src/utils/fetchTemplates.js
 
@@ -35764,7 +35770,6 @@ var VillainPlus_component = normalizeComponent(
 
 
 
-
 for (var VillainEditorvue_type_script_lang_js_key in standard) {
   if (standard.hasOwnProperty(VillainEditorvue_type_script_lang_js_key)) {
     external_commonjs_vue_commonjs2_vue_root_Vue_default.a.component(VillainEditorvue_type_script_lang_js_key, standard[VillainEditorvue_type_script_lang_js_key]);
@@ -35803,23 +35808,23 @@ for (var _key2 in tools) {
     },
     server: {
       type: String,
-      default: '/'
+      default: ''
     },
     baseURL: {
       type: String,
-      default: '/api/villain/'
+      default: '/admin/api/villain/'
     },
     browseURL: {
       type: String,
-      default: '/api/villain/browse/'
+      default: '/admin/api/villain/browse/'
     },
     slideshowsURL: {
       type: String,
-      default: '/api/villain/slideshows/'
+      default: '/admin/api/villain/slideshows/'
     },
     templatesURL: {
       type: String,
-      default: '/api/villain/templates/'
+      default: '/admin/api/villain/templates/'
     },
     imageSeries: {
       type: String,
@@ -35918,25 +35923,25 @@ for (var _key2 in tools) {
     Object.defineProperty(urls, 'base', {
       enumerable: true,
       get: function get() {
-        return pathJoin(_this3.server, _this3.baseURL);
+        return "".concat(_this3.server).concat(_this3.baseURL);
       }
     });
     Object.defineProperty(urls, 'browse', {
       enumerable: true,
       get: function get() {
-        return pathJoin(_this3.server, _this3.browseURL);
+        return "".concat(_this3.server).concat(_this3.browseURL);
       }
     });
     Object.defineProperty(urls, 'slideshows', {
       enumerable: true,
       get: function get() {
-        return pathJoin(_this3.server, _this3.slideshowsURL);
+        return "".concat(_this3.server).concat(_this3.slideshowsURL);
       }
     });
     Object.defineProperty(urls, 'templates', {
       enumerable: true,
       get: function get() {
-        return pathJoin(_this3.server, _this3.templatesURL);
+        return "".concat(_this3.server).concat(_this3.templatesURL);
       }
     });
     return {
@@ -35981,7 +35986,7 @@ for (var _key2 in tools) {
               }
 
               _context.next = 4;
-              return fetchTemplates(this.templates, this.extraHeaders, pathJoin(this.server, this.templatesURL));
+              return fetchTemplates(this.templates, this.extraHeaders, "".concat(this.server).concat(this.templatesURL));
 
             case 4:
               this.availableTemplates = _context.sent;
@@ -36025,7 +36030,7 @@ for (var _key2 in tools) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return fetchTemplates(this.templates, this.extraHeaders, this.templatesURL);
+                return fetchTemplates(this.templates, this.extraHeaders, "".concat(this.server).concat(this.templatesURL));
 
               case 2:
                 this.availableTemplates = _context2.sent;

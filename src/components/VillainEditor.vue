@@ -78,7 +78,6 @@ import systemComponents from '@/components/blocks/system'
 import toolsComponents from '@/components/blocks/tools'
 import STANDARD_BLOCKS from '@/config/standardBlocks.js'
 import fetchTemplates from '@/utils/fetchTemplates.js'
-import pathJoin from '@/utils/pathJoin.js'
 
 for (let key in standardComponents) {
   if (standardComponents.hasOwnProperty(key)) {
@@ -123,27 +122,27 @@ export default {
 
     server: {
       type: String,
-      default: '/'
+      default: ''
     },
 
     baseURL: {
       type: String,
-      default: '/api/villain/'
+      default: '/admin/api/villain/'
     },
 
     browseURL: {
       type: String,
-      default: '/api/villain/browse/'
+      default: '/admin/api/villain/browse/'
     },
 
     slideshowsURL: {
       type: String,
-      default: '/api/villain/slideshows/'
+      default: '/admin/api/villain/slideshows/'
     },
 
     templatesURL: {
       type: String,
-      default: '/api/villain/templates/'
+      default: '/admin/api/villain/templates/'
     },
 
     imageSeries: {
@@ -233,19 +232,19 @@ export default {
      */
     Object.defineProperty(urls, 'base', {
        enumerable: true,
-       get: () => pathJoin(this.server, this.baseURL)
+       get: () => `${this.server}${this.baseURL}`
     })
     Object.defineProperty(urls, 'browse', {
        enumerable: true,
-       get: () => pathJoin(this.server, this.browseURL)
+       get: () => `${this.server}${this.browseURL}`
     })
     Object.defineProperty(urls, 'slideshows', {
        enumerable: true,
-       get: () => pathJoin(this.server, this.slideshowsURL)
+       get: () => `${this.server}${this.slideshowsURL}`
     })
     Object.defineProperty(urls, 'templates', {
        enumerable: true,
-       get: () => pathJoin(this.server, this.templatesURL)
+       get: () => `${this.server}${this.templatesURL}`
     })
 
     return {
@@ -273,7 +272,7 @@ export default {
   async created () {
     console.debug('==> VILLAIN EDITOR INITIALIZING')
     if (this.templateMode) {
-      this.availableTemplates = await fetchTemplates(this.templates, this.extraHeaders, pathJoin(this.server, this.templatesURL))
+      this.availableTemplates = await fetchTemplates(this.templates, this.extraHeaders, `${this.server}${this.templatesURL}`)
     }
 
     // convert data to blocks
@@ -293,7 +292,7 @@ export default {
 
   methods: {
     async updateTemplates () {
-      this.availableTemplates = await fetchTemplates(this.templates, this.extraHeaders, this.templatesURL)
+      this.availableTemplates = await fetchTemplates(this.templates, this.extraHeaders, `${this.server}${this.templatesURL}`)
     },
 
     updateSource () {

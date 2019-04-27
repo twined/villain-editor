@@ -123,7 +123,7 @@ export default {
 
     server: {
       type: String,
-      default: ''
+      default: '/'
     },
 
     baseURL: {

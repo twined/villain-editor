@@ -13,7 +13,7 @@ export default async function storeTemplate (template, extraHeaders, url) {
   }
 
   const formData = new FormData()
-  formData.append('template', template)
+  formData.append('template', JSON.stringify(template))
   request = new Request(url, { headers, method: 'post', body: formData })
 
   try {

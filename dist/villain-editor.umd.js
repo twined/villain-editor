@@ -31462,12 +31462,12 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./src/styles/lib.scss
 var lib = __webpack_require__("7b11");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=24622c2d&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=64e3e174&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.builderMode)?_c('div',{staticClass:"villain-builder"},[_c('VillainBuilder')],1):_c('div',{staticClass:"villain-editor",class:_vm.fullscreen ? 'villain-fullscreen': ''},[_c('div',{staticClass:"villain-editor-toolbar"},[_vm._m(0),_c('div',{staticClass:"villain-editor-controls float-right"},[_c('div',{on:{"click":function($event){return _vm.toggleSource()}}},[(_vm.showSource)?[_c('i',{staticClass:"fa fa-fw fa-times"})]:[_c('i',{staticClass:"fa fa-fw fa-code"})]],2),_c('div',{on:{"click":function($event){return _vm.toggleFullscreen()}}},[(_vm.fullscreen)?[_c('i',{staticClass:"fa fa-fw fa-times"})]:[_c('i',{staticClass:"fa fa-fw fa-expand-arrows-alt"})]],2)])]),(_vm.showSource)?[_c('div',{staticClass:"villain-editor-source"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.src),expression:"src"}],ref:"tasource",domProps:{"value":(_vm.src)},on:{"input":function($event){if($event.target.composing){ return; }_vm.src=$event.target.value}}}),_c('div',{staticClass:"d-flex justify-content-center"},[_c('button',{staticClass:"btn btn-primary mt-4",on:{"click":_vm.updateSource}},[_vm._v("\n          Oppdatér\n        ")])])])]:[(_vm.blocks && _vm.blocks.length)?_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){return _vm.addBlock($event)},"move":function($event){return _vm.moveBlock($event)},"delete":_vm.deleteBlock,"order":_vm.orderBlocks}}):_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){return _vm.addBlock($event)},"move":function($event){return _vm.moveBlock($event)},"delete":_vm.deleteBlock}})]],2)}
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-editor-instructions"},[_c('i',{staticClass:"fa mr-2 fa-info-circle"}),_vm._v("\n      Trykk på \"+\" under for å legge til en innholdsblokk\n    ")])}]
 
 
-// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=24622c2d&
+// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=64e3e174&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/get-iterator.js
 var get_iterator = __webpack_require__("5d73");
@@ -31775,7 +31775,28 @@ function alertConfirm(title, text, callback) {
 }
 
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
+var es6_regexp_replace = __webpack_require__("a481");
+
+// CONCATENATED MODULE: ./src/utils/pathJoin.js
+
+function pathJoin() {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  return args.map(function (part, i) {
+    if (i === 0) {
+      return part.trim().replace(/[/]*$/g, '');
+    } else {
+      return part.trim().replace(/(^[/]*|[/]*$)/g, '');
+    }
+  }).filter(function (x) {
+    return x.length;
+  }).join('/');
+}
 // CONCATENATED MODULE: ./src/utils/fetchTemplates.js
+
 
 
 
@@ -31788,7 +31809,7 @@ function _fetchTemplates() {
   _fetchTemplates = _asyncToGenerator(
   /*#__PURE__*/
   regeneratorRuntime.mark(function _callee(namespace, extraHeaders, url) {
-    var request, headers, _arr, _i, key, response, data;
+    var request, headers, _arr, _i, key, fullPath, response, data;
 
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -31829,38 +31850,40 @@ function _fetchTemplates() {
               }
             }
 
-            request = new Request("".concat(url).concat(namespace || 'all'), {
+            fullPath = pathJoin(url, namespace);
+            request = new Request(fullPath, {
               headers: headers
             });
-            _context.prev = 4;
-            _context.next = 7;
+            _context.prev = 5;
+            _context.next = 8;
             return fetch(request);
 
-          case 7:
+          case 8:
             response = _context.sent;
-            _context.next = 10;
+            _context.next = 11;
             return response.json();
 
-          case 10:
+          case 11:
             data = _context.sent;
             return _context.abrupt("return", data);
 
-          case 14:
-            _context.prev = 14;
-            _context.t0 = _context["catch"](4);
+          case 15:
+            _context.prev = 15;
+            _context.t0 = _context["catch"](5);
             alertError('Feil', 'Klarte ikke hente maler fra databasen!');
             console.error(_context.t0);
 
-          case 18:
+          case 19:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, this, [[4, 14]]);
+    }, _callee, this, [[5, 15]]);
   }));
   return _fetchTemplates.apply(this, arguments);
 }
 // CONCATENATED MODULE: ./src/utils/storeTemplate.js
+
 
 
 
@@ -31893,7 +31916,7 @@ function _storeTemplate() {
             }
 
             formData = new FormData();
-            formData.append('template', template);
+            formData.append('template', stringify_default()(template));
             request = new Request(url, {
               headers: headers,
               method: 'post',
@@ -32683,9 +32706,6 @@ var TemplateBlockvue_type_template_id_6886aff6_staticRenderFns = []
 
 
 // CONCATENATED MODULE: ./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=6886aff6&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
-var es6_regexp_replace = __webpack_require__("a481");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/system/TemplateBlock.vue?vue&type=script&lang=js&
 
@@ -35744,6 +35764,7 @@ var VillainPlus_component = normalizeComponent(
 
 
 
+
 for (var VillainEditorvue_type_script_lang_js_key in standard) {
   if (standard.hasOwnProperty(VillainEditorvue_type_script_lang_js_key)) {
     external_commonjs_vue_commonjs2_vue_root_Vue_default.a.component(VillainEditorvue_type_script_lang_js_key, standard[VillainEditorvue_type_script_lang_js_key]);
@@ -35779,6 +35800,10 @@ for (var _key2 in tools) {
     templateMode: {
       type: Boolean,
       default: false
+    },
+    server: {
+      type: String,
+      default: ''
     },
     baseURL: {
       type: String,
@@ -35886,28 +35911,32 @@ for (var _key2 in tools) {
         return _this3.extraHeaders;
       }
     });
+    /**
+     * URLS
+     */
+
     Object.defineProperty(urls, 'base', {
       enumerable: true,
       get: function get() {
-        return _this3.baseURL;
+        return pathJoin(_this3.server, _this3.baseURL);
       }
     });
     Object.defineProperty(urls, 'browse', {
       enumerable: true,
       get: function get() {
-        return _this3.browseURL;
+        return pathJoin(_this3.server, _this3.browseURL);
       }
     });
     Object.defineProperty(urls, 'slideshows', {
       enumerable: true,
       get: function get() {
-        return _this3.slideshowsURL;
+        return pathJoin(_this3.server, _this3.slideshowsURL);
       }
     });
     Object.defineProperty(urls, 'templates', {
       enumerable: true,
       get: function get() {
-        return _this3.templatesURL;
+        return pathJoin(_this3.server, _this3.templatesURL);
       }
     });
     return {
@@ -35952,7 +35981,7 @@ for (var _key2 in tools) {
               }
 
               _context.next = 4;
-              return fetchTemplates(this.templates, this.extraHeaders, this.templatesURL);
+              return fetchTemplates(this.templates, this.extraHeaders, pathJoin(this.server, this.templatesURL));
 
             case 4:
               this.availableTemplates = _context.sent;

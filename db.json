@@ -1,0 +1,63 @@
+{
+  "templates": [
+    {
+      "type": "template",
+      "data": {
+        "id": 1,
+        "name": "Produktteaser - 1 bilde",
+        "help_text": "Produktteaser, med et bilde (breddeformat)",
+        "class": "v-teaser-single",
+        "code": "<div class=\"teaser-single\">%{MARKDOWN}</div>",
+        "refs": [
+          {
+            "name": "MARKDOWN",
+            "data": {
+              "type": "markdown",
+              "data": {
+                "text": "MD text for single"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "template",
+      "data": {
+        "id": 2,
+        "name": "Produktteaser - 2 bilder",
+        "help_text": "Produktteaser, med to sidestilte bilder (høydeformat)",
+        "class": "v-teaser-double",
+        "code": "<div class=\"teaser-double\">%{MARKDOWN}</div>",
+        "refs": [
+          {
+            "name": "MARKDOWN",
+            "data": {
+              "type": "markdown",
+              "data": {
+                "text": "MD text for double"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

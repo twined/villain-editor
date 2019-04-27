@@ -1,4 +1,5 @@
 import { alertError } from './alerts'
+import pathJoin from './pathJoin'
 
 export default async function fetchTemplates (namespace, extraHeaders, url) {
   // return [
@@ -35,7 +36,8 @@ export default async function fetchTemplates (namespace, extraHeaders, url) {
     }
   }
 
-  request = new Request(`${url}${namespace || 'all'}`, { headers })
+  let fullPath = pathJoin(url, namespace)
+  request = new Request(fullPath, { headers })
 
   try {
     let response = await fetch(request)

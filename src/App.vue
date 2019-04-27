@@ -4,6 +4,7 @@
       :json="json"
       :builder-mode="true"
       :template-mode="true"
+      server="http://localhost:3000"
     />
   </div>
 </template>

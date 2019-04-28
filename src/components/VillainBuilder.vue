@@ -1,29 +1,120 @@
 <template>
   <div class="villain-builder-wrapper">
-    <button
-      class="save"
-      @click="saveTemplate()">
-      Lagre
-    </button>
+    <div class="villain-builder-header">
+      <span class="text-mono">
+        <template v-if="currentTemplate">
+          Editérer {<strong> {{ currentTemplate.data.class }} </strong>}
+        </template>
+      </span>
+    </div>
+
     <div class="villain-builder-editor-wrapper">
       <div
         id="builder-template"
         class="villain-builder-editor">
       </div>
     </div>
-    <aside>
+
+    <aside class="villain-builder-content-aside">
+      <div class="villain-builder-aside-header">
+        Maler
+      </div>
       <ul>
         <li
           v-for="t in templates"
           :key="t.data.id"
+          class="text-mono"
           @click="selectTemplate(t)">
           {{ t.data.class }}
         </li>
       </ul>
     </aside>
+
+    <div class="villain-builder-refs">
+      <div
+        id="builder-ref"
+        class="villain-builder-ref">
+      </div>
+    </div>
+
+    <aside class="villain-builder-refs-aside">
+      <template v-if="currentTemplate && currentTemplate.data.refs">
+        <div class="villain-builder-aside-header">
+          REFs
+        </div>
+        <ul>
+          <li
+            v-for="ref in currentTemplate.data.refs"
+            :key="ref.name"
+            class="text-mono"
+            @click="selectRef(ref)">
+            %{<strong>{{ ref.name }}</strong>}
+            <button
+              v-if="prevRefName === ref.name"
+              class="btn btn-outline-secondary btn-sm"
+              @click.prevent.stop="saveRef()">Lagre</button>
+          </li>
+        </ul>
+      </template>
+    </aside>
+    <div class="villain-builder-footer">
+      <div
+        v-if="showBlockPicker"
+        class="villain-builder-block-picker">
+        <div class="villain-builder-block-picker-available">
+          <div
+            v-for="b in available.blocks"
+            :key="b.name"
+            class="villain-editor-plus-available-block"
+            @mouseover="setHover(b.name)"
+            @click="addBlock(b)">
+            <div>
+              <i
+                :class="b.icon"
+                class="fa fa-fw"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="villain-builder-block-picker-header">
+          &rarr; {{ hoveredBlock }}
+        </div>
+      </div>
+      <div
+        v-if="showNamer"
+        class="villain-builder-block-picker-namer">
+        <label class="float-left">Navngi ref</label>
+        <input
+          v-model="refName"
+          class="form-control float-left d-inline"
+          type="input">
+        <button
+          class="btn btn-outline-secondary float-left"
+          @click="saveName">
+          Opprett ref
+        </button>
+      </div>
+      <button
+        class="save btn btn-outline-primary float-right ml-2"
+        @click="saveTemplate()">
+        Lagre
+      </button>
+
+      <div class="dropdown float-right">
+        <button
+          :disabled="currentTemplate === null"
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          @click="showBlockPicker = true">
+          Ny REF
+        </button>
+      </div>
+    </div>
   </div>
 </template>
+
 <script>
+
 import CodeFlask from 'codeflask'
 import fetchTemplates from '@/utils/fetchTemplates'
 import storeTemplate from '@/utils/storeTemplate'
@@ -31,35 +122,101 @@ import storeTemplate from '@/utils/storeTemplate'
 export default {
   data () {
     return {
-      flask: null,
+      hoveredBlock: 'Velg blokk',
+      showBlockPicker: false,
+      showNamer: false,
+      codeFlask: null,
+      refFlask: null,
+      refName: '',
       currentTemplate: null,
+      currentRef: null,
+      prevRefName: null,
       templates: []
     }
   },
 
   inject: [
+    'available',
     'headers',
     'urls'
   ],
 
   async mounted () {
     this.templates = await fetchTemplates('all', this.headers.extra, this.urls.templates)
-    this.flask = new CodeFlask('#builder-template', { language: 'html', lineNumbers: true })
+    this.codeFlask = new CodeFlask('#builder-template', { language: 'html', lineNumbers: true })
+    this.refFlask = new CodeFlask('#builder-ref', { language: 'javascript', lineNumbers: true })
   },
 
   methods: {
+    setHover (name) {
+      this.hoveredBlock = name
+    },
+
+    saveName () {
+      this.currentRef.name = this.refName
+      this.refName = ''
+      this.showNamer = false
+      this.refFlask.updateCode(JSON.stringify(this.currentRef, null, 2))
+
+      this.currentTemplate.data.refs = [
+        ...this.currentTemplate.data.refs,
+        this.currentRef
+      ]
+    },
+
+    saveRef () {
+      // get this ref
+      const newRef = JSON.parse(this.refFlask.getCode())
+      // find ref to replace
+      const oldRef = this.currentTemplate.data.refs.find(r => r.name === this.prevRefName)
+      if (oldRef) {
+        let idx = this.currentTemplate.data.refs.indexOf(oldRef)
+        if (idx >= 0) {
+          this.currentTemplate.data.refs = [
+            ...this.currentTemplate.data.refs.slice(0, idx),
+            newRef,
+            ...this.currentTemplate.data.refs.slice(idx + 1)
+          ]
+          this.resetRef()
+        }
+      }
+    },
+
+    resetRef () {
+      this.currentRef = {}
+      this.prevRefName = null
+      this.refFlask.updateCode('')
+    },
+
+    addBlock (b) {
+      const ref = {
+        name: b.component.toUpperCase(),
+        data: { type: b.component.toLowerCase(), data: b.dataTemplate }
+      }
+
+      this.currentRef = { ...ref }
+      this.showNamer = true
+      this.showBlockPicker = false
+    },
+
     selectTemplate (t) {
+      this.resetRef()
       this.currentTemplate = t
-      this.flask.updateCode(this.currentTemplate.data.code)
+      this.codeFlask.updateCode(this.currentTemplate.data.code)
+    },
+
+    selectRef (r) {
+      this.currentRef = { ...r }
+      this.prevRefName = this.currentRef.name
+      this.refFlask.updateCode(JSON.stringify(this.currentRef, null, 2))
     },
 
     async saveTemplate () {
-      console.log(this.headers)
       this.currentTemplate = {
         ...this.currentTemplate,
         data: {
           ...this.currentTemplate.data,
-          code: this.flask.getCode()
+          code: this.codeFlask.getCode()
         }
       }
 

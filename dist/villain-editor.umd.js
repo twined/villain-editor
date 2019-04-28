@@ -31673,12 +31673,15 @@ var autosize_default = /*#__PURE__*/__webpack_require__.n(autosize);
 var cloneDeep = __webpack_require__("0644");
 var cloneDeep_default = /*#__PURE__*/__webpack_require__.n(cloneDeep);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainBuilder.vue?vue&type=template&id=96eb75d6&
-var VillainBuildervue_type_template_id_96eb75d6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-wrapper"},[_c('button',{staticClass:"save",on:{"click":function($event){return _vm.saveTemplate()}}},[_vm._v("\n    Lagre\n  ")]),_vm._m(0),_c('aside',[_c('ul',_vm._l((_vm.templates),function(t){return _c('li',{key:t.data.id,on:{"click":function($event){return _vm.selectTemplate(t)}}},[_vm._v("\n        "+_vm._s(t.data.class)+"\n      ")])}),0)])])}
-var VillainBuildervue_type_template_id_96eb75d6_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-editor-wrapper"},[_c('div',{staticClass:"villain-builder-editor",attrs:{"id":"builder-template"}})])}]
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainBuilder.vue?vue&type=template&id=0db351a0&
+var VillainBuildervue_type_template_id_0db351a0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-wrapper"},[_c('div',{staticClass:"villain-builder-header"},[_c('span',{staticClass:"text-mono"},[(_vm.currentTemplate)?[_vm._v("\n        Editérer {"),_c('strong',[_vm._v(" "+_vm._s(_vm.currentTemplate.data.class)+" ")]),_vm._v("}\n      ")]:_vm._e()],2)]),_vm._m(0),_c('aside',{staticClass:"villain-builder-content-aside"},[_c('div',{staticClass:"villain-builder-aside-header"},[_vm._v("\n      Maler\n    ")]),_c('ul',_vm._l((_vm.templates),function(t){return _c('li',{key:t.data.id,staticClass:"text-mono",on:{"click":function($event){return _vm.selectTemplate(t)}}},[_vm._v("\n        "+_vm._s(t.data.class)+"\n      ")])}),0)]),_vm._m(1),_c('aside',{staticClass:"villain-builder-refs-aside"},[(_vm.currentTemplate && _vm.currentTemplate.data.refs)?[_c('div',{staticClass:"villain-builder-aside-header"},[_vm._v("\n        REFs\n      ")]),_c('ul',_vm._l((_vm.currentTemplate.data.refs),function(ref){return _c('li',{key:ref.name,staticClass:"text-mono",on:{"click":function($event){return _vm.selectRef(ref)}}},[_vm._v("\n          %{"),_c('strong',[_vm._v(_vm._s(ref.name))]),_vm._v("}\n          "),(_vm.prevRefName === ref.name)?_c('button',{staticClass:"btn btn-outline-secondary btn-sm",on:{"click":function($event){$event.preventDefault();$event.stopPropagation();return _vm.saveRef()}}},[_vm._v("Lagre")]):_vm._e()])}),0)]:_vm._e()],2),_c('div',{staticClass:"villain-builder-footer"},[(_vm.showBlockPicker)?_c('div',{staticClass:"villain-builder-block-picker"},[_c('div',{staticClass:"villain-builder-block-picker-available"},_vm._l((_vm.available.blocks),function(b){return _c('div',{key:b.name,staticClass:"villain-editor-plus-available-block",on:{"mouseover":function($event){return _vm.setHover(b.name)},"click":function($event){return _vm.addBlock(b)}}},[_c('div',[_c('i',{staticClass:"fa fa-fw",class:b.icon})])])}),0),_c('div',{staticClass:"villain-builder-block-picker-header"},[_vm._v("\n        → "+_vm._s(_vm.hoveredBlock)+"\n      ")])]):_vm._e(),(_vm.showNamer)?_c('div',{staticClass:"villain-builder-block-picker-namer"},[_c('label',{staticClass:"float-left"},[_vm._v("Navngi ref")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.refName),expression:"refName"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.refName)},on:{"input":function($event){if($event.target.composing){ return; }_vm.refName=$event.target.value}}}),_c('button',{staticClass:"btn btn-outline-secondary float-left",on:{"click":_vm.saveName}},[_vm._v("\n        Opprett ref\n      ")])]):_vm._e(),_c('button',{staticClass:"save btn btn-outline-primary float-right ml-2",on:{"click":function($event){return _vm.saveTemplate()}}},[_vm._v("\n      Lagre\n    ")]),_c('div',{staticClass:"dropdown float-right"},[_c('button',{staticClass:"btn btn-secondary dropdown-toggle",attrs:{"disabled":_vm.currentTemplate === null,"type":"button"},on:{"click":function($event){_vm.showBlockPicker = true}}},[_vm._v("\n        Ny REF\n      ")])])])])}
+var VillainBuildervue_type_template_id_0db351a0_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-editor-wrapper"},[_c('div',{staticClass:"villain-builder-editor",attrs:{"id":"builder-template"}})])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-refs"},[_c('div',{staticClass:"villain-builder-ref",attrs:{"id":"builder-ref"}})])}]
 
 
-// CONCATENATED MODULE: ./src/components/VillainBuilder.vue?vue&type=template&id=96eb75d6&
+// CONCATENATED MODULE: ./src/components/VillainBuilder.vue?vue&type=template&id=0db351a0&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
+var es6_function_name = __webpack_require__("7f7f");
 
 // EXTERNAL MODULE: ./node_modules/codeflask/build/codeflask.module.js
 var codeflask_module = __webpack_require__("84a6");
@@ -31921,6 +31924,100 @@ function _storeTemplate() {
 
 
 
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -31952,12 +32049,19 @@ function _storeTemplate() {
 /* harmony default export */ var VillainBuildervue_type_script_lang_js_ = ({
   data: function data() {
     return {
-      flask: null,
+      hoveredBlock: 'Velg blokk',
+      showBlockPicker: false,
+      showNamer: false,
+      codeFlask: null,
+      refFlask: null,
+      refName: '',
       currentTemplate: null,
+      currentRef: null,
+      prevRefName: null,
       templates: []
     };
   },
-  inject: ['headers', 'urls'],
+  inject: ['available', 'headers', 'urls'],
   mounted: function () {
     var _mounted = _asyncToGenerator(
     /*#__PURE__*/
@@ -31971,12 +32075,16 @@ function _storeTemplate() {
 
             case 2:
               this.templates = _context.sent;
-              this.flask = new codeflask_module["a" /* default */]('#builder-template', {
+              this.codeFlask = new codeflask_module["a" /* default */]('#builder-template', {
                 language: 'html',
                 lineNumbers: true
               });
+              this.refFlask = new codeflask_module["a" /* default */]('#builder-ref', {
+                language: 'javascript',
+                lineNumbers: true
+              });
 
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -31991,9 +32099,61 @@ function _storeTemplate() {
     return mounted;
   }(),
   methods: {
+    setHover: function setHover(name) {
+      this.hoveredBlock = name;
+    },
+    saveName: function saveName() {
+      this.currentRef.name = this.refName;
+      this.refName = '';
+      this.showNamer = false;
+      this.refFlask.updateCode(stringify_default()(this.currentRef, null, 2));
+      this.currentTemplate.data.refs = [].concat(_toConsumableArray(this.currentTemplate.data.refs), [this.currentRef]);
+    },
+    saveRef: function saveRef() {
+      var _this = this;
+
+      // get this ref
+      var newRef = JSON.parse(this.refFlask.getCode()); // find ref to replace
+
+      var oldRef = this.currentTemplate.data.refs.find(function (r) {
+        return r.name === _this.prevRefName;
+      });
+
+      if (oldRef) {
+        var idx = this.currentTemplate.data.refs.indexOf(oldRef);
+
+        if (idx >= 0) {
+          this.currentTemplate.data.refs = [].concat(_toConsumableArray(this.currentTemplate.data.refs.slice(0, idx)), [newRef], _toConsumableArray(this.currentTemplate.data.refs.slice(idx + 1)));
+          this.resetRef();
+        }
+      }
+    },
+    resetRef: function resetRef() {
+      this.currentRef = {};
+      this.prevRefName = null;
+      this.refFlask.updateCode('');
+    },
+    addBlock: function addBlock(b) {
+      var ref = {
+        name: b.component.toUpperCase(),
+        data: {
+          type: b.component.toLowerCase(),
+          data: b.dataTemplate
+        }
+      };
+      this.currentRef = _objectSpread({}, ref);
+      this.showNamer = true;
+      this.showBlockPicker = false;
+    },
     selectTemplate: function selectTemplate(t) {
+      this.resetRef();
       this.currentTemplate = t;
-      this.flask.updateCode(this.currentTemplate.data.code);
+      this.codeFlask.updateCode(this.currentTemplate.data.code);
+    },
+    selectRef: function selectRef(r) {
+      this.currentRef = _objectSpread({}, r);
+      this.prevRefName = this.currentRef.name;
+      this.refFlask.updateCode(stringify_default()(this.currentRef, null, 2));
     },
     saveTemplate: function () {
       var _saveTemplate = _asyncToGenerator(
@@ -32004,20 +32164,19 @@ function _storeTemplate() {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                console.log(this.headers);
                 this.currentTemplate = _objectSpread({}, this.currentTemplate, {
                   data: _objectSpread({}, this.currentTemplate.data, {
-                    code: this.flask.getCode()
+                    code: this.codeFlask.getCode()
                   })
                 });
-                _context2.next = 4;
+                _context2.next = 3;
                 return storeTemplate(this.currentTemplate, this.headers.extra, this.urls.templates);
 
-              case 4:
+              case 3:
                 result = _context2.sent;
                 console.log(result);
 
-              case 6:
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -32140,8 +32299,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_VillainBuildervue_type_script_lang_js_,
-  VillainBuildervue_type_template_id_96eb75d6_render,
-  VillainBuildervue_type_template_id_96eb75d6_staticRenderFns,
+  VillainBuildervue_type_template_id_0db351a0_render,
+  VillainBuildervue_type_template_id_0db351a0_staticRenderFns,
   false,
   null,
   null,
@@ -32163,9 +32322,6 @@ var Blockvue_type_template_id_d6891ef4_staticRenderFns = [function () {var _vm=t
 
 
 // CONCATENATED MODULE: ./src/components/blocks/system/Block.vue?vue&type=template&id=d6891ef4&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
-var es6_function_name = __webpack_require__("7f7f");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/system/Block.vue?vue&type=script&lang=js&
 

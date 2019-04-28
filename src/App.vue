@@ -2,7 +2,7 @@
   <div id="app">
     <VillainEditor
       :json="json"
-      :builder-mode="false"
+      :builder-mode="true"
       :template-mode="true"
       server="http://localhost:3000"
     />

@@ -1,31 +1,6 @@
 import { alertError } from './alerts'
-import pathJoin from './pathJoin'
 
 export default async function fetchTemplates (namespace, extraHeaders, url) {
-  // return [
-  //   {
-  //     type: 'template',
-  //     data: {
-  //       id: 2,
-  //       name: 'Produktteaser - 2 bilder',
-  //       help_text: 'Produktteaser, med to sidestilte bilder (høydeformat)',
-  //       class: 'v-unique-id',
-  //       code: '<div>%{MARKDOWN}</div>',
-  //       refs: [
-  //         {
-  //           'name': 'MARKDOWN',
-  //           'data': {
-  //             'type': 'markdown',
-  //             'data': {
-  //               'text': 'MD text!'
-  //             }
-  //           }
-  //         }
-  //       ]
-  //     }
-  //   }
-  // ]
-
   let request
   let headers = new Headers()
   headers.append('accept', 'application/json, text/javascript, */*; q=0.01')
@@ -36,7 +11,7 @@ export default async function fetchTemplates (namespace, extraHeaders, url) {
     }
   }
 
-  let fullPath = pathJoin(url, namespace)
+  let fullPath = `${url}${namespace}`
   request = new Request(fullPath, { headers })
 
   try {

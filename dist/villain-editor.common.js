@@ -31766,34 +31766,7 @@ function alertConfirm(title, text, callback) {
 }
 
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
-var es6_regexp_replace = __webpack_require__("a481");
-
-// CONCATENATED MODULE: ./src/utils/pathJoin.js
-
-function pathJoin() {
-  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-    args[_key] = arguments[_key];
-  }
-
-  var str = args.map(function (part, i) {
-    if (i === 0) {
-      return part.trim().replace(/[/]*$/g, '');
-    } else {
-      return part.trim().replace(/(^[/]*|[/]*$)/g, '');
-    }
-  }).filter(function (x) {
-    return x.length;
-  }).join('/');
-
-  if (str[0] !== '/') {
-    return '/' + str;
-  }
-
-  return str;
-}
 // CONCATENATED MODULE: ./src/utils/fetchTemplates.js
-
 
 
 
@@ -31812,29 +31785,6 @@ function _fetchTemplates() {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            // return [
-            //   {
-            //     type: 'template',
-            //     data: {
-            //       id: 2,
-            //       name: 'Produktteaser - 2 bilder',
-            //       help_text: 'Produktteaser, med to sidestilte bilder (høydeformat)',
-            //       class: 'v-unique-id',
-            //       code: '<div>%{MARKDOWN}</div>',
-            //       refs: [
-            //         {
-            //           'name': 'MARKDOWN',
-            //           'data': {
-            //             'type': 'markdown',
-            //             'data': {
-            //               'text': 'MD text!'
-            //             }
-            //           }
-            //         }
-            //       ]
-            //     }
-            //   }
-            // ]
             headers = new Headers();
             headers.append('accept', 'application/json, text/javascript, */*; q=0.01');
 
@@ -31847,7 +31797,7 @@ function _fetchTemplates() {
               }
             }
 
-            fullPath = pathJoin(url, namespace);
+            fullPath = "".concat(url).concat(namespace);
             request = new Request(fullPath, {
               headers: headers
             });
@@ -32703,6 +32653,9 @@ var TemplateBlockvue_type_template_id_6886aff6_staticRenderFns = []
 
 
 // CONCATENATED MODULE: ./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=6886aff6&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
+var es6_regexp_replace = __webpack_require__("a481");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/system/TemplateBlock.vue?vue&type=script&lang=js&
 

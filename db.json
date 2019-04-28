@@ -28,7 +28,7 @@
         "name": "Produktteaser - 2 bilder",
         "help_text": "Produktteaser, med to sidestilte bilder (høydeformat)",
         "class": "v-teaser-double",
-        "code": "<div class=\"teaser-double\">%{MARKDOWN}</div>",
+        "code": "<div class=\"teaser-double\"><h1>Header</h1><div class=\"content\">%{MARKDOWN}</div></div>",
         "refs": [
           {
             "name": "MARKDOWN",

@@ -48,6 +48,12 @@
           REFs
         </div>
         <ul>
+          <button
+            :disabled="currentTemplate === null"
+            class="btn btn-primary btn-block mb-2"
+            @click="showBlockPicker = true">
+            Ny REF
+          </button>
           <li
             v-for="ref in currentTemplate.data.refs"
             :key="ref.name"
@@ -123,19 +129,11 @@
           Opprett ref
         </button>
       </div>
-      <button
-        class="save btn btn-outline-primary float-right ml-2"
-        @click="saveTemplate()">
-        Lagre
-      </button>
-
-      <div class="dropdown float-right">
+      <div class="villain-builder-save-wrapper">
         <button
-          :disabled="currentTemplate === null"
-          class="btn btn-secondary dropdown-toggle"
-          type="button"
-          @click="showBlockPicker = true">
-          Ny REF
+          class="btn btn-outline-primary"
+          @click="saveTemplate()">
+          Lagre
         </button>
       </div>
     </div>

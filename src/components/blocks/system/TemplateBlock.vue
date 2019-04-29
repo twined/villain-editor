@@ -136,6 +136,16 @@ export default {
       let templateSourceRefs = foundTemplate.data.refs
       let blockRefs = this.block.data.refs
 
+      for (let i = 0; i < templateSourceRefs.length; i++) {
+        if (!blockRefs.find(b => b.name === templateSourceRefs[i].name)) {
+          console.log('didnt find', templateSourceRefs[i])
+          this.block.data.refs = [
+            ...this.block.data.refs,
+            templateSourceRefs[i]
+          ]
+        }
+      }
+
       console.log('template refs', templateSourceRefs)
       console.log('block refs', blockRefs)
     },

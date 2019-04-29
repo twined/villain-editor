@@ -32857,17 +32857,18 @@ var BlockContainer_component = normalizeComponent(
 )
 
 /* harmony default export */ var BlockContainer = (BlockContainer_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=ab23a13c&
-var TemplateBlockvue_type_template_id_ab23a13c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-template-description"},[_c('i',{staticClass:"fa fa-fw fa-map mr-1"}),_vm._v(" "+_vm._s(_vm.block.data.name)+"\n  ")]),_c(_vm.buildWrapper(),{tag:"component"})],1)}
-var TemplateBlockvue_type_template_id_ab23a13c_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=1d9892e6&
+var TemplateBlockvue_type_template_id_1d9892e6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-template-description"},[_c('i',{staticClass:"fa fa-fw fa-map mr-1"}),_vm._v(" "+_vm._s(_vm.block.data.name)+"\n  ")]),_c(_vm.buildWrapper(),{tag:"component"})],1)}
+var TemplateBlockvue_type_template_id_1d9892e6_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=ab23a13c&
+// CONCATENATED MODULE: ./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=1d9892e6&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
 var es6_regexp_replace = __webpack_require__("a481");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/system/TemplateBlock.vue?vue&type=script&lang=js&
+
 
 
 
@@ -33000,6 +33001,20 @@ external_commonjs_vue_commonjs2_vue_root_Vue_default.a.component('component-prox
       });
       var templateSourceRefs = foundTemplate.data.refs;
       var blockRefs = this.block.data.refs;
+
+      var _loop = function _loop(i) {
+        if (!blockRefs.find(function (b) {
+          return b.name === templateSourceRefs[i].name;
+        })) {
+          console.log('didnt find', templateSourceRefs[i]);
+          _this.block.data.refs = [].concat(_toConsumableArray(_this.block.data.refs), [templateSourceRefs[i]]);
+        }
+      };
+
+      for (var i = 0; i < templateSourceRefs.length; i++) {
+        _loop(i);
+      }
+
       console.log('template refs', templateSourceRefs);
       console.log('block refs', blockRefs);
     },
@@ -33035,8 +33050,8 @@ external_commonjs_vue_commonjs2_vue_root_Vue_default.a.component('component-prox
 
 var TemplateBlock_component = normalizeComponent(
   system_TemplateBlockvue_type_script_lang_js_,
-  TemplateBlockvue_type_template_id_ab23a13c_render,
-  TemplateBlockvue_type_template_id_ab23a13c_staticRenderFns,
+  TemplateBlockvue_type_template_id_1d9892e6_render,
+  TemplateBlockvue_type_template_id_1d9892e6_staticRenderFns,
   false,
   null,
   null,

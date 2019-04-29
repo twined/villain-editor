@@ -31898,7 +31898,7 @@ function _storeTemplate() {
               break;
             }
 
-            fetchTemplates('all', this.extraHeaders, url);
+            fetchTemplates('all', extraHeaders, url);
             return _context.abrupt("return", data);
 
           case 16:

@@ -20,6 +20,11 @@
         Maler
       </div>
       <ul>
+        <button
+          class="btn btn-primary btn-block mb-2"
+          @click="createTemplate">
+          Ny mal
+        </button>
         <li
           v-for="t in templates"
           :key="t.data.id"
@@ -58,6 +63,30 @@
       </template>
     </aside>
     <div class="villain-builder-footer">
+      <div
+        v-if="!showBlockPicker && !showNamer && currentTemplate"
+        class="villain-builder-block-attributes">
+        <label class="float-left">Klasse</label>
+        <input
+          v-model="currentTemplate.data.class"
+          class="form-control float-left d-inline"
+          type="input">
+        <label class="float-left">Navn</label>
+        <input
+          v-model="currentTemplate.data.name"
+          class="form-control float-left d-inline"
+          type="input">
+        <label class="float-left">Kategori</label>
+        <input
+          v-model="currentTemplate.data.namespace"
+          class="form-control float-left d-inline"
+          type="input">
+        <label class="float-left">Hjelpetekst</label>
+        <input
+          v-model="currentTemplate.data.help_text"
+          class="form-control float-left d-inline"
+          type="input">
+      </div>
       <div
         v-if="showBlockPicker"
         class="villain-builder-block-picker">
@@ -125,6 +154,7 @@ export default {
       hoveredBlock: 'Velg blokk',
       showBlockPicker: false,
       showNamer: false,
+      showTemplateAttrs: false,
       codeFlask: null,
       refFlask: null,
       refName: '',
@@ -148,6 +178,24 @@ export default {
   },
 
   methods: {
+    createTemplate () {
+      const template = {
+        type: 'template',
+        data: {
+          class: 'v-classname-here',
+          code: '<div class="wrapper"></div>',
+          help_text: 'Hjelpetekst',
+          name: 'Navn på mal',
+          namespace: '',
+          refs: []
+        }
+      }
+
+      this.resetRef()
+      this.currentTemplate = template
+      this.codeFlask.updateCode(template.data.code)
+    },
+
     setHover (name) {
       this.hoveredBlock = name
     },
@@ -156,6 +204,7 @@ export default {
       this.currentRef.name = this.refName
       this.refName = ''
       this.showNamer = false
+
       this.refFlask.updateCode(JSON.stringify(this.currentRef, null, 2))
 
       this.currentTemplate.data.refs = [

@@ -132,7 +132,7 @@ export default {
     },
 
     missingRefs () {
-      let foundTemplate = this.available.templates.find(t => t.data.id === id)
+      let foundTemplate = this.available.templates.find(t => t.data.id === this.block.data.id)
       let templateSourceRefs = foundTemplate.data.refs
       let blockRefs = this.block.data.refs
 

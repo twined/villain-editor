@@ -186,7 +186,7 @@ export default {
           code: '<div class="wrapper"></div>',
           help_text: 'Hjelpetekst',
           name: 'Navn på mal',
-          namespace: '',
+          namespace: 'general',
           refs: []
         }
       }
@@ -270,7 +270,9 @@ export default {
       }
 
       let result = await storeTemplate(this.currentTemplate, this.headers.extra, this.urls.templates)
-      console.log(result)
+      if (result.status === 200) {
+        this.templates = await fetchTemplates('all', this.headers.extra, this.urls.templates)
+      }
     }
   }
 }

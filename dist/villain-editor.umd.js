@@ -31673,12 +31673,12 @@ var autosize_default = /*#__PURE__*/__webpack_require__.n(autosize);
 var cloneDeep = __webpack_require__("0644");
 var cloneDeep_default = /*#__PURE__*/__webpack_require__.n(cloneDeep);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainBuilder.vue?vue&type=template&id=fe55dbca&
-var VillainBuildervue_type_template_id_fe55dbca_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-wrapper"},[_c('div',{staticClass:"villain-builder-header"},[_c('span',{staticClass:"text-mono"},[(_vm.currentTemplate)?[_vm._v("\n        Editérer {"),_c('strong',[_vm._v(" "+_vm._s(_vm.currentTemplate.data.class)+" ")]),_vm._v("}\n      ")]:_vm._e()],2)]),_vm._m(0),_c('aside',{staticClass:"villain-builder-content-aside"},[_c('div',{staticClass:"villain-builder-aside-header"},[_vm._v("\n      Maler\n    ")]),_c('ul',[_c('button',{staticClass:"btn btn-primary btn-block mb-2",on:{"click":_vm.createTemplate}},[_vm._v("\n        Ny mal\n      ")]),_vm._l((_vm.templates),function(t){return _c('li',{key:t.data.id,staticClass:"text-mono",on:{"click":function($event){return _vm.selectTemplate(t)}}},[_vm._v("\n        "+_vm._s(t.data.class)+"\n      ")])})],2)]),_vm._m(1),_c('aside',{staticClass:"villain-builder-refs-aside"},[(_vm.currentTemplate && _vm.currentTemplate.data.refs)?[_c('div',{staticClass:"villain-builder-aside-header"},[_vm._v("\n        REFs\n      ")]),_c('ul',_vm._l((_vm.currentTemplate.data.refs),function(ref){return _c('li',{key:ref.name,staticClass:"text-mono",on:{"click":function($event){return _vm.selectRef(ref)}}},[_vm._v("\n          %{"),_c('strong',[_vm._v(_vm._s(ref.name))]),_vm._v("}\n          "),(_vm.prevRefName === ref.name)?_c('button',{staticClass:"btn btn-outline-secondary btn-sm",on:{"click":function($event){$event.preventDefault();$event.stopPropagation();return _vm.saveRef()}}},[_vm._v("Lagre")]):_vm._e()])}),0)]:_vm._e()],2),_c('div',{staticClass:"villain-builder-footer"},[(!_vm.showBlockPicker && !_vm.showNamer && _vm.currentTemplate)?_c('div',{staticClass:"villain-builder-block-attributes"},[_c('label',{staticClass:"float-left"},[_vm._v("Klasse")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentTemplate.data.class),expression:"currentTemplate.data.class"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.currentTemplate.data.class)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.currentTemplate.data, "class", $event.target.value)}}}),_c('label',{staticClass:"float-left"},[_vm._v("Navn")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentTemplate.data.name),expression:"currentTemplate.data.name"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.currentTemplate.data.name)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.currentTemplate.data, "name", $event.target.value)}}}),_c('label',{staticClass:"float-left"},[_vm._v("Kategori")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentTemplate.data.namespace),expression:"currentTemplate.data.namespace"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.currentTemplate.data.namespace)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.currentTemplate.data, "namespace", $event.target.value)}}}),_c('label',{staticClass:"float-left"},[_vm._v("Hjelpetekst")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentTemplate.data.help_text),expression:"currentTemplate.data.help_text"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.currentTemplate.data.help_text)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.currentTemplate.data, "help_text", $event.target.value)}}})]):_vm._e(),(_vm.showBlockPicker)?_c('div',{staticClass:"villain-builder-block-picker"},[_c('div',{staticClass:"villain-builder-block-picker-available"},_vm._l((_vm.available.blocks),function(b){return _c('div',{key:b.name,staticClass:"villain-editor-plus-available-block",on:{"mouseover":function($event){return _vm.setHover(b.name)},"click":function($event){return _vm.addBlock(b)}}},[_c('div',[_c('i',{staticClass:"fa fa-fw",class:b.icon})])])}),0),_c('div',{staticClass:"villain-builder-block-picker-header"},[_vm._v("\n        → "+_vm._s(_vm.hoveredBlock)+"\n      ")])]):_vm._e(),(_vm.showNamer)?_c('div',{staticClass:"villain-builder-block-picker-namer"},[_c('label',{staticClass:"float-left"},[_vm._v("Navngi ref")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.refName),expression:"refName"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.refName)},on:{"input":function($event){if($event.target.composing){ return; }_vm.refName=$event.target.value}}}),_c('button',{staticClass:"btn btn-outline-secondary float-left",on:{"click":_vm.saveName}},[_vm._v("\n        Opprett ref\n      ")])]):_vm._e(),_c('button',{staticClass:"save btn btn-outline-primary float-right ml-2",on:{"click":function($event){return _vm.saveTemplate()}}},[_vm._v("\n      Lagre\n    ")]),_c('div',{staticClass:"dropdown float-right"},[_c('button',{staticClass:"btn btn-secondary dropdown-toggle",attrs:{"disabled":_vm.currentTemplate === null,"type":"button"},on:{"click":function($event){_vm.showBlockPicker = true}}},[_vm._v("\n        Ny REF\n      ")])])])])}
-var VillainBuildervue_type_template_id_fe55dbca_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-editor-wrapper"},[_c('div',{staticClass:"villain-builder-editor",attrs:{"id":"builder-template"}})])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-refs"},[_c('div',{staticClass:"villain-builder-ref",attrs:{"id":"builder-ref"}})])}]
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainBuilder.vue?vue&type=template&id=5abd44e2&
+var VillainBuildervue_type_template_id_5abd44e2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-wrapper"},[_c('div',{staticClass:"villain-builder-header"},[_c('span',{staticClass:"text-mono"},[(_vm.currentTemplate)?[_vm._v("\n        Editérer {"),_c('strong',[_vm._v(" "+_vm._s(_vm.currentTemplate.data.class)+" ")]),_vm._v("}\n      ")]:_vm._e()],2)]),_vm._m(0),_c('aside',{staticClass:"villain-builder-content-aside"},[_c('div',{staticClass:"villain-builder-aside-header"},[_vm._v("\n      Maler\n    ")]),_c('ul',[_c('button',{staticClass:"btn btn-primary btn-block mb-2",on:{"click":_vm.createTemplate}},[_vm._v("\n        Ny mal\n      ")]),_vm._l((_vm.templates),function(t){return _c('li',{key:t.data.id,staticClass:"text-mono",on:{"click":function($event){return _vm.selectTemplate(t)}}},[_vm._v("\n        "+_vm._s(t.data.class)+"\n      ")])})],2)]),_vm._m(1),_c('aside',{staticClass:"villain-builder-refs-aside"},[(_vm.currentTemplate && _vm.currentTemplate.data.refs)?[_c('div',{staticClass:"villain-builder-aside-header"},[_vm._v("\n        REFs\n      ")]),_c('ul',_vm._l((_vm.currentTemplate.data.refs),function(ref){return _c('li',{key:ref.name,staticClass:"text-mono",on:{"click":function($event){return _vm.selectRef(ref)}}},[_vm._v("\n          %{"),_c('strong',[_vm._v(_vm._s(ref.name))]),_vm._v("}\n          "),(_vm.prevRefName === ref.name)?_c('button',{staticClass:"btn btn-outline-secondary btn-sm",on:{"click":function($event){$event.preventDefault();$event.stopPropagation();return _vm.saveRef()}}},[_vm._v("Lagre")]):_vm._e()])}),0)]:_vm._e()],2),_c('div',{staticClass:"villain-builder-footer"},[(!_vm.showBlockPicker && !_vm.showNamer && _vm.currentTemplate)?_c('div',{staticClass:"villain-builder-block-attributes"},[_c('label',{staticClass:"float-left"},[_vm._v("Klasse")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentTemplate.data.class),expression:"currentTemplate.data.class"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.currentTemplate.data.class)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.currentTemplate.data, "class", $event.target.value)}}}),_c('label',{staticClass:"float-left"},[_vm._v("Navn")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentTemplate.data.name),expression:"currentTemplate.data.name"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.currentTemplate.data.name)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.currentTemplate.data, "name", $event.target.value)}}}),_c('label',{staticClass:"float-left"},[_vm._v("Kategori")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentTemplate.data.namespace),expression:"currentTemplate.data.namespace"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.currentTemplate.data.namespace)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.currentTemplate.data, "namespace", $event.target.value)}}}),_c('label',{staticClass:"float-left"},[_vm._v("Hjelpetekst")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentTemplate.data.help_text),expression:"currentTemplate.data.help_text"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.currentTemplate.data.help_text)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.currentTemplate.data, "help_text", $event.target.value)}}})]):_vm._e(),(_vm.showBlockPicker)?_c('div',{staticClass:"villain-builder-block-picker"},[_c('div',{staticClass:"villain-builder-block-picker-available"},_vm._l((_vm.available.blocks),function(b){return _c('div',{key:b.name,staticClass:"villain-editor-plus-available-block",on:{"mouseover":function($event){return _vm.setHover(b.name)},"click":function($event){return _vm.addBlock(b)}}},[_c('div',[_c('i',{staticClass:"fa fa-fw",class:b.icon})])])}),0),_c('div',{staticClass:"villain-builder-block-picker-header"},[_vm._v("\n        → "+_vm._s(_vm.hoveredBlock)+"\n      ")])]):_vm._e(),(_vm.showNamer)?_c('div',{staticClass:"villain-builder-block-picker-namer"},[_c('label',{staticClass:"float-left"},[_vm._v("Navngi ref")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.refName),expression:"refName"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.refName)},on:{"input":function($event){if($event.target.composing){ return; }_vm.refName=$event.target.value}}}),_c('button',{staticClass:"btn btn-outline-secondary float-left",on:{"click":_vm.saveName}},[_vm._v("\n        Opprett ref\n      ")])]):_vm._e(),_c('button',{staticClass:"save btn btn-outline-primary float-right ml-2",on:{"click":function($event){return _vm.saveTemplate()}}},[_vm._v("\n      Lagre\n    ")]),_c('div',{staticClass:"dropdown float-right"},[_c('button',{staticClass:"btn btn-secondary dropdown-toggle",attrs:{"disabled":_vm.currentTemplate === null,"type":"button"},on:{"click":function($event){_vm.showBlockPicker = true}}},[_vm._v("\n        Ny REF\n      ")])])])])}
+var VillainBuildervue_type_template_id_5abd44e2_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-editor-wrapper"},[_c('div',{staticClass:"villain-builder-editor",attrs:{"id":"builder-template"}})])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-refs"},[_c('div',{staticClass:"villain-builder-ref",attrs:{"id":"builder-ref"}})])}]
 
 
-// CONCATENATED MODULE: ./src/components/VillainBuilder.vue?vue&type=template&id=fe55dbca&
+// CONCATENATED MODULE: ./src/components/VillainBuilder.vue?vue&type=template&id=5abd44e2&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
 var es6_function_name = __webpack_require__("7f7f");
@@ -31894,30 +31894,29 @@ function _storeTemplate() {
             data = _context.sent;
 
             if (!(data.status === 200)) {
-              _context.next = 17;
+              _context.next = 16;
               break;
             }
 
-            fetchTemplates('all', extraHeaders, url);
             alertSuccess('OK', 'Malen ble lagret');
             return _context.abrupt("return", data);
 
-          case 17:
-            _context.next = 23;
+          case 16:
+            _context.next = 22;
             break;
 
-          case 19:
-            _context.prev = 19;
+          case 18:
+            _context.prev = 18;
             _context.t0 = _context["catch"](6);
             alertError('Feil', 'Feil ved lagring av mal i database.');
             console.error(_context.t0);
 
-          case 23:
+          case 22:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, this, [[6, 19]]);
+    }, _callee, this, [[6, 18]]);
   }));
   return _storeTemplate.apply(this, arguments);
 }
@@ -32138,7 +32137,7 @@ function _storeTemplate() {
           code: '<div class="wrapper"></div>',
           help_text: 'Hjelpetekst',
           name: 'Navn på mal',
-          namespace: '',
+          namespace: 'general',
           refs: []
         }
       };
@@ -32221,9 +32220,19 @@ function _storeTemplate() {
 
               case 3:
                 result = _context2.sent;
-                console.log(result);
 
-              case 5:
+                if (!(result.status === 200)) {
+                  _context2.next = 8;
+                  break;
+                }
+
+                _context2.next = 7;
+                return fetchTemplates('all', this.headers.extra, this.urls.templates);
+
+              case 7:
+                this.templates = _context2.sent;
+
+              case 8:
               case "end":
                 return _context2.stop();
             }
@@ -32346,8 +32355,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_VillainBuildervue_type_script_lang_js_,
-  VillainBuildervue_type_template_id_fe55dbca_render,
-  VillainBuildervue_type_template_id_fe55dbca_staticRenderFns,
+  VillainBuildervue_type_template_id_5abd44e2_render,
+  VillainBuildervue_type_template_id_5abd44e2_staticRenderFns,
   false,
   null,
   null,

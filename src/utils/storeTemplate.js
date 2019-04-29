@@ -21,7 +21,6 @@ export default async function storeTemplate (template, extraHeaders, url) {
     let data = await response.json()
 
     if (data.status === 200) {
-      fetchTemplates('all', extraHeaders, url)
       alertSuccess('OK', 'Malen ble lagret')
       return data
     }

@@ -32866,12 +32866,12 @@ var BlockContainer_component = normalizeComponent(
 )
 
 /* harmony default export */ var BlockContainer = (BlockContainer_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=6886aff6&
-var TemplateBlockvue_type_template_id_6886aff6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-template-description"},[_c('i',{staticClass:"fa fa-fw fa-map mr-1"}),_vm._v(" "+_vm._s(_vm.block.data.name)+"\n  ")]),_c(_vm.buildWrapper(),{tag:"component"})],1)}
-var TemplateBlockvue_type_template_id_6886aff6_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=2101cdcf&
+var TemplateBlockvue_type_template_id_2101cdcf_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-template-description"},[_c('i',{staticClass:"fa fa-fw fa-map mr-1"}),_vm._v(" "+_vm._s(_vm.block.data.name)+"\n  ")]),_c(_vm.buildWrapper(),{tag:"component"})],1)}
+var TemplateBlockvue_type_template_id_2101cdcf_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=6886aff6&
+// CONCATENATED MODULE: ./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=2101cdcf&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
 var es6_regexp_replace = __webpack_require__("a481");
@@ -32988,6 +32988,10 @@ external_commonjs_vue_commonjs2_vue_root_Vue_default.a.component('component-prox
       return refs[name];
     },
     buildSlots: function buildSlots() {
+      /**
+       * HANDLE MISSING REFS? IF THE TEMPLATE HAS BEEN EDITED AND THE NEW REF IS MISSING, WE SHOULD INSERT AN EMPTY ONE HERE?
+       */
+      var missingRefs = this.missingRefs();
       var template = '';
 
       for (var i = 0; i < this.block.data.refs.length; i++) {
@@ -32996,6 +33000,15 @@ external_commonjs_vue_commonjs2_vue_root_Vue_default.a.component('component-prox
       }
 
       return template;
+    },
+    missingRefs: function missingRefs() {
+      var foundTemplate = this.available.templates.find(function (t) {
+        return t.data.id === id;
+      });
+      var templateSourceRefs = foundTemplate.data.refs;
+      var blockRefs = this.block.data.refs;
+      console.log('template refs', templateSourceRefs);
+      console.log('block refs', blockRefs);
     },
     buildWrapper: function buildWrapper() {
       var template = "\n        <TemplateContentWrapper>\n          ".concat(this.buildSlots(), "\n        </TemplateContentWrapper>\n      ");
@@ -33029,8 +33042,8 @@ external_commonjs_vue_commonjs2_vue_root_Vue_default.a.component('component-prox
 
 var TemplateBlock_component = normalizeComponent(
   system_TemplateBlockvue_type_script_lang_js_,
-  TemplateBlockvue_type_template_id_6886aff6_render,
-  TemplateBlockvue_type_template_id_6886aff6_staticRenderFns,
+  TemplateBlockvue_type_template_id_2101cdcf_render,
+  TemplateBlockvue_type_template_id_2101cdcf_staticRenderFns,
   false,
   null,
   null,

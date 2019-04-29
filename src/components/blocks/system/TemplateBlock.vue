@@ -119,12 +119,25 @@ export default {
     },
 
     buildSlots () {
+      /**
+       * HANDLE MISSING REFS? IF THE TEMPLATE HAS BEEN EDITED AND THE NEW REF IS MISSING, WE SHOULD INSERT AN EMPTY ONE HERE?
+       */
+      let missingRefs = this.missingRefs()
       let template = ''
       for (let i = 0; i < this.block.data.refs.length; i++) {
         let ref = this.block.data.refs[i]
         template += `<div slot="${ref.name}"><component is="${ref.data.type}Block" :block="refs.${ref.name}" /></div>`
       }
       return template
+    },
+
+    missingRefs () {
+      let foundTemplate = this.available.templates.find(t => t.data.id === id)
+      let templateSourceRefs = foundTemplate.data.refs
+      let blockRefs = this.block.data.refs
+
+      console.log('template refs', templateSourceRefs)
+      console.log('block refs', blockRefs)
     },
 
     buildWrapper () {

@@ -31885,29 +31885,30 @@ function _storeTemplate() {
             data = _context.sent;
 
             if (!(data.status === 200)) {
-              _context.next = 16;
+              _context.next = 17;
               break;
             }
 
             fetchTemplates('all', extraHeaders, url);
+            alertSuccess('OK', 'Malen ble lagret');
             return _context.abrupt("return", data);
 
-          case 16:
-            _context.next = 22;
+          case 17:
+            _context.next = 23;
             break;
 
-          case 18:
-            _context.prev = 18;
+          case 19:
+            _context.prev = 19;
             _context.t0 = _context["catch"](6);
             alertError('Feil', 'Feil ved lagring av mal i database.');
             console.error(_context.t0);
 
-          case 22:
+          case 23:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, this, [[6, 18]]);
+    }, _callee, this, [[6, 19]]);
   }));
   return _storeTemplate.apply(this, arguments);
 }

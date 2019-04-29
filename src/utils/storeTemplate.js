@@ -1,4 +1,4 @@
-import { alertError } from './alerts'
+import { alertError, alertSuccess } from './alerts'
 import fetchTemplates from './fetchTemplates'
 
 export default async function storeTemplate (template, extraHeaders, url) {
@@ -22,6 +22,7 @@ export default async function storeTemplate (template, extraHeaders, url) {
 
     if (data.status === 200) {
       fetchTemplates('all', extraHeaders, url)
+      alertSuccess('OK', 'Malen ble lagret')
       return data
     }
   } catch (e) {

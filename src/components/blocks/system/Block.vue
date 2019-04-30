@@ -266,7 +266,6 @@ export default {
       ev.stopPropagation()
 
       let data = this.block
-      console.log('data', data)
       let block = this.$refs.content
       let handle = this.$refs.handle
       let hCR = handle.getBoundingClientRect()

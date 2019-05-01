@@ -34424,12 +34424,12 @@ var MarkdownBlock_component = normalizeComponent(
 )
 
 /* harmony default export */ var MarkdownBlock = (MarkdownBlock_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/TextBlock.vue?vue&type=template&id=1ada4e16&
-var TextBlockvue_type_template_id_1ada4e16_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent,"icon":"fa-paragraph"},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('quill-editor',{ref:"quill",class:_vm.block.data.type,attrs:{"options":_vm.quillOptions},model:{value:(_vm.text),callback:function ($$v) {_vm.text=$$v},expression:"text"}}),_c('template',{slot:"config"},[_c('div',{staticClass:"form-check"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.type),expression:"block.data.type"}],staticClass:"form-check-input",attrs:{"type":"radio","value":"paragraph"},domProps:{"checked":_vm._q(_vm.block.data.type,"paragraph")},on:{"change":function($event){return _vm.$set(_vm.block.data, "type", "paragraph")}}}),_c('label',{staticClass:"form-check-label"},[_vm._v("\n        Paragraf/brødtekst\n      ")])]),_c('div',{staticClass:"form-check"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.type),expression:"block.data.type"}],staticClass:"form-check-input",attrs:{"type":"radio","value":"lead"},domProps:{"checked":_vm._q(_vm.block.data.type,"lead")},on:{"change":function($event){return _vm.$set(_vm.block.data, "type", "lead")}}}),_c('label',{staticClass:"form-check-label"},[_vm._v("\n        Ingress\n      ")])]),_c('div',{staticClass:"form-check"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.type),expression:"block.data.type"}],staticClass:"form-check-input",attrs:{"type":"radio"},domProps:{"value":_vm.customClass,"checked":_vm._q(_vm.block.data.type,_vm.customClass)},on:{"change":function($event){return _vm.$set(_vm.block.data, "type", _vm.customClass)}}}),_c('label',{staticClass:"form-check-label"},[_c('div',{staticClass:"form-group"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.customClass),expression:"customClass"}],staticClass:"form-control",attrs:{"type":"input"},domProps:{"value":(_vm.customClass)},on:{"input":function($event){if($event.target.composing){ return; }_vm.customClass=$event.target.value}}})])])])])],2)}
-var TextBlockvue_type_template_id_1ada4e16_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1dcdf57b-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/TextBlock.vue?vue&type=template&id=ce7e0290&
+var TextBlockvue_type_template_id_ce7e0290_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent,"icon":"fa-paragraph"},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('quill-editor',{ref:"quill",class:_vm.block.data.type,attrs:{"options":_vm.quillOptions},model:{value:(_vm.text),callback:function ($$v) {_vm.text=$$v},expression:"text"}}),_c('template',{slot:"config"},[_c('div',{staticClass:"form-check"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.type),expression:"block.data.type"}],staticClass:"form-check-input",attrs:{"type":"radio","value":"paragraph"},domProps:{"checked":_vm._q(_vm.block.data.type,"paragraph")},on:{"change":function($event){return _vm.$set(_vm.block.data, "type", "paragraph")}}}),_c('label',{staticClass:"form-check-label"},[_vm._v("\n        Paragraf/brødtekst\n      ")])]),_c('div',{staticClass:"form-check"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.type),expression:"block.data.type"}],staticClass:"form-check-input",attrs:{"type":"radio","value":"lead"},domProps:{"checked":_vm._q(_vm.block.data.type,"lead")},on:{"change":function($event){return _vm.$set(_vm.block.data, "type", "lead")}}}),_c('label',{staticClass:"form-check-label"},[_vm._v("\n        Ingress\n      ")])]),_c('div',{staticClass:"form-check"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.type),expression:"block.data.type"}],staticClass:"form-check-input",attrs:{"type":"radio"},domProps:{"value":_vm.customClass,"checked":_vm._q(_vm.block.data.type,_vm.customClass)},on:{"change":function($event){return _vm.$set(_vm.block.data, "type", _vm.customClass)}}}),_c('label',{staticClass:"form-check-label"},[_c('div',{staticClass:"form-group"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.customClass),expression:"customClass"}],staticClass:"form-control",attrs:{"type":"input"},domProps:{"value":(_vm.customClass)},on:{"input":function($event){if($event.target.composing){ return; }_vm.customClass=$event.target.value}}})])])])])],2)}
+var TextBlockvue_type_template_id_ce7e0290_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/blocks/standard/TextBlock.vue?vue&type=template&id=1ada4e16&
+// CONCATENATED MODULE: ./src/components/blocks/standard/TextBlock.vue?vue&type=template&id=ce7e0290&
 
 // EXTERNAL MODULE: ./node_modules/vue-quill-editor/dist/vue-quill-editor.js
 var vue_quill_editor = __webpack_require__("953d");
@@ -34522,7 +34522,7 @@ var md = new markdown_it_default.a({
       quillOptions: {
         placeholder: 'Tekst her',
         modules: {
-          toolbar: [['bold', 'italic'], [{
+          toolbar: [['bold', 'italic', 'strike'], [{
             'list': 'ordered'
           }, {
             'list': 'bullet'
@@ -34575,8 +34575,8 @@ var md = new markdown_it_default.a({
 
 var TextBlock_component = normalizeComponent(
   standard_TextBlockvue_type_script_lang_js_,
-  TextBlockvue_type_template_id_1ada4e16_render,
-  TextBlockvue_type_template_id_1ada4e16_staticRenderFns,
+  TextBlockvue_type_template_id_ce7e0290_render,
+  TextBlockvue_type_template_id_ce7e0290_staticRenderFns,
   false,
   null,
   null,

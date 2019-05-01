@@ -86,7 +86,7 @@ export default {
         placeholder: 'Tekst her',
         modules: {
           toolbar: [
-            ['bold', 'italic'],
+            ['bold', 'italic', 'strike'],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
             ['link']
           ]

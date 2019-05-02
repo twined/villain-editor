@@ -78,10 +78,34 @@ export default {
 
   created () {
     console.debug('<TemplateBlock /> created')
+    this.deleteProps()
     this.createTemplateContentWrapper()
   },
 
   methods: {
+    /** remove props we don't want to store */
+    deleteProps () {
+      if (this.block.data.hasOwnProperty('namespace')) {
+        delete this.block.data.namespace
+      }
+
+      if (this.block.data.hasOwnProperty('code')) {
+        delete this.block.data.code
+      }
+
+      if (this.block.data.hasOwnProperty('class')) {
+        delete this.block.data.class
+      }
+
+      if (this.block.data.hasOwnProperty('name')) {
+        delete this.block.data.name
+      }
+
+      if (this.block.data.hasOwnProperty('help_text')) {
+        delete this.block.data.help_text
+      }
+    },
+
     getSourceCode () {
       const id = this.block.data.id
       let foundTemplate = this.available.templates.find(t => t.data.id === id)

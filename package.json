@@ -16,7 +16,7 @@
     "codeflask": "^1.4.0",
     "lodash.clonedeep": "^4.5.0",
     "markdown-it": "^8.4.2",
-    "sortablejs": "^1.8.4",
+    "sortablejs": "^1.9.0",
     "vex-dialog": "^1.1.0",
     "vex-js": "^4.1.0",
     "vue": "^2.6.10",
@@ -25,12 +25,12 @@
     "vue-slide-up-down": "^1.7.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.5.1",
-    "@vue/cli-plugin-eslint": "^3.5.1",
-    "@vue/cli-service": "^3.5.1",
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-eslint": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "json-server": "^0.14.2",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10"
   },

@@ -167,7 +167,7 @@ export default {
 
     templates: {
       type: String,
-      default: 'all'
+      default: null
     }
   },
 
@@ -214,37 +214,37 @@ export default {
     const urls = {}
 
     Object.defineProperty(available, 'blocks', {
-       enumerable: true,
-       get: () => this.availableBlocks,
+      enumerable: true,
+      get: () => this.availableBlocks
     })
     Object.defineProperty(available, 'templates', {
-       enumerable: true,
-       get: () => this.availableTemplates,
+      enumerable: true,
+      get: () => this.availableTemplates
     })
 
     Object.defineProperty(headers, 'extra', {
-       enumerable: true,
-       get: () => this.extraHeaders,
+      enumerable: true,
+      get: () => this.extraHeaders
     })
 
     /**
      * URLS
      */
     Object.defineProperty(urls, 'base', {
-       enumerable: true,
-       get: () => `${this.server}${this.baseURL}`
+      enumerable: true,
+      get: () => `${this.server}${this.baseURL}`
     })
     Object.defineProperty(urls, 'browse', {
-       enumerable: true,
-       get: () => `${this.server}${this.browseURL}`
+      enumerable: true,
+      get: () => `${this.server}${this.browseURL}`
     })
     Object.defineProperty(urls, 'slideshows', {
-       enumerable: true,
-       get: () => `${this.server}${this.slideshowsURL}`
+      enumerable: true,
+      get: () => `${this.server}${this.slideshowsURL}`
     })
     Object.defineProperty(urls, 'templates', {
-       enumerable: true,
-       get: () => `${this.server}${this.templatesURL}`
+      enumerable: true,
+      get: () => `${this.server}${this.templatesURL}`
     })
 
     return {
@@ -271,7 +271,7 @@ export default {
 
   async created () {
     console.debug('==> VILLAIN EDITOR INITIALIZING')
-    if (this.templateMode) {
+    if (this.templates) {
       this.availableTemplates = await fetchTemplates(this.templates, this.extraHeaders, `${this.server}${this.templatesURL}`)
     }
 

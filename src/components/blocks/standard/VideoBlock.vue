@@ -10,8 +10,13 @@
     @delete="$emit('delete', $event)">
     <div class="villain-block-video">
       <div
-        v-if="html"
+        v-if="html && block.data.source !== 'file'"
         class="villain-block-video-content"
+        v-html="html"
+      />
+      <div
+        v-else-if="html && block.data.source === 'file'"
+        class="villain-block-video-file-content"
         v-html="html"
       />
       <p
@@ -23,9 +28,19 @@
       <div
         class="form-group">
         <p>
-          Lim inn link til youtube eller vimeo. <br>
+          Lim inn link til youtube, vimeo eller ekstern fil. <br>
           F.eks <strong>http://www.youtube.com/watch?v=jlbunmCbTBA</strong>
         </p>
+        <template
+          v-if="block.data.remote_id">
+          <label>Eksisterende data ({{ block.data.source }})</label>
+          <input
+            v-model="block.data.remote_id"
+            class="form-control"
+            disabled="true"
+            type="input">
+          <label class="mt-3">Lim inn ny adresse</label>
+        </template>
         <input
           v-model="url"
           class="form-control"
@@ -49,7 +64,8 @@
 import Block from '@/components/blocks/system/Block'
 
 const VIMEO_REGEX = /(?:http[s]?:\/\/)?(?:www.)?vimeo.com\/(.+)/
-const YOUTUBE_REGEX = /(?:youtube(?:-nocookie)?\.com\/(?:[^/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})\W/
+const YOUTUBE_REGEX = /(?:youtube\.com\/\S*(?:(?:\/e(?:mbed))?\/|watch\?(?:\S*?&?v\=))|youtu\.be\/)([a-zA-Z0-9_-]{6,11})/
+const FILE_REGEX = /(.*)/
 
 export default {
   name: 'ImageBlock',
@@ -91,6 +107,13 @@ export default {
           html: ['<iframe src="{{protocol}}//www.youtube.com/embed/{{remote_id}}" ',
             'width="580" height="320" frameborder="0" allowfullscreen></iframe>'
           ].join('\n')
+        },
+        file: {
+          regex: FILE_REGEX,
+          html: ['<video class="villain-video-file" muted="muted" tabindex="-1" loop autoplay src="{{remote_id}}">',
+            '<source src="{{remote_id}}" type="video/mp4">',
+            '</video>'
+          ].join('\n')
         }
       }
     }
@@ -120,6 +143,8 @@ export default {
         if (match !== null && match[1] !== undefined) {
           this.block.data.source = key
           this.block.data.remote_id = match[1]
+          this.showConfig = false
+          break
         }
       }
 

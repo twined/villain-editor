@@ -3,7 +3,8 @@
     <VillainEditor
       :json="json"
       :builder-mode="false"
-      :template-mode="true"
+      :template-mode="false"
+      templates="all"
       server="http://localhost:3000"
     />
   </div>

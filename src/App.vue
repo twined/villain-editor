@@ -4,7 +4,6 @@
       :json="json"
       :builder-mode="false"
       :template-mode="false"
-      templates="all"
       server="http://localhost:3000"
     />
   </div>
@@ -29,23 +28,6 @@ export default {
           'data': {
             'type': 'paragraph',
             'text': '<p>test</p>'
-          }
-        },
-        {
-          'type': 'template',
-          'data': {
-            'refs': [
-              {
-                'name': 'MARKDOWN',
-                'data': {
-                  'type': 'markdown',
-                  'data': {
-                    'text': 'MD text!'
-                  }
-                }
-              }
-            ],
-            'id': 2
           }
         }
       ]

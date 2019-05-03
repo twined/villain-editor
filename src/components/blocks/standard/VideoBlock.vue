@@ -39,6 +39,13 @@
             class="form-control"
             disabled="true"
             type="input">
+
+          <label class="mt-3">Link videoen til denne adressen:</label>
+          <input
+            v-model="block.data.link"
+            class="form-control"
+            type="input">
+
           <label class="mt-3">Lim inn ny adresse</label>
         </template>
         <input

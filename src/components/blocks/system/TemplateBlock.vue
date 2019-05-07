@@ -126,12 +126,9 @@ export default {
         return '<div>!! template not found !!</div>'
       }
 
-      this.block = {
-        ...this.block,
-        data: {
-          ...this.block.data,
-          id: foundTemplate.id }
-      }
+      this.block.data.id = foundTemplate.id
+
+      console.log('block is', this.block)
 
       this.deleteProps()
 

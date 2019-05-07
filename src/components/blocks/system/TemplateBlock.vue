@@ -126,7 +126,7 @@ export default {
         return '<div>!! template not found !!</div>'
       }
 
-      this.block.data.id = foundTemplate.id
+      this.block.data.id = foundTemplate.data.id
 
       console.log('block is', this.block)
 

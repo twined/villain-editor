@@ -107,10 +107,18 @@ export default {
     },
 
     getSourceCode () {
+      let foundTemplate
       const id = this.block.data.id
-      let foundTemplate = this.available.templates.find(t => t.data.id === id)
+
+      if (!id) {
+        foundTemplate = this.available.templates.find(t => t.data.class === this.block.data.class)
+      } else {
+        foundTemplate = this.available.templates.find(t => t.data.id === id)
+      }
+
       if (!foundTemplate) {
-        return '<div>!!template not found !!</div>'
+        console.error('==> missing template', this.block.data)
+        return '<div>!! template not found !!</div>'
       }
       return foundTemplate.data.code
     },
@@ -157,10 +165,19 @@ export default {
     },
 
     copyMissingRefs () {
-      let foundTemplate = this.available.templates.find(t => t.data.id === this.block.data.id)
+      let foundTemplate
+      const id = this.block.data.id
+
+      if (!id) {
+        foundTemplate = this.available.templates.find(t => t.data.class === this.block.data.class)
+      } else {
+        foundTemplate = this.available.templates.find(t => t.data.id === this.block.data.id)
+      }
+
       if (!foundTemplate) {
         return
       }
+
       let templateSourceRefs = foundTemplate.data.refs
       let blockRefs = this.block.data.refs
 

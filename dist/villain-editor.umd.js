@@ -33213,12 +33213,12 @@ var BlockContainer_component = normalizeComponent(
 )
 
 /* harmony default export */ var BlockContainer = (BlockContainer_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"b2408bf8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=544e5b5d&
-var TemplateBlockvue_type_template_id_544e5b5d_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-template-description"},[_c('i',{staticClass:"fa fa-fw fa-map mr-1"}),_vm._v(" "+_vm._s(_vm.block.data.name)+"\n  ")]),_c(_vm.buildWrapper(),{tag:"component"})],1)}
-var TemplateBlockvue_type_template_id_544e5b5d_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"b2408bf8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=3820ef44&
+var TemplateBlockvue_type_template_id_3820ef44_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-template-description"},[_c('i',{staticClass:"fa fa-fw fa-map mr-1"}),_vm._v(" "+_vm._s(_vm.block.data.name)+"\n  ")]),_c(_vm.buildWrapper(),{tag:"component"})],1)}
+var TemplateBlockvue_type_template_id_3820ef44_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=544e5b5d&
+// CONCATENATED MODULE: ./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=3820ef44&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
 var es6_regexp_replace = __webpack_require__("a481");
@@ -33301,6 +33301,11 @@ external_commonjs_vue_commonjs2_vue_root_Vue_default.a.component('component-prox
   methods: {
     /** remove props we don't want to store */
     deleteProps: function deleteProps() {
+      // only delete props here if we don't have an ID
+      if (!this.block.data.hasOwnProperty('namespace')) {
+        return;
+      }
+
       if (this.block.data.hasOwnProperty('namespace')) {
         delete this.block.data.namespace;
       }
@@ -33336,6 +33341,8 @@ external_commonjs_vue_commonjs2_vue_root_Vue_default.a.component('component-prox
           return t.data.id === id;
         });
       }
+
+      this.block.data.id = foundTemplate.id;
 
       if (!foundTemplate) {
         console.error('==> missing template', this.block.data);
@@ -33452,8 +33459,8 @@ external_commonjs_vue_commonjs2_vue_root_Vue_default.a.component('component-prox
 
 var TemplateBlock_component = normalizeComponent(
   system_TemplateBlockvue_type_script_lang_js_,
-  TemplateBlockvue_type_template_id_544e5b5d_render,
-  TemplateBlockvue_type_template_id_544e5b5d_staticRenderFns,
+  TemplateBlockvue_type_template_id_3820ef44_render,
+  TemplateBlockvue_type_template_id_3820ef44_staticRenderFns,
   false,
   null,
   null,

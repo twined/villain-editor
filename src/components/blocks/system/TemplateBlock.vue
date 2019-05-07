@@ -85,6 +85,11 @@ export default {
   methods: {
     /** remove props we don't want to store */
     deleteProps () {
+      // only delete props here if we don't have an ID
+      if (!this.block.data.hasOwnProperty('namespace')) {
+        return
+      }
+
       if (this.block.data.hasOwnProperty('namespace')) {
         delete this.block.data.namespace
       }
@@ -115,6 +120,8 @@ export default {
       } else {
         foundTemplate = this.available.templates.find(t => t.data.id === id)
       }
+
+      this.block.data.id = foundTemplate.id
 
       if (!foundTemplate) {
         console.error('==> missing template', this.block.data)

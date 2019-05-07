@@ -126,7 +126,13 @@ export default {
         return '<div>!! template not found !!</div>'
       }
 
-      this.block.data.id = foundTemplate.id
+      this.block = {
+        ...this.block,
+        data: {
+          ...this.block.data,
+          id: foundTemplate.id }
+      }
+
       this.deleteProps()
 
       return foundTemplate.data.code

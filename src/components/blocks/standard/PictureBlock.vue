@@ -190,12 +190,23 @@
         <div
           v-if="block.data.url"
           class="form-group">
-          <label>CSS klasser</label>
+          <label>CSS klasser (img)</label>
           <input
-            v-model="block.data.class"
+            v-model="block.data.img_class"
             class="form-control"
             type="input">
         </div>
+
+        <div
+          v-if="block.data.url"
+          class="form-group">
+          <label>CSS klasser (picture)</label>
+          <input
+            v-model="block.data.picture_class"
+            class="form-control"
+            type="input">
+        </div>
+
         <div class="villain-config-content-buttons">
           <button
             v-if="!showImages"

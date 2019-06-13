@@ -76,10 +76,22 @@ export default {
     },
 
     getBlockName () {
-      console.log(this.block)
       if (this.block.data.name) {
         return this.block.data.name
       }
+
+      let foundTemplate
+      const id = this.block.data.id
+
+      if (id) {
+        foundTemplate = this.available.templates.find(t => t.data.id === id)
+      }
+
+      if (!foundTemplate) {
+        return '?'
+      }
+
+      return foundTemplate.data.name
     }
   },
 

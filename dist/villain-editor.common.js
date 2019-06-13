@@ -36760,7 +36760,10 @@ var VillainPlus_component = normalizeComponent(
     sizes: null,
     title: '',
     credits: '',
-    class: 'img-fluid'
+    img_class: 'img-fluid',
+    picture_class: '',
+    srcset: '',
+    media_queries: ''
   }
 }, {
   name: 'Datatabell',

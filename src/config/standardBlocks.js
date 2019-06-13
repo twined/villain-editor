@@ -52,6 +52,19 @@ export default [
   },
 
   {
+    name: 'Bildefigur (avansert)',
+    icon: 'fa-portrait',
+    component: 'Picture',
+    dataTemplate: {
+      url: '',
+      sizes: null,
+      title: '',
+      credits: '',
+      class: 'img-fluid'
+    }
+  },
+
+  {
     name: 'Datatabell',
     icon: 'fa-table',
     component: 'Datatable',

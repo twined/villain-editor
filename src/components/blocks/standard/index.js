@@ -7,6 +7,7 @@ import HtmlBlock from '@/components/blocks/standard/HtmlBlock'
 import ImageBlock from '@/components/blocks/standard/ImageBlock'
 import MapBlock from '@/components/blocks/standard/MapBlock'
 import MarkdownBlock from '@/components/blocks/standard/MarkdownBlock'
+import PictureBlock from '@/components/blocks/standard/PictureBlock'
 import TextBlock from '@/components/blocks/standard/TextBlock'
 import VideoBlock from '@/components/blocks/standard/VideoBlock'
 import TimelineBlock from '@/components/blocks/standard/TimelineBlock'
@@ -22,6 +23,7 @@ export default {
   ImageBlock,
   MapBlock,
   MarkdownBlock,
+  PictureBlock,
   SlideshowBlock,
   TextBlock,
   TimelineBlock,

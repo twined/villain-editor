@@ -33213,12 +33213,12 @@ var BlockContainer_component = normalizeComponent(
 )
 
 /* harmony default export */ var BlockContainer = (BlockContainer_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"02592146-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=0025e54e&
-var TemplateBlockvue_type_template_id_0025e54e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-template-description"},[_c('i',{staticClass:"fa fa-fw fa-map mr-1"}),_vm._v(" "+_vm._s(_vm.block.data.name)+"\n  ")]),_c(_vm.buildWrapper(),{tag:"component"})],1)}
-var TemplateBlockvue_type_template_id_0025e54e_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"02592146-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=91fe93b4&
+var TemplateBlockvue_type_template_id_91fe93b4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-template-description"},[_c('i',{staticClass:"fa fa-fw fa-map mr-1"}),_vm._v(" "+_vm._s(_vm.getBlockName)+"\n  ")]),_c(_vm.buildWrapper(),{tag:"component"})],1)}
+var TemplateBlockvue_type_template_id_91fe93b4_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=0025e54e&
+// CONCATENATED MODULE: ./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=91fe93b4&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
 var es6_regexp_replace = __webpack_require__("a481");
@@ -33291,6 +33291,13 @@ external_commonjs_vue_commonjs2_vue_root_Vue_default.a.component('component-prox
     templateString: function templateString() {
       var str = this.buildComponents();
       return "\n        <div class=\"".concat(this.block.data.class, "\">").concat(str, "</div>\n      ");
+    },
+    getBlockName: function getBlockName() {
+      console.log(this.block);
+
+      if (this.block.data.name) {
+        return this.block.data.name;
+      }
     }
   },
   created: function created() {
@@ -33348,7 +33355,6 @@ external_commonjs_vue_commonjs2_vue_root_Vue_default.a.component('component-prox
       }
 
       this.block.data.id = foundTemplate.data.id;
-      console.log('block is', this.block);
       this.deleteProps();
       return foundTemplate.data.code;
     },
@@ -33460,8 +33466,8 @@ external_commonjs_vue_commonjs2_vue_root_Vue_default.a.component('component-prox
 
 var TemplateBlock_component = normalizeComponent(
   system_TemplateBlockvue_type_script_lang_js_,
-  TemplateBlockvue_type_template_id_0025e54e_render,
-  TemplateBlockvue_type_template_id_0025e54e_staticRenderFns,
+  TemplateBlockvue_type_template_id_91fe93b4_render,
+  TemplateBlockvue_type_template_id_91fe93b4_staticRenderFns,
   false,
   null,
   null,
@@ -34839,6 +34845,494 @@ var MarkdownBlock_component = normalizeComponent(
 )
 
 /* harmony default export */ var MarkdownBlock = (MarkdownBlock_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"02592146-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/PictureBlock.vue?vue&type=template&id=edf59956&
+var PictureBlockvue_type_template_id_edf59956_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent,"config":_vm.showConfig},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-block-picture"},[(_vm.block.data.url)?_c('img',{staticClass:"img-fluid",attrs:{"src":_vm.block.data.url}}):_c('div',{staticClass:"d-flex justify-content-center"},[_c('div',{staticClass:"d-inline-block"},[_vm._v("\n        Inget bilde\n      ")])])]),_c('template',{slot:"config"},[(!_vm.showImages && !_vm.block.data.url)?_c('div',[_c('div',{staticClass:"display-icon"},[_c('drop',{staticClass:"drop",on:{"dragover":function($event){_vm.dragOver = true},"dragleave":function($event){_vm.dragOver = false},"drop":_vm.handleDrop}},[(_vm.dragOver)?_c('i',{staticClass:"fa fa-fw fa-cloud-upload-alt"}):[(_vm.uploading)?_c('i',{staticClass:"fa fa-fw fa-circle-notch fa-spin"}):_c('i',{staticClass:"fa fa-fw fa-portrait"})]],2)],1),_c('p',{staticClass:"text-center"},[(_vm.dragOver)?[_vm._v("\n          Slipp for å laste opp!\n        ")]:[(_vm.uploading)?[_vm._v("\n            Laster opp ...\n          ")]:[_vm._v("\n            Dra bildet du vil laste opp hit ↑\n          ")]]],2)]):_vm._e(),(_vm.showImages && _vm.listStyle)?_c('div',{staticClass:"villain-image-library mt-4"},[_c('div',{staticStyle:{"text-align":"center","padding-bottom":"20px"},on:{"click":function($event){_vm.listStyle = false}}},[_c('i',{staticClass:"fa fa-fw fa-th"})]),_c('table',{staticClass:"table villain-image-table"},_vm._l((_vm.images),function(i){return _c('tr',{key:i.id},[_c('td',{staticClass:"fit"},[_c('img',{staticClass:"img-fluid",attrs:{"src":i.thumb},on:{"click":function($event){return _vm.selectImage(i)}}})]),_c('td',[_c('table',{staticClass:"table table-bordered"},[_c('tr',[_c('td',[_c('span',{staticClass:"text-mono"},[_vm._v(_vm._s(i.src.substring(i.src.lastIndexOf('/')+1)))])]),_c('td',[_c('span',{staticClass:"text-mono text-align-right"},[_vm._v("\n                    "+_vm._s(i.width)+"x"+_vm._s(i.height)+"\n                  ")])])])])])])}),0)]):(_vm.showImages && !_vm.listStyle)?_c('div',{staticClass:"villain-image-library row mt-4"},[_c('div',{staticClass:"col-12",staticStyle:{"text-align":"center","padding-bottom":"20px"},on:{"click":function($event){_vm.listStyle = true}}},[_c('i',{staticClass:"fa fa-fw fa-list"})]),_vm._l((_vm.images),function(i){return _c('div',{key:i.id,staticClass:"col-3 mb-3"},[_c('img',{staticClass:"img-fluid",attrs:{"src":i.thumb},on:{"click":function($event){return _vm.selectImage(i)}}})])})],2):_c('div',[(_vm.block.data.url)?_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Kilde")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.url),expression:"block.data.url"}],staticClass:"form-control",attrs:{"type":"input"},domProps:{"value":(_vm.block.data.url)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "url", $event.target.value)}}})]):_vm._e(),(_vm.block.data.url)?_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Tittel")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.title),expression:"block.data.title"}],staticClass:"form-control",attrs:{"type":"input"},domProps:{"value":(_vm.block.data.title)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "title", $event.target.value)}}})]):_vm._e(),(_vm.block.data.url)?_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Krediteringer")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.credits),expression:"block.data.credits"}],staticClass:"form-control",attrs:{"type":"input"},domProps:{"value":(_vm.block.data.credits)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "credits", $event.target.value)}}})]):_vm._e(),(_vm.block.data.sizes)?_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Størrelse")]),_c('select',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.url),expression:"block.data.url"}],staticClass:"form-control",on:{"change":function($event){var $$selectedVal = Array.prototype.filter.call($event.target.options,function(o){return o.selected}).map(function(o){var val = "_value" in o ? o._value : o.value;return val}); _vm.$set(_vm.block.data, "url", $event.target.multiple ? $$selectedVal : $$selectedVal[0])}}},[_c('option',{domProps:{"value":_vm.originalUrl}},[_vm._v("\n            orginal\n          ")]),_vm._l((_vm.block.data.sizes),function(size,key){return _c('option',{key:key,domProps:{"value":size}},[_vm._v("\n            "+_vm._s(key)+"\n          ")])})],2)]):_vm._e(),(_vm.block.data.url)?_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Media queries")]),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.media_queries),expression:"block.data.media_queries"}],staticClass:"form-control",domProps:{"value":(_vm.block.data.media_queries)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "media_queries", $event.target.value)}}})]):_vm._e(),(_vm.block.data.url)?_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Sourcesets")]),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.srcset),expression:"block.data.srcset"}],staticClass:"form-control",domProps:{"value":(_vm.block.data.srcset)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "srcset", $event.target.value)}}})]):_vm._e(),(_vm.block.data.url)?_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("CSS klasser")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.class),expression:"block.data.class"}],staticClass:"form-control",attrs:{"type":"input"},domProps:{"value":(_vm.block.data.class)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "class", $event.target.value)}}})]):_vm._e(),_c('div',{staticClass:"villain-config-content-buttons"},[(!_vm.showImages)?_c('button',{staticClass:"btn btn-primary",on:{"click":_vm.getImages}},[_vm._v("\n          Velg bilde fra bildebibliotek\n        ")]):_vm._e(),(_vm.block.data.url !== '')?_c('button',{staticClass:"btn btn-primary ml-3",on:{"click":_vm.resetImage}},[_vm._v("\n          Nullstill bildeblokk\n        ")]):_vm._e()])])])],2)}
+var PictureBlockvue_type_template_id_edf59956_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/blocks/standard/PictureBlock.vue?vue&type=template&id=edf59956&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/PictureBlock.vue?vue&type=script&lang=js&
+
+
+
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ var PictureBlockvue_type_script_lang_js_ = ({
+  name: 'PictureBlock',
+  components: {
+    Block: Block,
+    Drop: vue_drag_drop_common["Drop"]
+  },
+  props: {
+    block: {
+      type: Object,
+      default: function _default() {}
+    },
+    parent: {
+      type: String,
+      default: null
+    }
+  },
+  data: function data() {
+    return {
+      customClass: '',
+      uid: null,
+      showConfig: false,
+      showImages: false,
+      showUpload: false,
+      images: [],
+      originalUrl: '',
+      dragOver: false,
+      uploading: false,
+      listStyle: false
+    };
+  },
+  computed: {
+    browseURL: function browseURL() {
+      return this.urls.browse + this.vImageSeries;
+    },
+    uploadURL: function uploadURL() {
+      return "".concat(this.urls.base, "upload/").concat(this.vImageSeries);
+    }
+  },
+  inject: ['urls', 'vImageSeries', 'headers'],
+  created: function created() {
+    console.debug('<PictureBlock /> created');
+
+    if (!this.block.data.url) {
+      this.showConfig = true;
+    }
+  },
+  methods: {
+    resetImage: function resetImage() {
+      this.block.data = {};
+    },
+    createUID: function createUID() {
+      return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
+    },
+    getImages: function () {
+      var _getImages = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee() {
+        var request, headers, _arr, _i, key, response, data;
+
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                headers = new Headers();
+                headers.append('accept', 'application/json, text/javascript, */*; q=0.01');
+
+                if (this.headers.extra) {
+                  _arr = Object.keys(this.headers.extra);
+
+                  for (_i = 0; _i < _arr.length; _i++) {
+                    key = _arr[_i];
+                    headers.append(key, this.headers.extra[key]);
+                  }
+                }
+
+                request = new Request(this.browseURL, {
+                  headers: headers
+                });
+                _context.prev = 4;
+                _context.next = 7;
+                return fetch(request);
+
+              case 7:
+                response = _context.sent;
+                _context.next = 10;
+                return response.json();
+
+              case 10:
+                data = _context.sent;
+
+                if (data.images.length) {
+                  this.images = data.images;
+                  this.showImages = true;
+                } else {
+                  alertError('Feil', 'Fant ingen bilder i biblioteket. Last opp et i stedet!');
+                }
+
+                _context.next = 18;
+                break;
+
+              case 14:
+                _context.prev = 14;
+                _context.t0 = _context["catch"](4);
+                alertError('Feil', 'Klarte ikke koble til bildebiblioteket!');
+                console.error(_context.t0);
+
+              case 18:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[4, 14]]);
+      }));
+
+      function getImages() {
+        return _getImages.apply(this, arguments);
+      }
+
+      return getImages;
+    }(),
+    selectImage: function selectImage(img) {
+      this.showImages = false;
+      this.$set(this.block.data, 'sizes', img.sizes);
+      this.$set(this.block.data, 'credits', img.credits);
+      this.$set(this.block.data, 'title', img.title);
+      this.$set(this.block.data, 'url', img.src);
+      this.$set(this.block.data, 'width', img.width || 0);
+      this.$set(this.block.data, 'height', img.height || 0);
+      this.originalUrl = img.src;
+      this.showConfig = false;
+    },
+    handleDrop: function handleDrop(data, event) {
+      event.preventDefault();
+      var files = event.dataTransfer.files;
+
+      if (files.length > 1) {
+        alertError('OBS', 'Du kan kun laste opp et bilde av gangen her. For å laste opp mange i en sleng, bruk "Bilder"-modulen i admin!');
+        this.dragOver = false;
+        return false;
+      }
+
+      var f = files.item(0);
+      this.upload(f);
+    },
+    upload: function () {
+      var _upload = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(f) {
+        var request, headers, _arr2, _i2, key, formData, response, data;
+
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                headers = new Headers();
+                headers.append('accept', 'application/json, text/javascript, */*; q=0.01');
+
+                if (this.headers.extra) {
+                  _arr2 = Object.keys(this.headers.extra);
+
+                  for (_i2 = 0; _i2 < _arr2.length; _i2++) {
+                    key = _arr2[_i2];
+                    headers.append(key, this.headers.extra[key]);
+                  }
+                }
+
+                formData = new FormData();
+                formData.append('image', f);
+                formData.append('name', f.name);
+                formData.append('uid', this.createUID());
+                request = new Request(this.uploadURL, {
+                  headers: headers,
+                  method: 'post',
+                  body: formData
+                });
+                _context2.prev = 8;
+                this.dragOver = false;
+                this.uploading = true;
+                _context2.next = 13;
+                return fetch(request);
+
+              case 13:
+                response = _context2.sent;
+                _context2.next = 16;
+                return response.json();
+
+              case 16:
+                data = _context2.sent;
+
+                if (data.status === 200) {
+                  this.showImages = false;
+                  this.uploading = false;
+                  this.$set(this.block.data, 'sizes', data.image.sizes);
+                  this.$set(this.block.data, 'credits', data.image.credits);
+                  this.$set(this.block.data, 'title', data.image.title);
+                  this.$set(this.block.data, 'url', data.image.src);
+                  this.$set(this.block.data, 'width', data.image.width || 0);
+                  this.$set(this.block.data, 'height', data.image.height || 0);
+                  this.originalUrl = data.image.src;
+                  this.showConfig = false;
+                } else {
+                  this.uploading = false;
+                  alertError('Feil', "Feil ved opplasting :(\n\n".concat(data.error, "'"));
+                }
+
+                _context2.next = 25;
+                break;
+
+              case 20:
+                _context2.prev = 20;
+                _context2.t0 = _context2["catch"](8);
+                this.uploading = false;
+                console.log(' ==> caught error', _context2.t0);
+                alertError('Feil', "Feil ved opplasting :(\n\n".concat(_context2.t0));
+
+              case 25:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[8, 20]]);
+      }));
+
+      function upload(_x) {
+        return _upload.apply(this, arguments);
+      }
+
+      return upload;
+    }()
+  }
+});
+// CONCATENATED MODULE: ./src/components/blocks/standard/PictureBlock.vue?vue&type=script&lang=js&
+ /* harmony default export */ var standard_PictureBlockvue_type_script_lang_js_ = (PictureBlockvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/blocks/standard/PictureBlock.vue
+
+
+
+
+
+/* normalize component */
+
+var PictureBlock_component = normalizeComponent(
+  standard_PictureBlockvue_type_script_lang_js_,
+  PictureBlockvue_type_template_id_edf59956_render,
+  PictureBlockvue_type_template_id_edf59956_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var PictureBlock = (PictureBlock_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"02592146-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/TextBlock.vue?vue&type=template&id=ce7e0290&
 var TextBlockvue_type_template_id_ce7e0290_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent,"icon":"fa-paragraph"},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('quill-editor',{ref:"quill",class:_vm.block.data.type,attrs:{"options":_vm.quillOptions},model:{value:(_vm.text),callback:function ($$v) {_vm.text=$$v},expression:"text"}}),_c('template',{slot:"config"},[_c('div',{staticClass:"form-check"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.type),expression:"block.data.type"}],staticClass:"form-check-input",attrs:{"type":"radio","value":"paragraph"},domProps:{"checked":_vm._q(_vm.block.data.type,"paragraph")},on:{"change":function($event){return _vm.$set(_vm.block.data, "type", "paragraph")}}}),_c('label',{staticClass:"form-check-label"},[_vm._v("\n        Paragraf/brødtekst\n      ")])]),_c('div',{staticClass:"form-check"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.type),expression:"block.data.type"}],staticClass:"form-check-input",attrs:{"type":"radio","value":"lead"},domProps:{"checked":_vm._q(_vm.block.data.type,"lead")},on:{"change":function($event){return _vm.$set(_vm.block.data, "type", "lead")}}}),_c('label',{staticClass:"form-check-label"},[_vm._v("\n        Ingress\n      ")])]),_c('div',{staticClass:"form-check"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.type),expression:"block.data.type"}],staticClass:"form-check-input",attrs:{"type":"radio"},domProps:{"value":_vm.customClass,"checked":_vm._q(_vm.block.data.type,_vm.customClass)},on:{"change":function($event){return _vm.$set(_vm.block.data, "type", _vm.customClass)}}}),_c('label',{staticClass:"form-check-label"},[_c('div',{staticClass:"form-group"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.customClass),expression:"customClass"}],staticClass:"form-control",attrs:{"type":"input"},domProps:{"value":(_vm.customClass)},on:{"input":function($event){if($event.target.composing){ return; }_vm.customClass=$event.target.value}}})])])])])],2)}
 var TextBlockvue_type_template_id_ce7e0290_staticRenderFns = []
@@ -35895,6 +36389,7 @@ var SlideshowBlock_component = normalizeComponent(
 
 
 
+
 /* harmony default export */ var standard = ({
   BlockquoteBlock: BlockquoteBlock,
   ColumnsBlock: ColumnsBlock,
@@ -35905,6 +36400,7 @@ var SlideshowBlock_component = normalizeComponent(
   ImageBlock: ImageBlock,
   MapBlock: MapBlock,
   MarkdownBlock: MarkdownBlock,
+  PictureBlock: PictureBlock,
   SlideshowBlock: SlideshowBlock,
   TextBlock: TextBlock,
   TimelineBlock: TimelineBlock,
@@ -36239,6 +36735,17 @@ var VillainPlus_component = normalizeComponent(
   component: 'Slideshow',
   dataTemplate: {
     images: []
+  }
+}, {
+  name: 'Bildefigur (avansert)',
+  icon: 'fa-portrait',
+  component: 'Picture',
+  dataTemplate: {
+    url: '',
+    sizes: null,
+    title: '',
+    credits: '',
+    class: 'img-fluid'
   }
 }, {
   name: 'Datatabell',

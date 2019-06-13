@@ -6,7 +6,7 @@
     @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
     <div class="villain-template-description">
-      <i class="fa fa-fw fa-map mr-1" /> {{ block.data.name }}
+      <i class="fa fa-fw fa-map mr-1" /> {{ getBlockName }}
     </div>
     <component :is="buildWrapper()" />
   </Block>
@@ -73,6 +73,13 @@ export default {
       return `
         <div class="${this.block.data.class}">${str}</div>
       `
+    },
+
+    getBlockName () {
+      console.log(this.block)
+      if (this.block.data.name) {
+        return this.block.data.name
+      }
     }
   },
 
@@ -127,8 +134,6 @@ export default {
       }
 
       this.block.data.id = foundTemplate.data.id
-
-      console.log('block is', this.block)
 
       this.deleteProps()
 

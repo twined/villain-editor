@@ -3,6 +3,7 @@ import Sortable from 'sortablejs'
 import App from './App.vue'
 import './styles/app.scss'
 import Quill from 'quill'
+import VueQuillEditor from 'vue-quill-editor'
 
 const Link = Quill.import('formats/link')
 class linkType extends Link {
@@ -29,6 +30,8 @@ Vue.directive('sortable', {
     return s
   }
 })
+
+Vue.use(VueQuillEditor)
 
 new Vue({
   render: h => h(App)

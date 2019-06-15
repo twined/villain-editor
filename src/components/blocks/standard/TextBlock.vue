@@ -54,7 +54,6 @@
 
 <script>
 import Block from '@/components/blocks/system/Block'
-import { quillEditor } from 'vue-quill-editor'
 import MarkdownIt from 'markdown-it'
 
 const md = new MarkdownIt({ html: true })
@@ -63,8 +62,7 @@ export default {
   name: 'TextBlock',
 
   components: {
-    Block,
-    quillEditor
+    Block
   },
 
   props: {

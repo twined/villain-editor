@@ -54,7 +54,26 @@
 
 <script>
 import Block from '@/components/blocks/system/Block'
+import { quillEditor } from 'vue-quill-editor'
+import Quill from 'quill'
 import MarkdownIt from 'markdown-it'
+
+const Link = Quill.import('formats/link')
+class linkType extends Link {
+  static create (value) {
+    let node = super.create(value)
+    value = this.sanitize(value)
+
+    if (value.startsWith('https://') || value.startsWith('http://')) {
+      node.className = 'link--external'
+    } else {
+      node.removeAttribute('target')
+    }
+    return node
+  }
+}
+
+Quill.register(linkType)
 
 const md = new MarkdownIt({ html: true })
 
@@ -62,7 +81,8 @@ export default {
   name: 'TextBlock',
 
   components: {
-    Block
+    Block,
+    quillEditor
   },
 
   props: {

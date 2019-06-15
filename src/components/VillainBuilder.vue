@@ -209,6 +209,8 @@ export default {
         ...this.currentTemplate.data.refs,
         this.currentRef
       ]
+
+      this.selectRef(this.currentRef)
     },
 
     saveRef () {

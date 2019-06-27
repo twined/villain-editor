@@ -1,63 +1,296 @@
 {
   "templates": [
     {
-      "type": "template",
       "data": {
         "id": 1,
-        "name": "Produktteaser - 1 bilde",
-        "help_text": "Produktteaser, med et bilde (breddeformat)",
-        "class": "v-teaser-single",
-        "code": "<div class=\"teaser-single\">%{MARKDOWN}</div>",
+        "name": "SVG header",
+        "namespace": "general",
+        "help_text": "SVG overskrift",
+        "class": "svg+header",
+        "code": "<div class=\"v-module\" data-v=\"svg+header\" data-moonwalk-section>\n  <div class=\"svg\" data-moonwalk>\n    %{HTML}\n  </div>\n</div>",
         "refs": [
           {
-            "name": "MARKDOWN",
             "data": {
-              "type": "markdown",
               "data": {
-                "text": "MD text for single"
-              }
-            }
+                "code": "Lim inn SVG overskrift her."
+              },
+              "type": "svg"
+            },
+            "name": "HTML"
           }
         ]
-      }
+      },
+      "type": "template"
     },
     {
-      "type": "template",
       "data": {
         "id": 2,
-        "name": "Produktteaser - 2 bilder",
-        "help_text": "Produktteaser, med to sidestilte bilder (høydeformat)",
-        "class": "v-teaser-double",
-        "code": "<div class=\"teaser-double\"><h1>Header</h1><div class=\"content\">%{MARKDOWN}</div></div>",
+        "name": "SVG header alt",
+        "namespace": "general",
+        "help_text": "SVG overskrift, farget bakgrunn",
+        "class": "svg+altbg+header",
+        "code": "<div class=\"v-module\" data-v=\"svg+altbg+header\" data-moonwalk-section>\n  <div class=\"svg\" data-moonwalk>\n    %{HTML}\n  </div>\n</div>",
         "refs": [
           {
-            "name": "MARKDOWN",
             "data": {
-              "type": "markdown",
               "data": {
-                "text": "MD text for double"
-              }
-            }
+                "code": "Lim inn SVG overskrift her."
+              },
+              "type": "svg"
+            },
+            "name": "HTML"
           }
         ]
+      },
+      "type": "template"
+    },
+    {
+      "data": {
+        "id": 3,
+        "name": "Tekst, stor, sentrert",
+        "namespace": "general",
+        "help_text": "Hovedtekst, sentrert",
+        "class": "text+large+center",
+        "code": "<div class=\"v-module\" data-v=\"text+large+center\" data-moonwalk-section>\n  <div class=\"text\" data-moonwalk-children>\n    %{MARKDOWN}\n  </div>\n</div>",
+        "refs": [
+          {
+            "data": {
+              "data": {
+                "text": "Tekst her"
+              },
+              "type": "markdown"
+            },
+            "name": "MARKDOWN"
+          }
+        ]
+      },
+      "type": "template"
+    },
+    {
+      "data": {
+        "id": 4,
+        "name": "Tekst, stor, sentrert, alt",
+        "namespace": "general",
+        "help_text": "Hovedtekst, sentrert, farget bakgrunn",
+        "class": "text+altbg+large+center",
+        "code": "<div class=\"v-module\" data-v=\"text+altbg+large+center\" data-moonwalk-section>\n  <div class=\"text\" data-moonwalk-children>\n    %{MARKDOWN}\n  </div>\n</div>",
+        "refs": [
+          {
+            "data": {
+              "data": {
+                "text": "Tekst her"
+              },
+              "type": "markdown"
+            },
+            "name": "MARKDOWN"
+          }
+        ]
+      },
+      "type": "template"
+    },
+    {
+      "data": {
+        "id": 5,
+        "name": "2 bilder, side om side",
+        "namespace": "general",
+        "help_text": "Stakkede bilder, side om side",
+        "class": "image|image(staggered)",
+        "code": "<div class=\"v-module\" data-v=\"image|image(staggered)\" data-moonwalk-section>\n  <figure>\n    %{PICTURE_1}\n  </figure>\n  <figure>\n    %{PICTURE_2}\n  </figure>\n</div>",
+        "refs": [
+          {
+            "data": {
+              "data": {
+                "credits": "",
+                "img_class": "img-fluid",
+                "media_queries": "",
+                "picture_class": "",
+                "sizes": null,
+                "srcset": "",
+                "title": "",
+                "url": ""
+              },
+              "type": "picture"
+            },
+            "name": "PICTURE_1"
+          },
+          {
+            "data": {
+              "data": {
+                "credits": "",
+                "img_class": "img-fluid",
+                "media_queries": "",
+                "picture_class": "",
+                "sizes": null,
+                "srcset": "",
+                "title": "",
+                "url": ""
+              },
+              "type": "picture"
+            },
+            "name": "PICTURE_2"
+          }
+        ]
+      },
+      "type": "template"
+    },
+    {
+      "data": {
+        "id": 6,
+        "name": "Video",
+        "namespace": "general",
+        "help_text": "Med coverbilde",
+        "class": "video",
+        "code": "<div class=\"v-module\" data-v=\"video\" data-cover-overlay data-cover-overlay-vimeo-play data-moonwalk-section>\n  <div class=\"video-wrapper\">\n    %{VIDEO}\n    %{COVER}\n\n    <button class=\"overlay-button noanim\" data-cover-overlay-button data-moonwalk-overlay>\n      <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1\" viewBox=\"0 0 500 500\">\n        <circle cx=\"250\" cy=\"250\" r=\"250\" fill=\"#3E3B38\" opacity=\".7\"/>\n        <path fill=\"#FFFBF2\" d=\"M205.28 377.11h8.02l140.86-123.17v-7.88L213.29 122.89h-8.02v254.22zm14.96-122.13h104.41c1.33 0 1.66 1.84.42 2.31L222 300.18c-3.27 1.23-6.76-1.19-6.76-4.68v-35.52c-.01-2.76 2.23-5 5-5zm-5.01-14.96V204.5c0-3.49 3.49-5.91 6.76-4.68l103.07 42.89c1.24.47.91 2.31-.42 2.31h-104.4c-2.77 0-5.01-2.24-5.01-5zm0-56.84v-36.05c0-4.15 4.77-6.5 8.06-3.96l99.8 85.68c1.08.84.14 2.54-1.15 2.06l-103.47-43.04c-1.94-.74-3.24-2.6-3.24-4.69zm3.25 128.95l103.47-43.04c1.28-.48 2.23 1.23 1.15 2.06l-99.8 85.68c-3.29 2.54-8.06.19-8.06-3.96v-36.06c-.01-2.08 1.29-3.95 3.24-4.68z\"/>\n      </svg>\n    </button>\n  </div>\n  <noscript>\n    Du trenger Javascript for å se denne videoen :(\n  </noscript>\n</div>",
+        "refs": [
+          {
+            "data": {
+              "data": {
+                "class": "img-fluid",
+                "credits": "",
+                "sizes": null,
+                "title": "",
+                "url": ""
+              },
+              "type": "image"
+            },
+            "name": "COVER"
+          },
+          {
+            "data": {
+              "data": {
+                "remote_id": "296162587",
+                "source": "vimeo"
+              },
+              "type": "video"
+            },
+            "name": "VIDEO"
+          }
+        ]
+      },
+      "type": "template"
+    }
+  ],
+  "images": {
+    "images": [
+      {
+        "credits": null,
+        "height": 1089,
+        "inserted_at": "2019-06-26T12:46:00",
+        "sizes": {
+          "large": "/media/images/site/posts/large/3bh20o219pt1.jpg",
+          "medium": "/media/images/site/posts/medium/3bh20o219pt1.jpg",
+          "micro": "/media/images/site/posts/micro/3bh20o219pt1.jpg",
+          "small": "/media/images/site/posts/small/3bh20o219pt1.jpg",
+          "thumb": "/media/images/site/posts/thumb/3bh20o219pt1.jpg",
+          "xlarge": "/media/images/site/posts/xlarge/3bh20o219pt1.jpg"
+        },
+        "src": "/media/images/site/posts/3bh20o219pt1.jpg",
+        "thumb": "/media/images/site/posts/thumb/3bh20o219pt1.jpg",
+        "title": null,
+        "width": 781
+      },
+      {
+        "credits": null,
+        "height": 1090,
+        "inserted_at": "2019-06-26T12:46:11",
+        "sizes": {
+          "large": "/media/images/site/posts/large/aavg132d77j.png",
+          "medium": "/media/images/site/posts/medium/aavg132d77j.png",
+          "micro": "/media/images/site/posts/micro/aavg132d77j.png",
+          "small": "/media/images/site/posts/small/aavg132d77j.png",
+          "thumb": "/media/images/site/posts/thumb/aavg132d77j.png",
+          "xlarge": "/media/images/site/posts/xlarge/aavg132d77j.png"
+        },
+        "src": "/media/images/site/posts/aavg132d77j.png",
+        "thumb": "/media/images/site/posts/thumb/aavg132d77j-optimized.png",
+        "title": null,
+        "width": 781
+      },
+      {
+        "credits": null,
+        "height": 810,
+        "inserted_at": "2019-06-26T13:00:48",
+        "sizes": {
+          "large": "/media/images/site/posts/large/28bb643g2m8o.jpg",
+          "medium": "/media/images/site/posts/medium/28bb643g2m8o.jpg",
+          "micro": "/media/images/site/posts/micro/28bb643g2m8o.jpg",
+          "small": "/media/images/site/posts/small/28bb643g2m8o.jpg",
+          "thumb": "/media/images/site/posts/thumb/28bb643g2m8o.jpg",
+          "xlarge": "/media/images/site/posts/xlarge/28bb643g2m8o.jpg"
+        },
+        "src": "/media/images/site/posts/28bb643g2m8o.jpg",
+        "thumb": "/media/images/site/posts/thumb/28bb643g2m8o.jpg",
+        "title": null,
+        "width": 1440
+      },
+      {
+        "credits": null,
+        "height": 1688,
+        "inserted_at": "2019-06-26T13:24:53",
+        "sizes": {
+          "large": "/media/images/site/posts/large/aodkc2t43gg.jpg",
+          "medium": "/media/images/site/posts/medium/aodkc2t43gg.jpg",
+          "micro": "/media/images/site/posts/micro/aodkc2t43gg.jpg",
+          "small": "/media/images/site/posts/small/aodkc2t43gg.jpg",
+          "thumb": "/media/images/site/posts/thumb/aodkc2t43gg.jpg",
+          "xlarge": "/media/images/site/posts/xlarge/aodkc2t43gg.jpg"
+        },
+        "src": "/media/images/site/posts/aodkc2t43gg.jpg",
+        "thumb": "/media/images/site/posts/thumb/aodkc2t43gg.jpg",
+        "title": null,
+        "width": 3000
+      },
+      {
+        "credits": null,
+        "height": 2753,
+        "inserted_at": "2019-06-26T13:27:03",
+        "sizes": {
+          "large": "/media/images/site/posts/large/r796o3nh5d0.jpg",
+          "medium": "/media/images/site/posts/medium/r796o3nh5d0.jpg",
+          "micro": "/media/images/site/posts/micro/r796o3nh5d0.jpg",
+          "small": "/media/images/site/posts/small/r796o3nh5d0.jpg",
+          "thumb": "/media/images/site/posts/thumb/r796o3nh5d0.jpg",
+          "xlarge": "/media/images/site/posts/xlarge/r796o3nh5d0.jpg"
+        },
+        "src": "/media/images/site/posts/r796o3nh5d0.jpg",
+        "thumb": "/media/images/site/posts/thumb/r796o3nh5d0.jpg",
+        "title": null,
+        "width": 2002
+      },
+      {
+        "credits": null,
+        "height": 1343,
+        "inserted_at": "2019-06-26T13:31:39",
+        "sizes": {
+          "large": "/media/images/site/posts/large/3r9pkh1ifpoa.png",
+          "medium": "/media/images/site/posts/medium/3r9pkh1ifpoa.png",
+          "micro": "/media/images/site/posts/micro/3r9pkh1ifpoa.png",
+          "small": "/media/images/site/posts/small/3r9pkh1ifpoa.png",
+          "thumb": "/media/images/site/posts/thumb/3r9pkh1ifpoa.png",
+          "xlarge": "/media/images/site/posts/xlarge/3r9pkh1ifpoa.png"
+        },
+        "src": "/media/images/site/posts/3r9pkh1ifpoa.png",
+        "thumb": "/media/images/site/posts/thumb/3r9pkh1ifpoa-optimized.png",
+        "title": null,
+        "width": 963
+      },
+      {
+        "credits": null,
+        "height": 1069,
+        "inserted_at": "2019-06-26T17:35:53",
+        "sizes": {
+          "large": "/media/images/site/posts/large/3eude3vkr95.png",
+          "medium": "/media/images/site/posts/medium/3eude3vkr95.png",
+          "micro": "/media/images/site/posts/micro/3eude3vkr95.png",
+          "small": "/media/images/site/posts/small/3eude3vkr95.png",
+          "thumb": "/media/images/site/posts/thumb/3eude3vkr95.png",
+          "xlarge": "/media/images/site/posts/xlarge/3eude3vkr95.png"
+        },
+        "src": "/media/images/site/posts/3eude3vkr95.png",
+        "thumb": "/media/images/site/posts/thumb/3eude3vkr95-optimized.png",
+        "title": null,
+        "width": 780
       }
-    }
-  ],
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
+    ]
   }
 }

@@ -154,8 +154,7 @@
           <label>Størrelse</label>
           <select
             v-model="block.data.url"
-            class="form-control"
-          >
+            class="form-control">
             <option
               :value="originalUrl">
               orginal
@@ -293,6 +292,13 @@ export default {
   methods: {
     resetImage () {
       this.block.data = {}
+      // delete block data, except srcset, media_queries, img_class, picture_class
+      // delete this.block.data.url
+      // delete this.block.data.sizes
+      // delete this.block.data.credits
+      // delete this.block.data.title
+      // delete this.block.data.width
+      // delete this.block.data.height
     },
 
     createUID () {
@@ -330,10 +336,11 @@ export default {
 
     selectImage (img) {
       this.showImages = false
+
+      this.$set(this.block.data, 'url', img.src)
       this.$set(this.block.data, 'sizes', img.sizes)
       this.$set(this.block.data, 'credits', img.credits)
       this.$set(this.block.data, 'title', img.title)
-      this.$set(this.block.data, 'url', img.src)
       this.$set(this.block.data, 'width', img.width || 0)
       this.$set(this.block.data, 'height', img.height || 0)
       this.originalUrl = img.src

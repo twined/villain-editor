@@ -68,6 +68,16 @@ export default [
   },
 
   {
+    name: 'Svg',
+    icon: 'fa-code',
+    component: 'Svg',
+    dataTemplate: {
+      'code': 'Lim inn svg tag her',
+      'class': ''
+    }
+  },
+
+  {
     name: 'Datatabell',
     icon: 'fa-table',
     component: 'Datatable',

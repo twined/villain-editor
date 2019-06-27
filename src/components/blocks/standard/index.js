@@ -8,10 +8,11 @@ import ImageBlock from '@/components/blocks/standard/ImageBlock'
 import MapBlock from '@/components/blocks/standard/MapBlock'
 import MarkdownBlock from '@/components/blocks/standard/MarkdownBlock'
 import PictureBlock from '@/components/blocks/standard/PictureBlock'
-import TextBlock from '@/components/blocks/standard/TextBlock'
-import VideoBlock from '@/components/blocks/standard/VideoBlock'
-import TimelineBlock from '@/components/blocks/standard/TimelineBlock'
 import SlideshowBlock from '@/components/blocks/standard/SlideshowBlock'
+import SvgBlock from '@/components/blocks/standard/SvgBlock'
+import TextBlock from '@/components/blocks/standard/TextBlock'
+import TimelineBlock from '@/components/blocks/standard/TimelineBlock'
+import VideoBlock from '@/components/blocks/standard/VideoBlock'
 
 export default {
   BlockquoteBlock,
@@ -25,6 +26,7 @@ export default {
   MarkdownBlock,
   PictureBlock,
   SlideshowBlock,
+  SvgBlock,
   TextBlock,
   TimelineBlock,
   VideoBlock

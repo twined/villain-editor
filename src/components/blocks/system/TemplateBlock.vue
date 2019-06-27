@@ -158,6 +158,7 @@ export default {
     },
 
     replaceRef (exp, refName) {
+      console.log('replaceRef', exp, refName)
       return `<slot name="${refName}">REPLACE</slot>`
     },
 
@@ -200,10 +201,11 @@ export default {
       if (!id) {
         foundTemplate = this.available.templates.find(t => t.data.class === this.block.data.class)
       } else {
-        foundTemplate = this.available.templates.find(t => t.data.id === this.block.data.id)
+        foundTemplate = this.available.templates.find(t => parseInt(t.data.id) === parseInt(this.block.data.id))
       }
 
       if (!foundTemplate) {
+        console.error('VILLAIN: template not found')
         return
       }
 

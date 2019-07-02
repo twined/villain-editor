@@ -312,6 +312,12 @@ export default {
       }
     },
 
+    refresh () {
+      let bx = cloneDeep(this.blocks)
+      this.updatedSource = JSON.stringify(bx.map(b => this.stripMeta(b)), null, 2)
+      this.blocks = JSON.parse(this.updatedSource)
+    },
+
     toggleFullscreen () {
       this.fullscreen = !this.fullscreen
     },

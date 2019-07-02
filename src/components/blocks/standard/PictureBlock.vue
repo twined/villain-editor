@@ -292,13 +292,6 @@ export default {
   methods: {
     resetImage () {
       this.block.data = {}
-      // delete block data, except srcset, media_queries, img_class, picture_class
-      // delete this.block.data.url
-      // delete this.block.data.sizes
-      // delete this.block.data.credits
-      // delete this.block.data.title
-      // delete this.block.data.width
-      // delete this.block.data.height
     },
 
     createUID () {
@@ -337,12 +330,16 @@ export default {
     selectImage (img) {
       this.showImages = false
 
-      this.$set(this.block.data, 'url', img.src)
-      this.$set(this.block.data, 'sizes', img.sizes)
-      this.$set(this.block.data, 'credits', img.credits)
-      this.$set(this.block.data, 'title', img.title)
-      this.$set(this.block.data, 'width', img.width || 0)
-      this.$set(this.block.data, 'height', img.height || 0)
+      this.block.data = {
+        ...this.block.data,
+        url: img.src,
+        sizes: { ...img.sizes },
+        credits: img.credits,
+        title: img.title,
+        width: img.width,
+        height: img.height
+      }
+
       this.originalUrl = img.src
 
       this.showConfig = false

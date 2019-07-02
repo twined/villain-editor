@@ -1,5 +1,4 @@
 import { alertError, alertSuccess } from './alerts'
-import fetchTemplates from './fetchTemplates'
 
 export default async function storeTemplate (template, extraHeaders, url) {
   let request

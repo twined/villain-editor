@@ -16,9 +16,8 @@
         <label>SVG kode</label>
         <textarea
           ref="txt"
-          :style="'font-size: ' + fontSize + 'rem'"
           v-model="block.data.code"
-          class="villain-header-input">
+          class="villain-svg-input">
         </textarea>
       </div>
 
@@ -65,10 +64,6 @@ export default {
 
   created () {
     console.debug('<SvgBlock /> created')
-  },
-
-  mounted () {
-    autosize(this.$refs.txt)
   }
 }
 </script>

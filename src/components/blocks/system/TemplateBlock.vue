@@ -22,25 +22,6 @@ Create a subcomponent and then replace slots with [refs]?
 
 import Vue from 'vue'
 
-Vue.component('component-proxy', {
-  props: {
-    name: {
-      type: String,
-      required: true
-    },
-    props: {
-      type: Object,
-      default: () => {}
-    }
-  },
-
-  render (createElem) {
-    return createElem(this.name, {
-      block: this.block
-    })
-  }
-})
-
 export default {
   name: 'TemplateBlock',
 
@@ -68,13 +49,6 @@ export default {
   ],
 
   computed: {
-    templateString () {
-      let str = this.buildComponents()
-      return `
-        <div class="${this.block.data.class}">${str}</div>
-      `
-    },
-
     getBlockName () {
       if (this.block.data.name) {
         return this.block.data.name
@@ -98,7 +72,7 @@ export default {
   created () {
     console.debug('<TemplateBlock /> created')
     this.deleteProps()
-    this.createTemplateContentWrapper()
+    this.createTemplateContentWrapperComponent()
   },
 
   methods: {
@@ -158,7 +132,6 @@ export default {
     },
 
     replaceRef (exp, refName) {
-      console.log('replaceRef', exp, refName)
       return `<slot name="${refName}">REPLACE</slot>`
     },
 
@@ -223,13 +196,15 @@ export default {
     },
 
     buildWrapper () {
+      const builtSlots = this.buildSlots()
       let template = `
         <TemplateContentWrapper>
-          ${this.buildSlots()}
+          ${builtSlots}
         </TemplateContentWrapper>
       `
 
-      let data = this.buildData()
+      let data = { ...this.buildData() }
+
       return {
         name: 'buildwrapper',
         template,
@@ -239,7 +214,7 @@ export default {
       }
     },
 
-    createTemplateContentWrapper () {
+    createTemplateContentWrapperComponent () {
       Vue.component('TemplateContentWrapper', {
         template: this.replaceRefs()
       })

@@ -13,14 +13,9 @@
 </template>
 
 <script>
-/*
-Can we do this with a slot perhaps?
-Extract all the code that is not ${REF}, replace ${REF} with <slot name="ref"></slot>
-
-Create a subcomponent and then replace slots with [refs]?
-*/
 
 import Vue from 'vue'
+import cloneDeep from 'lodash/cloneDeep'
 
 export default {
   name: 'TemplateBlock',
@@ -84,23 +79,23 @@ export default {
       }
 
       if (this.block.data.hasOwnProperty('namespace')) {
-        delete this.block.data.namespace
+        this.$delete(this.block.data, 'namespace')
       }
 
       if (this.block.data.hasOwnProperty('code')) {
-        delete this.block.data.code
+        this.$delete(this.block.data, 'code')
       }
 
       if (this.block.data.hasOwnProperty('class')) {
-        delete this.block.data.class
+        this.$delete(this.block.data, 'class')
       }
 
       if (this.block.data.hasOwnProperty('name')) {
-        delete this.block.data.name
+        this.$delete(this.block.data, 'name')
       }
 
       if (this.block.data.hasOwnProperty('help_text')) {
-        delete this.block.data.help_text
+        this.$delete(this.block.data, 'help_text')
       }
     },
 
@@ -119,16 +114,16 @@ export default {
         return '<div>!! template not found !!</div>'
       }
 
-      this.block.data.id = foundTemplate.data.id
-
+      this.$set(this.block.data, 'id', foundTemplate.data.id)
       this.deleteProps()
-
       return foundTemplate.data.code
     },
 
     replaceRefs () {
       let srcCode = this.getSourceCode()
-      return srcCode.replace(/%{(\w+)}/g, this.replaceRef)
+      let replacedRefsCode = srcCode.replace(/%{(\w+)}/g, this.replaceRef)
+
+      return replacedRefsCode
     },
 
     replaceRef (exp, refName) {
@@ -150,10 +145,6 @@ export default {
       return {
         refs
       }
-    },
-
-    getDataByRefName (refs, name) {
-      return refs[name]
     },
 
     buildSlots () {
@@ -203,7 +194,7 @@ export default {
         </TemplateContentWrapper>
       `
 
-      let data = { ...this.buildData() }
+      let data = this.buildData()
 
       return {
         name: 'buildwrapper',

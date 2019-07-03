@@ -330,18 +330,14 @@ export default {
     selectImage (img) {
       this.showImages = false
 
-      this.block.data = {
-        ...this.block.data,
-        url: img.src,
-        sizes: { ...img.sizes },
-        credits: img.credits,
-        title: img.title,
-        width: img.width,
-        height: img.height
-      }
+      this.$set(this.block.data, 'url', img.src)
+      this.$set(this.block.data, 'sizes', img.sizes)
+      this.$set(this.block.data, 'credits', img.credits)
+      this.$set(this.block.data, 'title', img.title)
+      this.$set(this.block.data, 'width', img.width || 0)
+      this.$set(this.block.data, 'height', img.height || 0)
 
       this.originalUrl = img.src
-
       this.showConfig = false
     },
 

@@ -78,6 +78,7 @@ import systemComponents from '@/components/blocks/system'
 import toolsComponents from '@/components/blocks/tools'
 import STANDARD_BLOCKS from '@/config/standardBlocks.js'
 import fetchTemplates from '@/utils/fetchTemplates.js'
+import { TweenMax } from 'gsap/all'
 
 for (let key in standardComponents) {
   if (standardComponents.hasOwnProperty(key)) {
@@ -290,7 +291,18 @@ export default {
     }
   },
 
+  mounted () {
+    this.animateIn()
+  },
+
   methods: {
+    animateIn (speed = 1) {
+      TweenMax.fromTo(this.$el, speed, { opacity: 0 }, { opacity: 1 })
+      TweenMax.fromTo(this.$el.querySelector('.villain-editor-instructions'), speed, { x: -5, opacity: 0 }, { x: 0, opacity: 1, delay: 0.9 })
+      TweenMax.fromTo(this.$el.querySelector('.villain-editor-controls'), speed, { x: -5, opacity: 0 }, { x: 0, opacity: 1, delay: 0.5 })
+      TweenMax.staggerFromTo(this.$el.querySelectorAll('.villain-editor-controls > div'), speed, { x: -3, opacity: 0 }, { x: 0, opacity: 1, delay: 1.2 }, 0.1)
+    },
+
     async updateTemplates () {
       this.availableTemplates = await fetchTemplates(this.templates, this.extraHeaders, `${this.server}${this.templatesURL}`)
     },
@@ -316,6 +328,9 @@ export default {
       let bx = cloneDeep(this.blocks)
       this.updatedSource = JSON.stringify(bx.map(b => this.stripMeta(b)), null, 2)
       this.blocks = JSON.parse(this.updatedSource)
+      this.blocks = this.addUIDs()
+
+      this.animateIn(0.5)
     },
 
     toggleFullscreen () {
@@ -581,6 +596,11 @@ export default {
           block,
           ...this.blocks.slice(parentIdx + 1)
         ]
+      }
+
+      // if template block, we refresh
+      if (block.type === 'template') {
+        this.refresh()
       }
     },
 

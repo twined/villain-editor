@@ -91,6 +91,7 @@ export default {
                 {
                   'data': {
                     'data': {
+                      'credits': null,
                       'height': 1069,
                       'img_class': 'img-fluid',
                       'media_queries': '',

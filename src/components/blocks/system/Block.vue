@@ -222,21 +222,6 @@ export default {
     this.$refs.handle.addEventListener('dragstart', this.onDragStart)
     this.$refs.handle.addEventListener('dragend', this.onDragEnd)
     this.$refs.handle.addEventListener('mousedown', this.onMouseDown)
-
-    setTimeout(() => {
-      let elTop = this.$el.getBoundingClientRect().top
-      let docBot = document.body.scrollTop + window.innerHeight
-      let elHeight = this.$el.clientHeight
-      let elBot = elTop + elHeight
-
-      if (elBot > docBot) {
-        let distance = elBot - docBot
-        window.scrollBy({
-          top: distance,
-          behavior: 'smooth'
-        })
-      }
-    }, 250)
   },
 
   methods: {
@@ -313,3 +298,8 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  .villain-block-wrapper {
+    // opacity: 0;
+  }
+</style>

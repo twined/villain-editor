@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { TweenMax, Power3 } from 'gsap/all'
+import { TweenMax, Power3 } from 'gsap'
 export default {
   name: 'BlockContainer',
 

@@ -96,7 +96,7 @@
 <script>
 
 import VueSlideUpDown from 'vue-slide-up-down'
-import { TweenMax } from 'gsap/all'
+import { TweenMax } from 'gsap'
 
 function createUID () {
   return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()

@@ -78,7 +78,7 @@ import systemComponents from '@/components/blocks/system'
 import toolsComponents from '@/components/blocks/tools'
 import STANDARD_BLOCKS from '@/config/standardBlocks.js'
 import fetchTemplates from '@/utils/fetchTemplates.js'
-import { TweenMax } from 'gsap/all'
+import { TweenMax } from 'gsap'
 
 for (let key in standardComponents) {
   if (standardComponents.hasOwnProperty(key)) {

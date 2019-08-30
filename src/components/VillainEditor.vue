@@ -8,12 +8,36 @@
     v-else
     :class="fullscreen ? 'villain-fullscreen': ''"
     class="villain-editor">
+    <div
+      v-if="showAutosaves"
+      class="villain-editor-autosave-list-popup">
+      <strong>Autolagrede versjoner</strong>
+      <div
+        v-for="(a, idx) in autosaveEntries"
+        :key="idx"
+        class="villain-editor-autosave-list-popup-item">
+        <div class="villain-editor-autosave-list-popup-item-date">
+          <i class="fa fa-fw fa-file mr-2" /> {{ new Date(a.timestamp).toLocaleString('nb') }}
+        </div>
+        <button
+          class="btn btn-outline-primary"
+          @click.prevent="restoreAutosave(a)">
+          Gjenopprett denne versjonen
+        </button>
+      </div>
+    </div>
     <div class="villain-editor-toolbar">
       <div class="villain-editor-instructions">
         <i class="fa mr-2 fa-info-circle" />
         Trykk på "+" under for å legge til en innholdsblokk
       </div>
       <div class="villain-editor-controls float-right">
+        <div class="villain-editor-autosave-status">
+          {{ autosaveStatus }}
+        </div>
+        <div @click="toggleAutosaves">
+          <i class="fas fa-fw fa-trash-restore" />
+        </div>
         <div @click="toggleSource()">
           <template v-if="showSource">
             <i class="fa fa-fw fa-times" />
@@ -78,6 +102,10 @@ import systemComponents from '@/components/blocks/system'
 import toolsComponents from '@/components/blocks/tools'
 import STANDARD_BLOCKS from '@/config/standardBlocks.js'
 import fetchTemplates from '@/utils/fetchTemplates.js'
+import { alertConfirm } from '@/utils/alerts'
+import { addAutoSave, getAutoSaves } from '@/utils/autoSave.js'
+import { AUTOSAVE_INTERVAL } from '@/config/autoSave.js'
+import getTimestamp from '@/utils/getTimestamp.js'
 import { TweenMax } from 'gsap'
 
 for (let key in standardComponents) {
@@ -174,7 +202,11 @@ export default {
 
   data () {
     return {
+      autosaveEntries: [],
+      autosaveStatus: '',
       blocks: [],
+      lastAutosavedAt: null,
+      showAutosaves: false,
       showSource: false,
       fullscreen: false,
       availableTemplates: []
@@ -260,6 +292,7 @@ export default {
   watch: {
     blocks: {
       handler: function (val, oldVal) {
+        this.lastEdit = getTimestamp()
         let bx = cloneDeep(val)
         if (bx.length) {
           this.$emit('input', JSON.stringify(bx.map(b => this.stripMeta(b)), null, 2))
@@ -286,9 +319,23 @@ export default {
       } else {
         this.blocks = JSON.parse(this.json)
       }
-
       this.blocks = this.addUIDs()
     }
+
+    this.lastEdit = getTimestamp()
+
+    // setup autosave interval
+    setInterval(() => {
+      // Only autosave if there are changes
+      if (this.lastEdit > this.lastAutosavedAt) {
+        this.lastAutosavedAt = getTimestamp()
+        this.autosaveStatus = 'autolagrer...'
+        setTimeout(() => {
+          this.autosaveStatus = ''
+        }, 2500)
+        addAutoSave(this.blocks)
+      }
+    }, AUTOSAVE_INTERVAL)
   },
 
   mounted () {
@@ -296,6 +343,25 @@ export default {
   },
 
   methods: {
+    toggleAutosaves () {
+      if (this.showAutosaves) {
+        this.showAutosaves = false
+        return
+      }
+      this.autosaveEntries = getAutoSaves()
+      this.showAutosaves = true
+    },
+
+    restoreAutosave (a) {
+      console.log(a)
+      alertConfirm('OBS!', 'Du er i ferd med å erstatte innholdet med data fra en autolagret versjon. Er du sikker på at du vil fortsette?', data => {
+        if (data) {
+          this.blocks = a.content
+          this.showAutosaves = false
+        }
+      })
+    },
+
     animateIn (speed = 1) {
       TweenMax.fromTo(this.$el, speed, { opacity: 0 }, { opacity: 1 })
       TweenMax.fromTo(this.$el.querySelector('.villain-editor-instructions'), speed, { x: -5, opacity: 0 }, { x: 0, opacity: 1, delay: 0.9 })

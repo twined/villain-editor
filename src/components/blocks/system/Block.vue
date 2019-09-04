@@ -11,6 +11,7 @@
       <slot></slot>
       <div class="villain-block-actions">
         <div
+          v-popover="'Skift blokkens posisjon'"
           v-if="!locked"
           ref="handle"
           class="villain-block-action villain-move">
@@ -23,18 +24,21 @@
           <i class="fa fa-fw fa-lock" />
         </div>
         <div
+          v-popover="'Vis hjelp for blokken'"
           v-if="hasHelpSlot"
           class="villain-block-action villain-help"
           @click="helpBlock">
           <i class="fa fa-fw fa-question-circle" />
         </div>
         <div
+          v-popover="'Endre blokkens oppsettsvalg'"
           v-if="hasConfigSlot"
           class="villain-block-action villain-config"
           @click="configBlock">
           <i class="fa fa-fw fa-cog" />
         </div>
         <div
+          v-popover="'Slett blokken'"
           v-if="!locked"
           class="villain-block-action villain-delete"
           @click="deleteBlock">
@@ -144,7 +148,10 @@
 </template>
 
 <script>
+import { VTooltip } from 'v-tooltip'
+
 export default {
+  directives: { popover: VTooltip },
 
   props: {
     block: {

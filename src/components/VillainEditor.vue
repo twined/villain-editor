@@ -17,7 +17,7 @@
         :key="idx"
         class="villain-editor-autosave-list-popup-item">
         <div class="villain-editor-autosave-list-popup-item-date">
-          <i class="fa fa-fw fa-file mr-2" /> {{ new Date(a.timestamp).toLocaleString('nb') }}
+          <i class="fa fa-fw fa-file mr-2" /> {{ format(a.timestamp, 'nb_NO') }}
         </div>
         <button
           class="btn btn-outline-primary"
@@ -35,10 +35,14 @@
         <div class="villain-editor-autosave-status">
           {{ autosaveStatus }}
         </div>
-        <div @click="toggleAutosaves">
+        <div
+          v-popover="'Vis autolagrede versjoner'"
+          @click="toggleAutosaves">
           <i class="fas fa-fw fa-trash-restore" />
         </div>
-        <div @click="toggleSource()">
+        <div
+          v-popover="showSource ? 'Lukk kildekodevisning' : 'Vis kildekode'"
+          @click="toggleSource()">
           <template v-if="showSource">
             <i class="fa fa-fw fa-times" />
           </template>
@@ -46,7 +50,9 @@
             <i class="fa fa-fw fa-code" />
           </template>
         </div>
-        <div @click="toggleFullscreen()">
+        <div
+          v-popover="fullscreen ? 'Lukk fullskjermsmodus' : 'Vis fullskjermsmodus'"
+          @click="toggleFullscreen()">
           <template v-if="fullscreen">
             <i class="fa fa-fw fa-times" />
           </template>
@@ -96,6 +102,10 @@
 import Vue from 'vue'
 import autosize from 'autosize'
 import cloneDeep from 'lodash/cloneDeep'
+import { format, register } from 'timeago.js'
+import nb_NO from 'timeago.js/lib/lang/nb_NO'
+import { VTooltip } from 'v-tooltip'
+
 import VillainBuilder from '@/components/VillainBuilder'
 import standardComponents from '@/components/blocks/standard'
 import systemComponents from '@/components/blocks/system'
@@ -104,8 +114,8 @@ import STANDARD_BLOCKS from '@/config/standardBlocks.js'
 import fetchTemplates from '@/utils/fetchTemplates.js'
 import { alertConfirm } from '@/utils/alerts'
 import { addAutoSave, getAutoSaves } from '@/utils/autoSave.js'
-import { AUTOSAVE_INTERVAL } from '@/config/autoSave.js'
 import getTimestamp from '@/utils/getTimestamp.js'
+import { AUTOSAVE_INTERVAL } from '@/config/autoSave.js'
 import { TweenMax } from 'gsap'
 
 for (let key in standardComponents) {
@@ -132,6 +142,8 @@ export default {
   components: {
     VillainBuilder
   },
+
+  directives: { popover: VTooltip },
 
   props: {
     builderMode: {
@@ -322,6 +334,8 @@ export default {
       this.blocks = this.addUIDs()
     }
 
+    register('nb_NO', nb_NO)
+
     this.lastEdit = getTimestamp()
 
     // setup autosave interval
@@ -343,6 +357,10 @@ export default {
   },
 
   methods: {
+    format (time, locale) {
+      return format(time, locale)
+    },
+
     toggleAutosaves () {
       if (this.showAutosaves) {
         this.showAutosaves = false

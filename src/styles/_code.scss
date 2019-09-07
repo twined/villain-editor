@@ -1,4 +1,13 @@
 .villain-editor {
+  .codeflask.codeflask--has-line-numbers:before {
+    background-color: #ffffff;
+  }
+
+  .codeflask__lines {
+    text-align: center;
+    font-family: inherit;
+  }
+
   .codeflask {
     background: #fff;
     color: #4f559c;

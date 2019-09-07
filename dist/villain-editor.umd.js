@@ -50566,12 +50566,12 @@ var BlockContainer_component = normalizeComponent(
 )
 
 /* harmony default export */ var BlockContainer = (BlockContainer_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=4271f634&
-var TemplateBlockvue_type_template_id_4271f634_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-template-description"},[_c('i',{staticClass:"fa fa-fw fa-map mr-1"}),_vm._v(" "+_vm._s(_vm.getBlockName)+"\n  ")]),_c(_vm.buildWrapper(),{tag:"component"})],1)}
-var TemplateBlockvue_type_template_id_4271f634_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=95d41066&
+var TemplateBlockvue_type_template_id_95d41066_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-template-description"},[_vm._v("\n    "+_vm._s(_vm.getBlockName)+"\n  ")]),_c(_vm.buildWrapper(),{tag:"component"})],1)}
+var TemplateBlockvue_type_template_id_95d41066_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=4271f634&
+// CONCATENATED MODULE: ./src/components/blocks/system/TemplateBlock.vue?vue&type=template&id=95d41066&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
 var es6_regexp_replace = __webpack_require__("a481");
@@ -50596,7 +50596,6 @@ var es6_regexp_replace = __webpack_require__("a481");
 //
 //
 //
-
 
 /* harmony default export */ var TemplateBlockvue_type_script_lang_js_ = ({
   name: 'TemplateBlock',
@@ -50805,8 +50804,8 @@ var es6_regexp_replace = __webpack_require__("a481");
 
 var TemplateBlock_component = normalizeComponent(
   system_TemplateBlockvue_type_script_lang_js_,
-  TemplateBlockvue_type_template_id_4271f634_render,
-  TemplateBlockvue_type_template_id_4271f634_staticRenderFns,
+  TemplateBlockvue_type_template_id_95d41066_render,
+  TemplateBlockvue_type_template_id_95d41066_staticRenderFns,
   false,
   null,
   null,
@@ -51410,12 +51409,12 @@ var HeaderBlock_component = normalizeComponent(
 )
 
 /* harmony default export */ var HeaderBlock = (HeaderBlock_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/HtmlBlock.vue?vue&type=template&id=48609bfb&
-var HtmlBlockvue_type_template_id_48609bfb_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{staticClass:"villain-extra-padding",attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-block-description"},[_c('i',{staticClass:"fa fa-fw fa-map mr-1"}),_vm._v(" HTML\n  ")]),_c('div',{ref:"wrapper",staticClass:"villain-html-input-wrapper"},[_c('div',{ref:"txt",staticClass:"villain-html-input"})]),_c('template',{slot:"config"},[_vm._v("\n    This is the config contents!\n  ")])],2)}
-var HtmlBlockvue_type_template_id_48609bfb_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/HtmlBlock.vue?vue&type=template&id=5499dd7b&
+var HtmlBlockvue_type_template_id_5499dd7b_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{staticClass:"villain-extra-padding",attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-block-description"},[_vm._v("\n    HTML\n  ")]),_c('div',{ref:"wrapper",staticClass:"villain-html-input-wrapper"},[_c('div',{ref:"txt",staticClass:"villain-html-input"})]),_c('template',{slot:"config"},[_vm._v("\n    This is the config contents!\n  ")])],2)}
+var HtmlBlockvue_type_template_id_5499dd7b_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/blocks/standard/HtmlBlock.vue?vue&type=template&id=48609bfb&
+// CONCATENATED MODULE: ./src/components/blocks/standard/HtmlBlock.vue?vue&type=template&id=5499dd7b&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/HtmlBlock.vue?vue&type=script&lang=js&
 //
@@ -51507,8 +51506,8 @@ var HtmlBlockvue_type_template_id_48609bfb_staticRenderFns = []
 
 var HtmlBlock_component = normalizeComponent(
   standard_HtmlBlockvue_type_script_lang_js_,
-  HtmlBlockvue_type_template_id_48609bfb_render,
-  HtmlBlockvue_type_template_id_48609bfb_staticRenderFns,
+  HtmlBlockvue_type_template_id_5499dd7b_render,
+  HtmlBlockvue_type_template_id_5499dd7b_staticRenderFns,
   false,
   null,
   null,
@@ -52138,12 +52137,12 @@ var MapBlock_component = normalizeComponent(
 )
 
 /* harmony default export */ var MapBlock = (MapBlock_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/MarkdownBlock.vue?vue&type=template&id=7821f0e0&
-var MarkdownBlockvue_type_template_id_7821f0e0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{staticClass:"villain-extra-padding",attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-block-description"},[_c('i',{staticClass:"fa fa-fw fa-map mr-1"}),_vm._v(" Markdown\n  ")]),_c('div',{ref:"wrapper",staticClass:"villain-markdown-input-wrapper"},[_c('div',{ref:"txt",staticClass:"villain-markdown-input"})]),_c('template',{slot:"help"},[_c('p',[_vm._v("\n      Markdown formatering er en ryddig måte å formatere tekst til nettsider på.\n      Her er noen av de vanligste formatene du kan bruke i denne blokka:\n    ")]),_c('code',[_vm._v("*Kursiv tekst*")]),_vm._v(" → "),_c('em',[_vm._v("Kursiv tekst")]),_c('br'),_c('code',[_vm._v("**Uthevet tekst**")]),_vm._v(" → "),_c('strong',[_vm._v("Uthevet tekst")]),_c('br'),_c('code',[_vm._v("[Lenke-tekst](https://www.nrk.no)")]),_vm._v(" → "),_c('a',{attrs:{"href":"https://nrk.no"}},[_vm._v("Lenke-tekst")]),_c('br')])],2)}
-var MarkdownBlockvue_type_template_id_7821f0e0_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/MarkdownBlock.vue?vue&type=template&id=c09335f0&
+var MarkdownBlockvue_type_template_id_c09335f0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{staticClass:"villain-extra-padding",attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-block-description"},[_vm._v("\n    Markdown\n  ")]),_c('div',{ref:"wrapper",staticClass:"villain-markdown-input-wrapper"},[_c('div',{ref:"txt",staticClass:"villain-markdown-input"})]),_c('template',{slot:"help"},[_c('p',[_vm._v("\n      Markdown formatering er en ryddig måte å formatere tekst til nettsider på.\n      Her er noen av de vanligste formatene du kan bruke i denne blokka:\n    ")]),_c('code',[_vm._v("*Kursiv tekst*")]),_vm._v(" → "),_c('em',[_vm._v("Kursiv tekst")]),_c('br'),_c('code',[_vm._v("**Uthevet tekst**")]),_vm._v(" → "),_c('strong',[_vm._v("Uthevet tekst")]),_c('br'),_c('code',[_vm._v("[Lenke-tekst](https://www.nrk.no)")]),_vm._v(" → "),_c('a',{attrs:{"href":"https://nrk.no"}},[_vm._v("Lenke-tekst")]),_c('br')])],2)}
+var MarkdownBlockvue_type_template_id_c09335f0_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/blocks/standard/MarkdownBlock.vue?vue&type=template&id=7821f0e0&
+// CONCATENATED MODULE: ./src/components/blocks/standard/MarkdownBlock.vue?vue&type=template&id=c09335f0&
 
 // EXTERNAL MODULE: ./node_modules/prismjs/prism.js
 var prism = __webpack_require__("c197");
@@ -52251,8 +52250,8 @@ var prism_markdown = __webpack_require__("826c");
 
 var MarkdownBlock_component = normalizeComponent(
   standard_MarkdownBlockvue_type_script_lang_js_,
-  MarkdownBlockvue_type_template_id_7821f0e0_render,
-  MarkdownBlockvue_type_template_id_7821f0e0_staticRenderFns,
+  MarkdownBlockvue_type_template_id_c09335f0_render,
+  MarkdownBlockvue_type_template_id_c09335f0_staticRenderFns,
   false,
   null,
   null,

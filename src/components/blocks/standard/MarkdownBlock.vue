@@ -7,7 +7,7 @@
     @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
     <div class="villain-block-description">
-      <i class="fa fa-fw fa-map mr-1" /> Markdown
+      Markdown
     </div>
     <div
       ref="wrapper"

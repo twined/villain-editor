@@ -6,7 +6,7 @@
     @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
     <div class="villain-template-description">
-      <i class="fa fa-fw fa-map mr-1" /> {{ getBlockName }}
+      {{ getBlockName }}
     </div>
     <component :is="buildWrapper()" />
   </Block>
@@ -15,7 +15,6 @@
 <script>
 
 import Vue from 'vue'
-import cloneDeep from 'lodash/cloneDeep'
 
 export default {
   name: 'TemplateBlock',

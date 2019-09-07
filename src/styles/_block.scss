@@ -5,13 +5,13 @@
 
 .villain-extra-padding {
   .villain-block {
-    padding: 2rem 2rem 1rem 1rem;
+    padding: 2rem 2rem 1rem 0rem;
   }
 }
 
 .villain-block {
   background-color: #fff;
-  padding: 0;
+  padding: 1rem;
   padding-right: 2rem;
   min-height: 120px;
   position: relative;
@@ -439,6 +439,7 @@
   user-select: none;
   pointer-events: none;
   height: 100%;
+  width: 100%;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);

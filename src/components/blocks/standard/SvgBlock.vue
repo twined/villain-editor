@@ -8,17 +8,19 @@
 
     <div
       ref="svg"
-      class="villain-svg-input"
+      class="villain-svg-output"
       v-html="block.data.code">
     </div>
     <template slot="config">
       <div class="form-group">
         <label>SVG kode</label>
-        <textarea
-          ref="txt"
-          v-model="block.data.code"
-          class="villain-svg-input">
-        </textarea>
+        <div
+          ref="wrapper"
+          class="villain-svg-input-wrapper">
+          <div
+            ref="txt"
+            class="villain-svg-input" />
+        </div>
       </div>
 
       <div class="form-group">
@@ -33,7 +35,8 @@
 </template>
 
 <script>
-import autosize from 'autosize'
+import { TweenMax } from 'gsap'
+import CodeFlask from 'codeflask'
 import Block from '@/components/blocks/system/Block'
 
 export default {
@@ -57,6 +60,7 @@ export default {
 
   data () {
     return {
+      codeFlask: null,
       customClass: '',
       uid: null
     }
@@ -64,6 +68,29 @@ export default {
 
   created () {
     console.debug('<SvgBlock /> created')
+  },
+
+  mounted () {
+    this.codeFlask = new CodeFlask(this.$refs.txt, { language: 'markup', defaultTheme: false, lineNumbers: true })
+
+    this.codeFlask.onUpdate(code => {
+      this.block.data.code = code
+      this.setHeight()
+    })
+
+    this.codeFlask.updateCode(this.block.data.code)
+
+    // set height
+    setTimeout(() => { this.setHeight() }, 800)
+  },
+
+  methods: {
+    setHeight () {
+      const pre = this.$refs.txt.querySelector('.codeflask__pre')
+      const wrapper = this.$refs.wrapper
+      const preHeight = pre.getBoundingClientRect().height > 0 ? pre.getBoundingClientRect().height : 24
+      TweenMax.to(wrapper, 0.5, { height: `calc(${preHeight}px + 1rem)` })
+    }
   }
 }
 </script>

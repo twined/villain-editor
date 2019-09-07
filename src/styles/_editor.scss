@@ -186,10 +186,21 @@
     }
 
     .villain-editor-controls {
-      padding: .1rem .5rem;
+      padding: .35rem .5rem 0;
       background-color: #fff;
       display: flex;
       justify-content: space-between;
+
+      .svg-icon {
+        width: 30px;
+
+        svg {
+          fill: lighten($villain-main-faded-color, 55%);
+          &:hover {
+            fill: $villain-main-color;
+          }
+        }
+      }
 
       div {
         padding: 0 .2rem;

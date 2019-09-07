@@ -1,0 +1,73 @@
+.villain-editor {
+  .codeflask {
+    background: #fff;
+    color: #4f559c;
+  }
+  .codeflask .token.punctuation {
+    color: #4a4a4a;
+  }
+  .codeflask .token.keyword {
+    color: #1f35b3;
+  }
+
+  .codeflask .token.title {
+    .token.punctuation {
+      font-weight: normal;
+      font-style: normal;
+    }
+    color: black;
+    font-weight: bold;
+  }
+
+  .codeflask .token.url {
+    color: #1f35b3;
+  }
+
+  .codeflask .token.bold {
+    .token.punctuation {
+      font-weight: normal;
+      font-style: normal;
+    }
+    color: black;
+    font-weight: bold;
+  }
+
+  .codeflask .token.italic {
+    .token.punctuation {
+      font-weight: normal;
+      font-style: normal;
+    }
+    font-style: italic;
+  }
+
+  .codeflask .token.operator {
+    color: #ff5598;
+  }
+  .codeflask .token.string {
+    color: #41ad8f;
+  }
+  .codeflask .token.comment {
+    color: #9badb7;
+  }
+  .codeflask .token.function {
+    color: #1f35b3;
+  }
+  .codeflask .token.boolean {
+    color: #1f35b3;
+  }
+  .codeflask .token.number {
+    color: #1f35b3;
+  }
+  .codeflask .token.selector {
+    color: #1f35b3;
+  }
+  .codeflask .token.property {
+    color: #1f35b3;
+  }
+  .codeflask .token.tag {
+    color: #1f35b3;
+  }
+  .codeflask .token.attr-value {
+    color: #1f35b3;
+  }
+}

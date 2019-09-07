@@ -38,26 +38,26 @@
         <div
           v-popover="'Vis autolagrede versjoner'"
           @click="toggleAutosaves">
-          <i class="fas fa-fw fa-trash-restore" />
+          <IconAutosave />
         </div>
         <div
           v-popover="showSource ? 'Lukk kildekodevisning' : 'Vis kildekode'"
           @click="toggleSource()">
           <template v-if="showSource">
-            <i class="fa fa-fw fa-times" />
+            <IconClose />
           </template>
           <template v-else>
-            <i class="fa fa-fw fa-code" />
+            <IconSource />
           </template>
         </div>
         <div
           v-popover="fullscreen ? 'Lukk fullskjermsmodus' : 'Vis fullskjermsmodus'"
           @click="toggleFullscreen()">
           <template v-if="fullscreen">
-            <i class="fa fa-fw fa-times" />
+            <IconClose />
           </template>
           <template v-else>
-            <i class="fa fa-fw fa-expand-arrows-alt" />
+            <IconFullscreen />
           </template>
         </div>
       </div>
@@ -110,6 +110,10 @@ import VillainBuilder from '@/components/VillainBuilder'
 import standardComponents from '@/components/blocks/standard'
 import systemComponents from '@/components/blocks/system'
 import toolsComponents from '@/components/blocks/tools'
+import IconAutosave from '@/components/icons/IconAutosave'
+import IconClose from '@/components/icons/IconClose'
+import IconFullscreen from '@/components/icons/IconFullscreen'
+import IconSource from '@/components/icons/IconSource'
 import STANDARD_BLOCKS from '@/config/standardBlocks.js'
 import fetchTemplates from '@/utils/fetchTemplates.js'
 import { alertConfirm } from '@/utils/alerts'
@@ -140,7 +144,11 @@ export default {
   name: 'VillainEditor',
 
   components: {
-    VillainBuilder
+    VillainBuilder,
+    IconAutosave,
+    IconClose,
+    IconFullscreen,
+    IconSource
   },
 
   directives: { popover: VTooltip },

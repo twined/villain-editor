@@ -3,6 +3,12 @@
   position: relative;
 }
 
+.villain-extra-padding {
+  .villain-block {
+    padding: 2rem 2rem 1rem 1rem;
+  }
+}
+
 .villain-block {
   background-color: #fff;
   padding: 0;
@@ -161,13 +167,16 @@
     min-height: 150px;
   }
 
-  .villain-template-description {
+  .villain-template-description, .villain-block-description {
     background-color: $villain-background-color;
     color: white;
-    font-size: 12px;
-    padding: 3px 7px;
+    font-size: 8px;
+    padding: 3px 5px;
     font-weight: bold;
     display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   .villain-block-info {
@@ -407,13 +416,29 @@
   padding: 1rem;
 }
 
+.villain-markdown-input-wrapper,
+.villain-svg-input-wrapper,
+.villain-html-input-wrapper {
+  position: relative;
+}
+
 .villain-markdown-input,
 .villain-svg-input,
 .villain-html-input {
   border: 0;
   width: 100%;
   font-family: "SF Mono", "Menlo", "Monaco", "Inconsolata", "Fira Mono", "Droid Sans Mono", "Source Code Pro", monospace;
-  padding: 1rem;
+
+  .codeflask__textarea {
+    overflow: hidden;
+  }
+}
+
+.villain-svg-output {
+  margin: 0 auto;
+  max-width: 250px;
+  user-select: none;
+  pointer-events: none;
 }
 
 .villain-block-divider {

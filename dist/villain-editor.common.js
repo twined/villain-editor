@@ -12577,6 +12577,240 @@ module.exports = function table(state, startLine, endLine, silent) {
 
 /***/ }),
 
+/***/ "826c":
+/***/ (function(module, exports) {
+
+Prism.languages.markdown = Prism.languages.extend('markup', {});
+Prism.languages.insertBefore('markdown', 'prolog', {
+	'blockquote': {
+		// > ...
+		pattern: /^>(?:[\t ]*>)*/m,
+		alias: 'punctuation'
+	},
+	'code': [
+		{
+			// Prefixed by 4 spaces or 1 tab
+			pattern: /^(?: {4}|\t).+/m,
+			alias: 'keyword'
+		},
+		{
+			// `code`
+			// ``code``
+			pattern: /``.+?``|`[^`\n]+`/,
+			alias: 'keyword'
+		},
+		{
+			// ```optional language
+			// code block
+			// ```
+			pattern: /^```[\s\S]*?^```$/m,
+			greedy: true,
+			inside: {
+				'code-block': {
+					pattern: /^(```.*(?:\r?\n|\r))[\s\S]+?(?=(?:\r?\n|\r)^```$)/m,
+					lookbehind: true
+				},
+				'code-language': {
+					pattern: /^(```).+/,
+					lookbehind: true
+				},
+				'punctuation': /```/
+			}
+		}
+	],
+	'title': [
+		{
+			// title 1
+			// =======
+
+			// title 2
+			// -------
+			pattern: /\S.*(?:\r?\n|\r)(?:==+|--+)/,
+			alias: 'important',
+			inside: {
+				punctuation: /==+$|--+$/
+			}
+		},
+		{
+			// # title 1
+			// ###### title 6
+			pattern: /(^\s*)#+.+/m,
+			lookbehind: true,
+			alias: 'important',
+			inside: {
+				punctuation: /^#+|#+$/
+			}
+		}
+	],
+	'hr': {
+		// ***
+		// ---
+		// * * *
+		// -----------
+		pattern: /(^\s*)([*-])(?:[\t ]*\2){2,}(?=\s*$)/m,
+		lookbehind: true,
+		alias: 'punctuation'
+	},
+	'list': {
+		// * item
+		// + item
+		// - item
+		// 1. item
+		pattern: /(^\s*)(?:[*+-]|\d+\.)(?=[\t ].)/m,
+		lookbehind: true,
+		alias: 'punctuation'
+	},
+	'url-reference': {
+		// [id]: http://example.com "Optional title"
+		// [id]: http://example.com 'Optional title'
+		// [id]: http://example.com (Optional title)
+		// [id]: <http://example.com> "Optional title"
+		pattern: /!?\[[^\]]+\]:[\t ]+(?:\S+|<(?:\\.|[^>\\])+>)(?:[\t ]+(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\((?:\\.|[^)\\])*\)))?/,
+		inside: {
+			'variable': {
+				pattern: /^(!?\[)[^\]]+/,
+				lookbehind: true
+			},
+			'string': /(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\((?:\\.|[^)\\])*\))$/,
+			'punctuation': /^[\[\]!:]|[<>]/
+		},
+		alias: 'url'
+	},
+	'bold': {
+		// **strong**
+		// __strong__
+
+		// Allow only one line break
+		pattern: /(^|[^\\])(\*\*|__)(?:(?:\r?\n|\r)(?!\r?\n|\r)|.)+?\2/,
+		lookbehind: true,
+		greedy: true,
+		inside: {
+			'punctuation': /^\*\*|^__|\*\*$|__$/
+		}
+	},
+	'italic': {
+		// *em*
+		// _em_
+
+		// Allow only one line break
+		pattern: /(^|[^\\])([*_])(?:(?:\r?\n|\r)(?!\r?\n|\r)|.)+?\2/,
+		lookbehind: true,
+		greedy: true,
+		inside: {
+			'punctuation': /^[*_]|[*_]$/
+		}
+	},
+	'strike': {
+		// ~~strike through~~
+		// ~strike~
+
+		// Allow only one line break
+		pattern: /(^|[^\\])(~~?)(?:(?:\r?\n|\r)(?!\r?\n|\r)|.)+?\2/,
+		lookbehind: true,
+		greedy: true,
+		inside: {
+			'punctuation': /^~~?|~~?$/
+		}
+	},
+	'url': {
+		// [example](http://example.com "Optional title")
+		// [example] [id]
+		pattern: /!?\[[^\]]+\](?:\([^\s)]+(?:[\t ]+"(?:\\.|[^"\\])*")?\)| ?\[[^\]\n]*\])/,
+		inside: {
+			'variable': {
+				pattern: /(!?\[)[^\]]+(?=\]$)/,
+				lookbehind: true
+			},
+			'string': {
+				pattern: /"(?:\\.|[^"\\])*"(?=\)$)/
+			}
+		}
+	}
+});
+
+['bold', 'italic', 'strike'].forEach(function (token) {
+	['url', 'bold', 'italic', 'strike'].forEach(function (inside) {
+		if (token !== inside) {
+			Prism.languages.markdown[token].inside[inside] = Prism.languages.markdown[inside];
+		}
+	});
+});
+
+Prism.hooks.add('after-tokenize', function (env) {
+	if (env.language !== 'markdown' && env.language !== 'md') {
+		return;
+	}
+
+	function walkTokens(tokens) {
+		if (!tokens || typeof tokens === 'string') {
+			return;
+		}
+
+		for (var i = 0, l = tokens.length; i < l; i++) {
+			var token = tokens[i];
+
+			if (token.type !== 'code') {
+				walkTokens(token.content);
+				continue;
+			}
+
+			var codeLang = token.content[1];
+			var codeBlock = token.content[3];
+
+			if (codeLang && codeBlock &&
+				codeLang.type === 'code-language' && codeBlock.type === 'code-block' &&
+				typeof codeLang.content === 'string') {
+
+				// this might be a language that Prism does not support
+				var alias = 'language-' + codeLang.content.trim().split(/\s+/)[0].toLowerCase();
+
+				// add alias
+				if (!codeBlock.alias) {
+					codeBlock.alias = [alias];
+				} else if (typeof codeBlock.alias === 'string') {
+					codeBlock.alias = [codeBlock.alias, alias];
+				} else {
+					codeBlock.alias.push(alias);
+				}
+			}
+		}
+	}
+
+	walkTokens(env.tokens);
+});
+
+Prism.hooks.add('wrap', function (env) {
+	if (env.type !== 'code-block') {
+		return;
+	}
+
+	var codeLang = '';
+	for (var i = 0, l = env.classes.length; i < l; i++) {
+		var cls = env.classes[i];
+		var match = /language-(.+)/.exec(cls);
+		if (match) {
+			codeLang = match[1];
+			break;
+		}
+	}
+
+	var grammar = Prism.languages[codeLang];
+
+	if (!grammar) {
+		return;
+	}
+
+	// reverse Prism.util.encode
+	var code = env.content.replace(/&lt;/g, '<').replace(/&amp;/g, '&');
+
+	env.content = Prism.highlight(code, grammar, codeLang);
+});
+
+Prism.languages.md = Prism.languages.markdown;
+
+
+/***/ }),
+
 /***/ "834f":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -30826,6 +31060,974 @@ module.exports = isIndex;
 
 /***/ }),
 
+/***/ "c197":
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {
+/* **********************************************
+     Begin prism-core.js
+********************************************** */
+
+var _self = (typeof window !== 'undefined')
+	? window   // if in browser
+	: (
+		(typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope)
+		? self // if in worker
+		: {}   // if in node js
+	);
+
+/**
+ * Prism: Lightweight, robust, elegant syntax highlighting
+ * MIT license http://www.opensource.org/licenses/mit-license.php/
+ * @author Lea Verou http://lea.verou.me
+ */
+
+var Prism = (function (_self){
+
+// Private helper vars
+var lang = /\blang(?:uage)?-([\w-]+)\b/i;
+var uniqueId = 0;
+
+var _ = {
+	manual: _self.Prism && _self.Prism.manual,
+	disableWorkerMessageHandler: _self.Prism && _self.Prism.disableWorkerMessageHandler,
+	util: {
+		encode: function (tokens) {
+			if (tokens instanceof Token) {
+				return new Token(tokens.type, _.util.encode(tokens.content), tokens.alias);
+			} else if (Array.isArray(tokens)) {
+				return tokens.map(_.util.encode);
+			} else {
+				return tokens.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\u00a0/g, ' ');
+			}
+		},
+
+		type: function (o) {
+			return Object.prototype.toString.call(o).slice(8, -1);
+		},
+
+		objId: function (obj) {
+			if (!obj['__id']) {
+				Object.defineProperty(obj, '__id', { value: ++uniqueId });
+			}
+			return obj['__id'];
+		},
+
+		// Deep clone a language definition (e.g. to extend it)
+		clone: function deepClone(o, visited) {
+			var clone, id, type = _.util.type(o);
+			visited = visited || {};
+
+			switch (type) {
+				case 'Object':
+					id = _.util.objId(o);
+					if (visited[id]) {
+						return visited[id];
+					}
+					clone = {};
+					visited[id] = clone;
+
+					for (var key in o) {
+						if (o.hasOwnProperty(key)) {
+							clone[key] = deepClone(o[key], visited);
+						}
+					}
+
+					return clone;
+
+				case 'Array':
+					id = _.util.objId(o);
+					if (visited[id]) {
+						return visited[id];
+					}
+					clone = [];
+					visited[id] = clone;
+
+					o.forEach(function (v, i) {
+						clone[i] = deepClone(v, visited);
+					});
+
+					return clone;
+
+				default:
+					return o;
+			}
+		}
+	},
+
+	languages: {
+		extend: function (id, redef) {
+			var lang = _.util.clone(_.languages[id]);
+
+			for (var key in redef) {
+				lang[key] = redef[key];
+			}
+
+			return lang;
+		},
+
+		/**
+		 * Insert a token before another token in a language literal
+		 * As this needs to recreate the object (we cannot actually insert before keys in object literals),
+		 * we cannot just provide an object, we need an object and a key.
+		 * @param inside The key (or language id) of the parent
+		 * @param before The key to insert before.
+		 * @param insert Object with the key/value pairs to insert
+		 * @param root The object that contains `inside`. If equal to Prism.languages, it can be omitted.
+		 */
+		insertBefore: function (inside, before, insert, root) {
+			root = root || _.languages;
+			var grammar = root[inside];
+			var ret = {};
+
+			for (var token in grammar) {
+				if (grammar.hasOwnProperty(token)) {
+
+					if (token == before) {
+						for (var newToken in insert) {
+							if (insert.hasOwnProperty(newToken)) {
+								ret[newToken] = insert[newToken];
+							}
+						}
+					}
+
+					// Do not insert token which also occur in insert. See #1525
+					if (!insert.hasOwnProperty(token)) {
+						ret[token] = grammar[token];
+					}
+				}
+			}
+
+			var old = root[inside];
+			root[inside] = ret;
+
+			// Update references in other language definitions
+			_.languages.DFS(_.languages, function(key, value) {
+				if (value === old && key != inside) {
+					this[key] = ret;
+				}
+			});
+
+			return ret;
+		},
+
+		// Traverse a language definition with Depth First Search
+		DFS: function DFS(o, callback, type, visited) {
+			visited = visited || {};
+
+			var objId = _.util.objId;
+
+			for (var i in o) {
+				if (o.hasOwnProperty(i)) {
+					callback.call(o, i, o[i], type || i);
+
+					var property = o[i],
+					    propertyType = _.util.type(property);
+
+					if (propertyType === 'Object' && !visited[objId(property)]) {
+						visited[objId(property)] = true;
+						DFS(property, callback, null, visited);
+					}
+					else if (propertyType === 'Array' && !visited[objId(property)]) {
+						visited[objId(property)] = true;
+						DFS(property, callback, i, visited);
+					}
+				}
+			}
+		}
+	},
+	plugins: {},
+
+	highlightAll: function(async, callback) {
+		_.highlightAllUnder(document, async, callback);
+	},
+
+	highlightAllUnder: function(container, async, callback) {
+		var env = {
+			callback: callback,
+			selector: 'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'
+		};
+
+		_.hooks.run("before-highlightall", env);
+
+		var elements = env.elements || container.querySelectorAll(env.selector);
+
+		for (var i=0, element; element = elements[i++];) {
+			_.highlightElement(element, async === true, env.callback);
+		}
+	},
+
+	highlightElement: function(element, async, callback) {
+		// Find language
+		var language, grammar, parent = element;
+
+		while (parent && !lang.test(parent.className)) {
+			parent = parent.parentNode;
+		}
+
+		if (parent) {
+			language = (parent.className.match(lang) || [,''])[1].toLowerCase();
+			grammar = _.languages[language];
+		}
+
+		// Set language on the element, if not present
+		element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+
+		if (element.parentNode) {
+			// Set language on the parent, for styling
+			parent = element.parentNode;
+
+			if (/pre/i.test(parent.nodeName)) {
+				parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+			}
+		}
+
+		var code = element.textContent;
+
+		var env = {
+			element: element,
+			language: language,
+			grammar: grammar,
+			code: code
+		};
+
+		var insertHighlightedCode = function (highlightedCode) {
+			env.highlightedCode = highlightedCode;
+
+			_.hooks.run('before-insert', env);
+
+			env.element.innerHTML = env.highlightedCode;
+
+			_.hooks.run('after-highlight', env);
+			_.hooks.run('complete', env);
+			callback && callback.call(env.element);
+		}
+
+		_.hooks.run('before-sanity-check', env);
+
+		if (!env.code) {
+			_.hooks.run('complete', env);
+			return;
+		}
+
+		_.hooks.run('before-highlight', env);
+
+		if (!env.grammar) {
+			insertHighlightedCode(_.util.encode(env.code));
+			return;
+		}
+
+		if (async && _self.Worker) {
+			var worker = new Worker(_.filename);
+
+			worker.onmessage = function(evt) {
+				insertHighlightedCode(evt.data);
+			};
+
+			worker.postMessage(JSON.stringify({
+				language: env.language,
+				code: env.code,
+				immediateClose: true
+			}));
+		}
+		else {
+			insertHighlightedCode(_.highlight(env.code, env.grammar, env.language));
+		}
+	},
+
+	highlight: function (text, grammar, language) {
+		var env = {
+			code: text,
+			grammar: grammar,
+			language: language
+		};
+		_.hooks.run('before-tokenize', env);
+		env.tokens = _.tokenize(env.code, env.grammar);
+		_.hooks.run('after-tokenize', env);
+		return Token.stringify(_.util.encode(env.tokens), env.language);
+	},
+
+	matchGrammar: function (text, strarr, grammar, index, startPos, oneshot, target) {
+		for (var token in grammar) {
+			if(!grammar.hasOwnProperty(token) || !grammar[token]) {
+				continue;
+			}
+
+			if (token == target) {
+				return;
+			}
+
+			var patterns = grammar[token];
+			patterns = (_.util.type(patterns) === "Array") ? patterns : [patterns];
+
+			for (var j = 0; j < patterns.length; ++j) {
+				var pattern = patterns[j],
+					inside = pattern.inside,
+					lookbehind = !!pattern.lookbehind,
+					greedy = !!pattern.greedy,
+					lookbehindLength = 0,
+					alias = pattern.alias;
+
+				if (greedy && !pattern.pattern.global) {
+					// Without the global flag, lastIndex won't work
+					var flags = pattern.pattern.toString().match(/[imuy]*$/)[0];
+					pattern.pattern = RegExp(pattern.pattern.source, flags + "g");
+				}
+
+				pattern = pattern.pattern || pattern;
+
+				// Don’t cache length as it changes during the loop
+				for (var i = index, pos = startPos; i < strarr.length; pos += strarr[i].length, ++i) {
+
+					var str = strarr[i];
+
+					if (strarr.length > text.length) {
+						// Something went terribly wrong, ABORT, ABORT!
+						return;
+					}
+
+					if (str instanceof Token) {
+						continue;
+					}
+
+					if (greedy && i != strarr.length - 1) {
+						pattern.lastIndex = pos;
+						var match = pattern.exec(text);
+						if (!match) {
+							break;
+						}
+
+						var from = match.index + (lookbehind ? match[1].length : 0),
+						    to = match.index + match[0].length,
+						    k = i,
+						    p = pos;
+
+						for (var len = strarr.length; k < len && (p < to || (!strarr[k].type && !strarr[k - 1].greedy)); ++k) {
+							p += strarr[k].length;
+							// Move the index i to the element in strarr that is closest to from
+							if (from >= p) {
+								++i;
+								pos = p;
+							}
+						}
+
+						// If strarr[i] is a Token, then the match starts inside another Token, which is invalid
+						if (strarr[i] instanceof Token) {
+							continue;
+						}
+
+						// Number of tokens to delete and replace with the new match
+						delNum = k - i;
+						str = text.slice(pos, p);
+						match.index -= pos;
+					} else {
+						pattern.lastIndex = 0;
+
+						var match = pattern.exec(str),
+							delNum = 1;
+					}
+
+					if (!match) {
+						if (oneshot) {
+							break;
+						}
+
+						continue;
+					}
+
+					if(lookbehind) {
+						lookbehindLength = match[1] ? match[1].length : 0;
+					}
+
+					var from = match.index + lookbehindLength,
+					    match = match[0].slice(lookbehindLength),
+					    to = from + match.length,
+					    before = str.slice(0, from),
+					    after = str.slice(to);
+
+					var args = [i, delNum];
+
+					if (before) {
+						++i;
+						pos += before.length;
+						args.push(before);
+					}
+
+					var wrapped = new Token(token, inside? _.tokenize(match, inside) : match, alias, match, greedy);
+
+					args.push(wrapped);
+
+					if (after) {
+						args.push(after);
+					}
+
+					Array.prototype.splice.apply(strarr, args);
+
+					if (delNum != 1)
+						_.matchGrammar(text, strarr, grammar, i, pos, true, token);
+
+					if (oneshot)
+						break;
+				}
+			}
+		}
+	},
+
+	tokenize: function(text, grammar) {
+		var strarr = [text];
+
+		var rest = grammar.rest;
+
+		if (rest) {
+			for (var token in rest) {
+				grammar[token] = rest[token];
+			}
+
+			delete grammar.rest;
+		}
+
+		_.matchGrammar(text, strarr, grammar, 0, 0, false);
+
+		return strarr;
+	},
+
+	hooks: {
+		all: {},
+
+		add: function (name, callback) {
+			var hooks = _.hooks.all;
+
+			hooks[name] = hooks[name] || [];
+
+			hooks[name].push(callback);
+		},
+
+		run: function (name, env) {
+			var callbacks = _.hooks.all[name];
+
+			if (!callbacks || !callbacks.length) {
+				return;
+			}
+
+			for (var i=0, callback; callback = callbacks[i++];) {
+				callback(env);
+			}
+		}
+	},
+
+	Token: Token
+};
+
+_self.Prism = _;
+
+function Token(type, content, alias, matchedStr, greedy) {
+	this.type = type;
+	this.content = content;
+	this.alias = alias;
+	// Copy of the full string this token was created from
+	this.length = (matchedStr || "").length|0;
+	this.greedy = !!greedy;
+}
+
+Token.stringify = function(o, language, parent) {
+	if (typeof o == 'string') {
+		return o;
+	}
+
+	if (Array.isArray(o)) {
+		return o.map(function(element) {
+			return Token.stringify(element, language, o);
+		}).join('');
+	}
+
+	var env = {
+		type: o.type,
+		content: Token.stringify(o.content, language, parent),
+		tag: 'span',
+		classes: ['token', o.type],
+		attributes: {},
+		language: language,
+		parent: parent
+	};
+
+	if (o.alias) {
+		var aliases = Array.isArray(o.alias) ? o.alias : [o.alias];
+		Array.prototype.push.apply(env.classes, aliases);
+	}
+
+	_.hooks.run('wrap', env);
+
+	var attributes = Object.keys(env.attributes).map(function(name) {
+		return name + '="' + (env.attributes[name] || '').replace(/"/g, '&quot;') + '"';
+	}).join(' ');
+
+	return '<' + env.tag + ' class="' + env.classes.join(' ') + '"' + (attributes ? ' ' + attributes : '') + '>' + env.content + '</' + env.tag + '>';
+
+};
+
+if (!_self.document) {
+	if (!_self.addEventListener) {
+		// in Node.js
+		return _;
+	}
+
+	if (!_.disableWorkerMessageHandler) {
+		// In worker
+		_self.addEventListener('message', function (evt) {
+			var message = JSON.parse(evt.data),
+				lang = message.language,
+				code = message.code,
+				immediateClose = message.immediateClose;
+
+			_self.postMessage(_.highlight(code, _.languages[lang], lang));
+			if (immediateClose) {
+				_self.close();
+			}
+		}, false);
+	}
+
+	return _;
+}
+
+//Get current script and highlight
+var script = document.currentScript || [].slice.call(document.getElementsByTagName("script")).pop();
+
+if (script) {
+	_.filename = script.src;
+
+	if (!_.manual && !script.hasAttribute('data-manual')) {
+		if(document.readyState !== "loading") {
+			if (window.requestAnimationFrame) {
+				window.requestAnimationFrame(_.highlightAll);
+			} else {
+				window.setTimeout(_.highlightAll, 16);
+			}
+		}
+		else {
+			document.addEventListener('DOMContentLoaded', _.highlightAll);
+		}
+	}
+}
+
+return _;
+
+})(_self);
+
+if ( true && module.exports) {
+	module.exports = Prism;
+}
+
+// hack for components to work correctly in node.js
+if (typeof global !== 'undefined') {
+	global.Prism = Prism;
+}
+
+
+/* **********************************************
+     Begin prism-markup.js
+********************************************** */
+
+Prism.languages.markup = {
+	'comment': /<!--[\s\S]*?-->/,
+	'prolog': /<\?[\s\S]+?\?>/,
+	'doctype': /<!DOCTYPE[\s\S]+?>/i,
+	'cdata': /<!\[CDATA\[[\s\S]*?]]>/i,
+	'tag': {
+		pattern: /<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/i,
+		greedy: true,
+		inside: {
+			'tag': {
+				pattern: /^<\/?[^\s>\/]+/i,
+				inside: {
+					'punctuation': /^<\/?/,
+					'namespace': /^[^\s>\/:]+:/
+				}
+			},
+			'attr-value': {
+				pattern: /=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/i,
+				inside: {
+					'punctuation': [
+						/^=/,
+						{
+							pattern: /^(\s*)["']|["']$/,
+							lookbehind: true
+						}
+					]
+				}
+			},
+			'punctuation': /\/?>/,
+			'attr-name': {
+				pattern: /[^\s>\/]+/,
+				inside: {
+					'namespace': /^[^\s>\/:]+:/
+				}
+			}
+
+		}
+	},
+	'entity': /&#?[\da-z]{1,8};/i
+};
+
+Prism.languages.markup['tag'].inside['attr-value'].inside['entity'] =
+	Prism.languages.markup['entity'];
+
+// Plugin to make entity title show the real entity, idea by Roman Komarov
+Prism.hooks.add('wrap', function(env) {
+
+	if (env.type === 'entity') {
+		env.attributes['title'] = env.content.replace(/&amp;/, '&');
+	}
+});
+
+Object.defineProperty(Prism.languages.markup.tag, 'addInlined', {
+	/**
+	 * Adds an inlined language to markup.
+	 *
+	 * An example of an inlined language is CSS with `<style>` tags.
+	 *
+	 * @param {string} tagName The name of the tag that contains the inlined language. This name will be treated as
+	 * case insensitive.
+	 * @param {string} lang The language key.
+	 * @example
+	 * addInlined('style', 'css');
+	 */
+	value: function addInlined(tagName, lang) {
+		var includedCdataInside = {};
+		includedCdataInside['language-' + lang] = {
+			pattern: /(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,
+			lookbehind: true,
+			inside: Prism.languages[lang]
+		};
+		includedCdataInside['cdata'] = /^<!\[CDATA\[|\]\]>$/i;
+
+		var inside = {
+			'included-cdata': {
+				pattern: /<!\[CDATA\[[\s\S]*?\]\]>/i,
+				inside: includedCdataInside
+			}
+		};
+		inside['language-' + lang] = {
+			pattern: /[\s\S]+/,
+			inside: Prism.languages[lang]
+		};
+
+		var def = {};
+		def[tagName] = {
+			pattern: RegExp(/(<__[\s\S]*?>)(?:<!\[CDATA\[[\s\S]*?\]\]>\s*|[\s\S])*?(?=<\/__>)/.source.replace(/__/g, tagName), 'i'),
+			lookbehind: true,
+			greedy: true,
+			inside: inside
+		};
+
+		Prism.languages.insertBefore('markup', 'cdata', def);
+	}
+});
+
+Prism.languages.xml = Prism.languages.extend('markup', {});
+Prism.languages.html = Prism.languages.markup;
+Prism.languages.mathml = Prism.languages.markup;
+Prism.languages.svg = Prism.languages.markup;
+
+
+/* **********************************************
+     Begin prism-css.js
+********************************************** */
+
+(function (Prism) {
+
+	var string = /("|')(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/;
+
+	Prism.languages.css = {
+		'comment': /\/\*[\s\S]*?\*\//,
+		'atrule': {
+			pattern: /@[\w-]+?[\s\S]*?(?:;|(?=\s*\{))/i,
+			inside: {
+				'rule': /@[\w-]+/
+				// See rest below
+			}
+		},
+		'url': RegExp('url\\((?:' + string.source + '|.*?)\\)', 'i'),
+		'selector': RegExp('[^{}\\s](?:[^{};"\']|' + string.source + ')*?(?=\\s*\\{)'),
+		'string': {
+			pattern: string,
+			greedy: true
+		},
+		'property': /[-_a-z\xA0-\uFFFF][-\w\xA0-\uFFFF]*(?=\s*:)/i,
+		'important': /!important\b/i,
+		'function': /[-a-z0-9]+(?=\()/i,
+		'punctuation': /[(){};:,]/
+	};
+
+	Prism.languages.css['atrule'].inside.rest = Prism.languages.css;
+
+	var markup = Prism.languages.markup;
+	if (markup) {
+		markup.tag.addInlined('style', 'css');
+
+		Prism.languages.insertBefore('inside', 'attr-value', {
+			'style-attr': {
+				pattern: /\s*style=("|')(?:\\[\s\S]|(?!\1)[^\\])*\1/i,
+				inside: {
+					'attr-name': {
+						pattern: /^\s*style/i,
+						inside: markup.tag.inside
+					},
+					'punctuation': /^\s*=\s*['"]|['"]\s*$/,
+					'attr-value': {
+						pattern: /.+/i,
+						inside: Prism.languages.css
+					}
+				},
+				alias: 'language-css'
+			}
+		}, markup.tag);
+	}
+
+}(Prism));
+
+
+/* **********************************************
+     Begin prism-clike.js
+********************************************** */
+
+Prism.languages.clike = {
+	'comment': [
+		{
+			pattern: /(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/,
+			lookbehind: true
+		},
+		{
+			pattern: /(^|[^\\:])\/\/.*/,
+			lookbehind: true,
+			greedy: true
+		}
+	],
+	'string': {
+		pattern: /(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
+		greedy: true
+	},
+	'class-name': {
+		pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[\w.\\]+/i,
+		lookbehind: true,
+		inside: {
+			punctuation: /[.\\]/
+		}
+	},
+	'keyword': /\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
+	'boolean': /\b(?:true|false)\b/,
+	'function': /\w+(?=\()/,
+	'number': /\b0x[\da-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:e[+-]?\d+)?/i,
+	'operator': /--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,
+	'punctuation': /[{}[\];(),.:]/
+};
+
+
+/* **********************************************
+     Begin prism-javascript.js
+********************************************** */
+
+Prism.languages.javascript = Prism.languages.extend('clike', {
+	'class-name': [
+		Prism.languages.clike['class-name'],
+		{
+			pattern: /(^|[^$\w\xA0-\uFFFF])[_$A-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\.(?:prototype|constructor))/,
+			lookbehind: true
+		}
+	],
+	'keyword': [
+		{
+			pattern: /((?:^|})\s*)(?:catch|finally)\b/,
+			lookbehind: true
+		},
+		{
+			pattern: /(^|[^.])\b(?:as|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|await|break|case|class|const|continue|debugger|default|delete|do|else|enum|export|extends|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)\b/,
+			lookbehind: true
+		},
+	],
+	'number': /\b(?:(?:0[xX][\dA-Fa-f]+|0[bB][01]+|0[oO][0-7]+)n?|\d+n|NaN|Infinity)\b|(?:\b\d+\.?\d*|\B\.\d+)(?:[Ee][+-]?\d+)?/,
+	// Allow for all non-ASCII characters (See http://stackoverflow.com/a/2008444)
+	'function': /[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,
+	'operator': /-[-=]?|\+[+=]?|!=?=?|<<?=?|>>?>?=?|=(?:==?|>)?|&[&=]?|\|[|=]?|\*\*?=?|\/=?|~|\^=?|%=?|\?|\.{3}/
+});
+
+Prism.languages.javascript['class-name'][0].pattern = /(\b(?:class|interface|extends|implements|instanceof|new)\s+)[\w.\\]+/
+
+Prism.languages.insertBefore('javascript', 'keyword', {
+	'regex': {
+		pattern: /((?:^|[^$\w\xA0-\uFFFF."'\])\s])\s*)\/(\[(?:[^\]\\\r\n]|\\.)*]|\\.|[^/\\\[\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})\]]))/,
+		lookbehind: true,
+		greedy: true
+	},
+	// This must be declared before keyword because we use "function" inside the look-forward
+	'function-variable': {
+		pattern: /[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*[=:]\s*(?:async\s*)?(?:\bfunction\b|(?:\((?:[^()]|\([^()]*\))*\)|[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)\s*=>))/,
+		alias: 'function'
+	},
+	'parameter': [
+		{
+			pattern: /(function(?:\s+[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)?\s*\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\))/,
+			lookbehind: true,
+			inside: Prism.languages.javascript
+		},
+		{
+			pattern: /[_$a-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*=>)/i,
+			inside: Prism.languages.javascript
+		},
+		{
+			pattern: /(\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*=>)/,
+			lookbehind: true,
+			inside: Prism.languages.javascript
+		},
+		{
+			pattern: /((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*\s*)\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*\{)/,
+			lookbehind: true,
+			inside: Prism.languages.javascript
+		}
+	],
+	'constant': /\b[A-Z](?:[A-Z_]|\dx?)*\b/
+});
+
+Prism.languages.insertBefore('javascript', 'string', {
+	'template-string': {
+		pattern: /`(?:\\[\s\S]|\${[^}]+}|[^\\`])*`/,
+		greedy: true,
+		inside: {
+			'interpolation': {
+				pattern: /\${[^}]+}/,
+				inside: {
+					'interpolation-punctuation': {
+						pattern: /^\${|}$/,
+						alias: 'punctuation'
+					},
+					rest: Prism.languages.javascript
+				}
+			},
+			'string': /[\s\S]+/
+		}
+	}
+});
+
+if (Prism.languages.markup) {
+	Prism.languages.markup.tag.addInlined('script', 'javascript');
+}
+
+Prism.languages.js = Prism.languages.javascript;
+
+
+/* **********************************************
+     Begin prism-file-highlight.js
+********************************************** */
+
+(function () {
+	if (typeof self === 'undefined' || !self.Prism || !self.document || !document.querySelector) {
+		return;
+	}
+
+	/**
+	 * @param {Element} [container=document]
+	 */
+	self.Prism.fileHighlight = function(container) {
+		container = container || document;
+
+		var Extensions = {
+			'js': 'javascript',
+			'py': 'python',
+			'rb': 'ruby',
+			'ps1': 'powershell',
+			'psm1': 'powershell',
+			'sh': 'bash',
+			'bat': 'batch',
+			'h': 'c',
+			'tex': 'latex'
+		};
+
+		Array.prototype.slice.call(container.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+			// ignore if already loaded
+			if (pre.hasAttribute('data-src-loaded')) {
+				return;
+			}
+
+			// load current
+			var src = pre.getAttribute('data-src');
+
+			var language, parent = pre;
+			var lang = /\blang(?:uage)?-([\w-]+)\b/i;
+			while (parent && !lang.test(parent.className)) {
+				parent = parent.parentNode;
+			}
+
+			if (parent) {
+				language = (pre.className.match(lang) || [, ''])[1];
+			}
+
+			if (!language) {
+				var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+				language = Extensions[extension] || extension;
+			}
+
+			var code = document.createElement('code');
+			code.className = 'language-' + language;
+
+			pre.textContent = '';
+
+			code.textContent = 'Loading…';
+
+			pre.appendChild(code);
+
+			var xhr = new XMLHttpRequest();
+
+			xhr.open('GET', src, true);
+
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4) {
+
+					if (xhr.status < 400 && xhr.responseText) {
+						code.textContent = xhr.responseText;
+
+						Prism.highlightElement(code);
+						// mark as loaded
+						pre.setAttribute('data-src-loaded', '');
+					}
+					else if (xhr.status >= 400) {
+						code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+					}
+					else {
+						code.textContent = '✖ Error: File does not exist or is empty';
+					}
+				}
+			};
+
+			xhr.send(null);
+		});
+
+		if (Prism.plugins.toolbar) {
+			Prism.plugins.toolbar.registerButton('download-file', function (env) {
+				var pre = env.element.parentNode;
+				if (!pre || !/pre/i.test(pre.nodeName) || !pre.hasAttribute('data-src') || !pre.hasAttribute('data-download-link')) {
+					return;
+				}
+				var src = pre.getAttribute('data-src');
+				var a = document.createElement('a');
+				a.textContent = pre.getAttribute('data-download-link-label') || 'Download';
+				a.setAttribute('download', '');
+				a.href = src;
+				return a;
+			});
+		}
+
+	};
+
+	document.addEventListener('DOMContentLoaded', function () {
+		// execute inside handler, for dropping Event as argument
+		self.Prism.fileHighlight();
+	});
+
+})();
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("c8ba")))
+
+/***/ }),
+
 /***/ "c207":
 /***/ (function(module, exports) {
 
@@ -41675,12 +42877,12 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./src/styles/lib.scss
 var lib = __webpack_require__("7b11");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=5e1f65b4&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.builderMode)?_c('div',{staticClass:"villain-builder"},[_c('VillainBuilder')],1):_c('div',{staticClass:"villain-editor",class:_vm.fullscreen ? 'villain-fullscreen': ''},[(_vm.showAutosaves)?_c('div',{staticClass:"villain-editor-autosave-list-popup"},[_c('strong',[_vm._v("Autolagrede versjoner")]),_vm._l((_vm.autosaveEntries),function(a,idx){return _c('div',{key:idx,staticClass:"villain-editor-autosave-list-popup-item"},[_c('div',{staticClass:"villain-editor-autosave-list-popup-item-date"},[_c('i',{staticClass:"fa fa-fw fa-file mr-2"}),_vm._v(" "+_vm._s(_vm.format(a.timestamp, 'nb_NO'))+"\n      ")]),_c('button',{staticClass:"btn btn-outline-primary",on:{"click":function($event){$event.preventDefault();return _vm.restoreAutosave(a)}}},[_vm._v("\n        Gjenopprett denne versjonen\n      ")])])})],2):_vm._e(),_c('div',{staticClass:"villain-editor-toolbar"},[_vm._m(0),_c('div',{staticClass:"villain-editor-controls float-right"},[_c('div',{staticClass:"villain-editor-autosave-status"},[_vm._v("\n        "+_vm._s(_vm.autosaveStatus)+"\n      ")]),_c('div',{directives:[{name:"popover",rawName:"v-popover",value:('Vis autolagrede versjoner'),expression:"'Vis autolagrede versjoner'"}],on:{"click":_vm.toggleAutosaves}},[_c('i',{staticClass:"fas fa-fw fa-trash-restore"})]),_c('div',{directives:[{name:"popover",rawName:"v-popover",value:(_vm.showSource ? 'Lukk kildekodevisning' : 'Vis kildekode'),expression:"showSource ? 'Lukk kildekodevisning' : 'Vis kildekode'"}],on:{"click":function($event){return _vm.toggleSource()}}},[(_vm.showSource)?[_c('i',{staticClass:"fa fa-fw fa-times"})]:[_c('i',{staticClass:"fa fa-fw fa-code"})]],2),_c('div',{directives:[{name:"popover",rawName:"v-popover",value:(_vm.fullscreen ? 'Lukk fullskjermsmodus' : 'Vis fullskjermsmodus'),expression:"fullscreen ? 'Lukk fullskjermsmodus' : 'Vis fullskjermsmodus'"}],on:{"click":function($event){return _vm.toggleFullscreen()}}},[(_vm.fullscreen)?[_c('i',{staticClass:"fa fa-fw fa-times"})]:[_c('i',{staticClass:"fa fa-fw fa-expand-arrows-alt"})]],2)])]),(_vm.showSource)?[_c('div',{staticClass:"villain-editor-source"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.src),expression:"src"}],ref:"tasource",domProps:{"value":(_vm.src)},on:{"input":function($event){if($event.target.composing){ return; }_vm.src=$event.target.value}}}),_c('div',{staticClass:"d-flex justify-content-center"},[_c('button',{staticClass:"btn btn-primary mt-4",on:{"click":_vm.updateSource}},[_vm._v("\n          Oppdatér\n        ")])])])]:[(_vm.blocks && _vm.blocks.length)?_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){return _vm.addBlock($event)},"move":function($event){return _vm.moveBlock($event)},"delete":_vm.deleteBlock,"order":_vm.orderBlocks}}):_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){return _vm.addBlock($event)},"move":function($event){return _vm.moveBlock($event)},"delete":_vm.deleteBlock}})]],2)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=54f83221&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.builderMode)?_c('div',{staticClass:"villain-builder"},[_c('VillainBuilder')],1):_c('div',{staticClass:"villain-editor",class:_vm.fullscreen ? 'villain-fullscreen': ''},[(_vm.showAutosaves)?_c('div',{staticClass:"villain-editor-autosave-list-popup"},[_c('strong',[_vm._v("Autolagrede versjoner")]),_vm._l((_vm.autosaveEntries),function(a,idx){return _c('div',{key:idx,staticClass:"villain-editor-autosave-list-popup-item"},[_c('div',{staticClass:"villain-editor-autosave-list-popup-item-date"},[_c('i',{staticClass:"fa fa-fw fa-file mr-2"}),_vm._v(" "+_vm._s(_vm.format(a.timestamp, 'nb_NO'))+"\n      ")]),_c('button',{staticClass:"btn btn-outline-primary",on:{"click":function($event){$event.preventDefault();return _vm.restoreAutosave(a)}}},[_vm._v("\n        Gjenopprett denne versjonen\n      ")])])})],2):_vm._e(),_c('div',{staticClass:"villain-editor-toolbar"},[_vm._m(0),_c('div',{staticClass:"villain-editor-controls float-right"},[_c('div',{staticClass:"villain-editor-autosave-status"},[_vm._v("\n        "+_vm._s(_vm.autosaveStatus)+"\n      ")]),_c('div',{directives:[{name:"popover",rawName:"v-popover",value:('Vis autolagrede versjoner'),expression:"'Vis autolagrede versjoner'"}],on:{"click":_vm.toggleAutosaves}},[_c('IconAutosave')],1),_c('div',{directives:[{name:"popover",rawName:"v-popover",value:(_vm.showSource ? 'Lukk kildekodevisning' : 'Vis kildekode'),expression:"showSource ? 'Lukk kildekodevisning' : 'Vis kildekode'"}],on:{"click":function($event){return _vm.toggleSource()}}},[(_vm.showSource)?[_c('IconClose')]:[_c('IconSource')]],2),_c('div',{directives:[{name:"popover",rawName:"v-popover",value:(_vm.fullscreen ? 'Lukk fullskjermsmodus' : 'Vis fullskjermsmodus'),expression:"fullscreen ? 'Lukk fullskjermsmodus' : 'Vis fullskjermsmodus'"}],on:{"click":function($event){return _vm.toggleFullscreen()}}},[(_vm.fullscreen)?[_c('IconClose')]:[_c('IconFullscreen')]],2)])]),(_vm.showSource)?[_c('div',{staticClass:"villain-editor-source"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.src),expression:"src"}],ref:"tasource",domProps:{"value":(_vm.src)},on:{"input":function($event){if($event.target.composing){ return; }_vm.src=$event.target.value}}}),_c('div',{staticClass:"d-flex justify-content-center"},[_c('button',{staticClass:"btn btn-primary mt-4",on:{"click":_vm.updateSource}},[_vm._v("\n          Oppdatér\n        ")])])])]:[(_vm.blocks && _vm.blocks.length)?_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){return _vm.addBlock($event)},"move":function($event){return _vm.moveBlock($event)},"delete":_vm.deleteBlock,"order":_vm.orderBlocks}}):_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){return _vm.addBlock($event)},"move":function($event){return _vm.moveBlock($event)},"delete":_vm.deleteBlock}})]],2)}
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-editor-instructions"},[_c('i',{staticClass:"fa mr-2 fa-info-circle"}),_vm._v("\n      Trykk på \"+\" under for å legge til en innholdsblokk\n    ")])}]
 
 
-// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=5e1f65b4&
+// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=54f83221&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.symbol.async-iterator.js
 var es7_symbol_async_iterator = __webpack_require__("ac4d");
@@ -50199,12 +51401,12 @@ var HeaderBlock_component = normalizeComponent(
 )
 
 /* harmony default export */ var HeaderBlock = (HeaderBlock_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/HtmlBlock.vue?vue&type=template&id=3bef13d4&
-var HtmlBlockvue_type_template_id_3bef13d4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.text),expression:"block.data.text"}],ref:"txt",staticClass:"villain-html-input",domProps:{"value":(_vm.block.data.text)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "text", $event.target.value)}}}),_c('template',{slot:"config"},[_vm._v("\n    This is the config contents!\n  ")])],2)}
-var HtmlBlockvue_type_template_id_3bef13d4_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/HtmlBlock.vue?vue&type=template&id=48609bfb&
+var HtmlBlockvue_type_template_id_48609bfb_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{staticClass:"villain-extra-padding",attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-block-description"},[_c('i',{staticClass:"fa fa-fw fa-map mr-1"}),_vm._v(" HTML\n  ")]),_c('div',{ref:"wrapper",staticClass:"villain-html-input-wrapper"},[_c('div',{ref:"txt",staticClass:"villain-html-input"})]),_c('template',{slot:"config"},[_vm._v("\n    This is the config contents!\n  ")])],2)}
+var HtmlBlockvue_type_template_id_48609bfb_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/blocks/standard/HtmlBlock.vue?vue&type=template&id=3bef13d4&
+// CONCATENATED MODULE: ./src/components/blocks/standard/HtmlBlock.vue?vue&type=template&id=48609bfb&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/HtmlBlock.vue?vue&type=script&lang=js&
 //
@@ -50225,6 +51427,13 @@ var HtmlBlockvue_type_template_id_3bef13d4_staticRenderFns = []
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ var HtmlBlockvue_type_script_lang_js_ = ({
@@ -50243,13 +51452,38 @@ var HtmlBlockvue_type_template_id_3bef13d4_staticRenderFns = []
     }
   },
   data: function data() {
-    return {};
+    return {
+      codeFlask: null
+    };
   },
   created: function created() {
     console.debug('<HtmlBlock /> created');
   },
   mounted: function mounted() {
-    autosize_default()(this.$refs.txt);
+    var _this = this;
+
+    this.codeFlask = new codeflask_module["a" /* default */](this.$refs.txt, {
+      language: 'markup',
+      defaultTheme: false,
+      lineNumbers: true
+    });
+    this.codeFlask.onUpdate(function (code) {
+      _this.block.data.text = code;
+
+      _this.setHeight();
+    });
+    this.codeFlask.updateCode(this.block.data.text); // set height
+
+    this.setHeight();
+  },
+  methods: {
+    setHeight: function setHeight() {
+      var pre = this.$refs.txt.querySelector('.codeflask__pre');
+      var wrapper = this.$refs.wrapper;
+      TweenMax_TweenMax.to(wrapper, 0.5, {
+        height: "calc(".concat(pre.clientHeight, "px + 1rem)")
+      });
+    }
   }
 });
 // CONCATENATED MODULE: ./src/components/blocks/standard/HtmlBlock.vue?vue&type=script&lang=js&
@@ -50264,8 +51498,8 @@ var HtmlBlockvue_type_template_id_3bef13d4_staticRenderFns = []
 
 var HtmlBlock_component = normalizeComponent(
   standard_HtmlBlockvue_type_script_lang_js_,
-  HtmlBlockvue_type_template_id_3bef13d4_render,
-  HtmlBlockvue_type_template_id_3bef13d4_staticRenderFns,
+  HtmlBlockvue_type_template_id_48609bfb_render,
+  HtmlBlockvue_type_template_id_48609bfb_staticRenderFns,
   false,
   null,
   null,
@@ -50895,12 +52129,18 @@ var MapBlock_component = normalizeComponent(
 )
 
 /* harmony default export */ var MapBlock = (MapBlock_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/MarkdownBlock.vue?vue&type=template&id=101bd4c0&
-var MarkdownBlockvue_type_template_id_101bd4c0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.text),expression:"block.data.text"}],ref:"txt",staticClass:"villain-markdown-input",domProps:{"value":(_vm.block.data.text)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "text", $event.target.value)}}}),_c('template',{slot:"help"},[_c('p',[_vm._v("\n      Markdown formatering er en ryddig måte å formatere tekst til nettsider på.\n      Her er noen av de vanligste formatene du kan bruke i denne blokka:\n    ")]),_c('code',[_vm._v("*Kursiv tekst*")]),_vm._v(" → "),_c('em',[_vm._v("Kursiv tekst")]),_c('br'),_c('code',[_vm._v("**Uthevet tekst**")]),_vm._v(" → "),_c('strong',[_vm._v("Uthevet tekst")]),_c('br'),_c('code',[_vm._v("[Lenke-tekst](https://www.nrk.no)")]),_vm._v(" → "),_c('a',{attrs:{"href":"https://nrk.no"}},[_vm._v("Lenke-tekst")]),_c('br')])],2)}
-var MarkdownBlockvue_type_template_id_101bd4c0_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/MarkdownBlock.vue?vue&type=template&id=7821f0e0&
+var MarkdownBlockvue_type_template_id_7821f0e0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{staticClass:"villain-extra-padding",attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-block-description"},[_c('i',{staticClass:"fa fa-fw fa-map mr-1"}),_vm._v(" Markdown\n  ")]),_c('div',{ref:"wrapper",staticClass:"villain-markdown-input-wrapper"},[_c('div',{ref:"txt",staticClass:"villain-markdown-input"})]),_c('template',{slot:"help"},[_c('p',[_vm._v("\n      Markdown formatering er en ryddig måte å formatere tekst til nettsider på.\n      Her er noen av de vanligste formatene du kan bruke i denne blokka:\n    ")]),_c('code',[_vm._v("*Kursiv tekst*")]),_vm._v(" → "),_c('em',[_vm._v("Kursiv tekst")]),_c('br'),_c('code',[_vm._v("**Uthevet tekst**")]),_vm._v(" → "),_c('strong',[_vm._v("Uthevet tekst")]),_c('br'),_c('code',[_vm._v("[Lenke-tekst](https://www.nrk.no)")]),_vm._v(" → "),_c('a',{attrs:{"href":"https://nrk.no"}},[_vm._v("Lenke-tekst")]),_c('br')])],2)}
+var MarkdownBlockvue_type_template_id_7821f0e0_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/blocks/standard/MarkdownBlock.vue?vue&type=template&id=101bd4c0&
+// CONCATENATED MODULE: ./src/components/blocks/standard/MarkdownBlock.vue?vue&type=template&id=7821f0e0&
+
+// EXTERNAL MODULE: ./node_modules/prismjs/prism.js
+var prism = __webpack_require__("c197");
+
+// EXTERNAL MODULE: ./node_modules/prismjs/components/prism-markdown.js
+var prism_markdown = __webpack_require__("826c");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/MarkdownBlock.vue?vue&type=script&lang=js&
 //
@@ -50927,6 +52167,15 @@ var MarkdownBlockvue_type_template_id_101bd4c0_staticRenderFns = []
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
+
+
 
 
 /* harmony default export */ var MarkdownBlockvue_type_script_lang_js_ = ({
@@ -50944,11 +52193,41 @@ var MarkdownBlockvue_type_template_id_101bd4c0_staticRenderFns = []
       default: null
     }
   },
+  data: function data() {
+    return {
+      codeFlask: null
+    };
+  },
   created: function created() {
     console.debug('<MarkdownBlock /> created');
   },
   mounted: function mounted() {
-    autosize_default()(this.$refs.txt);
+    var _this = this;
+
+    this.codeFlask = new codeflask_module["a" /* default */](this.$refs.txt, {
+      language: 'markdown',
+      defaultTheme: false,
+      lineNumbers: true
+    });
+    this.codeFlask.addLanguage('markdown', prism["languages"].markdown);
+    this.codeFlask.updateLanguage('markdown');
+    this.codeFlask.onUpdate(function (code) {
+      _this.block.data.text = code;
+
+      _this.setHeight();
+    });
+    this.codeFlask.updateCode(this.block.data.text); // set height
+
+    this.setHeight();
+  },
+  methods: {
+    setHeight: function setHeight() {
+      var pre = this.$refs.txt.querySelector('.codeflask__pre');
+      var wrapper = this.$refs.wrapper;
+      TweenMax_TweenMax.to(wrapper, 0.5, {
+        height: "calc(".concat(pre.clientHeight, "px + 1rem)")
+      });
+    }
   }
 });
 // CONCATENATED MODULE: ./src/components/blocks/standard/MarkdownBlock.vue?vue&type=script&lang=js&
@@ -50963,8 +52242,8 @@ var MarkdownBlockvue_type_template_id_101bd4c0_staticRenderFns = []
 
 var MarkdownBlock_component = normalizeComponent(
   standard_MarkdownBlockvue_type_script_lang_js_,
-  MarkdownBlockvue_type_template_id_101bd4c0_render,
-  MarkdownBlockvue_type_template_id_101bd4c0_staticRenderFns,
+  MarkdownBlockvue_type_template_id_7821f0e0_render,
+  MarkdownBlockvue_type_template_id_7821f0e0_staticRenderFns,
   false,
   null,
   null,
@@ -52041,12 +53320,12 @@ var SlideshowBlock_component = normalizeComponent(
 )
 
 /* harmony default export */ var SlideshowBlock = (SlideshowBlock_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/SvgBlock.vue?vue&type=template&id=3e348a3a&
-var SvgBlockvue_type_template_id_3e348a3a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{ref:"svg",staticClass:"villain-svg-input",domProps:{"innerHTML":_vm._s(_vm.block.data.code)}}),_c('template',{slot:"config"},[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("SVG kode")]),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.code),expression:"block.data.code"}],ref:"txt",staticClass:"villain-svg-input",domProps:{"value":(_vm.block.data.code)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "code", $event.target.value)}}})]),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("CSS klasser")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.class),expression:"block.data.class"}],staticClass:"form-control",attrs:{"type":"input"},domProps:{"value":(_vm.block.data.class)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "class", $event.target.value)}}})])])],2)}
-var SvgBlockvue_type_template_id_3e348a3a_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/SvgBlock.vue?vue&type=template&id=29ef9a84&
+var SvgBlockvue_type_template_id_29ef9a84_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{ref:"svg",staticClass:"villain-svg-output",domProps:{"innerHTML":_vm._s(_vm.block.data.code)}}),_c('template',{slot:"config"},[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("SVG kode")]),_c('div',{ref:"wrapper",staticClass:"villain-svg-input-wrapper"},[_c('div',{ref:"txt",staticClass:"villain-svg-input"})])]),_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("CSS klasser")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.class),expression:"block.data.class"}],staticClass:"form-control",attrs:{"type":"input"},domProps:{"value":(_vm.block.data.class)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "class", $event.target.value)}}})])])],2)}
+var SvgBlockvue_type_template_id_29ef9a84_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/blocks/standard/SvgBlock.vue?vue&type=template&id=3e348a3a&
+// CONCATENATED MODULE: ./src/components/blocks/standard/SvgBlock.vue?vue&type=template&id=29ef9a84&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/SvgBlock.vue?vue&type=script&lang=js&
 //
@@ -52083,6 +53362,9 @@ var SvgBlockvue_type_template_id_3e348a3a_staticRenderFns = []
 //
 //
 //
+//
+//
+
 
 
 /* harmony default export */ var SvgBlockvue_type_script_lang_js_ = ({
@@ -52102,12 +53384,42 @@ var SvgBlockvue_type_template_id_3e348a3a_staticRenderFns = []
   },
   data: function data() {
     return {
+      codeFlask: null,
       customClass: '',
       uid: null
     };
   },
   created: function created() {
     console.debug('<SvgBlock /> created');
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.codeFlask = new codeflask_module["a" /* default */](this.$refs.txt, {
+      language: 'markup',
+      defaultTheme: false,
+      lineNumbers: true
+    });
+    this.codeFlask.onUpdate(function (code) {
+      _this.block.data.code = code;
+
+      _this.setHeight();
+    });
+    this.codeFlask.updateCode(this.block.data.code); // set height
+
+    setTimeout(function () {
+      _this.setHeight();
+    }, 800);
+  },
+  methods: {
+    setHeight: function setHeight() {
+      var pre = this.$refs.txt.querySelector('.codeflask__pre');
+      var wrapper = this.$refs.wrapper;
+      var preHeight = pre.getBoundingClientRect().height > 0 ? pre.getBoundingClientRect().height : 24;
+      TweenMax_TweenMax.to(wrapper, 0.5, {
+        height: "calc(".concat(preHeight, "px + 1rem)")
+      });
+    }
   }
 });
 // CONCATENATED MODULE: ./src/components/blocks/standard/SvgBlock.vue?vue&type=script&lang=js&
@@ -52122,8 +53434,8 @@ var SvgBlockvue_type_template_id_3e348a3a_staticRenderFns = []
 
 var SvgBlock_component = normalizeComponent(
   standard_SvgBlockvue_type_script_lang_js_,
-  SvgBlockvue_type_template_id_3e348a3a_render,
-  SvgBlockvue_type_template_id_3e348a3a_staticRenderFns,
+  SvgBlockvue_type_template_id_29ef9a84_render,
+  SvgBlockvue_type_template_id_29ef9a84_staticRenderFns,
   false,
   null,
   null,
@@ -53116,6 +54428,178 @@ var VillainPlus_component = normalizeComponent(
 /* harmony default export */ var tools = ({
   VillainPlus: VillainPlus
 });
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/icons/IconAutosave.vue?vue&type=template&id=5850c86a&
+var IconAutosavevue_type_template_id_5850c86a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"svg-icon"},[_c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 64 64"}},[_c('path',{attrs:{"d":"M32 9C20.094 9 10.272 18.094 9.115 29.701l-2.408-2.408c-.391-.391-1.023-.391-1.414 0s-.391 1.023 0 1.414l4 4c.092.092.203.166.325.216.122.051.252.077.382.077s.26-.026.382-.077c.122-.051.233-.124.325-.216l4-4c.391-.391.391-1.023 0-1.414s-1.023-.391-1.414 0l-2.116 2.116C12.46 19.05 21.299 11 32 11c11.579 0 21 9.42 21 21 0 11.579-9.421 21-21 21-6.617 0-12.713-3.024-16.724-8.297-1.513-1.988-2.646-4.203-3.37-6.581-.16-.529-.721-.827-1.248-.666-.528.161-.827.72-.666 1.248.792 2.606 2.035 5.032 3.691 7.21C18.077 51.688 24.753 55 32 55c12.683 0 23-10.317 23-23C55 19.318 44.683 9 32 9z"}}),_c('path',{attrs:{"d":"M32 13c-.552 0-1 .448-1 1v18c0 .13.027.26.077.382.051.122.124.233.216.325l10 10c.195.195.451.293.707.293s.512-.098.707-.293c.391-.391.391-1.023 0-1.414L33 31.586V14c0-.552-.448-1-1-1z"}})])])}
+var IconAutosavevue_type_template_id_5850c86a_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/icons/IconAutosave.vue?vue&type=template&id=5850c86a&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/icons/IconAutosave.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ var IconAutosavevue_type_script_lang_js_ = ({});
+// CONCATENATED MODULE: ./src/components/icons/IconAutosave.vue?vue&type=script&lang=js&
+ /* harmony default export */ var icons_IconAutosavevue_type_script_lang_js_ = (IconAutosavevue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/icons/IconAutosave.vue
+
+
+
+
+
+/* normalize component */
+
+var IconAutosave_component = normalizeComponent(
+  icons_IconAutosavevue_type_script_lang_js_,
+  IconAutosavevue_type_template_id_5850c86a_render,
+  IconAutosavevue_type_template_id_5850c86a_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var IconAutosave = (IconAutosave_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/icons/IconClose.vue?vue&type=template&id=3eee9ac6&
+var IconClosevue_type_template_id_3eee9ac6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"svg-icon"},[_c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 100 100"}},[_c('path',{staticStyle:{"text-indent":"0","text-transform":"none","block-progression":"tb"},attrs:{"fill-rule":"evenodd","d":"M7.96875 5.90973a2.000005 2.000005 0 0 0-1.375 3.43751L47.1875 49.94102 6.59375 90.53472a2.000005 2.000005 0 1 0 2.8125 2.8125L50 52.75352l40.59375 40.5937a2.000005 2.000005 0 1 0 2.8125-2.8125L52.8125 49.94102 93.40625 9.34724a2.000005 2.000005 0 0 0-1.4375-3.43751 2.000005 2.000005 0 0 0-1.375.625L50 47.12847 9.40625 6.53473a2.000005 2.000005 0 0 0-1.4375-.625z","color":"#000","overflow":"visible"}})])])}
+var IconClosevue_type_template_id_3eee9ac6_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/icons/IconClose.vue?vue&type=template&id=3eee9ac6&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/icons/IconClose.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ var IconClosevue_type_script_lang_js_ = ({});
+// CONCATENATED MODULE: ./src/components/icons/IconClose.vue?vue&type=script&lang=js&
+ /* harmony default export */ var icons_IconClosevue_type_script_lang_js_ = (IconClosevue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/icons/IconClose.vue
+
+
+
+
+
+/* normalize component */
+
+var IconClose_component = normalizeComponent(
+  icons_IconClosevue_type_script_lang_js_,
+  IconClosevue_type_template_id_3eee9ac6_render,
+  IconClosevue_type_template_id_3eee9ac6_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var IconClose = (IconClose_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/icons/IconFullscreen.vue?vue&type=template&id=2e70387e&
+var IconFullscreenvue_type_template_id_2e70387e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"svg-icon"},[_c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 100 100"}},[_c('path',{attrs:{"d":"M12.4 87.6c-.3-.3-.5-.8-.5-1.2l.4-16.5c0-.8.8-1.6 1.6-1.6s1.6.8 1.6 1.6l-.3 14.8 14.8-.3c.8 0 1.7.7 1.6 1.6 0 .8-.6 1.6-1.6 1.6l-16.4.4c-.4.1-.9-.1-1.2-.4zM86.4 88.1L70 87.6c-1 0-1.6-.8-1.6-1.6-.1-.9.8-1.6 1.6-1.6l14.8.4-.3-14.8c0-.8.8-1.6 1.6-1.6s1.6.8 1.6 1.6l.4 16.5c0 .4-.2.9-.5 1.2-.3.2-.8.4-1.2.4zM12.4 12.4c.3-.3.8-.5 1.2-.5l16.4.4c.8 0 1.6.8 1.6 1.6s-.8 1.6-1.6 1.6l-14.8-.3.3 14.8c0 .8-.7 1.7-1.6 1.6-.8 0-1.6-.6-1.6-1.6l-.4-16.4c0-.4.2-.9.5-1.2zM88.1 13.6L87.7 30c0 1-.8 1.6-1.6 1.6-.9.1-1.6-.8-1.6-1.6l.4-14.8-14.9.3c-.8 0-1.6-.8-1.6-1.6s.8-1.6 1.6-1.6l16.5-.4c.4 0 .9.2 1.2.5.2.3.4.8.4 1.2z"}})])])}
+var IconFullscreenvue_type_template_id_2e70387e_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/icons/IconFullscreen.vue?vue&type=template&id=2e70387e&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/icons/IconFullscreen.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ var IconFullscreenvue_type_script_lang_js_ = ({});
+// CONCATENATED MODULE: ./src/components/icons/IconFullscreen.vue?vue&type=script&lang=js&
+ /* harmony default export */ var icons_IconFullscreenvue_type_script_lang_js_ = (IconFullscreenvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/icons/IconFullscreen.vue
+
+
+
+
+
+/* normalize component */
+
+var IconFullscreen_component = normalizeComponent(
+  icons_IconFullscreenvue_type_script_lang_js_,
+  IconFullscreenvue_type_template_id_2e70387e_render,
+  IconFullscreenvue_type_template_id_2e70387e_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var IconFullscreen = (IconFullscreen_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/icons/IconSource.vue?vue&type=template&id=16adb353&
+var IconSourcevue_type_template_id_16adb353_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"svg-icon"},[_c('svg',{attrs:{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 128 128"}},[_c('path',{attrs:{"d":"M121.1 8.4h-96c-2.9 0-5.3 2.4-5.3 5.3v12.9H8.4c-3.7 0-6.7 3-6.7 6.7v79.5c0 3.7 3 6.7 6.7 6.7h93c3.7 0 6.7-3 6.7-6.7v-11.5H121c2.9 0 5.3-2.4 5.3-5.3V13.7c0-2.9-2.3-5.3-5.2-5.3zm-96 5H121c.2 0 .3.1.3.3v13.1H24.9V13.7c0-.1.1-.3.2-.3zm78 99.4c0 .9-.8 1.7-1.7 1.7h-93c-.9 0-1.7-.8-1.7-1.7V33.4c0-.9.8-1.7 1.7-1.7h11.5v64.4c0 2.9 2.4 5.3 5.3 5.3h78v11.4zm18-16.4h-96c-.2 0-.3-.1-.3-.3V31.8h96.5v64.3c0 .1-.1.3-.2.3z"}}),_c('path',{attrs:{"d":"M33.7 22.2H41c1.4 0 2.5-1.1 2.5-2.5s-1.1-2.5-2.5-2.5h-7.3c-1.4 0-2.5 1.1-2.5 2.5s1.1 2.5 2.5 2.5zM50.4 22.2h7.3c1.4 0 2.5-1.1 2.5-2.5s-1.1-2.5-2.5-2.5h-7.3c-1.4 0-2.5 1.1-2.5 2.5s1.1 2.5 2.5 2.5zM55.6 47.7L40 63.3l15.6 15.5 3.5-3.5-12-12 12-12.1zM79.2 44.4c-1.3-.4-2.7.3-3.1 1.6L65.5 79c-.4 1.3.3 2.7 1.6 3.1.3.1.5.1.8.1 1.1 0 2-.7 2.4-1.7l10.6-32.9c.3-1.3-.4-2.7-1.7-3.2zM87.1 51.2l12 12.1-12 12 3.5 3.5 15.6-15.5-15.6-15.6z"}})])])}
+var IconSourcevue_type_template_id_16adb353_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/icons/IconSource.vue?vue&type=template&id=16adb353&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/icons/IconSource.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ var IconSourcevue_type_script_lang_js_ = ({});
+// CONCATENATED MODULE: ./src/components/icons/IconSource.vue?vue&type=script&lang=js&
+ /* harmony default export */ var icons_IconSourcevue_type_script_lang_js_ = (IconSourcevue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/icons/IconSource.vue
+
+
+
+
+
+/* normalize component */
+
+var IconSource_component = normalizeComponent(
+  icons_IconSourcevue_type_script_lang_js_,
+  IconSourcevue_type_template_id_16adb353_render,
+  IconSourcevue_type_template_id_16adb353_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var IconSource = (IconSource_component.exports);
 // CONCATENATED MODULE: ./src/config/standardBlocks.js
 /* harmony default export */ var standardBlocks = ([{
   name: 'Tekst',
@@ -53402,6 +54886,10 @@ function addAutoSave(content) {
 
 
 
+
+
+
+
 for (var VillainEditorvue_type_script_lang_js_key in standard) {
   if (standard.hasOwnProperty(VillainEditorvue_type_script_lang_js_key)) {
     external_commonjs_vue_commonjs2_vue_root_Vue_default.a.component(VillainEditorvue_type_script_lang_js_key, standard[VillainEditorvue_type_script_lang_js_key]);
@@ -53423,7 +54911,11 @@ for (var _key2 in tools) {
 /* harmony default export */ var VillainEditorvue_type_script_lang_js_ = ({
   name: 'VillainEditor',
   components: {
-    VillainBuilder: VillainBuilder
+    VillainBuilder: VillainBuilder,
+    IconAutosave: IconAutosave,
+    IconClose: IconClose,
+    IconFullscreen: IconFullscreen,
+    IconSource: IconSource
   },
   directives: {
     popover: v_tooltip_esm["a" /* VTooltip */]

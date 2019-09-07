@@ -435,10 +435,13 @@
 }
 
 .villain-svg-output {
-  margin: 0 auto;
   max-width: 250px;
   user-select: none;
   pointer-events: none;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .villain-block-divider {

@@ -291,7 +291,12 @@ export default {
 
   methods: {
     resetImage () {
-      this.block.data = {}
+      this.$set(this.block.data, 'url', '')
+      this.$set(this.block.data, 'sizes', {})
+      this.$set(this.block.data, 'credits', '')
+      this.$set(this.block.data, 'title', '')
+      this.$set(this.block.data, 'width', 0)
+      this.$set(this.block.data, 'height', 0)
     },
 
     createUID () {

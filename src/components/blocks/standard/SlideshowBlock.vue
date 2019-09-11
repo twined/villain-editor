@@ -257,7 +257,8 @@ export default {
   inject: [
     'urls',
     'vImageSeries',
-    'headers'
+    'headers',
+    'available'
   ],
 
   created () {
@@ -265,12 +266,12 @@ export default {
 
     this.getImages()
 
+    this.checkBlockProps(this.block, this.available.blocks)
+
     if (!this.block.data.images.length) {
       this.showConfig = true
       this.showImages = false
       this.showUpload = true
-    } else {
-
     }
   },
 

@@ -5,7 +5,9 @@
     @add="$emit('add', $event)"
     @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
-
+    <div class="villain-block-description">
+      SVG
+    </div>
     <div
       ref="svg"
       class="villain-svg-output"
@@ -58,6 +60,10 @@ export default {
     }
   },
 
+  inject: [
+    'available'
+  ],
+
   data () {
     return {
       codeFlask: null,
@@ -68,6 +74,7 @@ export default {
 
   created () {
     console.debug('<SvgBlock /> created')
+    this.checkBlockProps(this.block, this.available.blocks)
   },
 
   mounted () {

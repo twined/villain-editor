@@ -176,7 +176,6 @@ export default {
 
   created () {
     console.debug('<VillainPlus /> created')
-    console.log(this.namespacedTemplates)
   },
 
   mounted () {

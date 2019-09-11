@@ -120,6 +120,10 @@ export default {
     }
   },
 
+  inject: [
+    'available'
+  ],
+
   computed: {
     fontSize () {
       const level = parseInt(this.block.data.level)
@@ -142,6 +146,7 @@ export default {
 
   created () {
     console.debug('<HeaderBlock /> created')
+    this.checkBlockProps(this.block, this.available.blocks)
   },
 
   mounted () {

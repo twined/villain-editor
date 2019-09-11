@@ -169,6 +169,61 @@
         ]
       },
       "type": "template"
+    },
+
+    {
+      "data": {
+        "id": 7,
+        "name": "Slider",
+        "namespace": "images",
+        "help_text": "Karusell",
+        "class": "v-slider",
+        "code": "<div class=\"v-slider\">%{GALLERY}</div>",
+        "sequence": 7,
+        "refs": [
+          {
+            "data": {
+              "data": {
+                "images": [
+                  {
+                    "sizes": {
+                      "large": "/media/images/site/posts/large/aodkc2t43gg.jpg",
+                      "medium": "/media/images/site/posts/medium/aodkc2t43gg.jpg",
+                      "micro": "/media/images/site/posts/micro/aodkc2t43gg.jpg",
+                      "small": "/media/images/site/posts/small/aodkc2t43gg.jpg",
+                      "thumb": "/media/images/site/posts/thumb/aodkc2t43gg.jpg",
+                      "xlarge": "/media/images/site/posts/xlarge/aodkc2t43gg.jpg"
+                    },
+                    "credits": null,
+                    "title": null,
+                    "url": "/media/images/site/posts/aodkc2t43gg.jpg",
+                    "width": 3000,
+                    "height": 1688
+                  },
+                  {
+                    "sizes": {
+                      "large": "/media/images/site/posts/large/3eude3vkr95.png",
+                      "medium": "/media/images/site/posts/medium/3eude3vkr95.png",
+                      "micro": "/media/images/site/posts/micro/3eude3vkr95.png",
+                      "small": "/media/images/site/posts/small/3eude3vkr95.png",
+                      "thumb": "/media/images/site/posts/thumb/3eude3vkr95.png",
+                      "xlarge": "/media/images/site/posts/xlarge/3eude3vkr95.png"
+                    },
+                    "credits": null,
+                    "title": null,
+                    "url": "/media/images/site/posts/3eude3vkr95.png",
+                    "width": 780,
+                    "height": 1069
+                  }
+                ]
+              },
+              "type": "slideshow"
+            },
+            "name": "GALLERY"
+          }
+        ]
+      },
+      "type": "template"
     }
   ],
   "images": {

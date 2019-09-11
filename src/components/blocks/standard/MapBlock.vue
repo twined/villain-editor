@@ -65,6 +65,8 @@ export default {
     }
   },
 
+  inject: ['available'],
+
   data () {
     return {
       customClass: '',
@@ -89,6 +91,7 @@ export default {
 
   created () {
     console.debug('<MapBlock /> created')
+    this.checkBlockProps(this.block, this.available.blocks)
 
     if (!this.block.data.embed_url) {
       this.showConfig = true

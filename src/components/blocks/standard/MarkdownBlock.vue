@@ -55,6 +55,10 @@ export default {
     }
   },
 
+  inject: [
+    'available'
+  ],
+
   data () {
     return {
       codeFlask: null
@@ -63,6 +67,7 @@ export default {
 
   created () {
     console.debug('<MarkdownBlock /> created')
+    this.checkBlockProps(this.block, this.available.blocks)
   },
 
   mounted () {

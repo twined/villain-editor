@@ -103,7 +103,7 @@ import Vue from 'vue'
 import autosize from 'autosize'
 import cloneDeep from 'lodash/cloneDeep'
 import { format, register } from 'timeago.js'
-import nb_NO from 'timeago.js/lib/lang/nb_NO'
+import nbNO from 'timeago.js/lib/lang/nb_NO'
 import { VTooltip } from 'v-tooltip'
 
 import VillainBuilder from '@/components/VillainBuilder'
@@ -139,6 +139,26 @@ for (let key in toolsComponents) {
     Vue.component(key, toolsComponents[key])
   }
 }
+
+/**
+ * Add global mixin for ensuring block has all neccessary data props
+ */
+Vue.mixin({
+  methods: {
+    checkBlockProps (block, availableBlocks) {
+      const template = availableBlocks.find(b => b.component.toLowerCase() === block.type)
+
+      if (template) {
+        let blueprint = template.dataTemplate
+        for (let blueprintProp in blueprint) {
+          if (!block.data.hasOwnProperty(blueprintProp)) {
+            Vue.set(block.data, blueprintProp, blueprint[blueprintProp])
+          }
+        }
+      }
+    }
+  }
+})
 
 export default {
   name: 'VillainEditor',
@@ -351,7 +371,7 @@ export default {
       this.blocks = this.addUIDs()
     }
 
-    register('nb_NO', nb_NO)
+    register('nb_NO', nbNO)
 
     this.lastEdit = getTimestamp()
 
@@ -388,7 +408,6 @@ export default {
     },
 
     restoreAutosave (a) {
-      console.log(a)
       alertConfirm('OBS!', 'Du er i ferd med å erstatte innholdet med data fra en autolagret versjon. Er du sikker på at du vil fortsette?', data => {
         if (data) {
           this.blocks = a.content

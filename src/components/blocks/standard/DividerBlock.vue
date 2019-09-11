@@ -33,6 +33,10 @@ export default {
     }
   },
 
+  inject: [
+    'available'
+  ],
+
   data () {
     return {
       uid: null
@@ -41,6 +45,7 @@ export default {
 
   created () {
     console.debug('<DividerBlock /> created')
+    this.checkBlockProps(this.block, this.available.blocks)
   }
 }
 </script>

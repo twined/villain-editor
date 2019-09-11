@@ -74,11 +74,11 @@
 import Block from '@/components/blocks/system/Block'
 
 const VIMEO_REGEX = /(?:http[s]?:\/\/)?(?:www.)?vimeo.com\/(.+)/
-const YOUTUBE_REGEX = /(?:youtube\.com\/\S*(?:(?:\/e(?:mbed))?\/|watch\?(?:\S*?&?v\=))|youtu\.be\/)([a-zA-Z0-9_-]{6,11})/
+const YOUTUBE_REGEX = /(?:youtube\.com\/\S*(?:(?:\/e(?:mbed))?\/|watch\?(?:\S*?&?v=))|youtu\.be\/)([a-zA-Z0-9_-]{6,11})/
 const FILE_REGEX = /(.*)/
 
 export default {
-  name: 'ImageBlock',
+  name: 'VideoBlock',
 
   components: {
     Block
@@ -129,8 +129,11 @@ export default {
     }
   },
 
+  inject: ['available'],
+
   created () {
     console.debug('<VideoBlock /> created')
+    this.checkBlockProps(this.block, this.available.blocks)
 
     if (!this.block.data.remote_id) {
       this.showConfig = true

@@ -1,4 +1,5 @@
 {
+  "/admin/api/villain/templates/sequence": "/sequence/",
   "/admin/api/villain/templates/all": "/templates/",
   "/admin/api/villain/templates": "/templates/1",
   "/admin/api/villain/browse/post": "/images/"

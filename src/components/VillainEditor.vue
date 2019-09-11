@@ -194,6 +194,11 @@ export default {
       default: '/admin/api/villain/templates/'
     },
 
+    templateSequenceURL: {
+      type: String,
+      default: '/admin/api/villain/templates/sequence/'
+    },
+
     imageSeries: {
       type: String,
       default: 'post'
@@ -299,6 +304,10 @@ export default {
       enumerable: true,
       get: () => `${this.server}${this.templatesURL}`
     })
+    Object.defineProperty(urls, 'templateSequence', {
+      enumerable: true,
+      get: () => `${this.server}${this.templateSequenceURL}`
+    })
 
     return {
       vImageSeries: this.imageSeries,
@@ -389,10 +398,18 @@ export default {
     },
 
     animateIn (speed = 1) {
+      const instructions = this.$el.querySelector('.villain-editor-instructions')
+      const controls = this.$el.querySelector('.villain-editor-controls')
+
       TweenMax.fromTo(this.$el, speed, { opacity: 0 }, { opacity: 1 })
-      TweenMax.fromTo(this.$el.querySelector('.villain-editor-instructions'), speed, { x: -5, opacity: 0 }, { x: 0, opacity: 1, delay: 0.9 })
-      TweenMax.fromTo(this.$el.querySelector('.villain-editor-controls'), speed, { x: -5, opacity: 0 }, { x: 0, opacity: 1, delay: 0.5 })
-      TweenMax.staggerFromTo(this.$el.querySelectorAll('.villain-editor-controls > div'), speed, { x: -3, opacity: 0 }, { x: 0, opacity: 1, delay: 1.2 }, 0.1)
+
+      if (instructions) {
+        TweenMax.fromTo(instructions, speed, { x: -5, opacity: 0 }, { x: 0, opacity: 1, delay: 0.9 })
+      }
+      if (controls) {
+        TweenMax.fromTo(controls, speed, { x: -5, opacity: 0 }, { x: 0, opacity: 1, delay: 0.5 })
+        TweenMax.staggerFromTo(this.$el.querySelectorAll('.villain-editor-controls > div'), speed, { x: -3, opacity: 0 }, { x: 0, opacity: 1, delay: 1.2 }, 0.1)
+      }
     },
 
     async updateTemplates () {

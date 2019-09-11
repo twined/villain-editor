@@ -42886,12 +42886,12 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: ./src/styles/lib.scss
 var lib = __webpack_require__("7b11");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=54f83221&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainEditor.vue?vue&type=template&id=74dc77a6&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.builderMode)?_c('div',{staticClass:"villain-builder"},[_c('VillainBuilder')],1):_c('div',{staticClass:"villain-editor",class:_vm.fullscreen ? 'villain-fullscreen': ''},[(_vm.showAutosaves)?_c('div',{staticClass:"villain-editor-autosave-list-popup"},[_c('strong',[_vm._v("Autolagrede versjoner")]),_vm._l((_vm.autosaveEntries),function(a,idx){return _c('div',{key:idx,staticClass:"villain-editor-autosave-list-popup-item"},[_c('div',{staticClass:"villain-editor-autosave-list-popup-item-date"},[_c('i',{staticClass:"fa fa-fw fa-file mr-2"}),_vm._v(" "+_vm._s(_vm.format(a.timestamp, 'nb_NO'))+"\n      ")]),_c('button',{staticClass:"btn btn-outline-primary",on:{"click":function($event){$event.preventDefault();return _vm.restoreAutosave(a)}}},[_vm._v("\n        Gjenopprett denne versjonen\n      ")])])})],2):_vm._e(),_c('div',{staticClass:"villain-editor-toolbar"},[_vm._m(0),_c('div',{staticClass:"villain-editor-controls float-right"},[_c('div',{staticClass:"villain-editor-autosave-status"},[_vm._v("\n        "+_vm._s(_vm.autosaveStatus)+"\n      ")]),_c('div',{directives:[{name:"popover",rawName:"v-popover",value:('Vis autolagrede versjoner'),expression:"'Vis autolagrede versjoner'"}],on:{"click":_vm.toggleAutosaves}},[_c('IconAutosave')],1),_c('div',{directives:[{name:"popover",rawName:"v-popover",value:(_vm.showSource ? 'Lukk kildekodevisning' : 'Vis kildekode'),expression:"showSource ? 'Lukk kildekodevisning' : 'Vis kildekode'"}],on:{"click":function($event){return _vm.toggleSource()}}},[(_vm.showSource)?[_c('IconClose')]:[_c('IconSource')]],2),_c('div',{directives:[{name:"popover",rawName:"v-popover",value:(_vm.fullscreen ? 'Lukk fullskjermsmodus' : 'Vis fullskjermsmodus'),expression:"fullscreen ? 'Lukk fullskjermsmodus' : 'Vis fullskjermsmodus'"}],on:{"click":function($event){return _vm.toggleFullscreen()}}},[(_vm.fullscreen)?[_c('IconClose')]:[_c('IconFullscreen')]],2)])]),(_vm.showSource)?[_c('div',{staticClass:"villain-editor-source"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.src),expression:"src"}],ref:"tasource",domProps:{"value":(_vm.src)},on:{"input":function($event){if($event.target.composing){ return; }_vm.src=$event.target.value}}}),_c('div',{staticClass:"d-flex justify-content-center"},[_c('button',{staticClass:"btn btn-primary mt-4",on:{"click":_vm.updateSource}},[_vm._v("\n          Oppdatér\n        ")])])])]:[(_vm.blocks && _vm.blocks.length)?_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){return _vm.addBlock($event)},"move":function($event){return _vm.moveBlock($event)},"delete":_vm.deleteBlock,"order":_vm.orderBlocks}}):_c('BlockContainer',{attrs:{"blocks":_vm.blocks},on:{"add":function($event){return _vm.addBlock($event)},"move":function($event){return _vm.moveBlock($event)},"delete":_vm.deleteBlock}})]],2)}
 var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-editor-instructions"},[_c('i',{staticClass:"fa mr-2 fa-info-circle"}),_vm._v("\n      Trykk på \"+\" under for å legge til en innholdsblokk\n    ")])}]
 
 
-// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=54f83221&
+// CONCATENATED MODULE: ./src/components/VillainEditor.vue?vue&type=template&id=74dc77a6&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.symbol.async-iterator.js
 var es7_symbol_async_iterator = __webpack_require__("ac4d");
@@ -43110,12 +43110,12 @@ var nb_NO_default = /*#__PURE__*/__webpack_require__.n(nb_NO);
 // EXTERNAL MODULE: ./node_modules/v-tooltip/dist/v-tooltip.esm.js
 var v_tooltip_esm = __webpack_require__("e37d");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainBuilder.vue?vue&type=template&id=75a48416&
-var VillainBuildervue_type_template_id_75a48416_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-wrapper"},[_c('div',{staticClass:"villain-builder-header"},[_c('span',{staticClass:"text-mono"},[(_vm.currentTemplate)?[_vm._v("\n        Editérer {"),_c('strong',[_vm._v(" "+_vm._s(_vm.currentTemplate.data.class)+" ")]),_vm._v("}\n      ")]:_vm._e()],2)]),_vm._m(0),_c('aside',{staticClass:"villain-builder-content-aside"},[_c('div',{staticClass:"villain-builder-aside-header"},[_vm._v("\n      Maler\n    ")]),_c('ul',[_c('button',{staticClass:"btn btn-primary btn-block mb-2",on:{"click":_vm.createTemplate}},[_vm._v("\n        Ny mal\n      ")]),_vm._l((_vm.templates),function(t){return _c('li',{key:t.data.id,staticClass:"text-mono",on:{"click":function($event){return _vm.selectTemplate(t)}}},[_vm._v("\n        "+_vm._s(t.data.class)+"\n      ")])})],2)]),_vm._m(1),_c('aside',{staticClass:"villain-builder-refs-aside"},[(_vm.currentTemplate && _vm.currentTemplate.data.refs)?[_c('div',{staticClass:"villain-builder-aside-header"},[_vm._v("\n        REFs\n      ")]),_c('ul',[_c('button',{staticClass:"btn btn-primary btn-block mb-2",attrs:{"disabled":_vm.currentTemplate === null},on:{"click":function($event){_vm.showBlockPicker = true}}},[_vm._v("\n          Ny REF\n        ")]),_vm._l((_vm.currentTemplate.data.refs),function(ref){return _c('li',{key:ref.name,staticClass:"text-mono",on:{"click":function($event){return _vm.selectRef(ref)}}},[_vm._v("\n          %{"),_c('strong',[_vm._v(_vm._s(ref.name))]),_vm._v("}\n          "),(_vm.prevRefName === ref.name)?_c('button',{staticClass:"btn btn-outline-secondary btn-sm",on:{"click":function($event){$event.preventDefault();$event.stopPropagation();return _vm.saveRef()}}},[_vm._v("Lagre")]):_vm._e()])})],2)]:_vm._e()],2),_c('div',{staticClass:"villain-builder-footer"},[(!_vm.showBlockPicker && !_vm.showNamer && _vm.currentTemplate)?_c('div',{staticClass:"villain-builder-block-attributes"},[_c('label',{staticClass:"float-left"},[_vm._v("Klasse")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentTemplate.data.class),expression:"currentTemplate.data.class"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.currentTemplate.data.class)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.currentTemplate.data, "class", $event.target.value)}}}),_c('label',{staticClass:"float-left"},[_vm._v("Navn")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentTemplate.data.name),expression:"currentTemplate.data.name"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.currentTemplate.data.name)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.currentTemplate.data, "name", $event.target.value)}}}),_c('label',{staticClass:"float-left"},[_vm._v("Kategori")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentTemplate.data.namespace),expression:"currentTemplate.data.namespace"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.currentTemplate.data.namespace)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.currentTemplate.data, "namespace", $event.target.value)}}}),_c('label',{staticClass:"float-left"},[_vm._v("Hjelpetekst")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentTemplate.data.help_text),expression:"currentTemplate.data.help_text"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.currentTemplate.data.help_text)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.currentTemplate.data, "help_text", $event.target.value)}}})]):_vm._e(),(_vm.showBlockPicker)?_c('div',{staticClass:"villain-builder-block-picker"},[_c('div',{staticClass:"villain-builder-block-picker-available"},_vm._l((_vm.available.blocks),function(b){return _c('div',{key:b.name,staticClass:"villain-editor-plus-available-block",on:{"mouseover":function($event){return _vm.setHover(b.name)},"click":function($event){return _vm.addBlock(b)}}},[_c('div',[_c('i',{staticClass:"fa fa-fw",class:b.icon})])])}),0),_c('div',{staticClass:"villain-builder-block-picker-header"},[_vm._v("\n        → "+_vm._s(_vm.hoveredBlock)+"\n      ")])]):_vm._e(),(_vm.showNamer)?_c('div',{staticClass:"villain-builder-block-picker-namer"},[_c('label',{staticClass:"float-left"},[_vm._v("Navngi ref")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.refName),expression:"refName"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.refName)},on:{"input":function($event){if($event.target.composing){ return; }_vm.refName=$event.target.value}}}),_c('button',{staticClass:"btn btn-outline-secondary float-left",on:{"click":_vm.saveName}},[_vm._v("\n        Opprett ref\n      ")])]):_vm._e(),_c('div',{staticClass:"villain-builder-save-wrapper"},[_c('button',{staticClass:"btn btn-outline-primary",on:{"click":function($event){return _vm.saveTemplate()}}},[_vm._v("\n        Lagre\n      ")])])])])}
-var VillainBuildervue_type_template_id_75a48416_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-editor-wrapper"},[_c('div',{staticClass:"villain-builder-editor",attrs:{"id":"builder-template"}})])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-refs"},[_c('div',{staticClass:"villain-builder-ref",attrs:{"id":"builder-ref"}})])}]
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainBuilder.vue?vue&type=template&id=679a544d&
+var VillainBuildervue_type_template_id_679a544d_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-wrapper"},[_c('div',{staticClass:"villain-builder-header"},[_c('span',{staticClass:"text-mono"},[(_vm.currentTemplate)?[_vm._v("\n        Editérer {"),_c('strong',[_vm._v(" "+_vm._s(_vm.currentTemplate.data.class)+" ")]),_vm._v("}\n      ")]:_vm._e()],2)]),_vm._m(0),_c('aside',{staticClass:"villain-builder-content-aside"},[_c('div',{staticClass:"villain-builder-aside-header"},[_vm._v("\n      Maler\n    ")]),_c('transition-group',{directives:[{name:"sortable",rawName:"v-sortable",value:({handle: 'li', animation: 500, store: {get: _vm.getOrder, set: _vm.storeOrder}}),expression:"{handle: 'li', animation: 500, store: {get: getOrder, set: storeOrder}}"}],attrs:{"name":"fade-move","tag":"ul"}},[_c('button',{key:"createTemplateButton",staticClass:"btn btn-primary btn-block mb-2",on:{"click":_vm.createTemplate}},[_vm._v("\n        Ny mal\n      ")]),_vm._l((_vm.templates),function(t){return _c('li',{key:t.data.id,staticClass:"text-mono",attrs:{"data-id":t.data.id},on:{"click":function($event){return _vm.selectTemplate(t)}}},[_vm._v("\n        "+_vm._s(t.data.class)+"\n      ")])})],2)],1),_vm._m(1),_c('aside',{staticClass:"villain-builder-refs-aside"},[(_vm.currentTemplate && _vm.currentTemplate.data.refs)?[_c('div',{staticClass:"villain-builder-aside-header"},[_vm._v("\n        REFs\n      ")]),_c('ul',[_c('button',{staticClass:"btn btn-primary btn-block mb-2",attrs:{"disabled":_vm.currentTemplate === null},on:{"click":function($event){_vm.showBlockPicker = true}}},[_vm._v("\n          Ny REF\n        ")]),_vm._l((_vm.currentTemplate.data.refs),function(ref){return _c('li',{key:ref.name,staticClass:"text-mono",on:{"click":function($event){return _vm.selectRef(ref)}}},[_vm._v("\n          %{"),_c('strong',[_vm._v(_vm._s(ref.name))]),_vm._v("}\n          "),(_vm.prevRefName === ref.name)?_c('button',{staticClass:"btn btn-outline-secondary btn-sm",on:{"click":function($event){$event.preventDefault();$event.stopPropagation();return _vm.saveRef()}}},[_vm._v("Lagre")]):_vm._e()])})],2)]:_vm._e()],2),_c('div',{staticClass:"villain-builder-footer"},[(!_vm.showBlockPicker && !_vm.showNamer && _vm.currentTemplate)?_c('div',{staticClass:"villain-builder-block-attributes"},[_c('label',{staticClass:"float-left"},[_vm._v("Klasse")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentTemplate.data.class),expression:"currentTemplate.data.class"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.currentTemplate.data.class)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.currentTemplate.data, "class", $event.target.value)}}}),_c('label',{staticClass:"float-left"},[_vm._v("Navn")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentTemplate.data.name),expression:"currentTemplate.data.name"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.currentTemplate.data.name)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.currentTemplate.data, "name", $event.target.value)}}}),_c('label',{staticClass:"float-left"},[_vm._v("Kategori")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentTemplate.data.namespace),expression:"currentTemplate.data.namespace"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.currentTemplate.data.namespace)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.currentTemplate.data, "namespace", $event.target.value)}}}),_c('label',{staticClass:"float-left"},[_vm._v("Hjelpetekst")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.currentTemplate.data.help_text),expression:"currentTemplate.data.help_text"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.currentTemplate.data.help_text)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.currentTemplate.data, "help_text", $event.target.value)}}})]):_vm._e(),(_vm.showBlockPicker)?_c('div',{staticClass:"villain-builder-block-picker"},[_c('div',{staticClass:"villain-builder-block-picker-available"},_vm._l((_vm.available.blocks),function(b){return _c('div',{key:b.name,staticClass:"villain-editor-plus-available-block",on:{"mouseover":function($event){return _vm.setHover(b.name)},"click":function($event){return _vm.addBlock(b)}}},[_c('div',[_c('i',{staticClass:"fa fa-fw",class:b.icon})])])}),0),_c('div',{staticClass:"villain-builder-block-picker-header"},[_vm._v("\n        → "+_vm._s(_vm.hoveredBlock)+"\n      ")])]):_vm._e(),(_vm.showNamer)?_c('div',{staticClass:"villain-builder-block-picker-namer"},[_c('label',{staticClass:"float-left"},[_vm._v("Navngi ref")]),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.refName),expression:"refName"}],staticClass:"form-control float-left d-inline",attrs:{"type":"input"},domProps:{"value":(_vm.refName)},on:{"input":function($event){if($event.target.composing){ return; }_vm.refName=$event.target.value}}}),_c('button',{staticClass:"btn btn-outline-secondary float-left",on:{"click":_vm.saveName}},[_vm._v("\n        Opprett ref\n      ")])]):_vm._e(),_c('div',{staticClass:"villain-builder-save-wrapper"},[_c('button',{staticClass:"btn btn-outline-primary",on:{"click":function($event){return _vm.saveTemplate()}}},[_vm._v("\n        Lagre\n      ")])])])])}
+var VillainBuildervue_type_template_id_679a544d_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-editor-wrapper"},[_c('div',{staticClass:"villain-builder-editor",attrs:{"id":"builder-template"}})])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"villain-builder-refs"},[_c('div',{staticClass:"villain-builder-ref",attrs:{"id":"builder-ref"}})])}]
 
 
-// CONCATENATED MODULE: ./src/components/VillainBuilder.vue?vue&type=template&id=75a48416&
+// CONCATENATED MODULE: ./src/components/VillainBuilder.vue?vue&type=template&id=679a544d&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
 var es6_function_name = __webpack_require__("7f7f");
@@ -43359,6 +43359,85 @@ function _storeTemplate() {
   }));
   return _storeTemplate.apply(this, arguments);
 }
+// CONCATENATED MODULE: ./src/utils/storeTemplateSequence.js
+
+
+
+
+
+
+function storeTemplateSequence(_x, _x2, _x3) {
+  return _storeTemplateSequence.apply(this, arguments);
+}
+
+function _storeTemplateSequence() {
+  _storeTemplateSequence = _asyncToGenerator(
+  /*#__PURE__*/
+  regeneratorRuntime.mark(function _callee(sequence, extraHeaders, url) {
+    var request, headers, _arr, _i, key, formData, response, data;
+
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            headers = new Headers();
+            headers.append('accept', 'application/json, text/javascript, */*; q=0.01');
+
+            if (extraHeaders) {
+              _arr = Object.keys(extraHeaders);
+
+              for (_i = 0; _i < _arr.length; _i++) {
+                key = _arr[_i];
+                headers.append(key, extraHeaders[key]);
+              }
+            }
+
+            formData = new FormData();
+            formData.append('sequence', JSON.stringify(sequence));
+            request = new Request(url, {
+              headers: headers,
+              method: 'post',
+              body: formData
+            });
+            _context.prev = 6;
+            _context.next = 9;
+            return fetch(request);
+
+          case 9:
+            response = _context.sent;
+            _context.next = 12;
+            return response.json();
+
+          case 12:
+            data = _context.sent;
+
+            if (!(data.status === 200)) {
+              _context.next = 16;
+              break;
+            }
+
+            alertSuccess('OK', 'Rekkefølgen ble lagret');
+            return _context.abrupt("return", data);
+
+          case 16:
+            _context.next = 22;
+            break;
+
+          case 18:
+            _context.prev = 18;
+            _context.t0 = _context["catch"](6);
+            alertError('Feil', 'Feil ved lagring av rekkefølge i database.');
+            console.error(_context.t0);
+
+          case 22:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[6, 18]]);
+  }));
+  return _storeTemplateSequence.apply(this, arguments);
+}
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/VillainBuilder.vue?vue&type=script&lang=js&
 
 
@@ -43508,6 +43587,13 @@ function _storeTemplate() {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -43524,7 +43610,8 @@ function _storeTemplate() {
       currentTemplate: null,
       currentRef: null,
       prevRefName: null,
-      templates: []
+      templates: [],
+      templateSequence: []
     };
   },
   inject: ['available', 'headers', 'urls'],
@@ -43565,6 +43652,13 @@ function _storeTemplate() {
     return mounted;
   }(),
   methods: {
+    getOrder: function getOrder(sortable) {
+      return this.templateSequence;
+    },
+    storeOrder: function storeOrder(sortable) {
+      this.templateSequence = sortable.toArray();
+      storeTemplateSequence(this.templateSequence, this.headers.extra, this.urls.templateSequence);
+    },
     createTemplate: function createTemplate() {
       var template = {
         type: 'template',
@@ -43792,8 +43886,8 @@ function normalizeComponent (
 
 var component = normalizeComponent(
   components_VillainBuildervue_type_script_lang_js_,
-  VillainBuildervue_type_template_id_75a48416_render,
-  VillainBuildervue_type_template_id_75a48416_staticRenderFns,
+  VillainBuildervue_type_template_id_679a544d_render,
+  VillainBuildervue_type_template_id_679a544d_staticRenderFns,
   false,
   null,
   null,
@@ -54971,6 +55065,10 @@ for (var _key2 in tools) {
       type: String,
       default: '/admin/api/villain/templates/'
     },
+    templateSequenceURL: {
+      type: String,
+      default: '/admin/api/villain/templates/sequence/'
+    },
     imageSeries: {
       type: String,
       default: 'post'
@@ -55091,6 +55189,12 @@ for (var _key2 in tools) {
       enumerable: true,
       get: function get() {
         return "".concat(_this3.server).concat(_this3.templatesURL);
+      }
+    });
+    Object.defineProperty(urls, 'templateSequence', {
+      enumerable: true,
+      get: function get() {
+        return "".concat(_this3.server).concat(_this3.templateSequenceURL);
       }
     });
     return {
@@ -55216,35 +55320,43 @@ for (var _key2 in tools) {
     },
     animateIn: function animateIn() {
       var speed = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      var instructions = this.$el.querySelector('.villain-editor-instructions');
+      var controls = this.$el.querySelector('.villain-editor-controls');
       TweenMax_TweenMax.fromTo(this.$el, speed, {
         opacity: 0
       }, {
         opacity: 1
       });
-      TweenMax_TweenMax.fromTo(this.$el.querySelector('.villain-editor-instructions'), speed, {
-        x: -5,
-        opacity: 0
-      }, {
-        x: 0,
-        opacity: 1,
-        delay: 0.9
-      });
-      TweenMax_TweenMax.fromTo(this.$el.querySelector('.villain-editor-controls'), speed, {
-        x: -5,
-        opacity: 0
-      }, {
-        x: 0,
-        opacity: 1,
-        delay: 0.5
-      });
-      TweenMax_TweenMax.staggerFromTo(this.$el.querySelectorAll('.villain-editor-controls > div'), speed, {
-        x: -3,
-        opacity: 0
-      }, {
-        x: 0,
-        opacity: 1,
-        delay: 1.2
-      }, 0.1);
+
+      if (instructions) {
+        TweenMax_TweenMax.fromTo(instructions, speed, {
+          x: -5,
+          opacity: 0
+        }, {
+          x: 0,
+          opacity: 1,
+          delay: 0.9
+        });
+      }
+
+      if (controls) {
+        TweenMax_TweenMax.fromTo(controls, speed, {
+          x: -5,
+          opacity: 0
+        }, {
+          x: 0,
+          opacity: 1,
+          delay: 0.5
+        });
+        TweenMax_TweenMax.staggerFromTo(this.$el.querySelectorAll('.villain-editor-controls > div'), speed, {
+          x: -3,
+          opacity: 0
+        }, {
+          x: 0,
+          opacity: 1,
+          delay: 1.2
+        }, 0.1);
+      }
     },
     updateTemplates: function () {
       var _updateTemplates = _asyncToGenerator(

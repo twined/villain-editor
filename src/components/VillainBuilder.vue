@@ -19,20 +19,26 @@
       <div class="villain-builder-aside-header">
         Maler
       </div>
-      <ul>
+      <transition-group
+        v-sortable="{handle: 'li', animation: 500, store: {get: getOrder, set: storeOrder}}"
+        name="fade-move"
+        tag="ul">
         <button
+          key="createTemplateButton"
           class="btn btn-primary btn-block mb-2"
           @click="createTemplate">
           Ny mal
         </button>
+
         <li
           v-for="t in templates"
+          :data-id="t.data.id"
           :key="t.data.id"
           class="text-mono"
           @click="selectTemplate(t)">
           {{ t.data.class }}
         </li>
-      </ul>
+      </transition-group>
     </aside>
 
     <div class="villain-builder-refs">
@@ -145,6 +151,7 @@
 import CodeFlask from 'codeflask'
 import fetchTemplates from '@/utils/fetchTemplates'
 import storeTemplate from '@/utils/storeTemplate'
+import storeTemplateSequence from '@/utils/storeTemplateSequence'
 
 export default {
   data () {
@@ -159,7 +166,8 @@ export default {
       currentTemplate: null,
       currentRef: null,
       prevRefName: null,
-      templates: []
+      templates: [],
+      templateSequence: []
     }
   },
 
@@ -176,6 +184,15 @@ export default {
   },
 
   methods: {
+    getOrder (sortable) {
+      return this.templateSequence
+    },
+
+    storeOrder (sortable) {
+      this.templateSequence = sortable.toArray()
+      storeTemplateSequence(this.templateSequence, this.headers.extra, this.urls.templateSequence)
+    },
+
     createTemplate () {
       const template = {
         type: 'template',

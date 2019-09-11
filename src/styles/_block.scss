@@ -332,6 +332,7 @@
   .villain-block-slideshow-images {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     width: 100%;
     justify-content: center;
 
@@ -339,6 +340,7 @@
       position: relative;
       padding: .5rem;
       user-select: none;
+      width: 25%;
 
       .villain-block-slideshow-image-delete-overlay {
         user-select: none;

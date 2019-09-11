@@ -6,6 +6,9 @@
     @add="$emit('add', $event)"
     @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
+    <div class="villain-block-description">
+      Bildefigur
+    </div>
     <div class="villain-block-picture">
       <img
         v-if="block.data.url"

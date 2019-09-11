@@ -47,7 +47,8 @@ export default [
     icon: 'fa-images',
     component: 'Slideshow',
     dataTemplate: {
-      images: []
+      images: [],
+      class: ''
     }
   },
 

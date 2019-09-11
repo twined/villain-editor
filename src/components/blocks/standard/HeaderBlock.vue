@@ -5,6 +5,9 @@
     @add="$emit('add', $event)"
     @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
+    <div class="villain-block-description">
+      Overskrift (H{{ block.data.level }})
+    </div>
     <textarea
       ref="txt"
       :style="'font-size: ' + fontSize + 'rem'"

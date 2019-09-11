@@ -6,6 +6,9 @@
     @add="$emit('add', $event)"
     @move="$emit('move', $event)"
     @delete="$emit('delete', $event)">
+    <div class="villain-block-description">
+      Bildekarusell
+    </div>
     <div
       ref="block"
       class="villain-block-slideshow">
@@ -36,7 +39,7 @@
             />
           </div>
           <img
-            :src="i.sizes.thumb"
+            :src="i.url"
             class="img-fluid">
         </div>
       </transition-group>
@@ -172,6 +175,14 @@
             @click="selectImage(i)"
           />
         </div>
+        <div
+          class="col-12 form-group mt-4">
+          <label>CSS klasser</label>
+          <input
+            v-model="block.data.class"
+            class="form-control"
+            type="input">
+        </div>
       </div>
 
       <div class="villain-config-content-buttons">
@@ -187,7 +198,7 @@
       <p>
         For å slette et bilde i bildekarusellen, klikker du på bildet, deretter klikker du på søplekasse-ikonet (<i class="fa fa-trash" />)<br><br>
         For å gi bildene bildetekst, klikker du på bildet og deretter på info-ikonet (<i class="fa fa-info-circle" />)<br><br>
-        For å sortere bildene kan du dra og slippe de i ønsket rekkefølge
+        For å sortere bildene kan du dra og slippe de i ønsket rekkefølge.
       </p>
     </template>
   </Block>

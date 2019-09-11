@@ -5,7 +5,7 @@
       "data": {
         "id": 1,
         "name": "SVG header",
-        "namespace": "general",
+        "namespace": "headers",
         "help_text": "SVG overskrift",
         "class": "svg+header",
         "code": "<div class=\"v-module\" data-v=\"svg+header\" data-moonwalk-section>\n  <div class=\"svg\" data-moonwalk>\n    %{HTML}\n  </div>\n</div>",
@@ -27,7 +27,7 @@
       "data": {
         "id": 2,
         "name": "SVG header alt",
-        "namespace": "general",
+        "namespace": "headers",
         "help_text": "SVG overskrift, farget bakgrunn",
         "class": "svg+altbg+header",
         "code": "<div class=\"v-module\" data-v=\"svg+altbg+header\" data-moonwalk-section>\n  <div class=\"svg\" data-moonwalk>\n    %{HTML}\n  </div>\n</div>",
@@ -49,7 +49,7 @@
       "data": {
         "id": 3,
         "name": "Tekst, stor, sentrert",
-        "namespace": "general",
+        "namespace": "text",
         "help_text": "Hovedtekst, sentrert",
         "class": "text+large+center",
         "code": "<div class=\"v-module\" data-v=\"text+large+center\" data-moonwalk-section>\n  <div class=\"text\" data-moonwalk-children>\n    %{MARKDOWN}\n  </div>\n</div>",
@@ -71,7 +71,7 @@
       "data": {
         "id": 4,
         "name": "Tekst, stor, sentrert, alt",
-        "namespace": "general",
+        "namespace": "text",
         "help_text": "Hovedtekst, sentrert, farget bakgrunn",
         "class": "text+altbg+large+center",
         "code": "<div class=\"v-module\" data-v=\"text+altbg+large+center\" data-moonwalk-section>\n  <div class=\"text\" data-moonwalk-children>\n    %{MARKDOWN}\n  </div>\n</div>",
@@ -93,7 +93,7 @@
       "data": {
         "id": 5,
         "name": "2 bilder, side om side",
-        "namespace": "general",
+        "namespace": "images",
         "help_text": "Stakkede bilder, side om side",
         "class": "image|image(staggered)",
         "code": "<div class=\"v-module\" data-v=\"image|image(staggered)\" data-moonwalk-section>\n  <figure>\n    %{PICTURE_1}\n  </figure>\n  <figure>\n    %{PICTURE_2}\n  </figure>\n</div>",

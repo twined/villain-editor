@@ -69,12 +69,35 @@
           :active="showingTemplates"
           :duration="350">
           <div
-            v-if="available.templates.length"
+            v-if="namespacedTemplates"
             ref="templates"
             class="villain-editor-plus-available-templates">
             <div
-              v-for="(tp, idx) in available.templates"
-              :key="idx"
+              v-for="(tpls, key) in namespacedTemplates"
+              v-if="key !== 'general'"
+              :key="key"
+              @click="namespaceOpen === key ? namespaceOpen = null : namespaceOpen = key">
+              <div
+                class="villain-editor-plus-available-templates-namespace">
+                <IconDropdown :open="namespaceOpen === key" /><strong>{{ key.toUpperCase() }}</strong>
+              </div>
+              <VueSlideUpDown
+                :active="namespaceOpen === key"
+                :duration="350">
+                <div
+                  v-for="(tp, idx) in tpls"
+                  :key="'key-' + idx"
+                  class="villain-editor-plus-available-template"
+                  @click="addTemplate(tp)">
+                  <div class="villain-editor-plus-available-templates-title">{{ tp.data.name }}</div>
+                  <div class="villain-editor-plus-available-templates-help">{{ tp.data.help_text }}</div>
+                </div>
+              </VueSlideUpDown>
+            </div>
+
+            <div
+              v-for="(tp, idx) in namespacedTemplates.general"
+              :key="'general-' + idx"
               class="villain-editor-plus-available-template"
               @click="addTemplate(tp)">
               <div class="villain-editor-plus-available-templates-title">{{ tp.data.name }}</div>
@@ -97,6 +120,7 @@
 
 import VueSlideUpDown from 'vue-slide-up-down'
 import { TweenMax } from 'gsap'
+import IconDropdown from '@/components/icons/IconDropdown'
 
 function createUID () {
   return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase()
@@ -106,7 +130,8 @@ export default {
   name: 'VillainPlus',
 
   components: {
-    VueSlideUpDown
+    VueSlideUpDown,
+    IconDropdown
   },
 
   props: {
@@ -125,8 +150,22 @@ export default {
     return {
       active: false,
       draggingOver: false,
+      namespaceOpen: null,
       showingTemplates: false,
       hoveredBlock: 'Velg blokktype'
+    }
+  },
+
+  computed: {
+    namespacedTemplates () {
+      if (!this.available.templates.length) {
+        return null
+      }
+      return this.available.templates.reduce((objectsByKeyValue, obj) => {
+        const value = obj.data.namespace
+        objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj)
+        return objectsByKeyValue
+      }, {})
     }
   },
 
@@ -137,6 +176,7 @@ export default {
 
   created () {
     console.debug('<VillainPlus /> created')
+    console.log(this.namespacedTemplates)
   },
 
   mounted () {

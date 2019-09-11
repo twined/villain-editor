@@ -1,7 +1,7 @@
 .villain-editor-plus {
-  text-align: center;
   margin-top: 1rem;
   color: $villain-main-color;
+  text-align: center;
 
   &.villain-drag-over {
     .villain-editor-plus-inactive {
@@ -29,7 +29,8 @@
 
   .villain-editor-plus-available-template {
     cursor: pointer;
-    padding: 1rem;
+    padding: 1rem 1rem 1rem calc(1rem + 60px);
+    text-align: left;
 
     &:hover {
       color: #fff;
@@ -42,6 +43,36 @@
     text-transform: uppercase;
     margin-bottom: 6px;
     font-size: 13px;
+  }
+
+  .villain-editor-plus-available-templates-namespace {
+    cursor: pointer;
+
+    padding: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      color: #fff;
+      background-color: $villain-main-color !important;
+
+      .svg-icon {
+        fill: white;
+      }
+    }
+
+    strong {
+      font-size: 13px;
+    }
+
+    .svg-icon {
+      width: 30px;
+      height: 30px;
+      float: left;
+      margin-right: 30px;
+    }
   }
 }
 

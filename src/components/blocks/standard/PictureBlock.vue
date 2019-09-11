@@ -287,7 +287,6 @@ export default {
 
   created () {
     console.debug('<PictureBlock /> created')
-    this.checkBlockProps(this.block, this.available.blocks)
 
     if (!this.block.data.url) {
       this.showConfig = true

@@ -146,7 +146,6 @@ export default {
 
   created () {
     console.debug('<HeaderBlock /> created')
-    this.checkBlockProps(this.block, this.available.blocks)
   },
 
   mounted () {

@@ -58,7 +58,6 @@ export default {
 
   created () {
     console.debug('<BlockquoteBlock /> created')
-    this.checkBlockProps(this.block, this.available.blocks)
   }
 }
 </script>

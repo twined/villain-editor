@@ -133,7 +133,6 @@ export default {
 
   created () {
     console.debug('<VideoBlock /> created')
-    this.checkBlockProps(this.block, this.available.blocks)
 
     if (!this.block.data.remote_id) {
       this.showConfig = true

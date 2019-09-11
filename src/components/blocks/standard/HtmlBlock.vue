@@ -56,7 +56,6 @@ export default {
 
   created () {
     console.debug('<HtmlBlock /> created')
-    this.checkBlockProps(this.block, this.available.blocks)
   },
 
   mounted () {

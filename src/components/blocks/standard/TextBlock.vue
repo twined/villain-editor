@@ -130,7 +130,6 @@ export default {
 
   created () {
     console.debug('<TextBlock /> created')
-    this.checkBlockProps(this.block, this.available.blocks)
     this.text = md.render(this.block.data.text)
     this.customClass = this.block.data.type
   },

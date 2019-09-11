@@ -266,8 +266,6 @@ export default {
 
     this.getImages()
 
-    this.checkBlockProps(this.block, this.available.blocks)
-
     if (!this.block.data.images.length) {
       this.showConfig = true
       this.showImages = false

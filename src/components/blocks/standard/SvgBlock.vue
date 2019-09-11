@@ -74,7 +74,6 @@ export default {
 
   created () {
     console.debug('<SvgBlock /> created')
-    this.checkBlockProps(this.block, this.available.blocks)
   },
 
   mounted () {

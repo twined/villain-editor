@@ -140,26 +140,6 @@ for (let key in toolsComponents) {
   }
 }
 
-/**
- * Add global mixin for ensuring block has all neccessary data props
- */
-Vue.mixin({
-  methods: {
-    checkBlockProps (block, availableBlocks) {
-      const template = availableBlocks.find(b => b.component.toLowerCase() === block.type)
-
-      if (template) {
-        let blueprint = template.dataTemplate
-        for (let blueprintProp in blueprint) {
-          if (!block.data.hasOwnProperty(blueprintProp)) {
-            Vue.set(block.data, blueprintProp, blueprint[blueprintProp])
-          }
-        }
-      }
-    }
-  }
-})
-
 export default {
   name: 'VillainEditor',
 
@@ -251,6 +231,7 @@ export default {
       autosaveStatus: '',
       blocks: [],
       lastAutosavedAt: null,
+      needsRefresh: false,
       showAutosaves: false,
       showSource: false,
       fullscreen: false,
@@ -354,6 +335,7 @@ export default {
 
   async created () {
     console.debug('==> VILLAIN EDITOR INITIALIZING')
+
     if (this.templates) {
       this.availableTemplates = await fetchTemplates(this.templates, this.extraHeaders, `${this.server}${this.templatesURL}`)
     }
@@ -369,6 +351,18 @@ export default {
         this.blocks = JSON.parse(this.json)
       }
       this.blocks = this.addUIDs()
+    }
+
+    // validate each block!
+    for (let idx = 0; idx < this.blocks.length; idx++) {
+      const block = this.blocks[idx]
+      this.validateBlock(block)
+    }
+
+    // reconvert to start fresh if there are added props
+    if (this.needsRefresh) {
+      this.refresh(false)
+      console.debug('==> Refreshed Villain Blocks due to missing props.')
     }
 
     register('nb_NO', nbNO)
@@ -394,6 +388,29 @@ export default {
   },
 
   methods: {
+    validateBlock (block) {
+      const bpBlock = this.availableBlocks.find(b => b.component.toLowerCase() === block.type)
+      if (bpBlock) {
+        let blueprint = bpBlock.dataTemplate
+        for (let blueprintProp in blueprint) {
+          if (!block.data.hasOwnProperty(blueprintProp)) {
+            this.$set(block.data, blueprintProp, blueprint[blueprintProp])
+            console.debug(`==> Added missing property '${blueprintProp}' to '${block.type}'`)
+            this.needsRefresh = true
+          }
+        }
+      } else {
+        if (block.type === 'template') {
+          if (block.data.refs && block.data.refs.length) {
+            for (let idx = 0; idx < block.data.refs.length; idx++) {
+              let refBlock = block.data.refs[idx].data
+              this.validateBlock(refBlock)
+            }
+          }
+        }
+      }
+    },
+
     format (time, locale) {
       return format(time, locale)
     },
@@ -452,13 +469,15 @@ export default {
       }
     },
 
-    refresh () {
+    refresh (animate = true) {
       let bx = cloneDeep(this.blocks)
       this.updatedSource = JSON.stringify(bx.map(b => this.stripMeta(b)), null, 2)
       this.blocks = JSON.parse(this.updatedSource)
       this.blocks = this.addUIDs()
 
-      this.animateIn(0.5)
+      if (animate) {
+        this.animateIn(0.5)
+      }
     },
 
     toggleFullscreen () {

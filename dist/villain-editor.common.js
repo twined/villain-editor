@@ -55064,8 +55064,8 @@ function getTimestamp() {
   return new Date().getTime();
 }
 // CONCATENATED MODULE: ./src/config/autoSave.js
-var AUTOSAVE_INTERVAL = 1000 * 5;
-var AUTOSAVE_MAX_SAVES = 5;
+var AUTOSAVE_INTERVAL = 1000 * 60 * 3;
+var AUTOSAVE_MAX_SAVES = 10;
 // CONCATENATED MODULE: ./src/utils/autoSave.js
 
 

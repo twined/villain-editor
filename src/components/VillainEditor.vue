@@ -315,7 +315,8 @@ export default {
       vTemplateMode: this.templateMode,
       available,
       headers,
-      urls
+      urls,
+      refresh: this.refresh
     }
   },
 

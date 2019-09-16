@@ -9,15 +9,44 @@
       {{ getBlockName }}
     </div>
     <component :is="buildWrapper()" />
+    <template slot="config">
+      <div class="form-group">
+        <label>Refererte blokker [{{ block.data.refs.length }}]</label>
+        <table class="table villain-block-datatable-table">
+          <tbody>
+            <tr
+              v-for="(ref, idx) in block.data.refs"
+              :key="idx"
+              class="villain-template-config-ref">
+              <td>{{ ref.name }}</td>
+              <td style="float: right;">
+                <button
+                  class="btn btn-primary text-white d-flex"
+                  @click="replaceRefWithSource(ref)">
+                  <IconRefresh
+                    class="mr-2"
+                    style="height: 25px; width: 25px;" /> <span>Erstatt med referanseblokk</span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </template>
   </Block>
 </template>
 
 <script>
 
 import Vue from 'vue'
+import IconRefresh from '../../icons/IconRefresh'
 
 export default {
   name: 'TemplateBlock',
+
+  components: {
+    IconRefresh
+  },
 
   props: {
     block: {
@@ -39,7 +68,8 @@ export default {
   },
 
   inject: [
-    'available'
+    'available',
+    'refresh'
   ],
 
   computed: {
@@ -70,6 +100,23 @@ export default {
   },
 
   methods: {
+    replaceRefWithSource (ref) {
+      let foundTemplate = this.available.templates.find(t => t.data.id === this.block.data.id)
+      let foundRef = foundTemplate.data.refs.find(r => r.name === ref.name)
+
+      // replace our ref with foundRef
+      let refIdx = this.block.data.refs.indexOf(ref)
+
+      const newRefs = [
+        ...this.block.data.refs.slice(0, refIdx),
+        foundRef,
+        ...this.block.data.refs.slice(refIdx + 1)
+      ]
+
+      this.$set(this.block.data, 'refs', newRefs)
+      this.refresh(false)
+    },
+
     /** remove props we don't want to store */
     deleteProps () {
       // only delete props here if we don't have an ID

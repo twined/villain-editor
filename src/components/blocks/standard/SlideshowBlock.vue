@@ -258,7 +258,8 @@ export default {
     'urls',
     'vImageSeries',
     'headers',
-    'available'
+    'available',
+    'refresh'
   ],
 
   created () {
@@ -375,6 +376,8 @@ export default {
           }
         }
       }
+
+      this.refresh()
 
       this.showImages = false
       this.uploading = false

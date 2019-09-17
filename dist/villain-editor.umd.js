@@ -51187,6 +51187,87 @@ var ColumnsBlock_component = normalizeComponent(
 )
 
 /* harmony default export */ var ColumnsBlock = (ColumnsBlock_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/CommentBlock.vue?vue&type=template&id=36e2d79e&
+var CommentBlockvue_type_template_id_36e2d79e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('div',{staticClass:"villain-block-description"},[_vm._v("\n    Kommentar (vises ikke)\n  ")]),_c('div',{staticClass:"villain-block-comment"},[_c('code',[_c('pre',[_vm._v(_vm._s(_vm.block.data.text))])])]),_c('template',{slot:"config"},[_c('div',{staticClass:"form-group"},[_c('label',[_vm._v("Kommentar")]),_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.block.data.text),expression:"block.data.text"}],ref:"txt",staticClass:"form-control text-mono",domProps:{"value":(_vm.block.data.text)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.block.data, "text", $event.target.value)}}})])])],2)}
+var CommentBlockvue_type_template_id_36e2d79e_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/blocks/standard/CommentBlock.vue?vue&type=template&id=36e2d79e&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/CommentBlock.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var CommentBlockvue_type_script_lang_js_ = ({
+  name: 'CommentBlock',
+  components: {
+    Block: Block
+  },
+  props: {
+    block: {
+      type: Object,
+      default: function _default() {}
+    },
+    parent: {
+      type: String,
+      default: null
+    }
+  },
+  inject: ['available'],
+  data: function data() {
+    return {
+      uid: null
+    };
+  },
+  created: function created() {
+    console.debug('<CommentBlock /> created');
+  }
+});
+// CONCATENATED MODULE: ./src/components/blocks/standard/CommentBlock.vue?vue&type=script&lang=js&
+ /* harmony default export */ var standard_CommentBlockvue_type_script_lang_js_ = (CommentBlockvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/blocks/standard/CommentBlock.vue
+
+
+
+
+
+/* normalize component */
+
+var CommentBlock_component = normalizeComponent(
+  standard_CommentBlockvue_type_script_lang_js_,
+  CommentBlockvue_type_template_id_36e2d79e_render,
+  CommentBlockvue_type_template_id_36e2d79e_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var CommentBlock = (CommentBlock_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2b4aeddb-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/blocks/standard/DatatableBlock.vue?vue&type=template&id=24d4f74a&
 var DatatableBlockvue_type_template_id_24d4f74a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Block',{attrs:{"block":_vm.block,"parent":_vm.parent,"config":_vm.showConfig},on:{"add":function($event){return _vm.$emit('add', $event)},"move":function($event){return _vm.$emit('move', $event)},"delete":function($event){return _vm.$emit('delete', $event)}}},[_c('transition-group',{directives:[{name:"sortable",rawName:"v-sortable",value:({handle: '.villain-block-datatable-item', animation: 500, store: {get: _vm.getOrder, set: _vm.storeOrder}}),expression:"{handle: '.villain-block-datatable-item', animation: 500, store: {get: getOrder, set: storeOrder}}"}],staticClass:"villain-block-datatable",attrs:{"name":"fade-move","tag":"table"}},_vm._l((_vm.block.data),function(item){return _c('tr',{key:item.key + item.value,staticClass:"villain-block-datatable-item",attrs:{"data-id":item.key + item.value}},[_c('td',{staticClass:"villain-block-datatable-item-key"},[_vm._v("\n        "+_vm._s(item.key)+"\n      ")]),_c('td',{staticClass:"villain-block-datatable-item-value"},[_vm._v("\n        "+_vm._s(item.value)+"\n      ")])])}),0),_c('template',{slot:"config"},[_c('table',{staticClass:"table villain-block-datatable-table"},[_c('tbody',_vm._l((_vm.block.data),function(item,idx){return _c('tr',{key:idx + 'cfg'},[_c('td',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(item.key),expression:"item.key"}],staticClass:"form-control",attrs:{"type":"input"},domProps:{"value":(item.key)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(item, "key", $event.target.value)}}})]),_c('td',[_c('input',{directives:[{name:"model",rawName:"v-model",value:(item.value),expression:"item.value"}],staticClass:"form-control",attrs:{"type":"input"},domProps:{"value":(item.value)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(item, "value", $event.target.value)}}})]),_c('td',[_c('button',{staticClass:"btn btn-outline-primary btn-small",on:{"click":function($event){return _vm.deleteItem(item)}}},[_c('i',{staticClass:"fa fa-times"})])])])}),0)]),_c('div',{staticClass:"d-flex justify-content-center"},[_c('button',{staticClass:"btn btn-outline-primary",on:{"click":_vm.addItem}},[_vm._v("\n        Legg til ny linje\n      ")])])])],2)}
 var DatatableBlockvue_type_template_id_24d4f74a_staticRenderFns = []
@@ -54346,9 +54427,11 @@ var VideoBlock_component = normalizeComponent(
 
 
 
+
 /* harmony default export */ var standard = ({
   BlockquoteBlock: BlockquoteBlock,
   ColumnsBlock: ColumnsBlock,
+  CommentBlock: CommentBlock,
   DatatableBlock: DatatableBlock,
   DividerBlock: DividerBlock,
   HeaderBlock: HeaderBlock,
@@ -55066,6 +55149,13 @@ var IconSource_component = normalizeComponent(
   component: 'Html',
   dataTemplate: {
     'text': 'html'
+  }
+}, {
+  name: 'Kommentar (vises ikke)',
+  icon: 'fa-comment',
+  component: 'Comment',
+  dataTemplate: {
+    'text': 'Kommentar...'
   }
 }]);
 // CONCATENATED MODULE: ./src/utils/getTimestamp.js

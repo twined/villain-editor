@@ -171,6 +171,9 @@
     min-height: 150px;
   }
 
+  &[data-type="comment"] {
+    background-color: lightyellow;
+  }
 
   .villain-template-description, .villain-block-description {
     background-color: #e4e4e4;

@@ -150,5 +150,14 @@ export default [
     dataTemplate: {
       'text': 'html'
     }
+  },
+
+  {
+    name: 'Kommentar (vises ikke)',
+    icon: 'fa-comment',
+    component: 'Comment',
+    dataTemplate: {
+      'text': 'Kommentar...'
+    }
   }
 ]

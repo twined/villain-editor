@@ -11,10 +11,10 @@
     </div>
     <div
       ref="wrapper"
-      class="villain-html-input-wrapper">
-      <div
+      class="villain-markdown-input-wrapper">
+      <textarea
         ref="txt"
-        class="villain-html-input" />
+        class="villain-html-input"></textarea>
     </div>
     <template slot="config">
       This is the config contents!
@@ -23,8 +23,10 @@
 </template>
 
 <script>
-import { TweenMax } from 'gsap'
-import CodeFlask from 'codeflask'
+import CodeMirror from 'codemirror'
+import 'codemirror/mode/htmlmixed/htmlmixed.js'
+import 'codemirror/addon/display/autorefresh.js'
+
 import Block from '@/components/blocks/system/Block'
 
 export default {
@@ -48,7 +50,7 @@ export default {
 
   data () {
     return {
-      codeFlask: null
+      codeMirror: null
     }
   },
 
@@ -59,25 +61,25 @@ export default {
   },
 
   mounted () {
-    this.codeFlask = new CodeFlask(this.$refs.txt, { language: 'markup', defaultTheme: false, lineNumbers: true })
-
-    this.codeFlask.onUpdate(code => {
-      this.block.data.text = code
-      this.setHeight()
+    this.codeMirror = CodeMirror.fromTextArea(this.$refs.txt, {
+      mode: 'htmlmixed',
+      theme: 'duotone-light',
+      autoRefresh: true,
+      tabSize: 2,
+      line: true,
+      gutters: ['CodeMirror-linenumbers'],
+      matchBrackets: true,
+      showCursorWhenSelecting: true,
+      styleActiveLine: true,
+      lineNumbers: true,
+      styleSelectedText: true
     })
 
-    this.codeFlask.updateCode(this.block.data.text)
+    this.codeMirror.setValue(this.block.data.text)
 
-    // set height
-    this.setHeight()
-  },
-
-  methods: {
-    setHeight () {
-      const pre = this.$refs.txt.querySelector('.codeflask__pre')
-      const wrapper = this.$refs.wrapper
-      TweenMax.to(wrapper, 0.5, { height: `calc(${pre.clientHeight}px + 1rem)` })
-    }
+    this.codeMirror.on('change', cm => {
+      this.block.data.text = cm.getValue()
+    })
   }
 }
 </script>

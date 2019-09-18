@@ -88,7 +88,7 @@ function alertWarning (title, text, callback) {
   })
 }
 
-function alertPrompt (text, callback) {
+function alertPrompt (text, callback, value = '') {
   if (!callback) {
     callback = () => {}
   }
@@ -101,7 +101,7 @@ function alertPrompt (text, callback) {
         ${text}
       </div>
     `,
-    input: '<input name="data" type="text" required />',
+    input: `<input name="data" type="text" value="${value}" required />`,
     showCloseButton: true,
     buttons: [vex.dialog.buttons.YES],
     callback
@@ -124,7 +124,7 @@ function alertConfirm (title, text, callback) {
         ${text}
       </div>
     `,
-    buttons: [vex.dialog.buttons.YES, {...vex.dialog.buttons.NO, text: 'Avbryt'}],
+    buttons: [vex.dialog.buttons.YES, { ...vex.dialog.buttons.NO, text: 'Avbryt' }],
     callback
   })
 }

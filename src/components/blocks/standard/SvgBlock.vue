@@ -19,9 +19,9 @@
         <div
           ref="wrapper"
           class="villain-svg-input-wrapper">
-          <div
+          <textarea
             ref="txt"
-            class="villain-svg-input" />
+            class="villain-svg-input"></textarea>
         </div>
       </div>
 
@@ -37,8 +37,9 @@
 </template>
 
 <script>
-import { TweenMax } from 'gsap'
-import CodeFlask from 'codeflask'
+import CodeMirror from 'codemirror'
+import 'codemirror/mode/htmlmixed/htmlmixed.js'
+import 'codemirror/addon/display/autorefresh.js'
 import Block from '@/components/blocks/system/Block'
 
 export default {
@@ -66,7 +67,6 @@ export default {
 
   data () {
     return {
-      codeFlask: null,
       customClass: '',
       uid: null
     }
@@ -77,26 +77,25 @@ export default {
   },
 
   mounted () {
-    this.codeFlask = new CodeFlask(this.$refs.txt, { language: 'markup', defaultTheme: false, lineNumbers: true })
-
-    this.codeFlask.onUpdate(code => {
-      this.block.data.code = code
-      this.setHeight()
+    this.codeMirror = CodeMirror.fromTextArea(this.$refs.txt, {
+      autoRefresh: true,
+      mode: 'htmlmixed',
+      theme: 'duotone-light',
+      tabSize: 2,
+      line: true,
+      gutters: ['CodeMirror-linenumbers'],
+      matchBrackets: true,
+      showCursorWhenSelecting: true,
+      styleActiveLine: true,
+      lineNumbers: true,
+      styleSelectedText: true
     })
 
-    this.codeFlask.updateCode(this.block.data.code)
+    this.codeMirror.setValue(this.block.data.code)
 
-    // set height
-    setTimeout(() => { this.setHeight() }, 800)
-  },
-
-  methods: {
-    setHeight () {
-      const pre = this.$refs.txt.querySelector('.codeflask__pre')
-      const wrapper = this.$refs.wrapper
-      const preHeight = pre.getBoundingClientRect().height > 0 ? pre.getBoundingClientRect().height : 24
-      TweenMax.to(wrapper, 0.5, { height: `calc(${preHeight}px + 1rem)` })
-    }
+    this.codeMirror.on('change', cm => {
+      this.block.data.code = cm.getValue()
+    })
   }
 }
 </script>

@@ -50,23 +50,26 @@
           Ingen bilder i karusellen
         </div>
       </div>
+
       <div
-        v-if="editImage"
-        key="editImageKey"
-        class="villain-block-slideshow-images-meta">
-        <label>Tittel/bildetekst</label>
-        <input
-          v-model="editImage.title"
-          class="form-control"
-          type="input">
-        <div class="d-flex justify-content-center mt-3">
+        v-show="editImage"
+        ref="popup"
+        class="villain-block-slideshow-popup">
+        <div class="form-group">
+          <label>Endre tittel/bildetekst</label>
+          <div
+            ref="wrapper"
+            class="villain-markdown-input-wrapper">
+            <textarea
+              ref="txt"
+              class="villain-markdown-input"></textarea>
+          </div>
           <button
-            class="btn btn-primary"
+            class="btn btn-primary mt-2"
             @click="editImage = null; toggledImageUrl = null">
-            Lukk
+            OK
           </button>
         </div>
-
       </div>
     </div>
 
@@ -205,6 +208,11 @@
 </template>
 
 <script>
+import { TweenMax, Power3 } from 'gsap'
+import CodeMirror from 'codemirror'
+import 'codemirror/mode/gfm/gfm.js'
+import 'codemirror/addon/display/autorefresh.js'
+
 import Block from '@/components/blocks/system/Block'
 import { Drop } from 'vue-drag-drop'
 import { alertError } from '@/utils/alerts'
@@ -232,6 +240,7 @@ export default {
   data () {
     return {
       uid: null,
+      codeMirror: null,
       showConfig: false,
       showImages: true,
       showUpload: false,
@@ -276,7 +285,38 @@ export default {
 
   methods: {
     edit (img) {
+      TweenMax.set(this.$refs.popup, { autoAlpha: 0 })
+
+      if (this.codeMirror) {
+        this.codeMirror.toTextArea()
+      }
+
+      this.codeMirror = CodeMirror.fromTextArea(this.$refs.txt, {
+        autoRefresh: true,
+        mode: 'gfm',
+        theme: 'duotone-light',
+        tabSize: 2,
+        line: true,
+        gutters: ['CodeMirror-linenumbers'],
+        matchBrackets: true,
+        showCursorWhenSelecting: true,
+        styleActiveLine: true,
+        lineNumbers: true,
+        styleSelectedText: true
+      })
+
+      this.codeMirror.setValue(img.title)
+      this.codeMirror.refresh()
+
+      TweenMax.to(this.$refs.popup, 0.7, { delay: 0.3, autoAlpha: 1 })
+
       this.editImage = img
+
+      this.codeMirror.on('change', cm => {
+        if (this.editImage) {
+          this.editImage.title = cm.getValue()
+        }
+      })
     },
 
     toggleImage (img) {

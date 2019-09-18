@@ -148,7 +148,11 @@
 
 <script>
 
-import CodeFlask from 'codeflask'
+import CodeMirror from 'codemirror'
+import 'codemirror/mode/htmlmixed/htmlmixed.js'
+import 'codemirror/mode/javascript/javascript.js'
+import 'codemirror/addon/display/autorefresh.js'
+
 import fetchTemplates from '@/utils/fetchTemplates'
 import storeTemplate from '@/utils/storeTemplate'
 import storeTemplateSequence from '@/utils/storeTemplateSequence'
@@ -160,8 +164,8 @@ export default {
       showBlockPicker: false,
       showNamer: false,
       showTemplateAttrs: false,
-      codeFlask: null,
-      refFlask: null,
+      codeMirror: null,
+      refMirror: null,
       refName: '',
       currentTemplate: null,
       currentRef: null,
@@ -179,8 +183,33 @@ export default {
 
   async mounted () {
     this.templates = await fetchTemplates('all', this.headers.extra, this.urls.templates)
-    this.codeFlask = new CodeFlask('#builder-template', { language: 'html', lineNumbers: true })
-    this.refFlask = new CodeFlask('#builder-ref', { language: 'javascript', lineNumbers: true })
+    this.codeMirror = CodeMirror(document.querySelector('#builder-template'), {
+      mode: 'htmlmixed',
+      theme: 'duotone-light',
+      autoRefresh: true,
+      tabSize: 2,
+      line: true,
+      gutters: ['CodeMirror-linenumbers'],
+      matchBrackets: true,
+      showCursorWhenSelecting: true,
+      styleActiveLine: true,
+      lineNumbers: true,
+      styleSelectedText: true
+    })
+
+    this.refMirror = CodeMirror(document.querySelector('#builder-ref'), {
+      mode: 'javascript',
+      theme: 'duotone-light',
+      autoRefresh: true,
+      tabSize: 2,
+      line: true,
+      gutters: ['CodeMirror-linenumbers'],
+      matchBrackets: true,
+      showCursorWhenSelecting: true,
+      styleActiveLine: true,
+      lineNumbers: true,
+      styleSelectedText: true
+    })
   },
 
   methods: {
@@ -208,7 +237,9 @@ export default {
 
       this.resetRef()
       this.currentTemplate = template
-      this.codeFlask.updateCode(template.data.code)
+
+      this.codeMirror.setValue(template.data.code)
+      this.codeMirror.refresh()
     },
 
     setHover (name) {
@@ -220,7 +251,8 @@ export default {
       this.refName = ''
       this.showNamer = false
 
-      this.refFlask.updateCode(JSON.stringify(this.currentRef, null, 2))
+      this.refMirror.setValue(JSON.stringify(this.currentRef, null, 2))
+      this.refMirror.refresh()
 
       this.currentTemplate.data.refs = [
         ...this.currentTemplate.data.refs,
@@ -232,7 +264,7 @@ export default {
 
     saveRef () {
       // get this ref
-      const newRef = JSON.parse(this.refFlask.getCode())
+      const newRef = JSON.parse(this.refMirror.getValue())
       // find ref to replace
       const oldRef = this.currentTemplate.data.refs.find(r => r.name === this.prevRefName)
       if (oldRef) {
@@ -251,7 +283,7 @@ export default {
     resetRef () {
       this.currentRef = {}
       this.prevRefName = null
-      this.refFlask.updateCode('')
+      this.refMirror.setValue('')
     },
 
     addBlock (b) {
@@ -268,13 +300,16 @@ export default {
     selectTemplate (t) {
       this.resetRef()
       this.currentTemplate = t
-      this.codeFlask.updateCode(this.currentTemplate.data.code)
+      this.codeMirror.setValue(this.currentTemplate.data.code)
+      this.codeMirror.refresh()
     },
 
     selectRef (r) {
       this.currentRef = { ...r }
       this.prevRefName = this.currentRef.name
-      this.refFlask.updateCode(JSON.stringify(this.currentRef, null, 2))
+
+      this.refMirror.setValue(JSON.stringify(this.currentRef, null, 2))
+      this.refMirror.refresh()
     },
 
     async saveTemplate () {
@@ -282,7 +317,7 @@ export default {
         ...this.currentTemplate,
         data: {
           ...this.currentTemplate.data,
-          code: this.codeFlask.getCode()
+          code: this.codeMirror.getValue()
         }
       }
 

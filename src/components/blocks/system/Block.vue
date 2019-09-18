@@ -248,6 +248,7 @@ export default {
 
     configBlock () {
       this.showConfig = true
+      this.$emit('showConfig')
     },
 
     deleteBlock () {

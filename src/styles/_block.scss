@@ -315,6 +315,26 @@
 
 .villain-block-slideshow {
   width: 100%;
+  position: relative;
+
+  .villain-block-slideshow-popup {
+    padding: 2rem 3rem;
+    min-width: 760px;
+    margin-left: auto;
+    margin-right: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: white;
+    border: 1px solid #eee;
+    position: fixed;
+    z-index: 99999;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
 
   .villain-block-slideshow-images-meta {
     margin: 0 auto;
@@ -428,11 +448,11 @@
   padding: 1rem;
 }
 
-.villain-markdown-input-wrapper,
-.villain-svg-input-wrapper,
-.villain-html-input-wrapper {
-  position: relative;
-}
+// .villain-markdown-input-wrapper,
+// .villain-svg-input-wrapper,
+// .villain-html-input-wrapper {
+//   min-height: 150px;
+// }
 
 .villain-markdown-input,
 .villain-svg-input,
@@ -440,10 +460,6 @@
   border: 0;
   width: 100%;
   font-family: "SF Mono", "Menlo", "Monaco", "Inconsolata", "Fira Mono", "Droid Sans Mono", "Source Code Pro", monospace;
-
-  .codeflask__textarea {
-    overflow: hidden;
-  }
 }
 
 .villain-svg-output {

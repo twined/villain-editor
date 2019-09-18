@@ -12,9 +12,9 @@
     <div
       ref="wrapper"
       class="villain-markdown-input-wrapper">
-      <div
+      <textarea
         ref="txt"
-        class="villain-markdown-input" />
+        class="villain-markdown-input"></textarea>
     </div>
     <template slot="help">
       <p>
@@ -29,10 +29,9 @@
 </template>
 
 <script>
-import { TweenMax } from 'gsap'
-import * as Prism from 'prismjs'
-import CodeFlask from 'codeflask'
-import 'prismjs/components/prism-markdown'
+import CodeMirror from 'codemirror'
+import 'codemirror/mode/gfm/gfm.js'
+import 'codemirror/addon/display/autorefresh.js'
 
 import Block from '@/components/blocks/system/Block'
 
@@ -61,7 +60,7 @@ export default {
 
   data () {
     return {
-      codeFlask: null
+      codeMirror: null
     }
   },
 
@@ -70,27 +69,30 @@ export default {
   },
 
   mounted () {
-    this.codeFlask = new CodeFlask(this.$refs.txt, { language: 'markdown', defaultTheme: false, lineNumbers: true })
-    this.codeFlask.addLanguage('markdown', Prism.languages.markdown)
-    this.codeFlask.updateLanguage('markdown')
-
-    this.codeFlask.onUpdate(code => {
-      this.block.data.text = code
-      this.setHeight()
+    this.codeMirror = CodeMirror.fromTextArea(this.$refs.txt, {
+      mode: 'gfm',
+      theme: 'duotone-light',
+      autoRefresh: true,
+      line: true,
+      gutters: ['CodeMirror-linenumbers'],
+      matchBrackets: true,
+      showCursorWhenSelecting: true,
+      styleActiveLine: true,
+      lineNumbers: true,
+      styleSelectedText: true
     })
 
-    this.codeFlask.updateCode(this.block.data.text)
+    this.codeMirror.setValue(this.block.data.text)
 
-    // set height
-    this.setHeight()
+    this.codeMirror.on('change', cm => {
+      this.block.data.text = cm.getValue()
+    })
   },
 
-  methods: {
-    setHeight () {
-      const pre = this.$refs.txt.querySelector('.codeflask__pre')
-      const wrapper = this.$refs.wrapper
-      TweenMax.to(wrapper, 0.5, { height: `calc(${pre.clientHeight}px + 1rem)` })
-    }
+  destroy () {
+    // garbage cleanup
+    const element = this.codeMirror.doc.cm.getWrapperElement()
+    element && element.remove && element.remove()
   }
 }
 </script>

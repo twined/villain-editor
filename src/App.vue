@@ -2,7 +2,7 @@
   <div id="app">
     <VillainEditor
       :json="json"
-      :builder-mode="true"
+      :builder-mode="false"
       :template-mode="false"
       templates="all"
       server="http://localhost:3000"
@@ -70,7 +70,7 @@ export default {
                           'thumb': '/media/images/site/posts/thumb/ah1v66m5pm.jpg',
                           'xlarge': '/media/images/site/posts/xlarge/ah1v66m5pm.jpg'
                         },
-                        'title': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed',
+                        'title': null,
                         'url': '/media/images/site/posts/ah1v66m5pm.jpg',
                         'width': 1970
                       },
@@ -85,7 +85,7 @@ export default {
                           'thumb': '/media/images/site/posts/thumb/6e75f26juiq.jpg',
                           'xlarge': '/media/images/site/posts/xlarge/6e75f26juiq.jpg'
                         },
-                        'title': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed',
+                        'title': null,
                         'url': '/media/images/site/posts/6e75f26juiq.jpg',
                         'width': 2202
                       },
@@ -100,7 +100,7 @@ export default {
                           'thumb': '/media/images/site/posts/thumb/18ejojpi7jh.jpg',
                           'xlarge': '/media/images/site/posts/xlarge/18ejojpi7jh.jpg'
                         },
-                        'title': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed',
+                        'title': null,
                         'url': '/media/images/site/posts/18ejojpi7jh.jpg',
                         'width': 2202
                       },
@@ -115,7 +115,7 @@ export default {
                           'thumb': '/media/images/site/posts/thumb/1e4ovs21usk8.jpg',
                           'xlarge': '/media/images/site/posts/xlarge/1e4ovs21usk8.jpg'
                         },
-                        'title': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed',
+                        'title': null,
                         'url': '/media/images/site/posts/1e4ovs21usk8.jpg',
                         'width': 2203
                       }
@@ -167,7 +167,7 @@ export default {
                       'xlarge': '/media/images/site/posts/xlarge/1ukpg82i1900.png'
                     },
                     'srcset': '',
-                    'title': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed',
+                    'title': null,
                     'url': '/media/images/site/posts/1ukpg82i1900.png',
                     'width': 2084
                   },
@@ -192,7 +192,7 @@ export default {
                       'xlarge': '/media/images/site/posts/xlarge/31gkdg3dc1ku.jpg'
                     },
                     'srcset': '',
-                    'title': 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed',
+                    'title': null,
                     'url': '/media/images/site/posts/31gkdg3dc1ku.jpg',
                     'width': 3751
                   },

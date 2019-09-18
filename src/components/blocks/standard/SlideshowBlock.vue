@@ -305,7 +305,7 @@ export default {
         styleSelectedText: true
       })
 
-      this.codeMirror.setValue(img.title)
+      this.codeMirror.setValue(img.title || '')
       this.codeMirror.refresh()
 
       TweenMax.to(this.$refs.popup, 0.7, { delay: 0.3, autoAlpha: 1 })

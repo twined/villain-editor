@@ -31,7 +31,7 @@
             class="villain-block-slideshow-image-overlay">
             <i
               class="fa fa-info-circle"
-              @click.prevent.stop="edit(i)"
+              @click.prevent.stop="edit(i, $event)"
             />
             <i
               class="fa fa-trash"
@@ -53,22 +53,26 @@
 
       <div
         v-show="editImage"
-        ref="popup"
-        class="villain-block-slideshow-popup">
-        <div class="form-group">
-          <label>Endre tittel/bildetekst</label>
-          <div
-            ref="wrapper"
-            class="villain-markdown-input-wrapper">
-            <textarea
-              ref="txt"
-              class="villain-markdown-input"></textarea>
+        ref="popup-wrapper"
+        class="villain-block-slideshow-popup-wrapper">
+        <div
+          ref="popup"
+          class="villain-block-slideshow-popup">
+          <div class="form-group">
+            <label>Endre tittel/bildetekst</label>
+            <div
+              ref="wrapper"
+              class="villain-markdown-input-wrapper">
+              <textarea
+                ref="txt"
+                class="villain-markdown-input"></textarea>
+            </div>
+            <button
+              class="btn btn-primary mt-2"
+              @click="editImage = null; toggledImageUrl = null">
+              OK
+            </button>
           </div>
-          <button
-            class="btn btn-primary mt-2"
-            @click="editImage = null; toggledImageUrl = null">
-            OK
-          </button>
         </div>
       </div>
     </div>
@@ -284,8 +288,10 @@ export default {
   },
 
   methods: {
-    edit (img) {
-      TweenMax.set(this.$refs.popup, { autoAlpha: 0 })
+    edit (img, event) {
+      const rect = this.$refs.block.getBoundingClientRect()
+      const y = event.clientY - rect.top
+      TweenMax.set(this.$refs.popup, { autoAlpha: 0, top: y })
 
       if (this.codeMirror) {
         this.codeMirror.toTextArea()

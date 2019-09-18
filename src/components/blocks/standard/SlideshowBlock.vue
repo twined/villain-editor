@@ -23,9 +23,13 @@
           :key="i.url"
           :data-id="i.url"
           class="villain-block-slideshow-image"
-          @mouseover="imgHover"
+
+          @mouseover.stop="imgHover(i, $event)"
           @mouseout="imgLeave"
           @click="toggleImage(i)">
+          <i
+            class="fa fa-info-circle info"
+          />
           <div
             v-if="toggledImageUrl === i.url"
             class="villain-block-slideshow-image-overlay">
@@ -372,8 +376,10 @@ export default {
       this.block.data.images = newImages
     },
 
-    imgHover (e) {
-      e.currentTarget.classList.add('hover')
+    imgHover (i, e) {
+      if (this.toggledImageUrl !== i.url) {
+        e.currentTarget.classList.add('hover')
+      }
     },
 
     imgLeave (e) {

@@ -365,6 +365,24 @@
       padding: .5rem;
       user-select: none;
       width: 25%;
+      cursor: pointer;
+
+      i.info {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        color: #fff;
+        font-size: 3em;
+        transform: translateX(-50%) translateY(-50%);
+        transition: opacity 0.75s ease;
+        opacity: 0;
+      }
+
+      &.hover {
+        i.info {
+          opacity: 0.8;
+        }
+      }
 
       .villain-block-slideshow-image-delete-overlay {
         user-select: none;

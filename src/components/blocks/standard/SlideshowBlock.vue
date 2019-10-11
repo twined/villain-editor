@@ -97,7 +97,7 @@
                 class="img-fluid"
               />
             </td>
-            <td>
+            <td class="fit">
               <input
                 v-model="i.title"
                 class="form-control"

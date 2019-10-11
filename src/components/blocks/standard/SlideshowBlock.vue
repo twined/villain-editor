@@ -83,6 +83,35 @@
 
     <template slot="config">
       <div
+        v-if="showTitles">
+        <table
+          class="table villain-image-table">
+          <tr
+            v-for="i in block.data.images"
+            :key="i.url"
+            :data-id="i.url"
+            class="villain-block-slideshow-image">
+            <td class="fit">
+              <img
+                :src="i.url"
+                class="img-fluid"
+              />
+            </td>
+            <td>
+              <input
+                v-model="i.title"
+                class="form-control"
+                type="input">
+            </td>
+          </tr>
+        </table>
+        <button
+          class="btn btn-primary"
+          @click="showTitles = false; showImages = true">
+          OK
+        </button>
+      </div>
+      <div
         v-if="showUpload">
         <div
           class="display-icon">
@@ -170,9 +199,14 @@
         </div>
         <div class="col-12 d-flex justify-content-center mb-4">
           <button
-            class="btn btn-primary mx-auto"
+            class="btn btn-primary mr-1"
             @click="showUpload = true; showImages = false">
             Last opp bilder
+          </button>
+          <button
+            class="btn btn-primary ml-1"
+            @click="showTitles = true; showImages = false">
+            Endre bildetekster
           </button>
         </div>
         <div
@@ -198,9 +232,9 @@
 
       <div class="villain-config-content-buttons">
         <button
-          v-if="!showImages"
+          v-if="!showImages && !showTitles"
           class="btn btn-primary"
-          @click="showImages = true; showUpload = false">
+          @click="showImages = true; showUpload = false; showTitles = false">
           Velg bilder fra bildebibliotek
         </button>
       </div>
@@ -208,7 +242,7 @@
     <template slot="help">
       <p>
         For å slette et bilde i bildekarusellen, klikker du på bildet, deretter klikker du på søplekasse-ikonet (<i class="fa fa-trash" />)<br><br>
-        For å gi bildene bildetekst, klikker du på bildet og deretter på info-ikonet (<i class="fa fa-info-circle" />)<br><br>
+        For å gi bildene bildetekst, klikker du på tannhjulet (<i class="fa fa-cog" />) og deretter "Endre bildetekster"<br><br>
         For å sortere bildene kan du dra og slippe de i ønsket rekkefølge.
       </p>
     </template>
@@ -216,7 +250,7 @@
 </template>
 
 <script>
-import { TweenMax, Power3 } from 'gsap'
+import { TweenMax } from 'gsap'
 import CodeMirror from 'codemirror'
 import 'codemirror/mode/gfm/gfm.js'
 import 'codemirror/addon/display/autorefresh.js'
@@ -252,6 +286,7 @@ export default {
       showConfig: false,
       showImages: true,
       showUpload: false,
+      showTitles: false,
       dragOver: false,
       uploading: false,
       images: [],

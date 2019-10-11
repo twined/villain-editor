@@ -32,10 +32,17 @@
         </div>
         <div
           v-popover="'Endre blokkens oppsettsvalg'"
-          v-if="hasConfigSlot"
+          v-if="hasConfigSlot && block.type !== 'template'"
           class="villain-block-action villain-config"
           @click="configBlock">
           <i class="fa fa-fw fa-cog" />
+        </div>
+        <div
+          v-popover="'Endre malens oppsettsvalg'"
+          v-else-if="hasConfigSlot && block.type === 'template'"
+          class="villain-block-action villain-config"
+          @click="configBlock">
+          <i class="fa fa-fw fa-file" />
         </div>
         <div
           v-popover="'Slett blokken'"
@@ -149,6 +156,7 @@
 
 <script>
 import { VTooltip } from 'v-tooltip'
+import { alertConfirm } from '@/utils/alerts'
 
 export default {
   directives: { popover: VTooltip },
@@ -252,7 +260,11 @@ export default {
     },
 
     deleteBlock () {
-      this.$emit('delete', this.block)
+      alertConfirm('OBS!', 'Er du sikker på at du vil slette denne blokken?', data => {
+        if (data) {
+          this.$emit('delete', this.block)
+        }
+      })
     },
 
     onDragStart (ev) {

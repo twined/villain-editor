@@ -95,10 +95,10 @@
       ref="config"
       class="villain-block villain-block-config">
       <div class="villain-block-config-content">
-        <div class="villain-config-close-button">
-          <i
-            class="fa fa-times"
-            @click="showConfig = false" />
+        <div
+          class="villain-config-close-button"
+          @click="showConfig = false">
+          <i class="fa fa-times" />
         </div>
 
         <h5>Konfigurasjon &mdash; {{ getBlockDisplayName(block.type) }}</h5>

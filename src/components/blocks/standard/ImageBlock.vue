@@ -32,17 +32,17 @@
             @dragover="dragOver = true"
             @dragleave="dragOver = false"
             @drop="handleDrop">
-            <i
-              v-if="dragOver"
-              class="fa fa-fw fa-cloud-upload-alt"></i>
+            <template v-if="dragOver">
+              <i class="fa fa-fw fa-cloud-upload-alt"></i>
+            </template>
             <template
               v-else>
-              <i
-                v-if="uploading"
-                class="fa fa-fw fa-circle-notch fa-spin"></i>
-              <i
-                v-else
-                class="fa fa-fw fa-image"></i>
+              <template v-if="uploading">
+                <i class="fa fa-fw fa-circle-notch fa-spin"></i>
+              </template>
+              <template v-else>
+                <i class="fa fa-fw fa-image"></i>
+              </template>
             </template>
           </drop>
         </div>

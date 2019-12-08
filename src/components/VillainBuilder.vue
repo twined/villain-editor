@@ -24,6 +24,7 @@
         name="fade-move"
         tag="ul">
         <button
+          type="button"
           key="createTemplateButton"
           class="btn btn-primary btn-block mb-2"
           @click="createTemplate">
@@ -55,6 +56,7 @@
         </div>
         <ul>
           <button
+            type="button"
             :disabled="currentTemplate === null"
             class="btn btn-primary btn-block mb-2"
             @click="showBlockPicker = true">
@@ -67,6 +69,7 @@
             @click="selectRef(ref)">
             %{<strong>{{ ref.name }}</strong>}
             <button
+              type="button"
               v-if="prevRefName === ref.name"
               class="btn btn-outline-secondary btn-sm"
               @click.prevent.stop="saveRef()">Lagre</button>
@@ -130,6 +133,7 @@
           class="form-control float-left d-inline"
           type="input">
         <button
+          type="button"
           class="btn btn-outline-secondary float-left"
           @click="saveName">
           Opprett ref
@@ -137,6 +141,7 @@
       </div>
       <div class="villain-builder-save-wrapper">
         <button
+          type="button"
           class="btn btn-outline-primary"
           @click="saveTemplate()">
           Lagre

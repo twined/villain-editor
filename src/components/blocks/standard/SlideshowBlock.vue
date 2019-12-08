@@ -72,6 +72,7 @@
                 class="villain-markdown-input"></textarea>
             </div>
             <button
+              type="button"
               class="btn btn-primary mt-2"
               @click="editImage = null; toggledImageUrl = null">
               OK
@@ -106,6 +107,7 @@
           </tr>
         </table>
         <button
+          type="button"
           class="btn btn-primary"
           @click="showTitles = false; showImages = true">
           OK
@@ -199,11 +201,13 @@
         </div>
         <div class="col-12 d-flex justify-content-center mb-4">
           <button
+            type="button"
             class="btn btn-primary mr-1"
             @click="showUpload = true; showImages = false">
             Last opp bilder
           </button>
           <button
+            type="button"
             class="btn btn-primary ml-1"
             @click="showTitles = true; showImages = false">
             Endre bildetekster
@@ -233,6 +237,7 @@
       <div class="villain-config-content-buttons">
         <button
           v-if="!showImages && !showTitles"
+          type="button"
           class="btn btn-primary"
           @click="showImages = true; showUpload = false; showTitles = false">
           Velg bilder fra bildebibliotek

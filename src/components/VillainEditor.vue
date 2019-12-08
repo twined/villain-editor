@@ -20,6 +20,7 @@
           <i class="fa fa-fw fa-file mr-2" /> {{ format(a.timestamp, 'nb_NO') }}
         </div>
         <button
+          type="button"
           class="btn btn-outline-primary"
           @click.prevent="restoreAutosave(a)">
           Gjenopprett denne versjonen
@@ -70,6 +71,7 @@
           v-model="src" />
         <div class="d-flex justify-content-center">
           <button
+            type="button"
             class="btn btn-primary mt-4"
             @click="updateSource">
             Oppdatér

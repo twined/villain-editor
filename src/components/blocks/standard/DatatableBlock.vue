@@ -46,6 +46,7 @@
             </td>
             <td>
               <button
+                type="button"
                 class="btn btn-outline-primary btn-small"
                 @click="deleteItem(item)">
                 <i class="fa fa-times" />
@@ -56,6 +57,7 @@
       </table>
       <div class="d-flex justify-content-center">
         <button
+          type="button"
           class="btn btn-outline-primary"
           @click="addItem">
           Legg til ny linje

@@ -39,6 +39,7 @@
           class="form-control">
         </textarea>
         <button
+          type="button"
           class="btn btn-outline-primary btn-small mt-2"
           @click="deleteItem(item)">
           Slett
@@ -46,6 +47,7 @@
         <hr />
       </div>
       <button
+        type="button"
         class="btn btn-outline-primary"
         @click="addItem">
         Legg til nytt tidslinjepunkt

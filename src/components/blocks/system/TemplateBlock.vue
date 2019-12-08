@@ -21,6 +21,7 @@
               <td>{{ ref.name }}</td>
               <td style="float: right;">
                 <button
+                  type="button"
                   class="btn btn-primary text-white d-flex"
                   @click="replaceRefWithSource(ref)">
                   <IconRefresh

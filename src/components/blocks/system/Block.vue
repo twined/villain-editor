@@ -81,6 +81,7 @@
 
         <div class="villain-help-content-buttons">
           <button
+            type="button"
             class="btn btn-primary mt-3"
             @click="showHelp = false">
             Lukk

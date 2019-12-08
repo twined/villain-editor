@@ -212,12 +212,14 @@
         <div class="villain-config-content-buttons">
           <button
             v-if="!showImages"
+            type="button"
             class="btn btn-primary"
             @click="getImages">
             Velg bilde fra bildebibliotek
           </button>
           <button
             v-if="block.data.url !== ''"
+            type="button"
             class="btn btn-primary ml-3"
             @click="resetImage">
             Nullstill bildeblokk

@@ -62,6 +62,7 @@
           class="form-control"
           type="input">
         <button
+          type="button"
           class="btn btn-primary mt-2"
           @click="updateColumns">
           Sett kolonneantall (overskriver nåværende kolonner!)

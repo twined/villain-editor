@@ -272,17 +272,16 @@ export default {
 
   computed: {
     browseURL () {
-      return this.urls.browse + this.vImageSeries
+      return this.urls.browse + this.block.data.series_slug
     },
 
     uploadURL () {
-      return `${this.urls.base}upload/${this.vImageSeries}`
+      return `${this.urls.base}upload/${this.block.data.series_slug}`
     }
   },
 
   inject: [
     'urls',
-    'vImageSeries',
     'headers',
     'available'
   ],

@@ -38,7 +38,8 @@ export default [
       sizes: null,
       title: '',
       credits: '',
-      class: 'img-fluid'
+      class: 'img-fluid',
+      series_slug: 'post'
     }
   },
 
@@ -48,7 +49,8 @@ export default [
     component: 'Slideshow',
     dataTemplate: {
       images: [],
-      class: ''
+      class: '',
+      series_slug: 'post'
     }
   },
 
@@ -64,7 +66,8 @@ export default [
       img_class: 'img-fluid',
       picture_class: '',
       srcset: '',
-      media_queries: ''
+      media_queries: '',
+      series_slug: 'post'
     }
   },
 

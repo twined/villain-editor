@@ -67,10 +67,38 @@
 }
 ```
 
+#### Picture
+
+```
+{
+  "type": "picture",
+  "data": {
+    "credits": null,
+    "height": 2916,
+    "width": 2084,
+    "img_class": "img-fluid",
+    "media_queries": "",
+    "picture_class": "",
+    "sizes": {
+      "large": "/media/images/site/posts/large/1ukpg82i1900.png",
+      "medium": "/media/images/site/posts/medium/1ukpg82i1900.png",
+      "micro": "/media/images/site/posts/micro/1ukpg82i1900.png",
+      "small": "/media/images/site/posts/small/1ukpg82i1900.png",
+      "thumb": "/media/images/site/posts/thumb/1ukpg82i1900.png",
+      "xlarge": "/media/images/site/posts/xlarge/1ukpg82i1900.png"
+    },
+    "srcset": "",
+    "title": null,
+    "url": "/media/images/site/posts/1ukpg82i1900.png",
+    "series_slug": "test"
+  }
+}
+```
+
+
 #### Slideshow
 
 ```
-
 {
   "type": "slideshow",
   "data": {
@@ -86,12 +114,15 @@
         },
         "credits": null,
         "title": "Title of the image",
-        "url": "/media/images/site/posts/10aj2gtv8m6.jpg"
+        "url": "/media/images/site/posts/10aj2gtv8m6.jpg",
+        "series_slug": "post"
       }
     ]
   }
 }
 ```
+- `series_slug`: choose which series to browse images from
+
 
 ## Build Setup
 

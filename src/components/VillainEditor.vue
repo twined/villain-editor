@@ -313,7 +313,6 @@ export default {
     })
 
     return {
-      vImageSeries: this.imageSeries,
       vTemplateMode: this.templateMode,
       available,
       headers,

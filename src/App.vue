@@ -142,7 +142,8 @@ export default {
                     'srcset': '',
                     'title': null,
                     'url': '/media/images/site/posts/1ukpg82i1900.png',
-                    'width': 2084
+                    'width': 2084,
+                    'series_slug': 'test'
                   },
                   'type': 'picture'
                 },
